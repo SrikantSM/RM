@@ -1,0 +1,11 @@
+code;errorMessage
+AVL_ERR_1;Please enter the start date of the work assignment in the format YYYY-MM-DD.
+AVL_ERR_2;Please enter all working and non-working hours as integers.
+AVL_ERR_3;Please ensure that the sum of the working and non-working hours is not greater than 24.
+AVL_ERR_4;The cost center ID {0} is invalid. Please enter a valid cost center ID.
+AVL_ERR_5;Cost center is a mandatory field. Enter a cost center.
+AVL_ERR_6;The availability data of the workforce person can''t be uploaded. The workforce person has been marked for deletion.
+AVL_ERR_7;No work assignments found for the entered cost center.
+AVL_ERR_8;The work assignment ID {0} is invalid. Please enter a valid work assignment ID.
+AVL_ERR_9;The entered cost center {0} must match the cost center in the CSV file: {1}.
+AVL_ERR_10;The following entries in the CSV file have empty mandatory fields: {0}.

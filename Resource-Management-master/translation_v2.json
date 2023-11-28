@@ -1,0 +1,29 @@
+{
+	"collections": [{
+  
+        "collectionName": "C4P_RM_Launchpad",
+			"folders": [{
+				"startingFolderPath": "flp-content/portal-site/i18n/**",
+				"sourceFilters": [
+					"*.properties"
+				]
+			}]
+		},
+		{
+			"collectionName": "C4P_RM_DB",
+			"folders": [{
+					"startingFolderPath": "db/src/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				}]
+		}
+    ],
+    
+	"defaultConfiguration": {
+		"targetFolderPath": ".",
+		"pseudoLocFolderPath": ".",
+		"oneQFolderPath": ".",
+		"targetFileNamingConvention": "[filename]_[langCode].[extension]"
+	}
+}

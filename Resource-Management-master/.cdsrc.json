@@ -1,0 +1,208 @@
+{
+  "build": {
+    "target": ".",
+    "tasks": [
+      {
+        "src": "db",
+        "for": "hana",
+        "options": {
+          "model": [
+            "db",
+            "Skill/srv",
+            "Assignment/srv",
+            "Consultant-Profile/srv",
+            "Resource-Request/srv",
+            "Consultant-Profile/integration-srv",
+            "Central-Services/srv"
+          ]
+        }
+      },
+      {
+        "src": "Skill/srv",
+        "for": "java-cf",
+        "options": {
+          "model": [
+            "Skill/srv",
+            "db"
+          ]
+        }
+      },
+      {
+        "src": "Resource-Request/srv",
+        "for": "java-cf",
+        "options": {
+          "model": [
+            "Resource-Request/srv",
+            "db"
+          ]
+        }
+      },
+      {
+        "src": "Resource-Request/project-integration-adapter",
+        "for": "java-cf",
+        "options": {
+          "model": [
+            "db"
+          ]
+        }
+      },
+      {
+        "src": "Assignment/srv",
+        "for": "java-cf",
+        "options": {
+          "model": [
+            "Assignment/srv",
+            "db"
+          ]
+        }
+      },
+      {
+        "src": "Consultant-Profile/srv",
+        "for": "java-cf",
+        "options": {
+          "model": [
+            "Consultant-Profile/srv",
+            "db"
+          ]
+        }
+      },
+      {
+        "src": "Consultant-Profile/integration-srv",
+        "for": "java-cf",
+        "options": {
+          "model": [
+            "db",
+            "Consultant-Profile/integration-srv"
+          ]
+        }
+      },
+      {
+        "src": "Central-Services/srv",
+        "for": "java-cf",
+        "options": {
+          "model": [
+            "Central-Services/srv",
+            "db"
+          ]
+        }
+      },
+      {
+        "src": "Skill/app/skill",
+        "for": "fiori",
+        "options": {
+          "model": [
+            "Skill/srv/cds/skill-service"
+          ]
+        }
+      },
+      {
+        "src": "Skill/app/upload",
+        "for": "fiori",
+        "options": {
+          "model": [
+            "Skill/srv/cds/fileupload-service"
+          ]
+        }
+      },
+      {
+        "src": "Skill/app/download",
+        "for": "fiori",
+        "options": {
+          "model": [
+            "Skill/srv/cds/filedownload-service"
+          ]
+        }
+      },
+      {
+        "src": "Skill/app/catalog",
+        "for": "fiori",
+        "options": {
+          "model": [
+            "Skill/srv/cds/catalog-service"
+          ]
+        }
+      },
+      {
+        "src": "Skill/app/proficiency",
+        "for": "fiori",
+        "options": {
+          "model": [
+            "Skill/srv/cds/proficiency-service"
+          ]
+        }
+      },
+      {
+        "src": "Resource-Request/app/manageResourceRequest",
+        "for": "fiori",
+        "options": {
+          "model": [
+            "Resource-Request/srv/cds/fiori-annotations/manage"
+          ]
+        }
+      },
+      {
+        "src": "Resource-Request/app/staffResourceRequest",
+        "for": "fiori",
+        "options": {
+          "model": [
+            "Resource-Request/srv/cds/fiori-annotations/process"
+          ]
+        }
+      },
+      {
+        "src": "Assignment/app/capacityGridUi",
+        "for": "fiori",
+        "options": {
+          "model": [
+            "Assignment/srv"
+          ]
+        }
+      },
+      {
+        "src": "Consultant-Profile/app/myProjectExperienceUi",
+        "for": "fiori",
+        "options": {
+          "model": [
+            "Consultant-Profile/srv"
+          ]
+        }
+      },
+      {
+        "src": "Consultant-Profile/app/projectRoleUi",
+        "for": "fiori",
+        "options": {
+          "model": [
+            "Consultant-Profile/srv"
+          ]
+        }
+      },
+      {
+        "src": "Central-Services/app/defaultLanguage",
+        "for": "fiori",
+        "options": {
+          "model": [
+            "Central-Services/srv/cds/default-language-service"
+          ]
+        }
+      },
+      {
+        "src": "Central-Services/app/projectReplicationFilter",
+        "for": "fiori",
+        "options": {
+          "model": [
+            "Central-Services/srv/cds/project-replication-filter-service"
+          ]
+        }
+      },
+      {
+        "src": "Central-Services/app/resourceOrganization",
+        "for": "fiori",
+        "options": {
+          "model": [
+            "Central-Services/srv/cds/resource-organization/resource-organization-service"
+          ]
+        }
+      }
+    ]
+  }
+}

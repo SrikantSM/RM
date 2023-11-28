@@ -1,0 +1,225 @@
+---
+ID: Resource-Management.extension.us10.preprodcd
+_schema-version: "3.2"
+extends: Resource-Management
+
+modules:
+  - name: rm-db
+    parameters:
+      routes:
+        - route: "${space}-rm-db.cfapps.us10.hana.ondemand.com"
+    properties:
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+    provides:
+      - name: dynamic-db-deployment
+        properties:
+          url: "${protocol}://${routes/0/route}"
+  - name: rm-approuter
+    parameters:
+      instances: 1
+      idle-routes:
+        - idle-route: "us10preprod-bgtest-tenant-${space}-rm-approuter-idle.cfapps.us10.hana.ondemand.com"      
+      routes:
+        - route: "rm-preprod-consumer-tenant-${space}-rm-approuter.cfapps.us10.hana.ondemand.com"
+    properties:
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+      CORS: "[{\"uriPattern\":\"^(.*)$\",\"allowedOrigin\":[{\"host\":\"*.cfapps.us10.hana.ondemand.com\",\"protocol\":\"https\"}]}]"
+    provides:
+      - name: rm-approuter-url
+        properties:
+          ui-tenant-delimiter: -tenant-
+          ui-url-suffix: ${space}-${app-name}.cfapps.us10.hana.ondemand.com
+          url: "${protocol}://${routes/0/route}"
+  - name: skill-srv
+    parameters:
+      memory: 1024M
+      routes:
+        - route: "${space}-skill-srv.cfapps.us10.hana.ondemand.com"
+    hooks:
+      - name: before-skill-srv-start-db-update
+        parameters:
+          memory: 1024M
+          disk-quota: 512M
+    provides:
+      - name: skill-srv-api
+        properties:
+          url: "${protocol}://${routes/0/route}"
+    requires:
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+  - name: resourceRequest-srv
+    parameters:
+      memory: 1024M
+      routes:
+        - route: "${space}-resourcerequest-srv.cfapps.us10.hana.ondemand.com"
+    provides:
+      - name: resourceRequest-srv-api
+        properties:
+          url: "${protocol}://${routes/0/route}"
+    requires:
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+  - name: project-integration-adapter
+    parameters:
+      memory: 1024M
+      routes:
+        - route: "${space}-project-integration-adapter.cfapps.us10.hana.ondemand.com"
+    provides:
+      - name: project-integration-adapter-api
+        properties:
+          url: "${protocol}://${routes/0/route}"
+    requires:
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+  - name: assignment-srv
+    parameters:
+      memory: 1024M
+      routes:
+        - route: "${space}-assignment-srv.cfapps.us10.hana.ondemand.com"
+    provides:
+      - name: assignment-srv-api
+        properties:
+          url: "${protocol}://${routes/0/route}"
+    requires:
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+  - name: consultantProfile-srv
+    parameters:
+      memory: 1024M
+      routes:
+        - route: "${space}-consultant-profile-srv.cfapps.us10.hana.ondemand.com"
+    provides:
+      - name: consultantProfile-srv-api
+        properties:
+          url: "${protocol}://${routes/0/route}"
+    requires:
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+  - name: consultantProfile-integration-srv
+    parameters:
+      memory: 1024M
+      routes:
+        - route: "${space}-consultant-profile-integration-srv.cfapps.us10.hana.ondemand.com"
+    properties:
+      APPLICATION_URL: "${space}-consultant-profile-integration-srv.cfapps.us10.hana.ondemand.com"
+    provides:
+      - name: consultantProfile-integration-srv-api
+        properties:
+          url: "${protocol}://${routes/0/route}"
+    requires:
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+  - name: centralServices-srv
+    parameters:
+      memory: 1024M
+      routes:
+        - route: "${space}-central-services-srv.cfapps.us10.hana.ondemand.com"
+    requires:
+      - name: rm-personal-data-manager
+        parameters:
+          config:
+            fullyQualifiedApplicationName: ResourceManagement-${org}-${space}
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+  - name: rm-service-broker
+    parameters:
+      memory: 128M
+      routes:
+        - route: "${space}-rm-service-broker.cfapps.us10.hana.ondemand.com"
+    properties:
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+    requires:
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+  - name: rm-api-gateway
+    parameters:
+      routes:
+        - route: "${space}-rm-api.cfapps.us10.hana.ondemand.com"
+    requires:
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+
+resources:
+  - name: rm-uaa
+    type: com.sap.xs.uaa
+    parameters:
+      service-plan: broker
+      service: xsuaa
+      config:
+        xsappname: rm-${space}
+        oauth2-configuration: 
+          credential-types: [x509, binding-secret, instance-secret]
+  - name: rm-uaa-admin
+    type: com.sap.xs.uaa
+    parameters:
+      service-plan: broker
+      service: xsuaa
+      config:
+        xsappname: rm-admin-${space}
+        foreign-scope-references:
+          - "$XSAPPNAME(broker,rm-${space}).InitDb"
+          - "$XSAPPNAME(broker,rm-${space}).MigrateDb"
+          - "$XSAPPNAME(broker,rm-${space}).Metering.TriggerReporting"
+        role-templates:
+          - name: "ResourceManagementOperator"
+            scope-references:
+              - "$XSAPPNAME(broker,rm-${space}).InitDb"
+              - "$XSAPPNAME(broker,rm-${space}).MigrateDb"
+              - "$XSAPPNAME(broker,rm-${space}).Metering.TriggerReporting"
+
+  - name: rm-onboarding
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: saas-registry
+      service-plan: application
+      config:
+        xsappname: rm-${space}
+        appName: rm-${space}
+
+  - name: rm-personal-data-manager
+    parameters:
+      config:
+        xs-security:
+          xsappname: rm-${space}
+          authorities:
+            - $ACCEPT_GRANTED_AUTHORITIES
+        fullyQualifiedApplicationName: ResourceManagement-${org}-${space}
+
+  - name: rm-data-retention-manager
+    parameters:
+      config:
+        xs-security:
+          xsappname: rm-${space}
+        retention-configs:
+          applicationGroupName: ResourceManagement-${org}-${space}
+
+  - name: rm-mdi
+    parameters:
+      config:
+        businessSystemId: ResourceManagement-${org}-${space}
+
+  - name: rm-service-broker-credentials
+    parameters:
+      config:
+        brokerCredentialsHash:
+          broker-user: serviceBrokerCredentialsHash1
+          broker-user2: serviceBrokerCredentialsHash2
+          

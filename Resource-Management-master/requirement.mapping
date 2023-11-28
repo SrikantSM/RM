@@ -1,0 +1,6232 @@
+[{
+		"source_reference": "FileUploadServiceTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1062",
+			"MODULAREPPMSTARGAZER-1932",
+			"MODULAREPPMRELEASESCP-1629"
+		]
+	},
+	{
+		"source_reference": "FileDownloadServiceTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1062",
+			"MODULAREPPMSTARGAZER-1932",
+			"MODULAREPPMSTARGAZER-2372",
+			"MODULAREPPMBRADBURY-2450"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.skillimport.esco.EscoCsvConsistencyCheckImplTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1062",
+			"MODULAREPPMSTARGAZER-1932"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.CloudAuditLogServiceTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2646"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.utils.HttpRequestHelperTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2646"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.config.AuthorizationEventHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2646"
+		]
+	},
+	{
+		"source_reference": "SkillUploadJourney",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1062"
+		]
+	},
+	{
+		"source_reference": "DeltaUploadJourney",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1646"
+		]
+	},
+	{
+		"source_reference": "SkillActions",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1646"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.handlers.SkillEventHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1061",
+			"MODULAREPPMSTARGAZER-1646",
+			"EPPMC4P-7805"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.validators.SingleSkillSourceValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1061",
+			"MODULAREPPMSTARGAZER-1646",
+			"EPPMC4P-7805"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.handlers.Catalogs2SkillsRepositoryTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1646"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.handlers.AlternativeLabelEventHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1524"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.handlers.ProficiencySetHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1524",
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-1911"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.handlers.SkillTextEventHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1524"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.validators.AlternativeLabelValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1524"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.validators.MessagingInjectionValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1524"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.validators.SkillValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1524",
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "CreateSkillWithDialogTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1061",
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "DraftActivateSkillsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1061",
+			"MODULAREPPMSTARGAZER-1524",
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "PatchSkillsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1061",
+			"EPPMC4P-7805"
+		]
+	},
+	{
+		"source_reference": "RestrictSkillsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1061",
+			"EPPMC4P-7805"
+		]
+	},
+	{
+		"source_reference": "CreateAlternativeLabelsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1524"
+		]
+	},
+	{
+		"source_reference": "CreateSkillsTextsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1524"
+		]
+	},
+	{
+		"source_reference": "PatchAlternativeLabelsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1524"
+		]
+	},
+	{
+		"source_reference": "PatchSkillsTextsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1524"
+		]
+	},
+	{
+		"source_reference": "AssignCatalogsToSkillTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1646",
+			"EPPMC4P-7805"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.metering.health.MeteringSchemaHealthIndicatorTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1168"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.MeteringControllerTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1168",
+			"MODULAREPPMSTARGAZER-935"
+		]
+	},
+	{
+		"source_reference": "MeteringTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1168",
+			"MODULAREPPMSTARGAZER-935"
+		]
+	},
+	{
+		"source_reference": "NegativeAuthorizationTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1168",
+			"MODULAREPPMSTARGAZER-935",
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.test.config.MeteringSqliteTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.metering.MeteringReportingIntegrationTests",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.metering.config.MeteringConfigParamertersTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.metering.config.TokenProviderTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.metering.core.UsageDocumentMapperTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.metering.core.UsageReportTriggerTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.metering.core.MeteringProcessingServiceTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-935",
+			"EPPMC4P-6396"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.metering.repository.sqlitetests.MeteringReportRepositorySqliteTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.metering.repository.sqlitetests.MeteringDetailsRepositorySqliteTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.metering.repository.sqlitetests.MeteringDocumentIdsRepositorySqliteTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.metering.repositories.MeteringDetailsRepositoryTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.metering.repositories.MeteringDocumentIdsRepositoryTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.embeddedsupport.controller.ContextControllerTest",
+		"jira_keys": [
+			"EPPMC4P-5283"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.embeddedsupport.service.ContextServiceTest",
+		"jira_keys": [
+			"EPPMC4P-5283"
+		]
+	},
+	{
+		"source_reference": "CapacityGridFlpTileKpiTest",
+		"jira_keys": [
+			"EPPMC4P-4808"
+		]
+	},
+	{
+		"source_reference": "ConsultantAssignmentServiceTest",
+		"jira_keys": [
+			"EPPMC4P-4766"
+		]
+	},
+	{
+		"source_reference": "CapacityGridAssignmentCUDTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-4942",
+			"EPPMC4P-4603"
+		]
+	},
+	{
+		"source_reference": "AssignmentServiceTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2"
+		]
+	},
+	{
+		"source_reference": "AssignmentIntegrationTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-3062",
+			"MODULAREPPMEXCELSIOR-4065",
+			"MODULAREPPMEXCELSIOR-4112"
+		]
+	},
+	{
+		"source_reference": "BookedCapacityUpdateOnAssignmentCUDTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-4575"
+		]
+	},
+	{
+		"source_reference": "ChangeAssignmentTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-4575"
+		]
+	},
+	{
+		"source_reference": "EditableCapacityGridHeaderActionsTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-4575"
+		]
+	},
+	{
+		"source_reference": "CapacityGridAssignmentTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-3063",
+			"MODULAREPPMEXCELSIOR-4106",
+			"MODULAREPPMEXCELSIOR-4166"
+		]
+	},
+	{
+		"source_reference": "CapacityGridDailyAssignmentTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-3063",
+			"MODULAREPPMEXCELSIOR-4106",
+			"MODULAREPPMEXCELSIOR-4166"
+		]
+	},
+	{
+		"source_reference": "CapacityGridWeeklyAssignmentTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-3063",
+			"MODULAREPPMEXCELSIOR-4106",
+			"MODULAREPPMEXCELSIOR-4166"
+		]
+	},
+	{
+		"source_reference": "CapacityGridRequestDetailsPopUpTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-3063",
+			"MODULAREPPMEXCELSIOR-3272"
+		]
+	},
+	{
+		"source_reference": "EditableCapacityGridDailyTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2826"
+		]
+	},
+	{
+		"source_reference": "EditableCapacityGridDailyTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2024"
+		]
+	},
+	{
+		"source_reference": "EditableCapacityGridMonthlyTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2826"
+		]
+	},
+	{
+		"source_reference": "EditableCapacityGridMonthlyTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2024"
+		]
+	},
+	{
+		"source_reference": "AssignmentInstanceBasedAuthorizationTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2",
+			"MODULAREPPMEXCELSIOR-4166"
+		]
+	},
+	{
+		"source_reference": "DeleteAssignmentTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2"
+		]
+	},
+	{
+		"source_reference": "DailyEditableGridJourney",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2127",
+			"MODULAREPPMEXCELSIOR-3644"
+		]
+	},
+	{
+		"source_reference": "MonthlyEditableGridJourney",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2127",
+			"MODULAREPPMEXCELSIOR-3644"
+		]
+	},
+	{
+		"source_reference": "WeeklyEditableGridJourney",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2127",
+			"MODULAREPPMEXCELSIOR-3644"
+		]
+	},
+		{
+    		"source_reference": "EditableJourney",
+    		"jira_keys": [
+                "MODULAREPPMEXCELSIOR-4065"
+    		]
+    	},
+	{
+		"source_reference": "ChangeAssignmentTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1098"
+		]
+	},
+	{
+		"source_reference": "TotalHoursSimulationTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2"
+		]
+	},
+	{
+		"source_reference": "AsRequestedSimulationTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2",
+			"MODULAREPPMEXCELSIOR-1790"
+		]
+	},
+	{
+		"source_reference": "AssignmentServiceAuthorizationTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-245"
+		]
+	},
+	{
+		"source_reference": "CapacityGrid3Months6MonthsReadTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1930",
+			"MODULAREPPMEXCELSIOR-1596"
+		]
+	},
+	{
+		"source_reference": "CapacityGridSortingCriteriaAddedToURLTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1930",
+			"MODULAREPPMEXCELSIOR-1596",
+			"MODULAREPPMEXCELSIOR-4361"
+		]
+	},
+	{
+		"source_reference": "CapacityGridWithFilterCriteriaAddedToURLTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1930",
+			"MODULAREPPMEXCELSIOR-1596"
+		]
+	},
+	{
+		"source_reference": "CapacityGridContactDetailsPopUpTestFS",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1930",
+			"MODULAREPPMEXCELSIOR-1596"
+		]
+	},
+	{
+		"source_reference": "CapacityGridSortingCriteriaAddedToURLTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1930",
+			"MODULAREPPMEXCELSIOR-1596",
+			"MODULAREPPMEXCELSIOR-4361"
+		]
+	},
+	{
+		"source_reference": "CapacityGridWithFilterCriteriaAddedToURLTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1930",
+			"MODULAREPPMEXCELSIOR-1596"
+		]
+	},
+	{
+		"source_reference": "CapacityGridContactDetailsPopUpTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1930",
+			"MODULAREPPMEXCELSIOR-1596",
+			"EPPMC4P-6698"
+		]
+	},
+	{
+		"source_reference": "CapacityGridServiceAuthorizationTests",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1930",
+			"MODULAREPPMEXCELSIOR-1596"
+		]
+	},
+	{
+		"source_reference": "CapacityGridServiceTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1930",
+			"MODULAREPPMEXCELSIOR-1596"
+		]
+	},
+	{
+		"source_reference": "CapacityGridDailyUtilizationTemporalDataHandlingTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2612",
+			"MODULAREPPMEXCELSIOR-2774"
+		]
+	},
+	{
+		"source_reference": "CapacityGridMonthlyUtilizationTemporalDataHandlingTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2612",
+			"MODULAREPPMEXCELSIOR-2774"
+		]
+	},
+	{
+		"source_reference": "capacityGridMultipleWorkAssignmentsTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1930",
+			"MODULAREPPMEXCELSIOR-1596"
+		]
+	},
+	{
+		"source_reference": "CapacityGridWeeklyUtilizationTemporalDataHandlingTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2989"
+		]
+	},
+	{
+		"source_reference": "CapacityGridWeeklyReadTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2989",
+			"MODULAREPPMEXCELSIOR-4361"
+		]
+	},
+	{
+		"source_reference": "CheckResourceUtilization",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1597"
+		]
+	},
+	{
+		"source_reference": "CheckResourceUtilization",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1598"
+		]
+	},
+	{
+		"source_reference": "CapacityServiceAuthorizationTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-245"
+		]
+	},
+	{
+		"source_reference": "CapacityServiceTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-165"
+		]
+	},
+	{
+		"source_reference": "CapacityGridServiceInstanceAuthorizationTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-165"
+		]
+	},
+	{
+		"source_reference": "capacityGridMultipleWorkAssignments3MonthsTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1121"
+		]
+	},
+	{
+		"source_reference": "EditableCapacityGridHeaderActionsTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-3644"
+		]
+	},
+	{
+		"source_reference": "AssignmentReplicationTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1893",
+			"EPPMC4P-5404"
+		]
+	},
+	{
+		"source_reference": "AuthorizationJourney",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-165",
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "CheckResourceUtilization",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-165"
+		]
+	},
+	{
+		"source_reference": "LoadResourceUtilizationemptyHeader",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-165"
+		]
+	},
+	{
+		"source_reference": "PersonalizationJourney",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1742",
+			"MODULAREPPMEXCELSIOR-2007"
+		]
+	},
+	{
+		"source_reference": "AssignmentJourney",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1736",
+			"MODULAREPPMEXCELSIOR-2613"
+		]
+	},
+	{
+		"source_reference": "ResourceUtilizationJourney",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1861",
+			"MODULAREPPMEXCELSIOR-2613"
+		]
+	},
+	{
+		"source_reference": "PersonalizationDialogueJourney",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1861"
+		]
+	},
+	{
+		"source_reference": "AssignmentJourney",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-1861",
+			"MODULAREPPMEXCELSIOR-2074",
+			"MODULAREPPMEXCELSIOR-2613"
+		]
+	},
+	{
+		"source_reference": "FilterRequestJourney",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2534"
+		]
+	},
+	{
+		"source_reference": "CheckDailyResourceUtilization",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2390"
+		]
+	},
+	{
+		"source_reference": "WeeklyEditableGridJourney",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2988"
+		]
+	},
+	{
+		"source_reference": "CheckWeeklyResourceUtilization",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2980"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.integration.AssignmentS4IntegrationTest",
+		"jira_keys": [
+			"EPPMC4P-6819"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.handlers.AssignmentServiceHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2",
+			"MODULAREPPMEXCELSIOR-3062",
+			"MODULAREPPMEXCELSIOR-4575"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.handlers.CapacityGridServiceHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-165"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.handlers.RequesterAssignmentServiceHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-4965"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.simulation.AssignmentAsRequestedSimulatorTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2",
+			"MODULAREPPMEXCELSIOR-1790"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.simulation.AssignmentSimulatorFactoryTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.simulation.AssignmentTotalHoursSimulatorTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.utils.AssignmentServiceHandlerUtilityTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.utils.AssignmentSimulationUtilityTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.utils.DataProviderTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.utils.AssignmentUtilityTest",
+		"jira_keys": [
+			"EPPMC4P-4808"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.utils.MessageKeyPrecompilerTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.validation.AssignmentValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.auditlog.AuditChangeLogTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-793"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.auditlog.AuditLogChangeListenerTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-793"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.auditlog.AuditLogUtilTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-854"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.assignment.auditlog.AuthorizationEventHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-854"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.AssignmentRepositoryTest$InsertAssignmentAndSupplyTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-556"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.AssignmentServiceTest$CreateAssignment",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-556"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.actions.handlers.ChangeAssignmentActionHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-744"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.actions.utils.AssignmentCompareTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-744"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.actions.utils.AssignmentProposalValidatorTest$checkAssignmentExistsTest",
+		"jira_keys": [
+			"EPPMC4P-5360"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.actions.utils.AssignmentProposalValidatorTest$ValidateAssignmentTest",
+		"jira_keys": [
+			"EPPMC4P-5360"
+		]
+	},
+	{
+		"source_reference": "CapacityGridContactDetailsPopUpTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-610"
+		]
+	},
+	{
+		"source_reference": "test-journey-my-project-experience",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-803",
+			"MODULAREPPMVALIANT-814",
+			"MODULAREPPMVALIANT-980",
+			"MODULAREPPMVALIANT-1095",
+			"MODULAREPPMVALIANT-1629",
+			"MODULAREPPMVALIANT-1677",
+			"MODULAREPPMSTARGAZER-1945",
+			"MODULAREPPMSTARGAZER-2249",
+			"MODULAREPPMVALIANT-2151",
+			"MODULAREPPMVALIANT-2351",
+			"MODULAREPPMVALIANT-2399",
+			"EPPMC4P-5101",
+			"EPPMC4P-5310",
+			"EPPMC4P-7739"
+		]
+	},
+ 	{
+		"source_reference": "test-journey-my-resource",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2113",
+			"MODULAREPPMVALIANT-2145",
+			"MODULAREPPMVALIANT-2228",
+			"MODULAREPPMVALIANT-2142",
+			"MODULAREPPMVALIANT-2351",
+			"MODULAREPPMVALIANT-2399",
+			"EPPMC4P-5101",
+			"EPPMC4P-5121",
+			"EPPMC4P-5310",
+			"EPPMC4P-7739"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/SkillMasterList",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-803",
+			"MODULAREPPMVALIANT-980",
+			"MODULAREPPMVALIANT-1629"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/SkillMasterListAll",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-803",
+			"MODULAREPPMVALIANT-980"
+		]
+	},
+	{
+		"source_reference": "ProjectTeamMemberReadTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-689",
+			"MODULAREPPMSTARGAZER-1982"
+		]
+	},
+	{
+		"source_reference": "ProjectTeamMemberNegativeTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-689"
+		]
+	},
+	{
+		"source_reference": "Read Resource Request Details",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-375"
+		]
+	},
+	{
+		"source_reference": "Read Resource Request Information",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-375"
+		]
+	},
+	{
+		"source_reference": "Read Resource Manager details",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-375"
+		]
+	},
+	{
+		"source_reference": "Read Processor details",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-375"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.actions.handlers.ProcessResourceRequestActionHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-377",
+			"MODULAREPPMBRADBURY-642"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.actions.handlers.ProcessResourceRequestActionHandlerTest$ForwardResourceRequestTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-810",
+			"MODULAREPPMBRADBURY-2440"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-377",
+			"MODULAREPPMBRADBURY-504"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestHandlerTest$WhenHandlers",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-810",
+			"MODULAREPPMBRADBURY-1239",
+			"MODULAREPPMBRADBURY-1467",
+			"MODULAREPPMBRADBURY-1869"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ProcessResourceRequestHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-504"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-377",
+			"MODULAREPPMBRADBURY-672",
+			"MODULAREPPMBRADBURY-504"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateProcessingResourceOrgExistence",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2273"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateProcessingResourceOrg",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2273"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateUserAuthorization",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2273",
+			"MODULAREPPMBRADBURY-2440"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateRequestedResourceOrgExistence",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2273"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$CheckResourceRequestStaffing",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1869"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$checkResourceRequestDeleteUpdate",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1869"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateReferenceObjAssignedToResReqTest",
+		"jira_keys": [
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "AuthorizationTestForResourceRequest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-377",
+			"MODULAREPPMBRADBURY-2273",
+			"MODULAREPPMBRADBURY-2440",
+			"EPPMC4P-5321",
+			"EPPMC4P-5404"
+		]
+	},
+	{
+		"source_reference": "Authorization",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-377",
+			"EPPMC4P-5404",
+			"EPPMC4P-6530"
+		]
+	},
+	{
+		"source_reference": "CreateScenarios",
+		"jira_keys": [
+			"EPPMC4P-6530",
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "ResourceRequest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-503",
+			"MODULAREPPMBRADBURY-409",
+			"MODULAREPPMBRADBURY-504",
+			"MODULAREPPMBRADBURY-1474",
+			"MODULAREPPMBRADBURY-1466",
+			"MODULAREPPMBRADBURY-2313",
+			"MODULAREPPMBRADBURY-2273",
+			"EPPMC4P-5321",
+			"EPPMC4P-5404"
+		]
+	},
+	{
+		"source_reference": "Manage Resource Request | Query",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-409",
+			"MODULAREPPMBRADBURY-625",
+			"MODULAREPPMBRADBURY-1869",
+			"EPPMC4P-5456"
+		]
+	},
+	{
+		"source_reference": "Manage Resource Request | Read",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-409",
+			"MODULAREPPMBRADBURY-1869",
+			"MODULAREPPMBRADBURY-1963",
+			"MODULAREPPMBRADBURY-1989",
+			"MODULAREPPMBRADBURY-2216",
+			"MODULAREPPMBRADBURY-2274",
+			"MODULAREPPMBRADBURY-2273",
+			"MODULAREPPMBRADBURY-411"
+		]
+	},
+	{
+		"source_reference": "Manage Resource Request | Create",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-409",
+			"MODULAREPPMBRADBURY-1869",
+			"MODULAREPPMBRADBURY-1963",
+			"MODULAREPPMBRADBURY-2216",
+			"MODULAREPPMBRADBURY-2273",
+			"EPPMC4P-5456",
+			"EPPMC4P-6956"
+		]
+	},
+	{
+		"source_reference": "Manage Resource Request | Update",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-409",
+			"MODULAREPPMBRADBURY-1869",
+			"MODULAREPPMBRADBURY-1963",
+			"MODULAREPPMBRADBURY-2216",
+			"MODULAREPPMBRADBURY-2273",
+			"EPPMC4P-5456"
+		]
+	},
+	{
+		"source_reference": "Manage Resource Request | Delete",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-409",
+			"MODULAREPPMBRADBURY-1869",
+			"EPPMC4P-5456"
+		]
+	},
+	{
+		"source_reference": "Manage Resource Request | List Report UX Consistency",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1869",
+			"MODULAREPPMBRADBURY-2274",
+			"MODULAREPPMBRADBURY-2273",
+			"MODULAREPPMBRADBURY-411"
+		]
+	},
+	{
+		"source_reference": "Manage Resource Request | Object Page UX Consistency",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1869",
+			"MODULAREPPMBRADBURY-1963",
+			"MODULAREPPMBRADBURY-1989",
+			"MODULAREPPMBRADBURY-2216",
+			"MODULAREPPMBRADBURY-2374",
+			"MODULAREPPMBRADBURY-2273",
+			"MODULAREPPMBRADBURY-411",
+			"MODULAREPPMBRADBURY-2532"
+		]
+	},
+	{
+		"source_reference": "Weekly Effort Distribution | Aggregate",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594",
+			"MODULAREPPMBRADBURY-2027",
+			"MODULAREPPMBRADBURY-411"
+		]
+	},
+	{
+		"source_reference": "Weekly Effort Distribution | Create",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594",
+			"MODULAREPPMBRADBURY-1761",
+			"MODULAREPPMBRADBURY-411"
+		]
+	},
+	{
+		"source_reference": "Weekly Effort Distribution | Update",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594",
+			"MODULAREPPMBRADBURY-411"
+		]
+	},
+	{
+		"source_reference": "Weekly Effort Distribution | Delete",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594",
+			"MODULAREPPMBRADBURY-411"
+		]
+	},
+	{
+		"source_reference": "Weekly Effort Distribution | View",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594",
+			"MODULAREPPMBRADBURY-1963",
+			"MODULAREPPMBRADBURY-2027"
+		]
+	},
+	{
+		"source_reference": "Weekly Effort Distribution | UX Consistency",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594",
+			"MODULAREPPMBRADBURY-1963"
+		]
+	},
+	{
+		"source_reference": "Staff Resource Request - MainJourney",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-409",
+			"MODULAREPPMBRADBURY-617",
+			"MODULAREPPMBRADBURY-1472",
+			"MODULAREPPMBRADBURY-2273",
+			"MODULAREPPMBRADBURY-2670",
+			"EPPMC4P-5321"
+		]
+	},
+	{
+		"source_reference": "Staff Resource Request - View Effort Distribution Journey",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1319"
+		]
+	},
+	{
+		"source_reference": "UX Consistency - Staff Resource Request - Read ListReport scenarios",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1869",
+			"MODULAREPPMBRADBURY-1359",
+			"MODULAREPPMBRADBURY-2216",
+			"MODULAREPPMBRADBURY-2374",
+			"MODULAREPPMBRADBURY-2274",
+			"MODULAREPPMBRADBURY-2273",
+			"MODULAREPPMBRADBURY-411",
+			"MODULAREPPMBRADBURY-2532",
+			"MODULAREPPMBRADBURY-2670",
+			"EPPMC4P-5321"
+		]
+	},
+	{
+		"source_reference": "Staff Resource Request - CompareResources",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2378",
+			"MODULAREPPMBRADBURY-2438",
+			"MODULAREPPMBRADBURY-2532",
+			"EPPMC4P-5321"
+		]
+	},
+	{
+		"source_reference": "Staff Resource Request - Skill Comparison",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2438",
+      			"MODULAREPPMBRADBURY-2515",
+			"MODULAREPPMBRADBURY-2582",
+			"EPPMC4P-5321"
+		]
+	},
+	{
+		"source_reference": "Staff Resource Request - Availability Comparison",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2582",
+			"EPPMC4P-5321"
+		]
+	},
+	{
+		"source_reference": "Manage Project Data Replication | Create",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140",
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+    	"source_reference": "projectReplicationFilter.Manage Project Data Replication | Edit",
+    	"jira_keys": [
+    		"MODULAREPPMBRADBURY-1140",
+    		"MODULAREPPMBRADBURY-2253",
+    		"MODULAREPPMBRADBURY-2278"
+    	]
+    },
+    {
+    	"source_reference": "projectReplicationFilter.Manage Project Data Replication | Read",
+    	"jira_keys": [
+    		"MODULAREPPMBRADBURY-1140",
+    		"MODULAREPPMBRADBURY-1325",
+    		"MODULAREPPMBRADBURY-2278"
+    	]
+    },
+	{
+		"source_reference": "Manage Resource Request QUnit | Calendar Model",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1240",
+			"MODULAREPPMBRADBURY-2027"
+		]
+	},
+	{
+		"source_reference": "Manage Resource Request QUnit | Month Calendar View",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1240"
+		]
+	},
+	{
+		"source_reference": "Effort Distribution QUnit | Calendar Model",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1319"
+		]
+	},
+	{
+		"source_reference": "Contact Card QUnit | ResourceQuickView",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1472",
+			"MODULAREPPMBRADBURY-2313",
+			"MODULAREPPMBRADBURY-2532",
+			"EPPMC4P-5354"
+		]
+	},
+	{
+		"source_reference": "Model QUnit | Week Calendar Model",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594",
+			"MODULAREPPMBRADBURY-1761",
+			"MODULAREPPMBRADBURY-2027"
+		]
+	},
+	{
+		"source_reference": "Utils QUnit | DateHelper",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594"
+		]
+	},
+	{
+		"source_reference": "Manage Resource Request - Contact Card Journey",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2313",
+			"MODULAREPPMBRADBURY-2532",
+			"EPPMC4P-5354",
+			"EPPMC4P-7141"
+		]
+	},
+	{
+		"source_reference": "Staff Resource Request - Contact Card Journey",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2313",
+			"MODULAREPPMBRADBURY-2532",
+			"EPPMC4P-5354",
+			"EPPMC4P-7141"
+		]
+	},
+	{
+		"source_reference": "DayWiseAvailabilityMatch",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1019",
+			"EPPMC4P-5404"
+		]
+	},
+	{
+		"source_reference": "WeekWiseAvailabilityMatch",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1591",
+			"EPPMC4P-5404"
+		]
+	},
+	{
+		"source_reference": "TotalMatch",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1088",
+			"MODULAREPPMBRADBURY-1591",
+			"EPPMC4P-5321",
+			"EPPMC4P-5404"
+		]
+	},
+	{
+		"source_reference": "Demoflow",
+		"jira_keys": [
+			"MODULAREPPMRELEASESCP-893",
+			"MODULAREPPMEXCELSIOR-500",
+			"MODULAREPPMRELEASESCP-945",
+			"MODULAREPPMEXCELSIOR-744",
+			"MODULAREPPMEXCELSIOR-515",
+			"MODULAREPPMSTARGAZER-1095",
+			"MODULAREPPMSTARGAZER-1229",
+			"MODULAREPPMEXCELSIOR-1438",
+			"MODULAREPPMEXCELSIOR-2286",
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMBRADBURY-1472",
+			"MODULAREPPMSTARGAZER-1945",
+			"MODULAREPPMSTARGAZER-2249",
+			"MODULAREPPMBRADBURY-1466",
+			"MODULAREPPMBRADBURY-1869",
+			"MODULAREPPMBRADBURY-2177",
+			"MODULAREPPMBRADBURY-2273",
+			"MODULAREPPMEXCELSIOR-2534",
+			"MODULAREPPMBRADBURY-411",
+			"EPPMC4P-5354"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.auditlog.AuditLogUtilTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-674"
+		]
+	},
+   {
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Time Period Pagination Monthly Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4194"
+    	]
+   	},
+   	  {
+        	"source_reference": "/base/app/capacityGridUi/webapp/test/unit/unitTests.qunit.html MultiInputWithValueHelp",
+        	"jira_keys": [
+        		"MODULAREPPMEXCELSIOR-4859"
+        	]
+       	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Time Period Pagination Daily Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4194"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Time Period Pagination Weekly Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4194"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Hide Leading Columns Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4224",
+    		"MODULAREPPMEXCELSIOR-4361",
+    		"EPPMC4P-5931"
+    	]
+   	},
+   	{
+        	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Personalization Journey",
+        	"jira_keys": [
+        		"EPPMC4P-5931"
+        	]
+    },
+    {
+            "source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Additional Columns Journey",
+            "jira_keys": [
+            	"EPPMC4P-5931"
+            ]
+    },
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Assignment Daily Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4361",
+    		"MODULAREPPMEXCELSIOR-4575",
+			"EPPMC4P-4825"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Assignment Monthly Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4361",
+            "MODULAREPPMEXCELSIOR-4575"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Assignment Weekly Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4361",
+    		"MODULAREPPMEXCELSIOR-4575"
+
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Filter Request Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4361",
+			"EPPMC4P-6097"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Resource Daily Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4361",
+    		"EPPMC4P-5429"
+    	]
+   	},
+   	{
+        	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Filter Resources With Edited Assignments Journey",
+        	"jira_keys": [
+        		"EPPMC4P-6807"
+        	]
+       	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Resource Monthly Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4361",
+    		"EPPMC4P-5429"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Resource Weekly Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4361",
+    		"EPPMC4P-5429"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup1.qunit.html Edit Daily Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4575",
+    		"MODULAREPPMEXCELSIOR-4386"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup1.qunit.html Edit Monthly Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4575",
+    		"MODULAREPPMEXCELSIOR-4386"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup1.qunit.html Copy Paste Assignment Journey",
+    	"jira_keys": [
+    		"EPPMC4P-4603"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup1.qunit.html Cut Paste Assignment Journey",
+    	"jira_keys": [
+    		"EPPMC4P-4603"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup1.qunit.html Drag And Drop Assignment Journey",
+    	"jira_keys": [
+    		"EPPMC4P-6300"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup1.qunit.html Edit Create Assignment Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4311",
+			"MODULAREPPMEXCELSIOR-4928",
+		    "MODULAREPPMEXCELSIOR-4935"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Filter Request Journey",
+    	"jira_keys": [
+    		"EPPMC4P-8741"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Additional Columns Journey",
+    	"jira_keys": [
+    		"EPPMC4P-8741"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Dynamic Date Range Monthly Journey",
+    	"jira_keys": [
+    		"EPPMC4P-7758"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Dynamic Date Range Weekly Journey",
+    	"jira_keys": [
+    		"EPPMC4P-7758"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Dynamic Date Range Daily Journey",
+    	"jira_keys": [
+    		"EPPMC4P-7758"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup3.qunit.html Create Assignment Journey",
+    	"jira_keys": [
+    		"EPPMC4P-6290"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup3.qunit.html Delete Assignment Journey",
+    	"jira_keys": [
+    		"EPPMC4P-6290"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup3.qunit.html Copy Paste Assignment Journey",
+    	"jira_keys": [
+    		"EPPMC4P-6290"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup1.qunit.html Change Daily Utilization Journey",
+    	"jira_keys": [
+    		"EPPMC4P-6290",
+			"EPPMC4P-6819"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup1.qunit.html Edit Delete Assignment Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4364"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup1.qunit.html Focused Edit Journey",
+    	"jira_keys": [
+    		"EPPMC4P-7609",
+		"EPPMC4P-8844"
+    	]
+   	},
+   	{
+        "source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup1.qunit.html Delete Assignment Journey",
+        "jira_keys": [
+        	"EPPMC4P-5077"
+        ]
+    },
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup1.qunit.html Edit Weekly Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4575",
+    		"MODULAREPPMEXCELSIOR-4386"
+    	]
+   	},
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup1.qunit.html Variants Journey",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4361",
+    		"EPPMC4P-5931"
+    	]
+   	},
+   	{
+        "source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup1.qunit.html ActionEnablement Journey",
+       	"jira_keys": [
+       	        "MODULAREPPMEXCELSIOR-4386",
+				"MODULAREPPMEXCELSIOR-4311",
+				"MODULAREPPMEXCELSIOR-4364",
+				"EPPMC4P-4603"
+        ]
+    },
+    {
+        "source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Quick View Journey",
+      	"jira_keys": [
+		       "EPPMC4P-5077",
+           	       "EPPMC4P-5931"
+        ]
+    },
+	{
+    	"source_reference": "/base/app/capacityGridUi/webapp/test/integration/opaTestsGroup2.qunit.html Table Export Journey",
+    	"jira_keys": [
+    		"EPPMC4P-4818"
+    	]
+   	},
+	{
+    	"source_reference": "Authorization Journey",
+    	"jira_keys": [
+    			"EPPMC4P-4808"
+    	]
+    },
+    {
+        "source_reference": "Weekly Assignment Journey",
+        "jira_keys": [
+        		"EPPMC4P-5931"
+        ]
+    },
+    {
+            "source_reference": "Filter Resources With Edited Assignment Journey",
+            "jira_keys": [
+            		"EPPMC4P-6807"
+            ]
+        },
+	{
+    	"source_reference": "CapacityGrid2Months1MonthsReadDailyUtilizationTest",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4361"
+    	]
+   	},
+	{
+    	"source_reference": "CapacityGrid3Months6MonthsReadMonthlyUtilizationTest",
+    	"jira_keys": [
+    		"MODULAREPPMEXCELSIOR-4361"
+    	]
+   	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.auditlog.AuthorizationEventHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-674"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.drm.controllers.ResourceRequestControllerTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-602",
+			"MODULAREPPMBRADBURY-2026",
+			"EPPMC4P-5404"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.drm.services.ResourceRequestServiceTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1475"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.drm.services.ManageResourceRequestServiceTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1475",
+			"MODULAREPPMBRADBURY-2026"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.config.HealthCheckConfigTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-809"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.health.HealthCheckPropertiesTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-809"
+		]
+	},
+	{
+		"source_reference": "ResourceRequestDRMTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-602",
+			"MODULAREPPMEXCELSIOR-866"
+		]
+	},
+	{
+		"source_reference": "DRMNegativeAuthorizationTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-602",
+			"MODULAREPPMEXCELSIOR-794",
+			"MODULAREPPMEXCELSIOR-866",
+			"MODULAREPPMVALIANT-801"
+		]
+	},
+	{
+		"source_reference": "ProjectTeamMemberDRMTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-794",
+			"MODULAREPPMVALIANT-801"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.projectroleservice.processor.ProjectRoleDataProcessorTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-814",
+			"MODULAREPPMVALIANT-838"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.handlers.ProjectRoleServiceEventHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-814",
+			"MODULAREPPMVALIANT-838"
+		]
+	},
+ 	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.handlers.MyResourceServiceHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2113",
+			"MODULAREPPMVALIANT-2145",
+			"MODULAREPPMVALIANT-2218",
+			"EPPMC4P-5121",
+			"EPPMC4P-7294"
+		]
+	},
+ 	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.myresourceservice.validations.ExternalWorkExperienceSkillValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2145"
+		]
+	},
+  	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.myresourceservice.validations.MyResourceExternalWorkExperienceHeaderValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2145"
+		]
+	},
+  	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.myresourceservice.validations.ProjectExperienceHeaderRoleValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2145"
+		]
+	},
+  	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.myresourceservice.validations.ProjectExperienceHeaderSkillValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2145"
+		]
+	},
+   	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.myresourceservice.validations.ProjectExperienceHeaderValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2145"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/RoleMasterList",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-814",
+			"MODULAREPPMVALIANT-980"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/RoleValueHelpList",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-814",
+			"MODULAREPPMVALIANT-980"
+		]
+	},
+	{
+		"source_reference": "ProjectRoleService/RoleLifecycleStatus",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-814",
+			"MODULAREPPMVALIANT-980"
+		]
+	},
+	{
+		"source_reference": "ProjectRoleService/Roles",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-814",
+			"MODULAREPPMVALIANT-980",
+			"MODULAREPPMVALIANT-838"
+		]
+	},
+	{
+		"source_reference": "test-journey-role",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-814",
+			"MODULAREPPMVALIANT-980",
+			"MODULAREPPMVALIANT-838"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.auditlog.AuditLogUtilTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-979",
+			"MODULAREPPMVALIANT-948"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.auditlog.AuthorizationEventHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-979"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.handlers.MyProjectExperienceServiceEventHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-948",
+			"MODULAREPPMVALIANT-1629",
+			"MODULAREPPMSTARGAZER-1944",
+			"MODULAREPPMSTARGAZER-1945",
+			"MODULAREPPMVALIANT-2151",
+			"MODULAREPPMVALIANT-2218"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/ExternalWorkExperience",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-980"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/ExternalWorkExperienceSkills",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-980"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/InternalWorkExperience",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-980",
+			"MODULAREPPMEXCELSIOR-1551",
+			"MODULAREPPMVALIANT-2351",
+			"EPPMC4P-5310",
+			"EPPMC4P-7248"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/InternalWorkExperienceSkills",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-980",
+			"MODULAREPPMEXCELSIOR-1551"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/MyProjectExperienceHeader",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-980",
+			"MODULAREPPMVALIANT-1834",
+			"MODULAREPPMVALIANT-2351",
+			"EPPMC4P-5310"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/PeriodicAvailability",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-980"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/ProfileData",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-980",
+			"MODULAREPPMVALIANT-1095",
+			"MODULAREPPMVALIANT-1677",
+			"MODULAREPPMVALIANT-2218",
+			"MODULAREPPMVALIANT-2351",
+			"MODULAREPPMVALIANT-2399",
+			"EPPMC4P-5101",
+			"EPPMC4P-5310"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/Roles",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-980",
+			"MODULAREPPMVALIANT-2351"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/Skills",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-980",
+			"MODULAREPPMVALIANT-2351"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/ProficiencyLevels",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/ProficiencySets",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/ProfilePhoto",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2151"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/Utilization",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-62"
+		]
+	},
+	{
+		"source_reference": "ProjectRoleService/RoleCodes",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-980"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.drm.controllers.AssignmentControllerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-801",
+			"EPPMC4P-5404"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.drm.controllers.CommmonControllerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-801"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.drm.controllers.ProjectTeamMemberControllerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-801"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.drm.InputValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-801"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ProjectReplicationFilterServiceEventHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-725"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ProjectReplicationFilterServiceEventHandlerTest$CheckValidServOrgId",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-725"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.exceptions.ExceptionUtilityTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-725",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ProjectReplicationTaskHandlerTest$BeforeProjectReplicationTaskCreateUpdateTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ProjectReplicationTaskHandlerTest$BeforeProjectReplicationTaskDraftCreateTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ProjectReplicationTaskHandlerTest$BeforeProjectReplicationTaskDeleteTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ProjectReplicationTaskHandlerTest$CheckProjectReplicationTasksTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ProjectReplicationTaskHandlerTest$OnActivateReplicationTaskTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ProjectReplicationTaskHandlerTest$OnRetryReplicationTaskTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ProjectReplicationTaskHandlerTest$UpdateReplicationTasksTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ProjectReplicationTaskHandlerTest$FillVirtualFieldsTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140",
+			"MODULAREPPMBRADBURY-2278"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ProjectReplicationTaskHandlerTest$AutomaticPublishingOnTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2278"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ProjectReplicationTaskHandlerTest$AutomaticPublishingOffTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2278"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ProjectReplicationTaskHandlerTest$SetAutoPublishVirtualFieldsTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2278"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.utils.ProjectIntegrationAdapterTest$TriggerInitialLoadTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.utils.ProjectIntegrationAdapterTest$FormUrlTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.utils.ProjectIntegrationAdapterTest$ReplaceUaaUrlWithSubdomainTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.controllers.FileUploadControllerTest",
+		"jira_keys": [
+			"EPPMC4P-7805"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.handlers.SingleSkillSourceHandlerTest",
+		"jira_keys": [
+			"EPPMC4P-7805"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.handlers.SkillIntegrationEventHandlerTest",
+		"jira_keys": [
+			"EPPMC4P-7805"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.utils.ProjectIntegrationAdapterTest$GetAutoPublishCodeforTaskTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ProjectReplicationTasksValidatorTest$CheckProjectReplicationTasksTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ProjectReplicationTasksValidatorTest$CheckReferenceDateTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ProjectReplicationTasksValidatorTest$checkIfReplicationTaskExistForServiceOrganizationTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ProjectReplicationTasksValidatorTest$checkServiceOrganizationCodeTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ProjectReplicationTasksValidatorTest$checkReplicationTaskUpdateDeleteTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ProjectReplicationTasksValidatorTest$getProjectReplicationTaskForServiceOrganizationTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestSkillsValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-672",
+			"MODULAREPPMBRADBURY-1474"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.projectroleservice.validations.ProjectRoleValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-838"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.utils.ProjectRoleEventHandlerUtilityTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-838"
+		]
+	},
+	{
+		"source_reference": "ProjectRoleService/ProjectRoles_Texts",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-838"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.controller.ServiceOrgControllerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-885"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.businessserviceorgservices.dao.ServiceOrgDAOImplTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-885"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.businessserviceorgservices.imports.ImportErrorTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-885"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.businessserviceorgservices.imports.ImportResultBuilderTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-885"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.businessserviceorgservices.imports.ImportResultImplTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-885"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.businessserviceorgservices.imports.serviceorg.CsvConsistencyCheckImplTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-885"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.businessserviceorgservices.imports.serviceorg.ServiceOrgCsvImporterImplTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-885",
+			"MODULAREPPMVALIANT-1421",
+			"MODULAREPPMBRADBURY-2217",
+			"EPPMC4P-4851"
+
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.businessserviceorgservices.validations.CostCenterValidationImplTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-885",
+			"EPPMC4P-4851"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.handlers.ServiceOrgFileDownloadHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-885"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.handlers.ServiceOrgFileUploadHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-885"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.processor.workforce.WorkforceMDILogAPIProcessorTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-947",
+			"MODULAREPPMVALIANT-1483",
+			"MODULAREPPMVALIANT-2151",
+			"EPPMC4P-5100"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.availabilityservice.CsvInputValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-947",
+			"MODULAREPPMVALIANT-1301",
+			"MODULAREPPMVALIANT-1304",
+			"MODULAREPPMVALIANT-1372",
+			"MODULAREPPMVALIANT-1223"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.availabilityservice.dao.AvailabilityDAOTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-947"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.availabilityservice.imports.AvailabilityCsvImporterTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-947"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.availabilityservice.imports.AvailabilityServiceTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-947"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.availabilityservice.imports.CsvConsistencyCheckImplTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-947"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.availabilityservice.imports.ImportResultBuilderTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-947"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.availabilityservice.imports.ImportResultImplTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-947"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.controller.AvailabilityControllerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-947"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.handlers.AvailabilityControllerAdviceTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-947"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.handlers.AvailabilityFileDownloadHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-947"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.handlers.AvailabilityFileUploadHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-947"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.handlers.ReplicationJobsTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-884"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.processor.costcenter.CostCenterMDILogAPIProcessorTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-884"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.processor.costcenter.converters.OneMDSCostCenterAttributesToRMCostCenterAttributesTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-884"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.processor.costcenter.converters.OneMDSCostCenterValidityToRMCostCenterValidityTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-884"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.recommendation.MatchingCandidatesHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-566"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.recommendation.MatchingCandidatesHandlerTest$WhenMatchingCandidatesHandlers",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2440",
+			"EPPMC4P-5321"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.recommendation.MatchingCandidatesHelperTest$WhenMatchingCandidatesHelpers",
+		"jira_keys": [
+			"EPPMC4P-5321"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.recommendation.RecommendationSessionContextTest$WhenRecommendationSessionContextSetContext",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2440"
+		]
+	},
+	{
+		"source_reference": "Availability",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-566"
+		]
+	},
+	{
+		"source_reference": "TotalMatch",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-566",
+			"MODULAREPPMBRADBURY-1165",
+			"MODULAREPPMBRADBURY-1474"
+		]
+	},
+	{
+		"source_reference": "SkillMatch",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1474"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.actions.handlers.ResourceRequestServiceActionHandlerTest$ForwardResourceRequestTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-575"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.actions.handlers.ResourceRequestServiceActionHandlerTest$WithdrawResourceRequestTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-575"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.controller.ProjectReplicationControllerTest$doDeltaLoad ",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-835",
+			"MODULAREPPMBRADBURY-1140",
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.controller.ProjectReplicationControllerTest$DeleteProjects",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.controller.ProjectReplicationControllerTest$onDeleteProjects",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-1140",
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.controller.ProjectReplicationControllerTest$onReplicateS4ProjectsDeltaLoad",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-1140",
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.controller.ProjectReplicationControllerTest$onReplicateS4ProjectsInitialLoad",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140",
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.controller.ProjectReplicationControllerTest$retryInitialLoadTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140",
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.controller.ProjectReplicationControllerTest$doInitialLoadTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140",
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ProjectReplicationTasksRepositoryTest$GetProjectReplicationTaskBasedonTaskStatusCode",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ProjectReplicationTasksRepositoryTest$UpdateProjectReplicationTaskStatus ",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.DemandRepositoryTest$UpsertDemandsTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-660"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.DemandRepositoryTest$DeleteDemandTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-660"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.DemandRepositoryTest$UpsertBillingRoleTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-660"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.DemandRepositoryTest$GetBillingRoleByIdTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-660"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.DemandRepositoryTest$SelectDemandForWorkPackageTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-660"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.DemandRepositoryTest$UpsertDemandTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.IntegrationStatusRepositoryTest$InsertProjectReplicationStatusTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.IntegrationStatusRepositoryTest$UpdateProjectReplicationStatusTests",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.IntegrationStatusRepositoryTest$InsertProjectSyncTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-835"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.IntegrationStatusRepositoryTest$GetSingleProjectSyncByStatusTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.IntegrationStatusRepositoryTest$GetProjectSyncByIdTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.IntegrationStatusRepositoryTest$UpdateProjectSyncStatusTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.IntegrationStatusRepositoryTest$UpsertProjectSyncTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.IntegrationStatusRepositoryTest$UpdateProjectReplicationStatusTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.IntegrationStatusRepositoryTest$GetProjectsForReplicationTest ",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.IntegrationStatusRepositoryTest$ReadProjectReplicationStatusTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.IntegrationStatusRepositoryTest$getErrorProjectsInprocess",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-835",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.IntegrationStatusRepositoryTest$setErrorProjectsToInprocess",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ProjectRepositoryTest$UpdateProjectTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ProjectRepositoryTest$GetProjectsByServiceOrganization",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ProjectRepositoryTest$UpsertProjectsTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ProjectRepositoryTest$UpsertCustomerTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ProjectRepositoryTest$GetCustomerByIdTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ProjectRepositoryTest$SelectProjectTreeTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ProjectRepositoryTest$GetCustomerTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ProjectRepositoryTest$DeleteCustomerTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ProjectRepositoryTest$GetCustomerProjectTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ProjectRepositoryTest$GetAllProjectsTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ProjectRepositoryTest$DeleteProjectTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ResourceRequestRepositoryTest$UpsertResourceRequests",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ResourceRequestRepositoryTest$UpsertResourceRequest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ResourceRequestRepositoryTest$DeleteResourceRequest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ResourceRequestRepositoryTest$selectResourceRequestForDemand",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$setReplicationRunStatusToProcessingTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-725",
+			"MODULAREPPMBRADBURY-835",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$TransformProjectToProjectSyncTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-835",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$setReplicationStatustoCompletedOrErrorTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-725",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$setProjectSyncStatusToErrorTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-725",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$getProjectTreeFromRMTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-725",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$insertProjectInRmTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-725"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$IsEligibileForReplicationTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-725",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$GetProjectReplicationForTriggerTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-725",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$getAllProjectsTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-725"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$UpdateProjectReplicationStatusTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$getAllProjectsForReplicationTaskTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$replicateProjectsForDeltaLoadTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$replicateProjectTree",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140",
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$setReplicationStatustoClosedTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$getFilteredProjectsTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$getProjectReplicationTaskBasedonTaskStatusCodeTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.ReplicationServiceTest$createDeltaAndDeleteJobTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.tranformation.TransformS4ProjectToRMTest$TransformS4Project",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.tranformation.TransformS4ProjectToRMTest$TransformS4WorkPackage",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.transformation.TransformS4ProjectToRMTest$TransformS4Demand",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652",
+			"EPPMC4P-5446"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.tranformation.TransformS4ProjectToRMTest$TransformS4DemandDestribution",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.tranformation.TransformS4ProjectToRMTest$ValidateStartDateConversion",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.tranformation.TransformS4ProjectToRMTest$ValidateEndDateConversion",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.tranformation.TransformS4ProjectToRMTest$TransformS4DemandHierarchy",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.tranformation.TransformS4ProjectToRMTest$TransformS4ProjectHierarchy",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-575",
+			"MODULAREPPMBRADBURY-660",
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-1812",
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$CompareAndChange",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$CompareAndChangeProject",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$IsWorkPackageAttributesChanged",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$IsDemandAttributesChanged",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$TraverseWorkPackagesToMapAndSet",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$TraverseDemandsToMapAndSet",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$DeleteWorkPackages",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$DeleteDemands",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$DeleteWorkPackagesOfProject",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$DeleteDemandsOfWorkPackage",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$DeleteProjects",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$CreateWorkPackageTree",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$CompareAndChangeDemand",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$compareAndChangeWorkPackage",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$AdaptDisruptiveChanges",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.repository.SupplySyncRepositoryTest$InsertDemand",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.repository.SupplySyncRepositoryTest$DeleteDemand",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.cf.jobScheduler.service.JobSchedulerServiceTest$createDeltaAndDeleteJob",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.cf.jobScheduler.service.JobSchedulerServiceTest$createJobForDelta",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.cf.jobScheduler.service.JobSchedulerServiceTest$createJobForDelete ",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.cf.jobScheduler.service.JobSchedulerServiceTest$prepareJobSchedulerRequest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.actions.handlers.ProcessResourceRequestActionHandlerTest$SetResponsibilityResourceRequestTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-642"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.actions.handlers.ProcessResourceRequestActionHandlerTest$ForwardResourceRequestTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-642",
+			"MODULAREPPMBRADBURY-2273"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.actions.handlers.ProcessResourceRequestActionHandlerTest$ResourceRequestStatusResolve",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-642"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.actions.handlers.ProcessResourceRequestActionHandlerTest$CheckWherePredicateSetCall",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-642",
+			"MODULAREPPMBRADBURY-2273"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ProjectReplicationFilterServiceEventHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "ManageProjectReplication",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "ResourceRequestMainJourney-Create",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-810",
+			"MODULAREPPMBRADBURY-1401",
+			"MODULAREPPMBRADBURY-1466"
+		]
+	},
+	{
+		"source_reference": "ResourceRequestMainJourney-Delete",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-810"
+		]
+	},
+	{
+		"source_reference": "ResourceRequestMainJourney-Query",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-810"
+		]
+	},
+	{
+		"source_reference": "ResourceRequestMainJourney-Read",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-810"
+		]
+	},
+	{
+		"source_reference": "ResourceRequestMainJourney-Update",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-810",
+			"MODULAREPPMBRADBURY-1466"
+		]
+	},
+	{
+		"source_reference": "ProcessRequestMainJourney",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-810"
+		]
+	},
+	{
+		"source_reference": "ProcessRequestUxConsistencyTestJourney",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-810"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.util.ProjectManagementS4ClientTest$GetProjectIdsTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652",
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.util.ProjectManagementS4ClientTest$getProjectIdsForReplicationTaskTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1140"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.util.ProjectManagementS4ClientTest$GetProjectTreeTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.util.ProjectManagementS4ClientTest$GetCustomerDetailsTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.util.ProjectManagementS4ClientTest$GetCostCenterActivityTypeTextTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.util.ProjectManagementS4ClientTest$IsAuthorisedForActivityTypeTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.util.ProjectManagementS4ClientTest$IsAuthorisedForCommercialProjectTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.util.ProjectManagementS4ClientTest$IsAuthorisedForCustomerMasterTests",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-652"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.cloudfoundry.service.masterdataintegration.MasterDataIntegrationServiceTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.cloudfoundry.environment.CFUserProvidedEnvironmentTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168",
+			"EPPMC4P-6737"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.cloudfoundry.service.jobscheduler.service.JobSchedulerServiceTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168",
+			"MODULAREPPMVALIANT-1234"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.cloudfoundry.service.jobscheduler.model.JobSchedulerRunsTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.handlers.MyBackgroundJobsTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168",
+			"EPPMC4P-6737"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.replicationdao.OneMDSReplicationDeltaTokenDAOTest",
+		"jira_keys": [
+			"EPPMC4P-6737"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.handlers.ReplicationJobsTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.handlers.TimeDimensionJobsTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.handlers.WorkforceAvailabilityServiceErrorMessageHandlerTest",
+		"jira_keys": [
+			"EPPMC4P-5100"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.handlers.WorkforceAvailabilityServiceEventHandlerTest",
+		"jira_keys": [
+			"EPPMC4P-5100"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.processor.workforce.dao.WorkAssignmentDAOTest",
+		"jira_keys": [
+			"EPPMC4P-5100"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.processor.workforce.dao.WorkforcePersonDAOTest",
+		"jira_keys": [
+			"EPPMC4P-5100"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.utils.commonvalidations.CommonValidatorImplTest",
+		"jira_keys": [
+			"EPPMC4P-5100"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.workforceavalilabilityservice.validations.WorkforceAvailabilityServiceValidatorTest",
+		"jira_keys": [
+			"EPPMC4P-5100"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$AdaptDisruptiveChanges",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-863",
+			"MODULAREPPMBRADBURY-1090"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$ChangeResourceRequestDates",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-863",
+			"MODULAREPPMBRADBURY-1090",
+			"MODULAREPPMBRADBURY-1594",
+			"MODULAREPPMBRADBURY-1589",
+			"MODULAREPPMBRADBURY-1590"
+		]
+	},
+	{
+		"source_reference": "OrganizationService/BSODetails",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168"
+		]
+	},
+	{
+		"source_reference": "ServiceOrgUploadService",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168"
+		]
+	},
+	{
+		"source_reference": "OrganizationService/ServiceOrganizationCode",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168",
+			"EPPMC4P-4927"
+		]
+	},
+	{
+		"source_reference": "AvailabilityUploadService/AvailabilityCostCenter",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168",
+			"EPPMC4P-5310"
+		]
+	},
+	{
+		"source_reference": "AvailabilityFileDownloadService",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168",
+			"MODULAREPPMVALIANT-1372"
+		]
+	},
+	{
+		"source_reference": "AvailabilityFileUploadService",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168",
+			"MODULAREPPMVALIANT-1301",
+			"MODULAREPPMVALIANT-1304",
+			"MODULAREPPMVALIANT-1372"
+		]
+	},
+	{
+		"source_reference": "AvailabilityUploadService/AvailabilitySummaryStatus",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168"
+		]
+	},
+	{
+		"source_reference": "AvailabilityUploadService/AvailabilityUploadData",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168",
+			"MODULAREPPMVALIANT-1993",
+			"MODULAREPPMVALIANT-2351"
+		]
+	},
+	{
+		"source_reference": "AvailabilityUploadService/AvailabilityUploadErrors",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168"
+		]
+	},
+	{
+		"source_reference": "AvailabilityUploadService/AvailabilityWorkForcePersonID",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1168"
+		]
+	},
+	{
+		"source_reference": "AvailabilityUploadService/AvailabilityPeriodicCount",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1993"
+		]
+	},
+	{
+		"source_reference": "consultantProfile-integration-srv/actuator/health",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1210"
+		]
+	},
+	{
+		"source_reference": "test-journey-availabilityUpload",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1241"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.skillimport.UploadJobServiceTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1314"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.skillimport.esco.EscoCsvSkillImporterImplTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1314",
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-1932"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.skillimport.esco.EscoParserImplTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1314",
+			"MODULAREPPMSTARGAZER-1932"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.validators.CatalogValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-432",
+			"MODULAREPPMSTARGAZER-1313",
+			"MODULAREPPMSTARGAZER-1910"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.handlers.CatalogEventHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-432",
+			"MODULAREPPMSTARGAZER-1313"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.repositories.CatalogRepositoryTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-432",
+			"MODULAREPPMSTARGAZER-1313"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.SkillFileDownloadServiceTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1314",
+			"MODULAREPPMSTARGAZER-1932",
+			"MODULAREPPMBRADBURY-2450"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.utils.CatalogTestHelper",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1314",
+			"MODULAREPPMSTARGAZER-432",
+			"MODULAREPPMSTARGAZER-1313"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.handlers.CommaSeparatedProficiencyLevelLanguagesHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-2454"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.handlers.CommaSeparatedSkillLanguagesHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-2453"
+		]
+	},
+	{
+		"source_reference": "AssignSkillToCatalogTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1313"
+		]
+	},
+	{
+		"source_reference": "CreateCatalogWithDialogTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-432"
+		]
+	},
+	{
+		"source_reference": "DeleteCatalogTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-432",
+			"MODULAREPPMSTARGAZER-1313",
+			"EPPMC4P-7805"
+		]
+	},
+	{
+		"source_reference": "FileUploadServiceTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1314",
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "UploadJobTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-2776"
+		]
+	},
+	{
+		"source_reference": "FileDownloadServiceTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1314"
+		]
+	},
+	{
+		"source_reference": "SkillCatalogTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-681"
+		]
+	},
+	{
+		"source_reference": "CatalogCreateMaintainDelete",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-432",
+			"MODULAREPPMSTARGAZER-1313",
+			"MODULAREPPMSTARGAZER-1910"
+		]
+	},
+	{
+		"source_reference": "SkillCreateMaintainDelete",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-681",
+			"MODULAREPPMSTARGAZER-1524",
+			"MODULAREPPMSTARGAZER-1646",
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "SkillUploadJourney",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1314",
+			"MODULAREPPMSTARGAZER-1646"
+		]
+	},
+	{
+		"source_reference": "SkillDownloadJourney",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1646",
+			"MODULAREPPMSTARGAZER-2372",
+			"MODULAREPPMBRADBURY-2450"
+		]
+	},
+	{
+		"source_reference": "skill-catalog.ManageCatalogs",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-432",
+			"MODULAREPPMSTARGAZER-1313",
+			"MODULAREPPMSTARGAZER-1613",
+			"MODULAREPPMSTARGAZER-1611",
+			"MODULAREPPMSTARGAZER-1612",
+			"MODULAREPPMSTARGAZER-1910",
+			"EPPMC4P-6893"
+		]
+	},
+	{
+		"source_reference": "skill-skill.ManageSkills",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-681",
+			"MODULAREPPMSTARGAZER-1611",
+			"MODULAREPPMSTARGAZER-1612",
+			"MODULAREPPMSTARGAZER-1524",
+			"MODULAREPPMSTARGAZER-1646"
+		]
+	},
+	{
+		"source_reference": "skill-skill.CustomActions",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1646"
+		]
+	},
+	{
+		"source_reference": "NoAuthorizationForServiceOrgTileJourney",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1300"
+		]
+	},
+	{
+		"source_reference": "test-journey-serviceOrgUpload",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1300",
+			"EPPMC4P-4851"
+		]
+	},
+	{
+		"source_reference": "test-journey-availabilityUpload",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1301",
+			"MODULAREPPMVALIANT-1304",
+			"MODULAREPPMVALIANT-1372",
+			"MODULAREPPMVALIANT-1993",
+			"MODULAREPPMVALIANT-2351",
+			"EPPMC4P-5310"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.controller.WorkforceReplicationControllerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1319",
+			"MODULAREPPMVALIANT-2151",
+			"MODULAREPPMVALIANT-2218"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.controller.CostCenterReplicationControllerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1319",
+			"MODULAREPPMVALIANT-2218"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.availabilityservice.dao.AvailabilityDAOTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1387"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.businessserviceorgservices.dao.ServiceOrgDAOImplTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1388"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.businessserviceorgservices.validations.CostCenterValidationImplTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1388"
+		]
+	},
+	{
+		"source_reference": "AvailabilityFileDownloadService/AvailabilityWorkForcePersonID",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1372"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/ProjectExperienceHeader",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1235",
+			"MODULAREPPMVALIANT-1834",
+			"MODULAREPPMVALIANT-2218",
+			"MODULAREPPMVALIANT-2351",
+			"EPPMC4P-5101",
+			"EPPMC4P-5310"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/Profiles",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1235",
+			"MODULAREPPMVALIANT-1677",
+			"MODULAREPPMVALIANT-2218",
+			"MODULAREPPMVALIANT-2351",
+			"MODULAREPPMVALIANT-2399",
+			"EPPMC4P-5101"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/Skills",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1235",
+			"MODULAREPPMVALIANT-2218",
+			"MODULAREPPMVALIANT-2351",
+			"EPPMC4P-5101",
+			"EPPMC4P-5310"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/Roles",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1235",
+			"MODULAREPPMVALIANT-2218",
+			"MODULAREPPMVALIANT-2351",
+			"EPPMC4P-5101",
+			"EPPMC4P-5310"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/Utilization",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1235"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/ExternalWorkExperience",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1235"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/ExternalWorkExperienceSkills",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1235"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/InternalWorkExperience",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1235",
+			"MODULAREPPMEXCELSIOR-1551",
+			"MODULAREPPMVALIANT-2351",
+			"EPPMC4P-5101",
+			"EPPMC4P-5310",
+			"EPPMC4P-7248"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/InternalWorkExperienceSkills",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1235",
+			"MODULAREPPMEXCELSIOR-1551"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/PeriodicAvailability",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1235"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/MyResourcesProficiencyLevels",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1275"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/ProficiencySets",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1275"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/ProfilePhoto",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2252"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/RoleMasterList",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1275"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/RoleValueHelpList",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1275"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/SkillMasterListAll",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1275"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/SkillMasterList",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1275"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.handlers.AvailabilityUploadServiceEventHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1223"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.handlers.ReplicationSchedulesEventHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1234"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.precompilation.MessageKeyPrecompilerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1234"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.replicationschedules.JobSchedulerScheduleToReplicationScheduleTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1234"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.replicationschedules.ReplicationSchedulesServiceTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1234",
+			"EPPMC4P-6737"
+		]
+	},
+	{
+		"source_reference": "replicationSchedules",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1234"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.auditlog.AuditLogUtilTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1483",
+			"MODULAREPPMBRADBURY-1963",
+			"EPPMC4P-5100"
+		]
+	},
+	{
+		"source_reference": "WorkAssignmentFirstJobDetailTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1560"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$BeforeResourceRequestCapacityDraftCreationOrUpdate",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1239"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$FillResourceCapacityDerivedValues",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1239"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestHandlerTest$DeriveDemandAttributeTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1239"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestHandlerTest$resetEffortDistributionOnTypeChange",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1239"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestHandlerTest$modifyCapacitiesForTotalEffortDistributionType",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1239"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateResourceRequestProperty",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1239",
+			"MODULAREPPMBRADBURY-1963",
+			"MODULAREPPMBRADBURY-1923",
+			"MODULAREPPMBRADBURY-2516"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.utils.ValuePathTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2516"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.InjectionValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2516"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestPublicAPIValidatorTest$validateResReqSrvFieldInputsForXSSFormulaInjection",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2516"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$validateResReqAttributesForXSSFormulaInjection",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2516"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateName",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1923"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestCapacityValidatorImplTest$validateResourceRequestCapacityDates",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1239",
+			"MODULAREPPMBRADBURY-1594"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestCapacityValidatorImplTest$validateEffortWithResourceRequest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594",
+			"MODULAREPPMBRADBURY-1673"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestCapacityValidatorImplTest$validateEffortForDailyDistribution",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1239"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestCapacityValidatorImplTest$validateDuplicateDatesInCapacities",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1239",
+			"MODULAREPPMBRADBURY-1318"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ResourceRequestRepositoryTest$DeleteCapacityRequirements",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1090"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ResourceRequestRepositoryTest$SelectCapacityRequirements",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1090"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.ResourceRequestRepositoryTest$WeeklyUpdatedCapacity",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1589",
+			"MODULAREPPMBRADBURY-1590",
+			"MODULAREPPMBRADBURY-2027"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.DeliveryOrganizationRepositoryTest",
+		"jira_keys": [
+			"EPPMC4P-5446"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.service.DetermineChangeTest$SetRequestedCapacityInResourceRequest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1090"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestHandlerTest$AdjustCapacitiesForResourceRequest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1090"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestHandlerTest$AdjustCapacitiesForDraftResourceRequest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1467"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestHandlerTest$SelectResourceRequest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1090"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestHandlerTest$SelectDraftResourceRequest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1467"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestHandlerTest$selectDraftResourceRequestCapacities",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1467"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestHandlerTest$ChangeResourceRequestDates",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1090"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestHandlerTest$ChangeResourceRequestDraftDates",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1467",
+			"MODULAREPPMBRADBURY-1594"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestHandlerTest$BeforeResourceRequestDraftCreationTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1963"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.helpers.ResourceRequestHelperTest$GetUpdatedCapacityForWeeklyDistribution",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594",
+			"MODULAREPPMBRADBURY-2027"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.helpers.ResourceRequestHelperTest$CalculateAndResetCapacityRequirements",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.helpers.ResourceRequestHelperTest$UpdateEffortDistributionOnTypeChange",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.helpers.ResourceRequestHelperTest$DeleteCapacityRecords",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.helpers.ResourceRequestHelperTest$SelectDraftResourceRequest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.helpers.ResourceRequestHelperTest$SelectAllDraftResourceRequestCapacities",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.helpers.ResourceRequestHelperTest$AggregateEffortDistributionOnTypeChangeFromDailyToWeekly",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.helpers.ResourceRequestHelperTest$SelectAllDraftResourceRequestCapacities",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.helpers.ResourceRequestHelperTest$UpdateReferenceObjectTest",
+		"jira_keys": [
+			"EPPMC4P-6531"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.helpers.ResourceRequestHelperTest$ResetReferenceObjectTest",
+		"jira_keys": [
+			"EPPMC4P-6531"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestCapacityValidatorImplTest$ValidateDatesODataChecks",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestCapacityValidatorImplTest$ValidateBasicBusinessLogic",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestCapacityValidatorImplTest$ValidateDailyCapacityData",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestCapacityValidatorImplTest$ValidateWeeklyCapacityData",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1594",
+			"MODULAREPPMBRADBURY-2027"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$CalculateAndResetCapacityRequirements",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1090"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$BeforeCreate",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1653",
+			"MODULAREPPMBRADBURY-1673"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$BeforeUpdate",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1653",
+			"MODULAREPPMBRADBURY-1673",
+			"MODULAREPPMBRADBURY-2027"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$AfterCreate",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1673"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$AfterUpdate",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1673",
+			"MODULAREPPMBRADBURY-2027"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$DeleteResourceRequestWithCapacity",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1673"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$GetTotalRequestedCapacityFromId",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1673"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$BeforeDelete",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1653",
+			"MODULAREPPMBRADBURY-1673"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$UpdateResourceRequestWithCapacity",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1653"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$GetIDfromContext",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1653"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$GetResourceRequestCapacityFromId",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1653"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$GetRequestedCapacityOfParent",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1653"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$FillRequestedCapacityInMinutes",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1653"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$FillStartTime",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1653"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.CapacityRequirementsHandlerTest$FillEndTime",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1653"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.SkillRequirementsHandlerTest$WhenHandlers",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1466",
+			"MODULAREPPMBRADBURY-2513"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.integration.IntegrationTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1090",
+			"MODULAREPPMBRADBURY-1812",
+			"EPPMC4P-5446"
+		]
+	},
+	{
+		"source_reference": "Daily Effort Distribution | Create",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1653",
+			"MODULAREPPMBRADBURY-1717",
+			"MODULAREPPMBRADBURY-411"
+		]
+	},
+	{
+		"source_reference": "Daily Effort Distribution | Update",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1653",
+			"MODULAREPPMBRADBURY-411"
+		]
+	},
+	{
+		"source_reference": "Daily Effort Distribution | Delete",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1653",
+			"MODULAREPPMBRADBURY-411"
+		]
+	},
+	{
+		"source_reference": "Daily Effort Distribution | Calendar Consistency",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1653",
+			"MODULAREPPMBRADBURY-1718",
+			"MODULAREPPMBRADBURY-1963"
+		]
+	},
+	{
+		"source_reference": "Daily Effort Distribution | Total Effort",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1653",
+			"MODULAREPPMBRADBURY-1718",
+			"MODULAREPPMBRADBURY-411"
+		]
+	},
+	{
+		"source_reference": "ResourceCapacityRequirementJourney-Create",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1318",
+			"MODULAREPPMBRADBURY-1467"
+		]
+	},
+	{
+		"source_reference": "ResourceCapacityRequirementJourney-Update",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1318",
+			"MODULAREPPMBRADBURY-1467"
+		]
+	},
+	{
+		"source_reference": "ResourceCapacityRequirementJourney-Delete",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1318",
+			"MODULAREPPMBRADBURY-1467"
+		]
+	},
+	{
+		"source_reference": "ResourceCapacityRequirementJourney-CalendarConsitency",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1318",
+			"MODULAREPPMBRADBURY-1319",
+			"MODULAREPPMBRADBURY-1467",
+			"MODULAREPPMBRADBURY-1718"
+		]
+	},
+	{
+		"source_reference": "ProjectRoleService/Languages",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1681"
+		]
+	},
+	{
+		"source_reference": "ProjectRoleService/Roles_Texts",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-826"
+		]
+	},
+	{
+		"source_reference": "createTenantJobs",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1073"
+		]
+	},
+	{
+		"source_reference": "replicateCostCenter",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1073"
+		]
+	},
+	{
+		"source_reference": "replicateWorkforce",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1073"
+		]
+	},
+	{
+		"source_reference": "timeDimensionUpdate",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1073"
+		]
+	},
+	{
+		"source_reference": "skill-proficiency.ManageProficiencies",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-2454",
+			"MODULAREPPMSTARGAZER-2729",
+			"MODULAREPPMBRADBURY-2063",
+			"EPPMC4P-6893"
+		]
+	},
+	{
+		"source_reference": "skill-proficiency.Test ProficiencyLevelsTable",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-2729"
+		]
+	},
+	{
+		"source_reference": "skill-proficiency.DragAndDrop",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-2729"
+		]
+	},
+	{
+		"source_reference": "skill-proficiency.ManageProficiencies Errors",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-2729",
+			"MODULAREPPMBRADBURY-2063"
+		]
+	},
+	{
+		"source_reference": "skill-proficiency.MoveButtonVisibility",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-2729"
+		]
+	},
+	{
+		"source_reference": "skill.ManageSkills Errors",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "skill.ManageSkills CRUDQ",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-2453",
+			"MODULAREPPMSTARGAZER-2776",
+			"EPPMC4P-6893"
+		]
+	},
+	{
+		"source_reference": "CreateProficiencyLevelsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-1911"
+		]
+	},
+	{
+		"source_reference": "CreateProficiencyLevelsTextsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-1911"
+		]
+	},
+	{
+		"source_reference": "CreateProficiencyWithDialogTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-1911"
+		]
+	},
+	{
+		"source_reference": "DeleteProficiencyLevelsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "DeleteProficiencyLevelsTextsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "DeleteProficiencySetsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "DraftActivateProficiencySetsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-1911",
+			"MODULAREPPMSTARGAZER-2729"
+		]
+	},
+	{
+		"source_reference": "DraftEditProficiencySetsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "EditDefaultProficiencySetTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "PatchProficiencyLevelsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-1911"
+		]
+	},
+	{
+		"source_reference": "PatchProficiencyLevelsTextsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-1911"
+		]
+	},
+	{
+		"source_reference": "PatchProficiencySetsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-1911",
+			"MODULAREPPMSTARGAZER-2729",
+			"EPPMC4P-7805"
+		]
+	},
+	{
+		"source_reference": "ProficiencyLevelLocalizationTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-2454"
+		]
+	},
+	{
+		"source_reference": "SkillLocalizationTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-2453"
+		]
+	},
+	{
+		"source_reference": "PatchProficiencyLevelsTextsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "PatchProficiencyLevelsTextsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "ProficiencySetActions",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "ProficiencySetCreate",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMBRADBURY-2063"
+		]
+	},
+	{
+		"source_reference": "ProficiencySetEdit",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-1911"
+		]
+	},
+	{
+		"source_reference": "ProficiencySetErrorCases",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-1911",
+			"MODULAREPPMBRADBURY-2063"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.handlers.MultitenancyHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.handlers.ProficiencyLevelHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-1911",
+			"MODULAREPPMSTARGAZER-2729",
+			"MODULAREPPMBRADBURY-2063"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.handlers.ProficiencyLevelTextHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-1911"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.repositories.ProficiencyLevelRepositoryTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-2454"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.repositories.ProficiencyLevelTextRepositoryTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.repositories.ProficiencySetRepositoryTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.repositories.SkillRepositoryTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-2453"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.DefaultProficiencyLevelServiceTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.DefaultProficiencySetServiceTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.ProficiencyLevelRankingServiceTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-2729"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.ProficiencyLevelTextReplicationServiceTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMBRADBURY-2063"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.validators.ProficiencyLevelTextValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.validators.ProficiencyLevelValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.services.validators.ProficiencySetValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1935",
+			"MODULAREPPMSTARGAZER-1911",
+			"MODULAREPPMSTARGAZER-2729"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.utils.CloudTenantTaskExecutorTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.utils.LocalTenantTaskExecutorTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.myprojectexperienceservice.DefaultProficiencyLevelServiceTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.myprojectexperienceservice.validations.ExternalWorkExperienceValidatorSkillsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.myprojectexperienceservice.validations.MyProjectExperienceHeaderSkillValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.repositories.ProficiencyLevelConsumptionRepoTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.repositories.SkillConsumptionRepoTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944"
+		]
+	},
+	{
+		"source_reference": "SimpleHttpTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944"
+		]
+	},
+	{
+		"source_reference": "ExternalWorkExperienceSkillsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944",
+			"MODULAREPPMSTARGAZER-1945"
+		]
+	},
+	{
+		"source_reference": "SkillMasterListAllTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944"
+		]
+	},
+	{
+		"source_reference": "SkillMasterListTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944"
+		]
+	},
+	{
+		"source_reference": "SkillsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944",
+			"MODULAREPPMSTARGAZER-1945"
+		]
+	},
+	{
+		"source_reference": "MyResourcesSkillsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944"
+		]
+	},
+	{
+		"source_reference": "ProficiencyLevelsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944"
+		]
+	},
+	{
+		"source_reference": "ProficiencySetsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1944"
+		]
+	},
+	{
+		"source_reference": "CapacityGridServiceTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-2074"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.SkillsConsumptionHandlerTest$SkillsConsumptionValueHelpBeforeRead",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1401"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.SkillsConsumptionHandlerTest$SkillsConsumptionValueHelpAfterRead",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1401"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.drm.controllers.ProjectTeamMemberControllerAuditLogTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1792"
+		]
+	},
+	{
+		"source_reference": "availabilityUploadUi.Availability Upload Ui",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2351"
+		]
+	},
+	{
+		"source_reference": "myProjectExperienceUi.Consultant Profile Basic Data",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2371",
+			"MODULAREPPMVALIANT-2351",
+			"MODULAREPPMVALIANT-2399"
+		]
+	},
+	{
+		"source_reference": "myProjectExperienceUi/ExternalWorkExperienceEditJourney",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1945"
+		]
+	},
+	{
+		"source_reference": "myProjectExperienceUi/PriorExperienceJourney",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1945",
+			"MODULAREPPMSTARGAZER-2249",
+			"EPPMC4P-7248"
+		]
+	},
+	{
+		"source_reference": "myProjectExperienceUi/QualificationsEditJourney",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1945"
+		]
+	},
+	{
+		"source_reference": "myProjectExperienceUi/QualificationsJourney",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1945"
+		]
+	},
+	{
+		"source_reference": "myProjectExperienceUi.Consultant Profile Availability",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1677",
+			"MODULAREPPMVALIANT-1629"
+		]
+	},
+	{
+		"source_reference": "myProjectExperienceUi.Internal Work Experience",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1677",
+			"MODULAREPPMVALIANT-1629",
+			"EPPMC4P-7248"
+		]
+	},
+	{
+		"source_reference": "myProjectExperienceUi.Editing Prior Experience",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1677",
+			"MODULAREPPMVALIANT-1629"
+		]
+	},
+	{
+		"source_reference": "myProjectExperienceUi.Profile Photo Data on Edit Mode",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2151"
+		]
+	},
+	{
+		"source_reference": "DraftActivateCatalogsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-1910"
+		]
+	},
+	{
+		"source_reference": "InternalWorkExperienceSkillsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-2249"
+		]
+	},
+	{
+		"source_reference": "MyResourcesInternalWorkExperienceSkillsTest",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-2249"
+		]
+	},
+	{
+		"source_reference": "myResourcesUi/PriorExperienceJourney",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-2249",
+			"EPPMC4P-7248"
+		]
+	},
+	{
+		"source_reference": "myResourcesUi/QualificationsJourney",
+		"jira_keys": [
+			"MODULAREPPMSTARGAZER-2249"
+		]
+	},
+	{
+		"source_reference": "myResourcesUi.My Resources List Page",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2228",
+			"MODULAREPPMVALIANT-2351",
+			"EPPMC4P-5101",
+			"EPPMC4P-5121",
+			"EPPMC4P-5310"
+		]
+	},
+	{
+		"source_reference": "myResourcesUi.Resource Profile Availability",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1275"
+		]
+	},
+	{
+		"source_reference": "myResourcesUi.Resource Profile Basic Data",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1275"
+		]
+	},
+	{
+		"source_reference": "myResourcesUi.Editing External Work Experience",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2145"
+		]
+	},
+	{
+		"source_reference": "myResourcesUi.Internal Work Experience",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1275",
+			"EPPMC4P-7248"
+		]
+	},
+	{
+		"source_reference": "myResourcesUi.Editing Prior Experience",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2145"
+		]
+	},
+	{
+		"source_reference": "myResourcesUi.Editing Qualifications",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2145"
+		]
+	},
+	{
+		"source_reference": "myResourcesUi.My Resources Contact Card Qunit",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2228",
+			"EPPMC4P-5101"
+		]
+	},
+	{
+		"source_reference": "myResourcesUi.Resource Profile Basic Data",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2351",
+			"MODULAREPPMVALIANT-2399"
+		]
+	},
+	{
+		"source_reference": "MyProjectExperienceService/PeriodicUtilization",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1834"
+		]
+	},
+	{
+		"source_reference": "MyResourcesService/PeriodicUtilization",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1834"
+		]
+	},
+	{
+		"source_reference": "MyAssignmentsService/AssignmentDetails",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1633",
+			"MODULAREPPMVALIANT-1741",
+			"MODULAREPPMVALIANT-1711",
+			"MODULAREPPMVALIANT-1770"
+		]
+	},
+	{
+		"source_reference": "MyAssignmentsService/ProjectDetails",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1633",
+			"MODULAREPPMVALIANT-1741",
+			"MODULAREPPMVALIANT-1711",
+			"MODULAREPPMVALIANT-1770"
+		]
+	},
+	{
+		"source_reference": "MyAssignmentsService/ResourceDetails",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1633",
+			"MODULAREPPMVALIANT-1741",
+			"MODULAREPPMVALIANT-1711",
+			"MODULAREPPMVALIANT-1770"
+		]
+	},
+	{
+		"source_reference": "MyAssignmentsService/AssignmentRequestDetails",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1633",
+			"MODULAREPPMVALIANT-1741",
+			"MODULAREPPMVALIANT-1711",
+			"MODULAREPPMVALIANT-1770",
+			"EPPMC4P-6642",
+			"EPPMC4P-5178",
+			"EPPMC4P-7248"
+		]
+	},
+	{
+		"source_reference": "WorkforceAvailabilityService/WorkforceAvailability",
+		"jira_keys": [
+			"EPPMC4P-5100"
+		]
+	},
+	{
+		"source_reference": "WorkforceAvailabilityService/Authorization",
+		"jira_keys": [
+			"EPPMC4P-5100"
+		]
+	},
+	{
+		"source_reference": "NoAuthorizationForMyAssignTileJourney",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1633",
+			"MODULAREPPMVALIANT-1741",
+			"MODULAREPPMVALIANT-1711",
+			"MODULAREPPMVALIANT-1770"
+		]
+	},
+	{
+		"source_reference": "test-journey-my-assignments",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1633",
+			"MODULAREPPMVALIANT-1741",
+			"MODULAREPPMVALIANT-1711",
+			"MODULAREPPMVALIANT-1770",
+			"MODULAREPPMVALIANT-1939",
+			"MODULAREPPMVALIANT-2226",
+			"EPPMC4P-7739"
+		]
+	},
+	{
+		"source_reference": "myAssignmentsUi.My Assignments",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1904",
+			"MODULAREPPMVALIANT-1939",
+			"MODULAREPPMVALIANT-2226",
+			"MODULAREPPMVALIANT-2401",
+			"EPPMC4P-7248"
+		]
+	},
+	{
+		"source_reference": "myAssignmentsUi.AssignmentDataManager",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1904",
+			"MODULAREPPMVALIANT-1939",
+			"MODULAREPPMVALIANT-2226",
+			"MODULAREPPMVALIANT-2401",
+			"EPPMC4P-6642",
+			"EPPMC4P-5178"
+		]
+	},
+	{
+		"source_reference": "myAssignmentsUi.BaseController",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2401"
+		]
+	},
+	{
+		"source_reference": "myAssignmentsUi.DataTransformer",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1904",
+			"MODULAREPPMVALIANT-1939",
+			"MODULAREPPMVALIANT-2226",
+			"MODULAREPPMVALIANT-2401",
+			"EPPMC4P-6642",
+			"EPPMC4P-5178",
+			"EPPMC4P-7248"
+		]
+	},
+	{
+		"source_reference": "myAssignmentsUi.DateUtility",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2401"
+		]
+	},
+	{
+		"source_reference": "myAssignmentsUi.Controller",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1904",
+			"MODULAREPPMVALIANT-1939",
+			"MODULAREPPMVALIANT-2226",
+			"MODULAREPPMVALIANT-2401"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.exceptions.ExceptionUtilityTest$RaiseExceptionWhenError",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ExposedResourceRequestServiceHandlerTest$BeforeCreate",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ExposedResourceRequestServiceHandlerTest$AfterCreate",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ExposedResourceRequestServiceHandlerTest$CheckBeforeUpdate",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ExposedResourceRequestServiceHandlerTest$CheckBeforeDelete",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.utils.PropertyMappingTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870"
+		]
+	},
+	{
+		"source_reference": "Authorization",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870",
+			"MODULAREPPMBRADBURY-2440"
+		]
+	},
+	{
+		"source_reference": "CreateNegative",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870",
+			"MODULAREPPMBRADBURY-1923",
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "CreatePositive",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870",
+			"MODULAREPPMBRADBURY-1923",
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "DeleteNegative",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870",
+			"EPPMC4P-5404"
+		]
+	},
+	{
+		"source_reference": "DeletePositive",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870",
+			"EPPMC4P-5404"
+		]
+	},
+	{
+		"source_reference": "Read",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870",
+			"MODULAREPPMBRADBURY-1945",
+			"EPPMC4P-5404"
+		]
+	},
+	{
+		"source_reference": "UpdateNegative",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870",
+			"EPPMC4P-5404",
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "UpdatePositive",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870",
+			"EPPMC4P-5404",
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.WorkPackageRepositoryTest$GetWorkPackageNameTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1812"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.transformation.TransformDemandToResourceRequestTest$prepareResourceRequest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1812",
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.util.HanaDisplayIDGeneratorTest$WhenMatchingCandidatesHandlers",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1812"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.utils.HanaDisplayIDGeneratorTest$WhenMatchingCandidatesHandlers",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1812"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.helpers.ResourceRequestHelperTest$CheckResourceRequestResourceOrganization",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2273"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.helpers.ResourceRequestHelperTest$ResourceRequestDerivedValuesTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2273"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.helpers.ResourceRequestHelperTest$FillResourceRequestDerivedValues",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2273"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.helpers.ResourceRequestHelperTest$FillReferenceObjectTypeCodeTest",
+		"jira_keys": [
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.helpers.ResourceRequestHelperTest$GetReferenceObjectTypeCodeTest",
+		"jira_keys": [
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.helpers.ResourceRequestHelperTest$UpdateReferenceObjectTypeCodeTest",
+		"jira_keys": [
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateMandatoryFieldsForCreate",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870",
+			"MODULAREPPMBRADBURY-1923"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateResourceRequestPropertyApi",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870",
+			"MODULAREPPMBRADBURY-1963",
+			"MODULAREPPMBRADBURY-1923"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateApiUpdateDates",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1870"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.actions.handlers.ManageResourceRequestServiceActionHandlerTest$ForwardResourceRequestTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945",
+			"MODULAREPPMBRADBURY-2216"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.actions.handlers.ManageResourceRequestServiceActionHandlerTest$WithdrawResourceRequestTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945"
+		]
+	},
+	{
+        	"source_reference": "com.sap.c4p.rm.resourcerequest.actions.handlers.ManageResourceRequestServiceActionHandlerTest$AcceptAssignmentProposalTest",
+    		"jira_keys": [
+    			"MODULAREPPMBRADBURY-2817",
+			"EPPMC4P-5360"
+    		]
+    	},
+	{
+        	"source_reference": "com.sap.c4p.rm.resourcerequest.actions.handlers.ManageResourceRequestServiceActionHandlerTest$RejectAssignmentProposalTest",
+    		"jira_keys": [
+    			"MODULAREPPMBRADBURY-2817",
+			"EPPMC4P-5360"
+    		]
+    	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestServiceHandlerTest$BeforeCreate",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945",
+			"MODULAREPPMBRADBURY-2516",
+			"MODULAREPPMBRADBURY-2273"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestServiceHandlerTest$BeforeRefObjCreate",
+		"jira_keys": [
+			"EPPMC4P-6530",
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestServiceHandlerTest$ValidateBeforeRefObjUpdate",
+		"jira_keys": [
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestServiceHandlerTest$ValidateBeforeRefObjDelete",
+		"jira_keys": [
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ReferenceObjectPublicAPIValidatorTest$validateRefObjFieldInputsForXSSInjection",
+		"jira_keys": [
+			"EPPMC4P-6530"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ReferenceObjectPublicAPIValidatorTest$ValidateRefObjTypeCodeExistence",
+		"jira_keys": [
+			"EPPMC4P-6530"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ReferenceObjectPublicAPIValidatorTest$ValidateObjDuration",
+		"jira_keys": [
+			"EPPMC4P-6530"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ReferenceObjectPublicAPIValidatorTest$ValidateReferenceObjectPropertyApiTest",
+		"jira_keys": [
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ReferenceObjectPublicAPIValidatorTest$ValidateReferenceObjectDateTest",
+		"jira_keys": [
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ReferenceObjectPublicAPIValidatorTest$ValidateIntegrityForRefObjectTest",
+		"jira_keys": [
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ReferenceObjectPublicAPIValidatorTest$ValidateRefObjDeletionTest",
+		"jira_keys": [
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ReferenceObjectPublicAPIValidatorTest$IntegrityCheckForTypeCodeTest",
+		"jira_keys": [
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestServiceHandlerTest$AfterCreate",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestServiceHandlerTest$CheckBeforeUpdate",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945",
+			"MODULAREPPMBRADBURY-2516"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ResourceRequestServiceHandlerTest$CheckBeforeDelete",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ManageResourceRequestHandlerTest$DeriveDemandAttributeTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ManageResourceRequestHandlerTest$BeforeResourceRequestDraftCreationTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ManageResourceRequestHandlerTest$ResourceRequestDefaultValuesTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945",
+			"MODULAREPPMBRADBURY-2273"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ManageResourceRequestHandlerTest$AdjustCapacitiesForResourceRequest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ManageResourceRequestHandlerTest$AdjustCapacitiesForDraftResourceRequest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ManageResourceRequestHandlerTest$selectDraftResourceRequestCapacities",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ManageResourceRequestHandlerTest$ChangeResourceRequestDates",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ManageResourceRequestHandlerTest$ChangeResourceRequestDraftDates",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ManageResourceRequestHandlerTest$WhenHandlers",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945",
+			"MODULAREPPMBRADBURY-2273",
+			"MODULAREPPMBRADBURY-2440",
+			"EPPMC4P-6531"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ManageResourceRequestHandlerTest$WhenUpdateResourceRequestStatus",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ManageResourceRequestHandlerTest$CheckWherePredicateSetCall",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1945",
+			"MODULAREPPMBRADBURY-2273"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ManageResourceRequestHandlerTest$AfterEventReadTest",
+		"jira_keys": [
+			"EPPMC4P-6956"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.handlers.ManageResourceRequestHandlerTest$FillVirtualFieldsTest",
+		"jira_keys": [
+			"EPPMC4P-6956"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateResourceRequestWorkPackageDateChecks",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1963"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateDescription",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-1989"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateResourceRequestProperty",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2216",
+			"MODULAREPPMBRADBURY-2273"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateRoleID",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2216"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateCheckAssignmentProposalExists",
+		"jira_keys": [
+			"EPPMC4P-5456"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateReferenceObjectIfTypeNoneTest",
+		"jira_keys": [
+			"EPPMC4P-6956"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateIfReferenceObjectMappedTest",
+		"jira_keys": [
+			"EPPMC4P-6956"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$ValidateReferenceObjAssignedToResReqTest",
+		"jira_keys": [
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.resourcerequest.validations.ResourceRequestValidatorImplTest$RefIntegrityCheckForRefObjectTest",
+		"jira_keys": [
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.controller.ProjectReplicationControllerTest$processAllProjectsFromProjectSyncTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.projectintegrationadapter.repository.IntegrationStatusRepositoryTest$insertDemandInSupplySync",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2253"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.utils.ImageUtilsTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2151"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.cloudfoundry.service.malwarescan.MalwareScanServiceTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2151"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.processor.workforce.dao.ProfilePhotoDAOTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2151"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.processor.workforce.dao.WorkforceReplicationDAOTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2151"
+		]
+	},
+	{
+		"source_reference": "resourceOrganization.Manage Resource Organization - Create",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217",
+			"MODULAREPPMBRADBURY-2273"
+		]
+	},
+	{
+		"source_reference": "resourceOrganization.Manage Resource Organization - Read",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217",
+			"MODULAREPPMBRADBURY-2273"
+		]
+	},
+	{
+		"source_reference": "resourceOrganization.Manage Resource Organization - Update",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217",
+			"MODULAREPPMBRADBURY-2273"
+		]
+	},
+	{
+		"source_reference": "resourceOrganization.Manage Resource Organization - Consistency",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+    	"source_reference": "resourceOrganization.Manage Resource Organization - Replicate Service Organization",
+    	"jira_keys": [
+    		"MODULAREPPMBRADBURY-2273"
+    	]
+    },
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ResourceOrganizationHandlerTest$BeforeResourceOrganizationCreateTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ResourceOrganizationHandlerTest$AfterResourceOrganizationReadTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ResourceOrganizationHandlerTest$FillResourceOrganizationVirtualFieldsTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ResourceOrganizationHandlerTest$OnCreateResourceOrganizationWithDialogTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ResourceOrganizationHandlerTest$updateResourceOrgCalculatedPropertiesTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ResourceOrganizationHandlerTest$CreateResourceOrganizationDraftTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.handlers.ResourceOrganizationHandlerTest$CreateResourceOrganizationDraftTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ResourceOrganizationValidatorTest$CheckValidateResourceOrganizationTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ResourceOrganizationValidatorTest$CheckResourceOrganizationItemsTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ResourceOrganizationValidatorTest$ValidateCostCenterTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ResourceOrganizationValidatorTest$ValidateCostCenterTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ResourceOrganizationValidatorTest$CheckResourceOrgNameEmptinessCheckTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ResourceOrganizationValidatorTest$CheckResourceOrgDescriptionXSSCheckTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ResourceOrganizationValidatorTest$CheckResourceOrgDescriptionXSSCheckTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ResourceOrganizationValidatorTest$CheckResourceOrgNameXSSCheckTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ResourceOrganizationValidatorTest$CheckDefaultTextTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ResourceOrganizationValidatorTest$CheckTextForLocaleTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ResourceOrganizationValidatorTest$CheckLanguagePresentTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.validations.ResourceOrganizationValidatorTest$CheckResOrgTextCountCheck",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+    	"source_reference": "com.sap.c4p.rm.centralservices.handlers.ResourceOrganizationHandlerTest$UpdateResourceOrganizationTest",
+    	"jira_keys": [
+    		"MODULAREPPMBRADBURY-2273"
+    	]
+    },
+    {
+        "source_reference": "com.sap.c4p.rm.centralservices.handlers.ResourceOrganizationHandlerTest$OnResourceOrganizationRestrictTest",
+        "jira_keys": [
+        	"MODULAREPPMBRADBURY-2273"
+        ]
+    },
+    {
+        "source_reference": "com.sap.c4p.rm.centralservices.handlers.ResourceOrganizationHandlerTest$OnResourceOrganizationUnRestrictTest",
+        "jira_keys": [
+        	"MODULAREPPMBRADBURY-2273"
+        ]
+    },
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.utils.ResOrgHanaDisplayIDGeneratorTest$DisplayIdTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.utils.DefaultLanguageTest$GetDefaultLanguageTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.utils.CommonValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.businessserviceorgservices.resourceorganization.ProcessResourceOrganizationTest$CheckProcessServiceOrganizationToResourceOrganization",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217",
+			"EPPMC4P-6987"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.businessserviceorgservices.resourceorganization.ProcessResourceOrganizationTest$CheckPrepareResourceOrgPayload",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217",
+			"EPPMC4P-5313",
+			"EPPMC4P-5258"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.businessserviceorgservices.resourceorganization.utils.ResOrgHanaDisplayIDGeneratorTest$DisplayIdTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.businessserviceorgservices.resourceorganization.dao.ResourceOrganizationDAOImplTest$CheckGetResourceOrganizationForServiceOrganizationTest",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.businessserviceorgservices.resourceorganization.dao.ResourceOrganizationDAOImplTest$CheckUpsertResourceOrganizations",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.businessserviceorgservices.resourceorganization.dao.ResourceOrganizationDAOImplTest$CheckDeleteResourceOrganizations",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2217"
+    		]
+  	},
+  	{
+		"source_reference": "AssignmentAPICUDTest",
+		"jira_keys": [
+			"MODULAREPPMEXCELSIOR-3783",
+			"EPPMC4P-4932"
+		]
+	},
+	{
+    	"source_reference": "Create Assignment Journey",
+    	"jira_keys": [
+    			"EPPMC4P-5077"
+    	]
+    },
+	{
+		"source_reference": "ProjectExperienceService/Profiles",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2289"
+		]
+	},
+	{
+		"source_reference": "ProjectExperienceService/SkillAssignments",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2289",
+			"MODULAREPPMVALIANT-2348",
+			"MODULAREPPMVALIANT-2450"
+		]
+	},
+	{
+		"source_reference": "ProjectExperienceService/PrimaryWorkAssignment",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2289"
+		]
+	},
+	{
+		"source_reference": "ProjectExperienceService/ExternalWorkExperience",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2289",
+			"MODULAREPPMVALIANT-2450"
+		]
+	},
+	{
+		"source_reference": "ProjectExperienceService/Authorization",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2289"
+		]
+	},
+	{
+		"source_reference": "ProjectExperienceService/ExternalWorkExperienceSkillAssignments",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2289",
+			"MODULAREPPMVALIANT-2450"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.config.BatchRequestFilterTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2289"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.config.BatchRequestFilterTest",
+		"jira_keys": [
+			"EPPMC4P-5100"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.processor.workforce.converters.OneMDSProfileDetailsToRMProfileDetailsTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2218"
+		]
+	},
+  	{
+		"source_reference": "com.sap.c4p.rm.ProfileDetailsAndCostCenterDBMigrationTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2218"
+      ]
+  	},
+  	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.handlers.ProjectExperienceServiceErrorMessageHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2348",
+			"MODULAREPPMVALIANT-2450"
+		]
+  	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.handlers.ProjectExperienceServiceEventHandlerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2348",
+			"MODULAREPPMVALIANT-2450"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.projectexperienceservice.validations.ProjectExperienceServiceExternalWorkExperienceSkillAssignmentsValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2450"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.projectexperienceservice.validations.ProjectExperienceServiceExternalWorkExperienceValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2450"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.projectexperienceservice.validations.ProjectExperienceServiceSkillAssignmentsValidatorTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2348",
+			"MODULAREPPMVALIANT-2450"
+		]
+	},
+	{
+		"source_reference": "availabilityDownload.Availability Download",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1005"
+		]
+	},
+	{
+		"source_reference": "availabilityDownload.Test App Controller",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1005"
+		]
+	},
+	{
+		"source_reference": "availabilityUpload.Availability Upload",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1005"
+		]
+	},
+	{
+		"source_reference": "availabilityUpload.Controller",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1005"
+		]
+	},
+	{
+		"source_reference": "availabilityUploadUi.Availability Upload Ui",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1005"
+		]
+	},
+	{
+		"source_reference": "businessServiceOrgUi.Maintain Service Organizations",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-886",
+			"MODULAREPPMEXCELSIOR-5094"
+		]
+	},
+	{
+		"source_reference": "businessServiceOrgUpload.Upload Service Organizations",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-886",
+			"MODULAREPPMEXCELSIOR-5094"
+		]
+	},
+	{
+		"source_reference": "businessServiceOrgUpload.Controller",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-886"
+		]
+	},
+	{
+		"source_reference": "projectRoleUi.Project Roles",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-264"
+		]
+	},
+	{
+		"source_reference": "replicationScheduleUi.Manage Replication Schedules",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-1234"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.SetExistingCustomersTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2501"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.controller.WorkforceReplicationControllerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2501",
+			"EPPMC4P-7972"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.controller.CostCenterReplicationControllerTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2501",
+			"EPPMC4P-7972"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.controller.WorkforceReplicationControllerWithDestinationTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2501",
+			"EPPMC4P-7972"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.controller.CostCenterReplicationControllerWithDestinationTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2501",
+			"EPPMC4P-7972"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.mdiintegration.controller.WorkforceCapabilityControllerWithDestinationTest",
+		"jira_keys": [
+			"EPPMC4P-6893"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.skill.mdiintegration.controller.WorkforceCapabilityNegativeAuthorizationTest",
+		"jira_keys": [
+			"EPPMC4P-6893"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.cloudfoundry.authclient.DestinationTokenTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2501"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.cloudfoundry.environment.DestinationVCAPTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2501"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.cloudfoundry.service.destination.model.DestinationResponseTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2501"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.cloudfoundry.service.destination.service.DestinationServiceTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2501"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.cloudfoundry.service.masterdataintegration.MasterDataIntegrationServiceTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2501"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.replicationdao.ExistingCustomerDetailDAOTest",
+		"jira_keys": [
+			"MODULAREPPMVALIANT-2501"
+		]
+	},
+	{
+        "source_reference": "com.sap.c4p.rm.resourcerequest.handlers.StaffingHandlerTest$validateFillVirtualFields",
+    	"jira_keys": [
+    		"MODULAREPPMBRADBURY-2817"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.resourcerequest.handlers.StaffingHandlerTest$validateAfterStaffingRead",
+    	"jira_keys": [
+    		"MODULAREPPMBRADBURY-2817"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.resourcerequest.helpers.StaffingHelperImplTest$ValidateUpdateAssignment",
+    	"jira_keys": [
+    		"MODULAREPPMBRADBURY-2817"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.resourcerequest.helpers.StaffingHelperLocalImplTest$ValidateUpdateAssignment",
+    	"jira_keys": [
+    		"MODULAREPPMBRADBURY-2817"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.authclient.DestinationTokenTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.authclient.JobSchedulerTokenTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.authclient.MasterDataIntegrationTokenTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.authclient.OAuthTokenResponseTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.environment.CFUserProvidedEnvironmentTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.environment.DestinationVCAPTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.environment.JobSchedulerVCAPTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.environment.MasterDataIntegrationVCAPTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.service.destination.model.DestinationResponseTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.service.destination.service.DestinationServiceTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.service.jobscheduler.model.JobSchedulerModelTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.service.jobscheduler.model.JobSchedulerRunHeaderTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.service.jobscheduler.model.JobSchedulerRunPayloadMessageTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.service.jobscheduler.model.JobSchedulerRunsTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.service.jobscheduler.model.JobScheduleRunPayloadTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.service.jobscheduler.service.JobSchedulerServiceTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.cloudfoundry.service.masterdataintegration.MasterDataIntegrationServiceTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.controller.ReplicationControllerTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893",
+			"EPPMC4P-7805"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.handlers.ReplicationJobsImplTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.processor.workforcecapability.dao.WorkforceCapabilityDAOTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.processor.workforcecapability.dao.WorkforceCapabilityReplicationDAOTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.processor.workforcecapability.WorkforceCapabilityMDIEventsAPIProcessorTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.processor.workforcecapabilitycatalog.dao.WorkForceCapabilityCatalogDAOTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.processor.workforcecapabilitycatalog.dao.WorkforceCapabilityCatalogReplicationDAOTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.processor.workforcecapabilitycatalog.WorkforceCapabilityCatalogMDIEventsAPIProcessorTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.processor.workforceproficiencyscale.converter.OneMDSProfLeveltoRMProfLevelTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.processor.workforceproficiencyscale.dao.WorkForceProficiencyDAOTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.processor.workforceproficiencyscale.dao.WorkforceProficiencyReplicationDAOTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.processor.workforceproficiencyscale.WorkforceProficiencyScaleMDIEventsAPIProcessorTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.replicationdao.ExistingCustomerDetailDAOTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.replicationdao.MDIObjectReplicationStatusDAOTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.replicationdao.OneMDSReplicationDeltaTokenDAOTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.replicationdao.ReplicationErrorMessagesDAOTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.replicationdao.ReplicationFailureDAOTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.utils.CommonUtilityImplTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893",
+			"EPPMC4P-7806"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.mdiintegration.utils.StringFormatterTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+        "source_reference": "com.sap.c4p.rm.skill.handlers.RestrictionHandlerTest",
+    	"jira_keys": [
+    		"EPPMC4P-6893"
+    	]
+    },
+	{
+		"source_reference": "Manage Resource Request | Assignment Proposal",
+		"jira_keys": [
+			"MODULAREPPMBRADBURY-2817"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.utils.FileUtilsTest",
+		"jira_keys": [
+			"EPPMC4P-5080"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.AttachmentCreationTaskTest",
+		"jira_keys": [
+			"EPPMC4P-5080"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.processor.workforce.dao.AttachmentDAOTest",
+		"jira_keys": [
+			"EPPMC4P-5080"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.processor.workforce.WorkforceMDILogAPIProcessorTest",
+		"jira_keys": [
+			"EPPMC4P-5080"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.processor.workforce.dao.WorkforceReplicationDAOTest",
+		"jira_keys": [
+			"EPPMC4P-5080"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.cloudfoundry.service.malwarescan.MalwareScanServiceTest",
+		"jira_keys": [
+			"EPPMC4P-5080"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.assignmentservice.AssignmentApiClientTest",
+		"jira_keys": [
+			"EPPMC4P-6642",
+			"EPPMC4P-5178"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.assignmentservice.AssignmentServiceUrlTest",
+		"jira_keys": [
+			"EPPMC4P-6642",
+			"EPPMC4P-5178"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.assignmentservice.PostWeeklyAssignmentsConverterTest",
+		"jira_keys": [
+			"EPPMC4P-6642",
+			"EPPMC4P-5178"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.consultantprofile.handlers.MyAssignmentsServiceHandlerTest",
+		"jira_keys": [
+			"EPPMC4P-6642",
+			"EPPMC4P-5178"
+		]
+	},
+		{
+		"source_reference": "com.sap.c4p.rm.centralservices.metering.config.C4PMeteringConfigParamertersTest",
+		"jira_keys": [
+			"EPPMC4P-6396"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.centralservices.metering.config.C4PTokenProviderTest",
+		"jira_keys": [
+			"EPPMC4P-6396"
+		]
+	},
+	{
+		"source_reference": "DeleteScenarios",
+		"jira_keys": [
+			"EPPMC4P-6891"
+		]
+	},
+	{
+		"source_reference": "SharpenAssignmentCUD",
+		"jira_keys": [
+			"EPPMC4P-6800"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.calm.CalmClientTest",
+		"jira_keys": [
+			"EPPMC4P-7972"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.calm.CalmServiceTest",
+		"jira_keys": [
+			"EPPMC4P-7972"
+		]
+	},
+	{
+		"source_reference": "com.sap.c4p.rm.calm.CalmUtilTest",
+		"jira_keys": [
+			"EPPMC4P-7972"
+		]
+	}
+]

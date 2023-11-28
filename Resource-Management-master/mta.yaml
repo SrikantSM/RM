@@ -1,0 +1,1922 @@
+---
+_schema-version: '3.2'
+ID: Resource-Management
+version: 1.38.0
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+  keep-existing-routes: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm ci --only=production
+    - npm run build
+modules:
+- name: rm-db
+  type: nodejs
+  path: db
+  properties:
+    DT_TAGS: "${space}"
+    DT_CLUSTER_ID: "${space}:rm-db"
+    DT_APPLICATIONID: "${space}:rm-db"
+  parameters:
+    memory: 256M
+    disk-quota: 1024M
+    enable-ssh: true
+  requires:
+  - name: dynatrace-service
+  - name: dynatrace-monitoring-service
+    parameters:
+      config:
+        rest_apitoken:
+          scopes: ["DataExport"]
+  - name: rm-logs
+  - name: rm-cloud-logs
+  - name: rm-audit-log-oauth
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: rm-ans
+    parameters:
+     config:
+       type: X509
+       x509:
+        origin: ALERT_NOTIFICATION_SERVICE
+        validity:
+           value: 100
+           type: DAYS
+  - name: rm-hdi-credentials
+    properties:
+      hdi_dynamic_deploy_user: "~{user}"
+      hdi_dynamic_deploy_password: "~{password}"
+  provides:
+  - name: dynamic-db-deployment
+    properties:
+      url: "${default-url}"
+- name: skill-srv
+  deployed-after:
+  - rm-db
+  type: java
+  path: Skill/srv
+  hooks:
+  - name: before-skill-srv-start-db-update
+    type: task
+    phases:
+    - deploy.application.before-start
+    - blue-green.application.before-start.idle
+    parameters:
+      name: db-schema-update
+      command: sed -i 's/org.springframework.boot.loader.JarLauncher/org.springframework.boot.loader.PropertiesLauncher/g' /home/vcap/staging_info.yml && sed -i 's/-Dsun.net.inetaddr.negative.ttl=0/-Dsun.net.inetaddr.negative.ttl=0 -Dloader.main=com.sap.cds.framework.spring.utils.Deploy/g' /home/vcap/staging_info.yml && jq -r .start_command /home/vcap/staging_info.yml | bash
+      memory: 4096M
+      disk-quota: 512M
+      buildpack: sap_java_buildpack
+  properties:
+    MDI_SERVICE_TIMEOUT: 120000
+    MDI_SERVICE_RETRY_ATTEMPT: 2
+    SPRING_PROFILES_ACTIVE: cloud
+    DT_TAGS: "${space}"
+    DT_CLUSTER_ID: "${space}:skill-srv"
+    DT_APPLICATIONID: "${space}:skill-srv"
+    JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jre.SAPMachineJRE']"
+    JBP_CONFIG_SAP_MACHINE_JRE: '{ use_offline_repository: false, version: 17.+ }'
+    CDS_SECURITY_AUTHENTICATION_NORMALIZEPROVIDERTENANT: false
+  parameters:
+    memory: 4096M
+    disk-quota: 512M
+    enable-ssh: true
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run --prefix ../../ generate-skill-schema
+    - mvn -B clean package
+    build-result: target/*.jar
+    requires:
+    - name: rm-db
+  provides:
+  - name: skill-srv-api
+    properties:
+      url: "${default-url}"
+  requires:
+  - name: rm-mdi
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: rm-jobscheduler
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-destination
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: rm-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-logs
+  - name: rm-cloud-logs
+  - name: rm-ans
+    parameters:
+     config:
+       type: X509
+       x509:
+        origin: ALERT_NOTIFICATION_SERVICE
+        validity:
+           value: 100
+           type: DAYS
+  - name: dynatrace-service         
+  - name: dynatrace-monitoring-service
+    parameters:
+      config:
+        rest_apitoken:
+          scopes: ["DataExport"]
+  - name: rm-service-manager
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-hdi-credentials
+    properties:
+      CDS_MULTITENANCY_DEPLOYER_USER: "~{user}"
+      CDS_MULTITENANCY_DEPLOYER_PASSWORD: "~{password}"
+  - name: dynamic-db-deployment
+    properties:
+      CDS_MULTITENANCY_DEPLOYER_URL: "~{url}"
+  - name: rm-approuter-url
+    properties:
+      CDS_MULTITENANCY_APPUI_URL: "~{ui-url-suffix}"
+      CDS_MULTITENANCY_APPUI_TENANTSEPARATOR: "~{ui-tenant-delimiter}"
+  - name: rm-autoscaler
+    parameters:
+      config:
+        instance_min_count: 3
+        instance_max_count: 5
+        scaling_rules:
+        - metric_type: memoryutil
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: cpu
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: memoryutil
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+        - metric_type: cpu
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+  - name: rm-audit-log-oauth
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+- name: resourceRequest-srv
+  deployed-after:
+  - skill-srv
+  type: java
+  properties:
+    SPRING_PROFILES_ACTIVE: cloud
+    DT_TAGS: "${space}"
+    DT_CLUSTER_ID: "${space}:resourceRequest-srv"
+    DT_APPLICATIONID: "${space}:resourceRequest-srv"
+    JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jre.SAPMachineJRE']"
+    JBP_CONFIG_SAP_MACHINE_JRE: '{ use_offline_repository: false, version: 17.+ }'
+    CDS_SECURITY_AUTHENTICATION_NORMALIZEPROVIDERTENANT: false
+  path: Resource-Request/srv
+  parameters:
+    memory: 4096M
+    disk-quota: 512M
+    enable-ssh: true
+    buildpack: sap_java_buildpack
+  build-parameters:
+    builder: custom
+    commands:
+    - mvn -B clean package
+    build-result: target/*.jar
+    requires:
+    - name: rm-db
+  provides:
+  - name: resourceRequest-srv-api
+    properties:
+      url: "${default-url}"
+  requires:
+  - name: rm-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-logs
+  - name: rm-cloud-logs
+  - name: rm-ans
+    parameters:
+     config:
+       type: X509
+       x509:
+        origin: ALERT_NOTIFICATION_SERVICE
+        validity:
+           value: 100
+           type: DAYS
+  - name: rm-audit-log-oauth
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: dynatrace-service          
+  - name: dynatrace-monitoring-service
+    parameters:
+      config:
+        rest_apitoken:
+          scopes: ["DataExport"]
+  - name: rm-service-manager
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: dynamic-db-deployment
+    properties:
+      CDS_MULTITENANCY_DEPLOYER_URL: "~{url}"
+  - name: rm-autoscaler
+    parameters:
+      config:
+        instance_min_count: 3
+        instance_max_count: 5
+        scaling_rules:
+        - metric_type: memoryutil
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: cpu
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: memoryutil
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+        - metric_type: cpu
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+- name: project-integration-adapter
+  deployed-after:
+  - skill-srv
+  type: java
+  properties:
+    SPRING_PROFILES_ACTIVE: cloud
+    DT_TAGS: "${space}"
+    DT_CLUSTER_ID: "${space}:project-integration-adapter"
+    DT_APPLICATIONID: "${space}:project-integration-adapter"
+    JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jre.SAPMachineJRE']"
+    JBP_CONFIG_SAP_MACHINE_JRE: '{  use_offline_repository: false, version: 17.+ }'
+    CDS_SECURITY_AUTHENTICATION_NORMALIZEPROVIDERTENANT: false
+  path: Resource-Request/project-integration-adapter
+  parameters:
+    memory: 4096M
+    disk-quota: 512M
+    enable-ssh: true
+    buildpack: sap_java_buildpack
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run --prefix ../../ generate-rr-int-schema
+    - mvn -B clean package
+    build-result: target/*.jar
+    requires:
+    - name: rm-db
+  provides:
+  - name: project-integration-adapter-api
+    properties:
+      url: "${default-url}"
+  requires:
+  - name: rm-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-logs
+  - name: rm-cloud-logs
+  - name: rm-ans
+    parameters:
+     config:
+       type: X509
+       x509:
+        origin: ALERT_NOTIFICATION_SERVICE
+        validity:
+           value: 100
+           type: DAYS
+  - name: dynatrace-service         
+  - name: dynatrace-monitoring-service
+    parameters:
+      config:
+        rest_apitoken:
+          scopes: ["DataExport"]
+  - name: rm-service-manager
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-onboarding
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-jobscheduler
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-destination
+  - name: rm-audit-log-oauth
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: dynamic-db-deployment
+    properties:
+      CDS_MULTITENANCY_DEPLOYER_URL: "~{url}"
+  - name: rm-autoscaler
+    parameters:
+      config:
+        instance_min_count: 3
+        instance_max_count: 5
+        scaling_rules:
+        - metric_type: memoryutil
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: cpu
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: memoryutil
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+        - metric_type: cpu
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+- name: assignment-srv
+  deployed-after:
+  - skill-srv
+  type: java
+  properties:
+    SPRING_PROFILES_ACTIVE: cloud
+    DT_TAGS: "${space}"
+    DT_CLUSTER_ID: "${space}:assignment-srv"
+    DT_APPLICATIONID: "${space}:assignment-srv"
+    JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jre.SAPMachineJRE']"
+    JBP_CONFIG_SAP_MACHINE_JRE: '{ use_offline_repository: false, version: 17.+ }'
+    CDS_SECURITY_AUTHENTICATION_NORMALIZEPROVIDERTENANT: false
+  path: Assignment/srv
+  parameters:
+    memory: 4096M
+    disk-quota: 512M
+    enable-ssh: true
+    buildpack: sap_java_buildpack
+  build-parameters:
+    builder: custom
+    commands:
+    - mvn -B clean package
+    build-result: target/*.jar
+    requires:
+    - name: rm-db
+  provides:
+  - name: assignment-srv-api
+    properties:
+      url: "${default-url}"
+  requires:
+  - name: rm-destination
+  - name: rm-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-logs
+  - name: rm-cloud-logs
+  - name: rm-ans
+    parameters:
+     config:
+       type: X509
+       x509:
+        origin: ALERT_NOTIFICATION_SERVICE
+        validity:
+           value: 100
+           type: DAYS
+  - name: dynatrace-service         
+  - name: dynatrace-monitoring-service
+    parameters:
+      config:
+        rest_apitoken:
+          scopes: ["DataExport"]
+  - name: rm-service-manager
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-audit-log-oauth
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: dynamic-db-deployment
+    properties:
+      CDS_MULTITENANCY_DEPLOYER_URL: "~{url}"
+  - name: rm-autoscaler
+    parameters:
+      config:
+        instance_min_count: 3
+        instance_max_count: 5
+        scaling_rules:
+        - metric_type: memoryutil
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: cpu
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: memoryutil
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+        - metric_type: cpu
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+- name: consultantProfile-srv
+  deployed-after:
+  - skill-srv
+  type: java
+  properties:
+    SPRING_PROFILES_ACTIVE: hana
+    DT_TAGS: "${space}"
+    DT_CLUSTER_ID: "${space}:consultantProfile-srv"
+    DT_APPLICATIONID: "${space}:consultantProfile-srv"
+    ASSIGNMENT_URL: "~{assignment-srv-api/url}"
+    MALWARE_SERVICE_RETRY_ATTEMPT: 2
+    MALWARE_SERVICE_TIMEOUT: 1000
+    JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jre.SAPMachineJRE']"
+    JBP_CONFIG_SAP_MACHINE_JRE: '{ use_offline_repository: false, version: 17.+ }'
+    CDS_SECURITY_AUTHENTICATION_NORMALIZEPROVIDERTENANT: false
+    ASSIGNMENT_GET_SERVICE_TIMEOUT: 1000
+    ASSIGNMENT_UPDATE_SERVICE_TIMEOUT: 3000
+    ASSIGNMENT_SERVICE_RETRY_ATTEMPT: 2
+  path: Consultant-Profile/srv
+  parameters:
+    memory: 4096M
+    disk-quota: 512M
+    enable-ssh: true
+    buildpack: sap_java_buildpack
+  build-parameters:
+    builder: custom
+    commands:
+    - mvn -B clean package
+    build-result: target/*.jar
+    requires:
+    - name: rm-db
+  provides:
+  - name: consultantProfile-srv-api
+    properties:
+      url: "${default-url}"
+  requires:
+  - name: rm-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-malware-scanner
+  - name: rm-logs
+  - name: rm-cloud-logs
+  - name: rm-ans
+    parameters:
+     config:
+       type: X509
+       x509:
+        origin: ALERT_NOTIFICATION_SERVICE
+        validity:
+           value: 100
+           type: DAYS
+  - name: dynatrace-service         
+  - name: dynatrace-monitoring-service
+    parameters:
+      config:
+        rest_apitoken:
+          scopes: ["DataExport"]
+  - name: rm-service-manager
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: assignment-srv-api
+  - name: rm-audit-log-oauth
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: dynamic-db-deployment
+    properties:
+      CDS_MULTITENANCY_DEPLOYER_URL: "~{url}"
+  - name: rm-autoscaler
+    parameters:
+      config:
+        instance_min_count: 3
+        instance_max_count: 5
+        scaling_rules:
+        - metric_type: memoryutil
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: cpu
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: memoryutil
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+        - metric_type: cpu
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+- name: consultantProfile-integration-srv
+  deployed-after:
+  - skill-srv
+  type: java
+  properties:
+    MDI_SERVICE_TIMEOUT: 120000
+    MDI_SERVICE_RETRY_ATTEMPT: 2
+    APPLICATION_URL: c4p-rm-eu10-prod-eu10-prod-consultantprofile-integration-srv.cfapps.eu10.hana.ondemand.com
+    SPRING_PROFILES_ACTIVE: hana
+    DT_TAGS: "${space}"
+    DT_CLUSTER_ID: "${space}:consultantProfile-integration-srv"
+    DT_APPLICATIONID: "${space}:consultantProfile-integration-srv"
+    JBP_CONFIG_JAVA_OPTS: "[java_opts: '-javaagent:BOOT-INF/lib/opentelemetry-javaagent-1.26.0.jar']"
+    OTEL_JAVAAGENT_ENABLED: true
+    OTEL_RESOURCE_ATTRIBUTES: "account=SAP_Cloud_ALM,serviceType=SPRC,otel.poll.service.type=SPRC,otel.poll.every.second=300"
+    OTEL_SERVICE_NAME: "SAP S/4HANA Cloud for projects Resource Management"
+    OTEL_PROPOGATORS: "sapuniversal"
+    OTEL_TRACES_EXPORTER: "none"
+    OTEL_METRICES_EXPORTER: "none"
+    OTEL_JAVAAGENT_EXTENSIONS: "BOOT-INF/lib/otel-agent-ext-java-1.5.1.jar"
+    JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jre.SAPMachineJRE']"
+    JBP_CONFIG_SAP_MACHINE_JRE: '{  use_offline_repository: false , version: 17.+ }'
+    CDS_SECURITY_AUTHENTICATION_NORMALIZEPROVIDERTENANT: false
+    SKILLS_URL: "~{skill-srv-api/url}"
+  path: Consultant-Profile/integration-srv
+  parameters:
+    memory: 4096M
+    disk-quota: 512M
+    enable-ssh: true
+    buildpack: sap_java_buildpack
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run --prefix ../../ generate-cp-int-schema
+    - mvn -B clean package
+    build-result: target/*.jar
+    requires:
+    - name: rm-db
+  provides:
+  - name: consultantProfile-integration-srv-api
+    properties:
+      url: "${default-url}"
+  requires:
+  - name: rm-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-logs
+  - name: rm-destination
+  - name: skill-srv-api
+  - name: rm-audit-log-oauth
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: rm-cloud-logs
+  - name: rm-ans
+    parameters:
+     config:
+       type: X509
+       x509:
+        origin: ALERT_NOTIFICATION_SERVICE
+        validity:
+           value: 100
+           type: DAYS
+  - name: dynatrace-service         
+  - name: dynatrace-monitoring-service
+    parameters:
+      config:
+        rest_apitoken:
+          scopes: ["DataExport"]
+  - name: rm-service-manager
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-onboarding
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-jobscheduler
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-mdi
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: dynamic-db-deployment
+    properties:
+      CDS_MULTITENANCY_DEPLOYER_URL: "~{url}"
+  - name: rm-autoscaler
+    parameters:
+      config:
+        instance_min_count: 3
+        instance_max_count: 5
+        scaling_rules:
+        - metric_type: memoryutil
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: cpu
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: memoryutil
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+        - metric_type: cpu
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+- name: centralServices-srv
+  deployed-after:
+  - skill-srv
+  type: java
+  properties:
+    SPRING_PROFILES_ACTIVE: cloud
+    DT_TAGS: "${space}"
+    DT_CLUSTER_ID: "${space}:centralServices-srv"
+    DT_APPLICATIONID: "${space}:centralServices-srv"
+    JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jre.SAPMachineJRE']"
+    JBP_CONFIG_SAP_MACHINE_JRE: '{  use_offline_repository: false, version: 17.+ }'
+    CDS_SECURITY_AUTHENTICATION_NORMALIZEPROVIDERTENANT: false
+  path: Central-Services/srv
+  parameters:
+    memory: 4096M
+    disk-quota: 512M
+    enable-ssh: true
+    buildpack: sap_java_buildpack
+    service-binding-route: "${routes/0/route}"
+    routes:
+    - route: "${org}-${space}-central-services-srv.cfapps.eu10.hana.ondemand.com"
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run --prefix ../../ generate-cs-schema
+    - mvn -B clean package
+    build-result: target/*.jar
+    requires:
+    - name: rm-db
+  provides:
+  - name: centralServices-srv-api
+    properties:
+      url: "${protocol}://${routes/0/route}"
+  requires:
+  - name: rm-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-logs
+  - name: rm-cloud-logs
+  - name: rm-ans
+    parameters:
+     config:
+       type: X509
+       x509:
+        origin: ALERT_NOTIFICATION_SERVICE
+        validity:
+           value: 100
+           type: DAYS
+  - name: dynatrace-service         
+  - name: dynatrace-monitoring-service
+    parameters:
+      config:
+        rest_apitoken:
+          scopes: ["DataExport"]
+  - name: rm-metering-service
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: c4p-metering-service   
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS  
+  - name: rm-service-manager
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: dynamic-db-deployment
+    properties:
+      CDS_MULTITENANCY_DEPLOYER_URL: "~{url}"
+  - name: skill-srv-api
+    properties:
+      DEFAULT_LANGUAGE_NOTIFCATION_URL: "~{url}/api/internal/default-language"
+  - name: project-integration-adapter-api
+    properties:
+      PROJECT_INTEGRATION_URL: "~{url}"
+  - name: rm-autoscaler
+    parameters:
+      config:
+        instance_min_count: 3
+        instance_max_count: 5
+        scaling_rules:
+        - metric_type: memoryutil
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: cpu
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: memoryutil
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+        - metric_type: cpu
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+  - name: rm-audit-log-oauth
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: rm-data-retention-manager
+  - name: rm-personal-data-manager
+    parameters:
+      config:
+        fullyQualifiedApplicationName: ResourceManagement
+        applicationTitle: ResourceManagement
+        applicationTitleKey: TITLE_PDM_APPLICATION
+        applicationURL: "${protocol}://${service-binding-route}"
+        endPoints:
+        - type: odatav4
+          serviceName: ProjectTeamMemberGdprService
+          serviceTitle: ProjectTeamMemberGdprService
+          serviceTitleKey: TITLE_PROJECT_TEAM_MEMBER_SERVICE
+          serviceURI: "/odata/v4/ProjectTeamMemberGdprService"
+          hasGdprAnnotations: false
+          annotationProviderRestEndPoint: "/pdm/projectTeamMemberAnnotations"
+          cacheControl: no-cache
+          textBundleURI: "/pdm/texts/i18n.properties"
+        - type: odatav4
+          serviceName: ResourceRequestGdprService
+          serviceTitle: ResourceRequestGdprService
+          serviceTitleKey: TITLE_RESOURCE_REQUEST_SERVICE
+          serviceURI: "/odata/v4/ResourceRequestGdprService"
+          hasGdprAnnotations: false
+          annotationProviderRestEndPoint: "/pdm/resourceRequestAnnotations"
+          cacheControl: no-cache
+          textBundleURI: "/pdm/texts/i18n.properties"
+- name: rm-approuter
+  deployed-after:
+  - rm-flp-content
+  type: approuter.nodejs
+  path: approuter
+  build-parameters:
+    builder: custom
+    commands:
+    - npm ci
+    - npm run test
+    - npm run ci_lint
+    - npm prune --production
+    - npm ci --only=production
+    ignore:
+    - target/
+  parameters:
+    instances: 3
+    disk-quota: 512M
+    memory: 256M
+    enable-ssh: true
+    routes:
+    - route: "*.res.projectscloud.cfapps.eu10.hana.ondemand.com"
+  parameters-metadata:
+    routes:
+      optional: true
+  properties:
+    DT_TAGS: "${space}"
+    DT_CLUSTER_ID: "${space}:rm-approuter"
+    DT_APPLICATIONID: "${space}:rm-approuter"
+    httpHeaders: >
+        [
+          {
+          "Content-Security-Policy": "frame-ancestors 'self' https://*.wdf.sap.corp:* https://*.s4hana.ondemand.com:* https://*.s4hana.cloud.sap:*"
+          }
+        ]
+  requires:
+  - name: rm-html5-repo-runtime
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: rm-logs
+  - name: rm-cloud-logs
+  - name: rm-ans
+    parameters:
+     config:
+       type: X509
+       x509:
+        origin: ALERT_NOTIFICATION_SERVICE
+        validity:
+           value: 100
+           type: DAYS
+  - name: rm-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-portal
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: rm-onboarding
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-audit-log-oauth
+  - name: uiThemeDesigner
+  - name: dynatrace-service
+  - name: dynatrace-monitoring-service
+    parameters:
+      config:
+        rest_apitoken:
+          scopes: ["DataExport"]
+  - name: rm-approuter-url
+    properties:
+      TENANT_HOST_PATTERN: "^(.*)~{ui-tenant-delimiter}~{ui-url-suffix}"
+  - name: skill-srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: skill-srv-api
+      url: "~{url}"
+  - name: assignment-srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: assignment-srv-api
+      url: "~{url}"
+  - name: resourceRequest-srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: resourceRequest-srv-api
+      url: "~{url}"
+  - name: project-integration-adapter-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: project-integration-adapter-api
+      url: "~{url}"
+  - name: consultantProfile-srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: consultantProfile-srv-api
+      url: "~{url}"
+  - name: consultantProfile-integration-srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: consultantProfile-integration-srv-api
+      url: "~{url}"
+  - name: centralServices-srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: centralServices-srv-api
+      url: "~{url}"
+  - name: rm-xray
+    group: destinations
+    properties:
+      name: rm-xray
+      url: "~{xrayurl}"
+  - name: rm-xray-data
+    group: destinations
+    properties:
+      name: rm-xray-data
+      url: "~{xraydataurl}"
+  - name: rm-autoscaler
+  provides:
+  - name: rm-approuter-url
+    properties:
+      ui-tenant-delimiter: "."
+      ui-url-suffix: res.projectscloud.cfapps.eu10.hana.ondemand.com
+      url: "${protocol}://tenant-onboarding.res.projectscloud.cfapps.eu10.hana.ondemand.com"
+- name: rm-ui-content
+  type: com.sap.application.content
+  path: ui-content
+  requires:
+  - name: rm-html5-repo-host
+    parameters:
+      content-target: true
+      service-key:
+        name: html5-content-deployment-key-${timestamp}
+        config:
+          xsuaa:
+            credential-type: x509
+            x509:
+              key-length: 2048
+              validity: 100
+              validity-type: DAYS
+  build-parameters:
+    ignore:
+    - ".gitkeep"
+    requires:
+    - name: skill-ui
+      artifacts:
+      - "./deploy-*.zip"
+    - name: skill-upload-ui
+      artifacts:
+      - "./deploy-*.zip"
+    - name: skill-download-ui
+      artifacts:
+      - "./deploy-*.zip"
+    - name: skill-catalog-ui
+      artifacts:
+      - "./deploy-*.zip"
+    - name: skill-proficiency-ui
+      artifacts:
+      - "./deploy-*.zip"
+    - name: centralServices-defaultLanguage-ui
+      artifacts:
+      - "./deploy-*.zip"
+    - name: centralServices-projectReplicationFilter-ui
+      artifacts:
+      - "./deploy-*.zip"
+    - name: centralServices-resourceOrganization-ui
+      artifacts:
+      - "./deploy-*.zip"
+    - name: myProjectExperienceUi
+      artifacts:
+      - "./myProjectExperienceUi.zip"
+    - name: myAssignmentsUi
+      artifacts:
+      - "./myAssignmentsUi.zip"
+    - name: projectRoleUi
+      artifacts:
+      - "./projectRoleUi.zip"
+    - name: availabilityUploadUi
+      artifacts:
+      - "./availabilityUploadUi.zip"
+    - name: availabilityUpload
+      artifacts:
+      - "./availabilityUpload.zip"
+    - name: availabilityDownload
+      artifacts:
+      - "./availabilityDownload.zip"
+    - name: myResourcesUi
+      artifacts:
+      - "./myResourcesUi.zip"
+    - name: manageResourceRequest-ui
+      artifacts:
+      - "./deploy-*.zip"
+    - name: staffResourceRequest-ui
+      artifacts:
+      - "./deploy-*.zip"
+    - name: resourceRequestLibrary-lib
+      artifacts:
+      - "./deploy-*.zip"
+    - name: capacity-ui
+      artifacts:
+      - "./deploy-*.zip"
+    - name: businessServiceOrgUi
+      artifacts:
+      - "./businessServiceOrgUi.zip"
+    - name: businessServiceOrgUpload
+      artifacts:
+      - "./businessServiceOrgUpload.zip"
+    - name: replication-schedules-ui
+      artifacts:
+      - "./replicationScheduleUi.zip"
+- name: skill-ui
+  type: html5
+  path: Skill/app/skill
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: skill-upload-ui
+  type: html5
+  path: Skill/app/upload
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: skill-download-ui
+  type: html5
+  path: Skill/app/download
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: skill-catalog-ui
+  type: html5
+  path: Skill/app/catalog
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: skill-proficiency-ui
+  type: html5
+  path: Skill/app/proficiency
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: centralServices-defaultLanguage-ui
+  type: html5
+  path: Central-Services/app/defaultLanguage
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: centralServices-projectReplicationFilter-ui
+  type: html5
+  path: Central-Services/app/projectReplicationFilter
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: centralServices-resourceOrganization-ui
+  type: html5
+  path: Central-Services/app/resourceOrganization
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: myProjectExperienceUi
+  type: html5
+  path: Consultant-Profile/app/myProjectExperienceUi
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: myAssignmentsUi
+  type: html5
+  path: Consultant-Profile/app/myAssignmentsUi
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: projectRoleUi
+  type: html5
+  path: Consultant-Profile/app/projectRoleUi
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: businessServiceOrgUi
+  type: html5
+  path: Consultant-Profile/app/businessServiceOrgUi
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: businessServiceOrgUpload
+  type: html5
+  path: Consultant-Profile/app/businessServiceOrgUpload
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: availabilityUploadUi
+  type: html5
+  path: Consultant-Profile/app/availabilityUploadUi
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: availabilityUpload
+  type: html5
+  path: Consultant-Profile/app/availabilityUpload
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: availabilityDownload
+  type: html5
+  path: Consultant-Profile/app/availabilityDownload
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: myResourcesUi
+  type: html5
+  path: Consultant-Profile/app/myResourcesUi
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: manageResourceRequest-ui
+  type: html5
+  path: Resource-Request/app/manageResourceRequest
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: staffResourceRequest-ui
+  type: html5
+  path: Resource-Request/app/staffResourceRequest
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: resourceRequestLibrary-lib
+  type: html5
+  path: Resource-Request/app/resourceRequestLibrary
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: capacity-ui
+  type: html5
+  path: Assignment/app/capacityGridUi
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: replication-schedules-ui
+  type: html5
+  path: Consultant-Profile/app/replicationScheduleUi
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: rm-flp-content
+  deployed-after:
+  - rm-ui-content
+  type: com.sap.application.content
+  build-parameters:
+    ignore:
+    - ".gitkeep"
+    build-artifact-name: content
+  path: flp-content
+  requires:
+  - name: rm-portal
+    parameters:
+      content-target: true
+      service-key:
+        name: portal-content-deploy-key
+        config:
+          content-endpoint: developer
+  - name: rm-html5-repo-host
+    parameters:
+      service-key:
+        name: flp-content-deployment-key-${timestamp}
+        config:
+          xsuaa:
+            credential-type: x509
+            x509:
+              key-length: 2048
+              validity: 100
+              validity-type: DAYS
+  - name: rm-uaa
+    parameters:
+      service-key:
+        name: rm-flp-content-rm-uaa-credentials-${timestamp}
+        config:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+- name: rm-service-broker
+  type: nodejs
+  path: Central-Services/service-broker
+  requires:
+  - name: rm-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-audit-log-oauth
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: gateway-api
+  - name: rm-service-broker-credentials
+  - name: rm-cloud-logs
+  - name: rm-logs
+  - name: rm-autoscaler
+    parameters:
+      config:
+        instance_min_count: 3
+        instance_max_count: 5
+        scaling_rules:
+        - metric_type: memoryutil
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: cpu
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: memoryutil
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+        - metric_type: cpu
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+  parameters:
+    buildpack: nodejs_buildpack
+    memory: 256M
+    disk-quota: 1G
+  properties:
+    SBF_SERVICE_CONFIG:
+      projects-cloud-resource-management-api:
+        extend_credentials:
+          shared:
+            apiUrl: "~{gateway-api/url}"
+        extend_xssecurity:
+          shared:
+            oauth2-configuration:
+              credential-types:
+              - binding-secret
+              - x509
+- name: rm-api-gateway
+  type: java
+  path: Central-Services/api-gateway
+  requires:
+  - name: resourceRequest-srv-api
+  - name: assignment-srv-api
+  - name: consultantProfile-srv-api
+  - name: consultantProfile-integration-srv-api
+  - name: rm-logs
+  - name: rm-cloud-logs
+  - name: rm-autoscaler
+    parameters:
+      config:
+        instance_min_count: 3
+        instance_max_count: 5
+        scaling_rules:
+        - metric_type: memoryutil
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: cpu
+          threshold: 85
+          operator: ">"
+          adjustment: "+1"
+        - metric_type: memoryutil
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+        - metric_type: cpu
+          threshold: 50
+          operator: "<"
+          adjustment: "-1"
+  build-parameters:
+    builder: custom
+    commands:
+    - mvn -B clean verify
+    build-result: target/*.jar
+  parameters:
+    memory: 1G
+    disk-quota: 1G
+    timeout: 600
+    health-check-type: port
+    buildpack: sap_java_buildpack
+    routes:
+    - route: resource-management-api-projectscloud.cfapps.eu10.hana.ondemand.com
+  properties:
+    JAVA_OPTS: "-Djava.security.egd=file:///dev/./urandom"
+    DT_CLUSTER_ID: "${space}-rm-api"
+    RESOURCE_REQUEST_URL: "~{resourceRequest-srv-api/url}"
+    ASSIGNMENT_URL: "~{assignment-srv-api/url}"
+    CONSULTANT_PROFILE_URL: "~{consultantProfile-srv-api/url}"
+    JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jre.SAPMachineJRE']"
+    JBP_CONFIG_SAP_MACHINE_JRE: '{ use_offline_repository: false, version: 17.+ }'
+    CONSULTANT_PROFILE_INTEGRATION_URL: "~{consultantProfile-integration-srv-api/url}"
+  provides:
+  - name: gateway-api
+    properties:
+      url: "${protocol}://${routes/0/route}"
+resources:
+- name: rm-uaa
+  type: com.sap.xs.uaa
+  parameters:
+    service-plan: broker
+    service: xsuaa
+    config:
+      xsappname: projects-cloud-rm
+      oauth2-configuration: 
+        credential-types: [x509, binding-secret, instance-secret]
+        system-attributes: [] 
+      tenant-mode: shared
+      scopes:
+      - name: uaa.user
+        description: UAA
+      - name: "$XSAPPNAME.Skills.Edit"
+        description: Authorization to edit skills
+      - name: "$XSAPPNAME.Skills.Delete"
+        description: Authorization to delete skills
+      - name: "$XSAPPNAME.Skills.Upload"
+        description: Authorization to upload skills
+      - name: "$XSAPPNAME.Skills.Download"
+        description: Authorization to download skills
+      - name: "$XSAPPNAME.SkillCatalogs.Edit"
+        description: Authorization to edit skill catalogs
+      - name: "$XSAPPNAME.SkillCatalogs.Delete"
+        description: Authorization to delete skill catalogs
+      - name: "$XSAPPNAME.MyAssignment.Edit"
+        description: edit of consultant's assignments
+      - name: "$XSAPPNAME.Proficiencies.Edit"
+        description: Authorization to edit proficiency sets
+      - name: "$XSAPPNAME.Proficiencies.Delete"
+        description: Authorization to delete proficiency sets
+      - name: "$XSAPPNAME.Asgt.Edit"
+        description: Authorization to edit assignments
+      - name: "$XSAPPNAME.UtilOvw.Read"
+        description: Authorization to view the resource utilization overview
+      - name: "$XSAPPNAME.ProjRplctnFilter.Edit"
+        description: Authorization to edit the Project Replication Filters
+      - name: "$XSAPPNAME.DefaultLanguage.Edit"
+        description: Authorization to edit the default language
+      - name: "$XSAPPNAME.ResOrg.Edit"
+        description: Authorization to edit Resource Organizations
+      - name: "$XSAPPNAME.Callback"
+        description: Onboarding Callback Access
+        grant-as-authority-to-apps:
+        - "$XSAPPNAME(application,sap-provisioning,tenant-onboarding)"
+      - name: "$XSAPPNAME.mtcallback"
+        description: Onboarding Callback Access
+        grant-as-authority-to-apps:
+        - "$XSAPPNAME(application,sap-provisioning,tenant-onboarding)"
+      - name: "$XSAPPNAME.InitDb"
+        description: Update the database artifacts after deployment of a new version
+        granted-apps:
+        - "$XSAPPNAME(broker,rm-admin-${space})"
+      - name: "$XSAPPNAME.Metering.TriggerReporting"
+        description: Allows to trigger the metering reporting manually
+        granted-apps:
+        - "$XSAPPNAME(broker,rm-admin-${space})"
+      - name: "$XSAPPNAME.ProjRole.Read"
+        description: Authorization to read project roles
+      - name: "$XSAPPNAME.ProjRole.Edit"
+        description: Authorization to edit project roles
+      - name: "$XSAPPNAME.ProjExp.Read"
+        description: Authorization to read consultant's project experience
+      - name: "$XSAPPNAME.ProjExp.Edit"
+        description: Authorization to edit consultant's project experience
+      - name: "$XSAPPNAME.MyResources.Read"
+        description: Authorization to read resource profiles
+      - name: "$XSAPPNAME.MyResources.Edit"
+        description: Authorization to edit resource profiles
+      - name: "$XSAPPNAME.Availability.Upload"
+        description: Authorization to upload Availability
+      - name: "$XSAPPNAME.Availability.Download"
+        description: Authorization to download Availability
+      - name: "$XSAPPNAME.BusinessServiceOrg.Upload"
+        description: Authorization to upload Service Organization
+      - name: "$XSAPPNAME.BusinessServiceOrg.Download"
+        description: Authorization to download Service Organization
+      - name: "$XSAPPNAME.RsceReq.Edit"
+        description: Authorization to edit resource requests
+      - name: "$XSAPPNAME.System"
+        description: Identifies the external consumers in client credential token
+          flow
+      - name: "$XSAPPNAME.Demand.Edit"
+        description: Authorization to edit demands
+      - name: "$XSAPPNAME.ReplicationSchedules.Read"
+        description: Authorization to read Replication Schedules
+      - name: "$XSAPPNAME.ReplicationSchedules.Edit"
+        description: Authorization to edit & activate Replication Schedules
+      - name: "$XSAPPNAME.PersonalDataManager"
+        description: Authority for Personal Data Manager
+        grant-as-authority-to-apps:
+        - "$XSSERVICENAME(rm-personal-data-manager)"
+      - name: "$XSAPPNAME.DataRetentionManager"
+        description: Authority for Data Retention Manager
+        grant-as-authority-to-apps:
+        - "$XSSERVICENAME(rm-data-retention-manager)"
+      - name: "$XSAPPNAME.JobScheduler"
+        description: scope for job scheduler
+        grant-as-authority-to-apps:
+        - "$XSSERVICENAME(rm-jobscheduler)"
+      authorities:
+      - "$XSAPPNAME.ProjExp.Read"
+      - "$XSAPPNAME.ProjExp.Edit"
+      - "$XSAPPNAME.Demand.Edit"
+      - "$XSAPPNAME.System"
+      attributes:
+      - name: RequestedResourceOrganization
+        description: Resource Organization requesting resources for the project
+        valueType: string
+        valueRequired: false
+      - name: ProcessingResourceOrganization
+        description: Resource Organization of resources for the project staffing
+        valueType: string
+        valueRequired: false
+      role-templates:
+      - name: Token_Exchange
+        description: UAA
+        scope-references:
+        - uaa.user
+      - name: ProjectTeamMember
+        description: Users can update their own project experience.
+        scope-references:
+        - "$XSAPPNAME.ProjExp.Read"
+        - "$XSAPPNAME.ProjExp.Edit"
+      - name: MyAssignmentEditor
+        description: Users can edit the assignments.
+        scope-references:
+        - uaa.user
+        - "$XSAPPNAME.MyAssignment.Edit"
+      - name: ResourceManager
+        description: Users can staff resource requests and view the resource utilization.
+        scope-references:
+        - "$XSAPPNAME.MyResources.Read"
+        - "$XSAPPNAME.MyResources.Edit"
+        - "$XSAPPNAME.Asgt.Edit"
+        - "$XSAPPNAME.UtilOvw.Read"
+        attribute-references:
+        - ProcessingResourceOrganization
+      - name: Requester
+        description: Users can create and manage resource requests.
+        scope-references:
+        - "$XSAPPNAME.RsceReq.Edit"
+        attribute-references:
+        - RequestedResourceOrganization
+      - name: ConfigurationExpert
+        description: Users have access to the configuration applications.
+        scope-references:
+        - "$XSAPPNAME.Skills.Edit"
+        - "$XSAPPNAME.Skills.Delete"
+        - "$XSAPPNAME.Skills.Upload"
+        - "$XSAPPNAME.Skills.Download"
+        - "$XSAPPNAME.SkillCatalogs.Edit"
+        - "$XSAPPNAME.SkillCatalogs.Delete"
+        - "$XSAPPNAME.Proficiencies.Edit"
+        - "$XSAPPNAME.Proficiencies.Delete"
+        - "$XSAPPNAME.ProjRole.Read"
+        - "$XSAPPNAME.ProjRole.Edit"
+        - "$XSAPPNAME.ProjRplctnFilter.Edit"
+        - "$XSAPPNAME.Availability.Upload"
+        - "$XSAPPNAME.Availability.Download"
+        - "$XSAPPNAME.BusinessServiceOrg.Upload"
+        - "$XSAPPNAME.BusinessServiceOrg.Download"
+        - "$XSAPPNAME.ReplicationSchedules.Read"
+        - "$XSAPPNAME.ReplicationSchedules.Edit"
+        - "$XSAPPNAME.ResOrg.Edit"
+      - name: ResourceManagementAdministrator
+        description: Users can set the default language for language dependent master
+          data.
+        scope-references:
+        - "$XSAPPNAME.DefaultLanguage.Edit"
+- name: rm-jobscheduler
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: jobscheduler
+    service-plan: standard
+    config:
+      enable-xsuaa-support: true
+  requires:
+  - name: rm-uaa
+- name: rm-uaa-admin
+  type: com.sap.xs.uaa
+  parameters:
+    service-plan: broker
+    service: xsuaa
+    config:
+      xsappname: rm-admin-${space}
+      tenant-mode: dedicated
+      foreign-scope-references:
+      - "$XSAPPNAME(broker,projects-cloud-rm).InitDb"
+      - "$XSAPPNAME(broker,projects-cloud-rm).Metering.TriggerReporting"
+      role-templates:
+      - name: ResourceManagementOperator
+        description: Perform administrative actions on the deployed RM application
+        scope-references:
+        - "$XSAPPNAME(broker,projects-cloud-rm).InitDb"
+        - "$XSAPPNAME(broker,projects-cloud-rm).Metering.TriggerReporting"
+- name: rm-portal
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service-plan: standard
+    service: portal
+- name: rm-logs
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: application-logs
+    service-plan: lite
+- name: rm-html5-repo-runtime
+  parameters:
+    service-plan: app-runtime
+    service: html5-apps-repo
+  type: org.cloudfoundry.managed-service
+- name: rm-html5-repo-host
+  parameters:
+    service-plan: app-host
+    service: html5-apps-repo
+    config:
+      sizeLimit: 10
+  type: org.cloudfoundry.managed-service
+- name: dynatrace-service
+  optional: true
+  type: org.cloudfoundry.existing-service  
+- name: dynatrace-monitoring-service
+  optional: true
+  type: org.cloudfoundry.existing-service
+  parameters:
+    service: Dynatrace Monitoring Service
+    service-plan: environment
+- name: rm-xray
+  properties:
+    xrayurl: https://xray.hana.ondemand.com/xRayControls/resources/sap/dfa/help
+- name: rm-xray-data
+  properties:
+    xraydataurl: https://cp.hana.ondemand.com/dps
+- name: rm-destination
+  optional: true
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: destination
+    service-plan: lite
+- name: rm-onboarding
+  type: org.cloudfoundry.managed-service
+  requires:
+  - name: rm-approuter-url
+  parameters:
+    service: saas-registry
+    service-plan: application
+    config:
+      xsappname: projects-cloud-rm
+      appName: projects-cloud-resource-management
+      appUrls:
+        onSubscription: "~{rm-approuter-url/url}/mt/v1.0/subscriptions/tenants/{tenantId}"
+        getDependencies: "~{rm-approuter-url/url}/callback/v1.0/dependencies"
+- name: rm-autoscaler
+  parameters:
+    service: autoscaler
+    service-plan: lite
+  type: org.cloudfoundry.managed-service
+- name: rm-hdi-credentials
+  properties:
+    user: "${generated-user}"
+    password: "${generated-password}"
+- name: rm-personal-data-manager
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: personal-data-manager-service
+    service-plan: standard
+    config:
+      xs-security:
+        xsappname: projects-cloud-rm
+        authorities:
+        - "$ACCEPT_GRANTED_AUTHORITIES"
+      fullyQualifiedApplicationName: ResourceManagement
+- name: rm-audit-log-oauth
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: auditlog
+    service-plan: oauth2
+- name: rm-data-retention-manager
+  type: org.cloudfoundry.managed-service
+  requires:
+  - name: centralServices-srv-api
+  parameters:
+    service: retention-manager
+    service-plan: standard
+    config:
+      xs-security:
+        xsappname: projects-cloud-rm
+        authorities:
+        - "$ACCEPT_GRANTED_AUTHORITIES"
+      retention-configs:
+        applicationGroupName: ResourceManagement-${org}-${space}
+        applicationGroupDescription: SAP S/4HANA Cloud for Projects, Resource Management
+        applicationGroupDescriptionKey: ResourceManagement
+        applicationGroupBaseURL: "~{centralServices-srv-api/url}"
+        textBundleEndPoint: "/pdm/texts/i18n.properties"
+        supportedLanguages:
+        - de
+        dataSubjects:
+        - dataSubjectRole: ProjectTeamMember
+          dataSubjectDescription: Project Team Member
+          dataSubjectDescriptionKey: ProjectTeamMember
+          dataSubjectBaseURL: "~{centralServices-srv-api/url}"
+          dataSubjectInformationEndPoint: "/drm/projectTeamMemberInformation"
+          dataSubjectDeletionEndPoint: "/drm/deleteProjectTeamMember"
+          dataSubjectsDestroyingEndPoint: "/drm/destroyProjectTeamMember"
+          legalEntity:
+            legalEntity: CompanyCode
+            legalEntityDescription: Company Code
+            legalEntityDescriptionKey: CompanyCode
+            legalEntityValueHelpEndPoint: "/drm/companyCode"
+          legalGrounds:
+          - legalGround: Assignment
+            legalGroundDescription: Assignment
+            legalGroundDescriptionKey: Assignment
+            legalGroundBaseURL: "~{centralServices-srv-api/url}"
+            dataSubjectEndofBusinessEndPoint: "/drm/assignment/dataSubjectEndOfBusiness"
+            dataSubjectLegalEntitiesEndPoint: "/drm/assignment/dataSubjectLegalEntities"
+            dataSubjectLastRetentionStartDatesEndPoint: "/drm/assignment/dataSubjectRetentionStartDate"
+            dataSubjectsEndofResidenceEndPoint: "/drm/assignment/endofResidenceDataSubject"
+            dataSubjectsEndofResidenceConfirmationEndPoint: "/drm/assignment/endofResidenceDSConfirmation"
+            dataSubjectLegalGroundDeletionEndPoint: "/drm/assignment/deleteLegalGroundInstances"
+            dataSubjectsLegalGroundDestroyingEndPoint: "/drm/assignment/destroyLegalGroundInstances"
+            startTimes:
+            - startTime: ResourceRequestEndDate
+              startTimeDescription: Resource Request End Date
+              startTimeDescriptionKey: ResourceRequestEndDate
+          - legalGround: ResourceRequest
+            legalGroundDescription: Resource Request
+            legalGroundDescriptionKey: ResourceRequest
+            legalGroundBaseURL: "~{centralServices-srv-api/url}"
+            legalGroundArchiveEndOfResidenceEndPoint: "/drm/resourceRequest/endOfResidence"
+            legalGroundArchiveDeletionEndPoint: "/drm/resourceRequest/archive"
+            archiveOnly: true
+            startTimes:
+            - startTime: ResourceRequestEndDate
+              startTimeDescription: Resource Request End Date
+              startTimeDescriptionKey: ResourceRequestEndDate
+            legalGroundKeyColumns:
+            - keyFieldName: ID
+              keyFieldDescription: Resource Request ID
+              keyFieldType: String
+- name: rm-mdi
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: one-mds
+    service-plan: default
+    config:
+      businessSystemId: SAP S/4HANA Cloud for Projects, Resource Management
+- name: rm-service-manager
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: service-manager
+    service-plan: container
+- name: rm-malware-scanner
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: malware-scanner
+    service-plan: clamav
+- name: rm-service-broker-credentials
+  type: org.cloudfoundry.user-provided-service
+  parameters:
+    config:
+      brokerCredentialsHash:
+        broker-user: serviceBrokerCredentialsHash1
+        broker-user2: serviceBrokerCredentialsHash2
+- name: rm-metering-service
+  optional: true
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: metering-service
+    service-plan: development
+- name: rm-ans
+  optional: true
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: alert-notification
+    service-plan: lite
+- name: rm-cloud-logs
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: cloud-logging
+    service-plan: standard
+- name: c4p-metering-service
+  optional: true
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: c4p-metering
+    service-plan: default   
+- name: uiThemeDesigner
+  optional: true
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service-plan: standard
+    service: theming    

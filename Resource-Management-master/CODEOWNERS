@@ -1,0 +1,13 @@
+# https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+# Code owners are automatically requested for review when someone opens a pull request that modifies code that they own.
+# Code owners are not automatically requested to review draft pull requests.
+
+# Properties Files are owned by Swarup
+*.properties @i046918 @i036870
+
+# Changes to the TWB config should also notify Swarup/Nicole, so translated files that are properties files can be added individually here
+translation_v2.json @i046918 @i036870
+
+# Pipeline changes
+.pipeline/config.yml @i076118 @i347065
+azure-pipelines.yml @i076118 @i347065

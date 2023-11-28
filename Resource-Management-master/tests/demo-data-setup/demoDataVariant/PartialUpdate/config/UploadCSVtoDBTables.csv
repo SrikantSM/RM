@@ -1,0 +1,3 @@
+TableName,FilePath
+COM_SAP_RESOURCEMANAGEMENT_RESOURCE_CAPACITY,resFullyFree/com.sap.resourceManagement.resource-Capacity.csv
+COM_SAP_RESOURCEMANAGEMENT_RESOURCE_CAPACITY,resNoAvail/com.sap.resourceManagement.resource-Capacity.csv

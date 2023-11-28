@@ -1,0 +1,748 @@
+name,descr,code,locale
+Afghanistan,Afghanistan,AF,en
+Åland Islands,Åland Islands,AX,en
+Albania,Albania,AL,en
+Algeria,Algeria,DZ,en
+American Samoa,American Samoa,AS,en
+Andorra,Andorra,AD,en
+Angola,Angola,AO,en
+Anguilla,Anguilla,AI,en
+Antarctica,Antarctica,AQ,en
+Antigua and Barbuda,Antigua and Barbuda,AG,en
+Argentina,Argentina,AR,en
+Armenia,Armenia,AM,en
+Aruba,Aruba,AW,en
+Australia,Australia,AU,en
+Austria,Austria,AT,en
+Azerbaijan,Azerbaijan,AZ,en
+Bahamas (the),Bahamas (the),BS,en
+Bahrain,Bahrain,BH,en
+Bangladesh,Bangladesh,BD,en
+Barbados,Barbados,BB,en
+Belarus,Belarus,BY,en
+Belgium,Belgium,BE,en
+Belize,Belize,BZ,en
+Benin,Benin,BJ,en
+Bermuda,Bermuda,BM,en
+Bhutan,Bhutan,BT,en
+"Bolivia, Plurinational State of","Bolivia, Plurinational State of",BO,en
+"Bonaire, Sint Eustatius and Saba","Bonaire, Sint Eustatius and Saba",BQ,en
+Bosnia and Herzegovina,Bosnia and Herzegovina,BA,en
+Botswana,Botswana,BW,en
+Bouvet Island,Bouvet Island,BV,en
+Brazil,Brazil,BR,en
+British Indian Ocean Territory (the),British Indian Ocean Territory (the),IO,en
+Brunei Darussalam,Brunei Darussalam,BN,en
+Bulgaria,Bulgaria,BG,en
+Burkina Faso,Burkina Faso,BF,en
+Burundi,Burundi,BI,en
+Cambodia,Cambodia,KH,en
+Cameroon,Cameroon,CM,en
+Canada,Canada,CA,en
+Cape Verde,Cape Verde,CV,en
+Cayman Islands (the),Cayman Islands (the),KY,en
+Central African Republic (the),Central African Republic (the),CF,en
+Chad,Chad,TD,en
+Chile,Chile,CL,en
+China,China,CN,en
+Christmas Island,Christmas Island,CX,en
+Cocos (Keeling) Islands (the),Cocos (Keeling) Islands (the),CC,en
+Colombia,Colombia,CO,en
+Comoros,Comoros,KM,en
+Congo,Congo,CG,en
+Congo (the Democratic Republic of the),Congo (the Democratic Republic of the),CD,en
+Cook Islands (the),Cook Islands (the),CK,en
+Costa Rica,Costa Rica,CR,en
+Côte d'Ivoire,Côte d'Ivoire,CI,en
+Croatia,Croatia,HR,en
+Cuba,Cuba,CU,en
+Curaçao,Curaçao,CW,en
+Cyprus,Cyprus,CY,en
+Czech Republic (the),Czech Republic (the),CZ,en
+Denmark,Denmark,DK,en
+Djibouti,Djibouti,DJ,en
+Dominica,Dominica,DM,en
+Dominican Republic (the),Dominican Republic (the),DO,en
+Ecuador,Ecuador,EC,en
+Egypt,Egypt,EG,en
+El Salvador,El Salvador,SV,en
+Equatorial Guinea,Equatorial Guinea,GQ,en
+Eritrea,Eritrea,ER,en
+Estonia,Estonia,EE,en
+Ethiopia,Ethiopia,ET,en
+Falkland Islands (the) [Malvinas],Falkland Islands (the) [Malvinas],FK,en
+Faroe Islands (the),Faroe Islands (the),FO,en
+Fiji,Fiji,FJ,en
+Finland,Finland,FI,en
+France,France,FR,en
+French Guiana,French Guiana,GF,en
+French Polynesia,French Polynesia,PF,en
+French Southern Territories (the),French Southern Territories (the),TF,en
+Gabon,Gabon,GA,en
+Gambia (The),Gambia (The),GM,en
+Georgia,Georgia,GE,en
+Germany,Germany,DE,en
+Ghana,Ghana,GH,en
+Gibraltar,Gibraltar,GI,en
+Greece,Greece,GR,en
+Greenland,Greenland,GL,en
+Grenada,Grenada,GD,en
+Guadeloupe,Guadeloupe,GP,en
+Guam,Guam,GU,en
+Guatemala,Guatemala,GT,en
+Guernsey,Guernsey,GG,en
+Guinea,Guinea,GN,en
+Guinea-Bissau,Guinea-Bissau,GW,en
+Guyana,Guyana,GY,en
+Haiti,Haiti,HT,en
+Heard Island and McDonald Islands,Heard Island and McDonald Islands,HM,en
+Holy See (the) [Vatican City State],Holy See (the) [Vatican City State],VA,en
+Honduras,Honduras,HN,en
+"Hong Kong, China","Hong Kong, China",HK,en
+Hungary,Hungary,HU,en
+Iceland,Iceland,IS,en
+India,India,IN,en
+Indonesia,Indonesia,ID,en
+Iran (the Islamic Republic of),Iran (the Islamic Republic of),IR,en
+Iraq,Iraq,IQ,en
+Ireland,Ireland,IE,en
+Isle of Man,Isle of Man,IM,en
+Israel,Israel,IL,en
+Italy,Italy,IT,en
+Jamaica,Jamaica,JM,en
+Japan,Japan,JP,en
+Jersey,Jersey,JE,en
+Jordan,Jordan,JO,en
+Kazakhstan,Kazakhstan,KZ,en
+Kenya,Kenya,KE,en
+Kiribati,Kiribati,KI,en
+Korea (the Democratic People's Republic of),Korea (the Democratic People's Republic of),KP,en
+Korea (the Republic of),Korea (the Republic of),KR,en
+Kuwait,Kuwait,KW,en
+Kyrgyzstan,Kyrgyzstan,KG,en
+Lao People's Democratic Republic (the),Lao People's Democratic Republic (the),LA,en
+Latvia,Latvia,LV,en
+Lebanon,Lebanon,LB,en
+Lesotho,Lesotho,LS,en
+Liberia,Liberia,LR,en
+Libya,Libya,LY,en
+Liechtenstein,Liechtenstein,LI,en
+Lithuania,Lithuania,LT,en
+Luxembourg,Luxembourg,LU,en
+"Macao, China","Macao, China",MO,en
+Macedonia (the former Yugoslav Republic of),Macedonia (the former Yugoslav Republic of),MK,en
+Madagascar,Madagascar,MG,en
+Malawi,Malawi,MW,en
+Malaysia,Malaysia,MY,en
+Maldives,Maldives,MV,en
+Mali,Mali,ML,en
+Malta,Malta,MT,en
+Marshall Islands (the),Marshall Islands (the),MH,en
+Martinique,Martinique,MQ,en
+Mauritania,Mauritania,MR,en
+Mauritius,Mauritius,MU,en
+Mayotte,Mayotte,YT,en
+Mexico,Mexico,MX,en
+Micronesia (the Federated States of),Micronesia (the Federated States of),FM,en
+Moldova (the Republic of),Moldova (the Republic of),MD,en
+Monaco,Monaco,MC,en
+Mongolia,Mongolia,MN,en
+Montenegro,Montenegro,ME,en
+Montserrat,Montserrat,MS,en
+Morocco,Morocco,MA,en
+Mozambique,Mozambique,MZ,en
+Myanmar,Myanmar,MM,en
+Namibia,Namibia,NA,en
+Nauru,Nauru,NR,en
+Nepal,Nepal,NP,en
+Netherlands (the),Netherlands (the),NL,en
+New Caledonia,New Caledonia,NC,en
+New Zealand,New Zealand,NZ,en
+Nicaragua,Nicaragua,NI,en
+Niger (the),Niger (the),NE,en
+Nigeria,Nigeria,NG,en
+Niue,Niue,NU,en
+Norfolk Island,Norfolk Island,NF,en
+Northern Mariana Islands (the),Northern Mariana Islands (the),MP,en
+Norway,Norway,NO,en
+Oman,Oman,OM,en
+Pakistan,Pakistan,PK,en
+Palau,Palau,PW,en
+"Palestine, State of","Palestine, State of",PS,en
+Panama,Panama,PA,en
+Papua New Guinea,Papua New Guinea,PG,en
+Paraguay,Paraguay,PY,en
+Peru,Peru,PE,en
+Philippines (the),Philippines (the),PH,en
+Pitcairn,Pitcairn,PN,en
+Poland,Poland,PL,en
+Portugal,Portugal,PT,en
+Puerto Rico,Puerto Rico,PR,en
+Qatar,Qatar,QA,en
+Réunion,Réunion,RE,en
+Romania,Romania,RO,en
+Russian Federation (the),Russian Federation (the),RU,en
+Rwanda,Rwanda,RW,en
+Saint Barthélemy,Saint Barthélemy,BL,en
+"Saint Helena, Ascension and Tristan da Cunha","Saint Helena, Ascension and Tristan da Cunha",SH,en
+Saint Kitts and Nevis,Saint Kitts and Nevis,KN,en
+Saint Lucia,Saint Lucia,LC,en
+Saint Martin (French part),Saint Martin (French part),MF,en
+Saint Pierre and Miquelon,Saint Pierre and Miquelon,PM,en
+Saint Vincent and the Grenadines,Saint Vincent and the Grenadines,VC,en
+Samoa,Samoa,WS,en
+San Marino,San Marino,SM,en
+Sao Tome and Principe,Sao Tome and Principe,ST,en
+Saudi Arabia,Saudi Arabia,SA,en
+Senegal,Senegal,SN,en
+Serbia,Serbia,RS,en
+Seychelles,Seychelles,SC,en
+Sierra Leone,Sierra Leone,SL,en
+Singapore,Singapore,SG,en
+Sint Maarten (Dutch part),Sint Maarten (Dutch part),SX,en
+Slovakia,Slovakia,SK,en
+Slovenia,Slovenia,SI,en
+Solomon Islands (the),Solomon Islands (the),SB,en
+Somalia,Somalia,SO,en
+South Africa,South Africa,ZA,en
+South Georgia and the South Sandwich Islands,South Georgia and the South Sandwich Islands,GS,en
+South Sudan,South Sudan,SS,en
+Spain,Spain,ES,en
+Sri Lanka,Sri Lanka,LK,en
+Sudan (the),Sudan (the),SD,en
+Suriname,Suriname,SR,en
+Svalbard and Jan Mayen,Svalbard and Jan Mayen,SJ,en
+Swaziland,Swaziland,SZ,en
+Sweden,Sweden,SE,en
+Switzerland,Switzerland,CH,en
+Syrian Arab Republic (the),Syrian Arab Republic (the),SY,en
+"Taiwan, China","Taiwan, China",TW,en
+Tajikistan,Tajikistan,TJ,en
+"Tanzania, United Republic of","Tanzania, United Republic of",TZ,en
+Thailand,Thailand,TH,en
+Timor-Leste,Timor-Leste,TL,en
+Togo,Togo,TG,en
+Tokelau,Tokelau,TK,en
+Tonga,Tonga,TO,en
+Trinidad and Tobago,Trinidad and Tobago,TT,en
+Tunisia,Tunisia,TN,en
+Turkey,Turkey,TR,en
+Turkmenistan,Turkmenistan,TM,en
+Turks and Caicos Islands (the),Turks and Caicos Islands (the),TC,en
+Tuvalu,Tuvalu,TV,en
+Uganda,Uganda,UG,en
+Ukraine,Ukraine,UA,en
+United Arab Emirates (the),United Arab Emirates (the),AE,en
+United Kingdom (the),United Kingdom (the),GB,en
+United States (the),United States (the),US,en
+United States Minor Outlying Islands (the),United States Minor Outlying Islands (the),UM,en
+Uruguay,Uruguay,UY,en
+Uzbekistan,Uzbekistan,UZ,en
+Vanuatu,Vanuatu,VU,en
+"Venezuela, Bolivarian Republic of","Venezuela, Bolivarian Republic of",VE,en
+Viet Nam,Viet Nam,VN,en
+Virgin Islands (British),Virgin Islands (British),VG,en
+Virgin Islands (U.S.),Virgin Islands (U.S.),VI,en
+Wallis and Futuna,Wallis and Futuna,WF,en
+Western Sahara,Western Sahara,EH,en
+Yemen,Yemen,YE,en
+Zambia,Zambia,ZM,en
+Zimbabwe,Zimbabwe,ZW,en
+Afghanistan (l'),Afghanistan (l'),AF,fr
+Afrique du Sud (l'),Afrique du Sud (l'),ZA,fr
+Åland (les Îles),Åland (les Îles),AX,fr
+Albanie (l'),Albanie (l'),AL,fr
+Algérie (l'),Algérie (l'),DZ,fr
+Allemagne (l'),Allemagne (l'),DE,fr
+Andorre (l'),Andorre (l'),AD,fr
+Angola (l'),Angola (l'),AO,fr
+Anguilla,Anguilla,AI,fr
+Antarctique (l'),Antarctique (l'),AQ,fr
+Antigua-et- Barbuda,Antigua-et- Barbuda,AG,fr
+Arabie saoudite (l'),Arabie saoudite (l'),SA,fr
+Argentine (l'),Argentine (l'),AR,fr
+Arménie (l'),Arménie (l'),AM,fr
+Aruba,Aruba,AW,fr
+Australie (l'),Australie (l'),AU,fr
+Autriche (l'),Autriche (l'),AT,fr
+Azerbaïdjan (l'),Azerbaïdjan (l'),AZ,fr
+Bahamas (les),Bahamas (les),BS,fr
+Bahreïn,Bahreïn,BH,fr
+Bangladesh (le),Bangladesh (le),BD,fr
+Barbade (la),Barbade (la),BB,fr
+Bélarus (le),Bélarus (le),BY,fr
+Belgique (la),Belgique (la),BE,fr
+Belize (le),Belize (le),BZ,fr
+Bénin (le),Bénin (le),BJ,fr
+Bermudes (les),Bermudes (les),BM,fr
+Bhoutan (le),Bhoutan (le),BT,fr
+"Bolivie, l'État plurinational de","Bolivie, l'État plurinational de",BO,fr
+"Bonaire, Saint- Eustache et Saba","Bonaire, Saint- Eustache et Saba",BQ,fr
+Bosnie- Herzégovine (la),Bosnie- Herzégovine (la),BA,fr
+Botswana (le),Botswana (le),BW,fr
+Bouvet (l'Île),Bouvet (l'Île),BV,fr
+Brésil (le),Brésil (le),BR,fr
+Brunei (le),Brunei (le),BN,fr
+Bulgarie (la),Bulgarie (la),BG,fr
+Burkina (le),Burkina (le),BF,fr
+Burundi (le),Burundi (le),BI,fr
+Caïmans (les Îles),Caïmans (les Îles),KY,fr
+Cambodge (le),Cambodge (le),KH,fr
+Cameroun (le),Cameroun (le),CM,fr
+Canada (le),Canada (le),CA,fr
+Cap-Vert (le),Cap-Vert (le),CV,fr
+Centrafricaine (la République),Centrafricaine (la République),CF,fr
+Chili (le),Chili (le),CL,fr
+Chine (la),Chine (la),CN,fr
+Christmas (l'Île),Christmas (l'Île),CX,fr
+Chypre,Chypre,CY,fr
+Cocos (les Îles)/ Keeling (les Îles),Cocos (les Îles)/ Keeling (les Îles),CC,fr
+Colombie (la),Colombie (la),CO,fr
+Comores (les),Comores (les),KM,fr
+Congo (le),Congo (le),CG,fr
+Congo (la République démocratique du),Congo (la République démocratique du),CD,fr
+Cook (les Îles),Cook (les Îles),CK,fr
+Corée (la République de),Corée (la République de),KR,fr
+Corée (la République populaire démocratique de),Corée (la République populaire démocratique de),KP,fr
+Costa Rica (le),Costa Rica (le),CR,fr
+Côte d'Ivoire (la),Côte d'Ivoire (la),CI,fr
+Croatie (la),Croatie (la),HR,fr
+Cuba,Cuba,CU,fr
+Curaçao,Curaçao,CW,fr
+Danemark (le),Danemark (le),DK,fr
+Djibouti,Djibouti,DJ,fr
+dominicaine (la République),dominicaine (la République),DO,fr
+Dominique (la),Dominique (la),DM,fr
+Égypte (l'),Égypte (l'),EG,fr
+Salvador (le),Salvador (le),SV,fr
+Émirats arabes unis (les),Émirats arabes unis (les),AE,fr
+Équateur (l'),Équateur (l'),EC,fr
+Érythrée (l'),Érythrée (l'),ER,fr
+Espagne (l'),Espagne (l'),ES,fr
+Estonie (l'),Estonie (l'),EE,fr
+États-Unis (les),États-Unis (les),US,fr
+Éthiopie (l'),Éthiopie (l'),ET,fr
+Falkland (les Îles)/Malouines (les Îles),Falkland (les Îles)/Malouines (les Îles),FK,fr
+Féroé (les Îles),Féroé (les Îles),FO,fr
+Fidji (les),Fidji (les),FJ,fr
+Finlande (la),Finlande (la),FI,fr
+France (la),France (la),FR,fr
+Gabon (le),Gabon (le),GA,fr
+Gambie (la),Gambie (la),GM,fr
+Géorgie (la),Géorgie (la),GE,fr
+Géorgie du Sud-et-les Îles Sandwich du Sud (la),Géorgie du Sud-et-les Îles Sandwich du Sud (la),GS,fr
+Ghana (le),Ghana (le),GH,fr
+Gibraltar,Gibraltar,GI,fr
+Grèce (la),Grèce (la),GR,fr
+Grenade (la),Grenade (la),GD,fr
+Groenland (le),Groenland (le),GL,fr
+Guadeloupe (la),Guadeloupe (la),GP,fr
+Guam,Guam,GU,fr
+Guatemala (le),Guatemala (le),GT,fr
+Guernesey,Guernesey,GG,fr
+Guinée (la),Guinée (la),GN,fr
+Guinée-Bissau (la),Guinée-Bissau (la),GW,fr
+Guinée équatoriale (la),Guinée équatoriale (la),GQ,fr
+Guyana (le),Guyana (le),GY,fr
+Guyane française (la),Guyane française (la),GF,fr
+Haïti,Haïti,HT,fr
+Heard-et-Îles MacDonald (l'Île),Heard-et-Îles MacDonald (l'Île),HM,fr
+Honduras (le),Honduras (le),HN,fr
+"Hong Kong, Chine","Hong Kong, Chine",HK,fr
+Hongrie (la),Hongrie (la),HU,fr
+Île de Man,Île de Man,IM,fr
+Îles mineures éloignées des États-Unis (les),Îles mineures éloignées des États-Unis (les),UM,fr
+Vierges britanniques (les Îles),Vierges britanniques (les Îles),VG,fr
+Vierges des États-Unis (les Îles),Vierges des États-Unis (les Îles),VI,fr
+Inde (l'),Inde (l'),IN,fr
+Indonésie (l'),Indonésie (l'),ID,fr
+Iran (République Islamique d'),Iran (République Islamique d'),IR,fr
+Iraq (l'),Iraq (l'),IQ,fr
+Irlande (l'),Irlande (l'),IE,fr
+Islande (l'),Islande (l'),IS,fr
+Israël,Israël,IL,fr
+Italie (l'),Italie (l'),IT,fr
+Jamaïque (la),Jamaïque (la),JM,fr
+Japon (le),Japon (le),JP,fr
+Jersey,Jersey,JE,fr
+Jordanie (la),Jordanie (la),JO,fr
+Kazakhstan (le),Kazakhstan (le),KZ,fr
+Kenya (le),Kenya (le),KE,fr
+Kirghizistan (le),Kirghizistan (le),KG,fr
+Kiribati (les),Kiribati (les),KI,fr
+Koweït (le),Koweït (le),KW,fr
+"Lao, République démocratique populaire","Lao, République démocratique populaire",LA,fr
+Lesotho (le),Lesotho (le),LS,fr
+Lettonie (la),Lettonie (la),LV,fr
+Liban (le),Liban (le),LB,fr
+Libéria (le),Libéria (le),LR,fr
+Libye (la),Libye (la),LY,fr
+Liechtenstein (le),Liechtenstein (le),LI,fr
+Lituanie (la),Lituanie (la),LT,fr
+Luxembourg (le),Luxembourg (le),LU,fr
+"Macao, Chine","Macao, Chine",MO,fr
+Macédoine(l'ex-République yougoslave de),Macédoine(l'ex-République yougoslave de),MK,fr
+Madagascar,Madagascar,MG,fr
+Malaisie (la),Malaisie (la),MY,fr
+Malawi (le),Malawi (le),MW,fr
+Maldives (les),Maldives (les),MV,fr
+Mali (le),Mali (le),ML,fr
+Malte,Malte,MT,fr
+Mariannes du Nord (les Îles),Mariannes du Nord (les Îles),MP,fr
+Maroc (le),Maroc (le),MA,fr
+Marshall (Îles),Marshall (Îles),MH,fr
+Martinique (la),Martinique (la),MQ,fr
+Maurice,Maurice,MU,fr
+Mauritanie (la),Mauritanie (la),MR,fr
+Mayotte,Mayotte,YT,fr
+Mexique (le),Mexique (le),MX,fr
+"Micronésie, États fédérés de","Micronésie, États fédérés de",FM,fr
+"Moldova, République de","Moldova, République de",MD,fr
+Monaco,Monaco,MC,fr
+Mongolie (la),Mongolie (la),MN,fr
+Monténégro (le),Monténégro (le),ME,fr
+Montserrat,Montserrat,MS,fr
+Mozambique (le),Mozambique (le),MZ,fr
+Myanmar (le),Myanmar (le),MM,fr
+Namibie (la),Namibie (la),NA,fr
+Nauru,Nauru,NR,fr
+Népal (le),Népal (le),NP,fr
+Nicaragua (le),Nicaragua (le),NI,fr
+Niger (le),Niger (le),NE,fr
+Nigéria (le),Nigéria (le),NG,fr
+Niue,Niue,NU,fr
+Norfolk (l'Île),Norfolk (l'Île),NF,fr
+Norvège (la),Norvège (la),NO,fr
+Nouvelle- Calédonie (la),Nouvelle- Calédonie (la),NC,fr
+Nouvelle- Zélande (la),Nouvelle- Zélande (la),NZ,fr
+Indien (le Territoire britannique de l'océan),Indien (le Territoire britannique de l'océan),IO,fr
+Oman,Oman,OM,fr
+Ouganda (l'),Ouganda (l'),UG,fr
+Ouzbékistan (l'),Ouzbékistan (l'),UZ,fr
+Pakistan (le),Pakistan (le),PK,fr
+Palaos (les),Palaos (les),PW,fr
+"Palestine, État de","Palestine, État de",PS,fr
+Panama (le),Panama (le),PA,fr
+Papouasie- Nouvelle- Guinée (la),Papouasie- Nouvelle- Guinée (la),PG,fr
+Paraguay (le),Paraguay (le),PY,fr
+Pays-Bas (les),Pays-Bas (les),NL,fr
+Pérou (le),Pérou (le),PE,fr
+Philippines (les),Philippines (les),PH,fr
+Pitcairn,Pitcairn,PN,fr
+Pologne (la),Pologne (la),PL,fr
+Polynésie française (la),Polynésie française (la),PF,fr
+Porto Rico,Porto Rico,PR,fr
+Portugal (le),Portugal (le),PT,fr
+Qatar (le),Qatar (le),QA,fr
+Réunion (La),Réunion (La),RE,fr
+Roumanie (la),Roumanie (la),RO,fr
+Royaume-Uni (le),Royaume-Uni (le),GB,fr
+Russie (la Fédération de),Russie (la Fédération de),RU,fr
+Rwanda (le),Rwanda (le),RW,fr
+Sahara occidental (le),Sahara occidental (le),EH,fr
+Saint- Barthélemy,Saint- Barthélemy,BL,fr
+"Sainte-Hélène, Ascension et Tristan da Cunha","Sainte-Hélène, Ascension et Tristan da Cunha",SH,fr
+Sainte-Lucie,Sainte-Lucie,LC,fr
+Saint-Kitts-et- Nevis,Saint-Kitts-et- Nevis,KN,fr
+Saint-Marin,Saint-Marin,SM,fr
+Saint-Martin (partie néerlandaise),Saint-Martin (partie néerlandaise),SX,fr
+Saint-Martin (partie française),Saint-Martin (partie française),MF,fr
+Saint-Pierre-et- Miquelon,Saint-Pierre-et- Miquelon,PM,fr
+Saint-Siège (le) [État de la Cité du Vatican (l')],Saint-Siège (le) [État de la Cité du Vatican (l')],VA,fr
+Saint-Vincent- et-les- Grenadines,Saint-Vincent- et-les- Grenadines,VC,fr
+Salomon (Îles),Salomon (Îles),SB,fr
+Samoa (les),Samoa (les),WS,fr
+Samoa américaines (les),Samoa américaines (les),AS,fr
+Sao Tomé-et- Principe,Sao Tomé-et- Principe,ST,fr
+Sénégal (le),Sénégal (le),SN,fr
+Serbie,Serbie,RS,fr
+Seychelles (les),Seychelles (les),SC,fr
+Sierra Leone (la),Sierra Leone (la),SL,fr
+Singapour,Singapour,SG,fr
+Slovaquie (la),Slovaquie (la),SK,fr
+Slovénie (la),Slovénie (la),SI,fr
+Somalie (la),Somalie (la),SO,fr
+Soudan (le),Soudan (le),SD,fr
+Soudan du Sud (le),Soudan du Sud (le),SS,fr
+Sri Lanka (le),Sri Lanka (le),LK,fr
+Suède (la),Suède (la),SE,fr
+Suisse (la),Suisse (la),CH,fr
+Suriname (le),Suriname (le),SR,fr
+Svalbard et l'Île Jan Mayen (le),Svalbard et l'Île Jan Mayen (le),SJ,fr
+Swaziland (le),Swaziland (le),SZ,fr
+République arabe syrienne (la),République arabe syrienne (la),SY,fr
+Tadjikistan (le),Tadjikistan (le),TJ,fr
+"Taïwan, Chine","Taïwan, Chine",TW,fr
+"Tanzanie, République- Unie de","Tanzanie, République- Unie de",TZ,fr
+Tchad (le),Tchad (le),TD,fr
+tchèque (la République),tchèque (la République),CZ,fr
+Terres australes françaises (les),Terres australes françaises (les),TF,fr
+Thaïlande (la),Thaïlande (la),TH,fr
+Timor-Leste (le),Timor-Leste (le),TL,fr
+Togo (le),Togo (le),TG,fr
+Tokelau (les),Tokelau (les),TK,fr
+Tonga (les),Tonga (les),TO,fr
+Trinité-et- Tobago (la),Trinité-et- Tobago (la),TT,fr
+Tunisie (la),Tunisie (la),TN,fr
+Turkménistan (le),Turkménistan (le),TM,fr
+Turks-et-Caïcos (les Îles),Turks-et-Caïcos (les Îles),TC,fr
+Turquie (la),Turquie (la),TR,fr
+Tuvalu (les),Tuvalu (les),TV,fr
+Ukraine (l'),Ukraine (l'),UA,fr
+Uruguay (l'),Uruguay (l'),UY,fr
+Vanuatu (le),Vanuatu (le),VU,fr
+"Venezuela, République bolivarienne du","Venezuela, République bolivarienne du",VE,fr
+Viet Nam (le),Viet Nam (le),VN,fr
+Wallis-et- Futuna,Wallis-et- Futuna,WF,fr
+Yémen (le),Yémen (le),YE,fr
+Zambie (la),Zambie (la),ZM,fr
+Zimbabwe (le),Zimbabwe (le),ZW,fr
+Afghanistan,Afghanistan,AF,de
+Åland,Åland,AX,de
+Albanien,Albanien,AL,de
+Algerien,Algerien,DZ,de
+Amerikanisch-Samoa,Amerikanisch-Samoa,AS,de
+Andorra,Andorra,AD,de
+Angola,Angola,AO,de
+Anguilla,Anguilla,AI,de
+Antarktis,Antarktis,AQ,de
+Antigua und Barbuda,Antigua und Barbuda,AG,de
+Argentinien,Argentinien,AR,de
+Armenien,Armenien,AM,de
+Aruba,Aruba,AW,de
+Australien,Australien,AU,de
+Österreich,Österreich,AT,de
+Aserbaidschan,Aserbaidschan,AZ,de
+Bahamas,Bahamas,BS,de
+Bahrain,Bahrain,BH,de
+Bangladesch,Bangladesch,BD,de
+Barbados,Barbados,BB,de
+Weißrussland,Weißrussland,BY,de
+Belgien,Belgien,BE,de
+Belize,Belize,BZ,de
+Benin,Benin,BJ,de
+Bermuda,Bermuda,BM,de
+Bhutan,Bhutan,BT,de
+Bolivien (Plurinationaler Staat),Bolivien (Plurinationaler Staat),BO,de
+"Bonaire, Sint Eustatius und Saba","Bonaire, Sint Eustatius und Saba",BQ,de
+Bosnien und Herzegowina,Bosnien und Herzegowina,BA,de
+Botsuana,Botsuana,BW,de
+Bouvetinsel,Bouvetinsel,BV,de
+Brasilien,Brasilien,BR,de
+Britisches Territorium im Indischen Ozean,Britisches Territorium im Indischen Ozean,IO,de
+Brunei Darussalam,Brunei Darussalam,BN,de
+Bulgarien,Bulgarien,BG,de
+Burkina Faso,Burkina Faso,BF,de
+Burundi,Burundi,BI,de
+Kambodscha,Kambodscha,KH,de
+Kamerun,Kamerun,CM,de
+Kanada,Kanada,CA,de
+Kap Verde,Kap Verde,CV,de
+Kaimaninseln,Kaimaninseln,KY,de
+Zentralafrikanische Republik,Zentralafrikanische Republik,CF,de
+Tschad,Tschad,TD,de
+Chile,Chile,CL,de
+China,China,CN,de
+Weihnachtsinsel,Weihnachtsinsel,CX,de
+Kokosinseln (Keelinginseln),Kokosinseln (Keelinginseln),CC,de
+Kolumbien,Kolumbien,CO,de
+Komoren,Komoren,KM,de
+Kongo,Kongo,CG,de
+Kongo (Demokratische Republik),Kongo (Demokratische Republik),CD,de
+Cookinseln,Cookinseln,CK,de
+Costa Rica,Costa Rica,CR,de
+Elfenbeinküste,Elfenbeinküste,CI,de
+Kroatien,Kroatien,HR,de
+Kuba,Kuba,CU,de
+Curaçao,Curaçao,CW,de
+Zypern,Zypern,CY,de
+Tschechien,Tschechien,CZ,de
+Dänemark,Dänemark,DK,de
+Dschibuti,Dschibuti,DJ,de
+Dominica,Dominica,DM,de
+Dominikanische Republik,Dominikanische Republik,DO,de
+Ecuador,Ecuador,EC,de
+Ägypten,Ägypten,EG,de
+El Salvador,El Salvador,SV,de
+Äquatorialguinea,Äquatorialguinea,GQ,de
+Eritrea,Eritrea,ER,de
+Estland,Estland,EE,de
+Äthiopien,Äthiopien,ET,de
+Falklandinseln (Malwinen),Falklandinseln (Malwinen),FK,de
+Falklandinseln,Falklandinseln,FO,de
+Fidschi,Fidschi,FJ,de
+Finnland,Finnland,FI,de
+Frankreich,Frankreich,FR,de
+Französisch-Guayana,Französisch-Guayana,GF,de
+Französisch-Polynesien,Französisch-Polynesien,PF,de
+Französische Südgebiete,Französische Südgebiete,TF,de
+Gabun,Gabun,GA,de
+Gambia,Gambia,GM,de
+Georgien,Georgien,GE,de
+Deutschland,Deutschland,DE,de
+Ghana,Ghana,GH,de
+Gibraltar,Gibraltar,GI,de
+Griechenland,Griechenland,GR,de
+Grönland,Grönland,GL,de
+Grenada,Grenada,GD,de
+Guadeloupe,Guadeloupe,GP,de
+Guam,Guam,GU,de
+Guatemala,Guatemala,GT,de
+Guernsey,Guernsey,GG,de
+Guinea,Guinea,GN,de
+Guinea-Bissau,Guinea-Bissau,GW,de
+Guyana,Guyana,GY,de
+Haiti,Haiti,HT,de
+Heard und McDonaldinseln,Heard und McDonaldinseln,HM,de
+Heiliger Stuhl [Staat der Vatikanstadt],Heiliger Stuhl [Staat der Vatikanstadt],VA,de
+Honduras,Honduras,HN,de
+"Hongkong, China","Hongkong, China",HK,de
+Ungarn,Ungarn,HU,de
+Island,Island,IS,de
+Indien,Indien,IN,de
+Indonesien,Indonesien,ID,de
+Iran (Islamische Republik),Iran (Islamische Republik),IR,de
+Irak,Irak,IQ,de
+Irland,Irland,IE,de
+Isle of Man,Isle of Man,IM,de
+Israel,Israel,IL,de
+Italien,Italien,IT,de
+Jamaika,Jamaika,JM,de
+Japan,Japan,JP,de
+Jersey,Jersey,JE,de
+Jordanien,Jordanien,JO,de
+Kasachstan,Kasachstan,KZ,de
+Kenia,Kenia,KE,de
+Kiribati,Kiribati,KI,de
+Korea (Demokratische Volksrepublik,Korea (Demokratische Volksrepublik,KP,de
+Korea (Republik Korea,Korea (Republik Korea,KR,de
+Kuwait,Kuwait,KW,de
+Kirgisistan,Kirgisistan,KG,de
+Laos,Laos,LA,de
+Lettland,Lettland,LV,de
+Libanon,Libanon,LB,de
+Lesotho,Lesotho,LS,de
+Liberia,Liberia,LR,de
+Libyen,Libyen,LY,de
+Liechtenstein,Liechtenstein,LI,de
+Litauen,Litauen,LT,de
+Luxemburg,Luxemburg,LU,de
+"Macau, China","Macau, China",MO,de
+Mazedonien (Ehemalige jugoslawische Republik),Mazedonien (Ehemalige jugoslawische Republik),MK,de
+Madagaskar,Madagaskar,MG,de
+Malawi,Malawi,MW,de
+Malaysia,Malaysia,MY,de
+Malediven,Malediven,MV,de
+Mali,Mali,ML,de
+Malta,Malta,MT,de
+Marshallinseln,Marshallinseln,MH,de
+Martinique,Martinique,MQ,de
+Mauretanien,Mauretanien,MR,de
+Mauritius,Mauritius,MU,de
+Mayotte,Mayotte,YT,de
+Mexiko,Mexiko,MX,de
+Mikronesien (Föderierte Staaten),Mikronesien (Föderierte Staaten),FM,de
+Moldau (Republik),Moldau (Republik),MD,de
+Monaco,Monaco,MC,de
+Mongolei,Mongolei,MN,de
+Montenegro,Montenegro,ME,de
+Montserrat,Montserrat,MS,de
+Marokko,Marokko,MA,de
+Mosambik,Mosambik,MZ,de
+Myanmar,Myanmar,MM,de
+Namibia,Namibia,NA,de
+Nauru,Nauru,NR,de
+Nepal,Nepal,NP,de
+Niederlande,Niederlande,NL,de
+Neukaledonien,Neukaledonien,NC,de
+Neuseeland,Neuseeland,NZ,de
+Nicaragua,Nicaragua,NI,de
+Niger,Niger,NE,de
+Nigeria,Nigeria,NG,de
+Niue,Niue,NU,de
+Norfolkinsel,Norfolkinsel,NF,de
+Nördliche Marianen,Nördliche Marianen,MP,de
+Norwegen,Norwegen,NO,de
+Oman,Oman,OM,de
+Pakistan,Pakistan,PK,de
+Palau,Palau,PW,de
+Palästina,Palästina,PS,de
+Panama,Panama,PA,de
+Papua-Neuguinea,Papua-Neuguinea,PG,de
+Paraguay,Paraguay,PY,de
+Peru,Peru,PE,de
+Philippinen,Philippinen,PH,de
+Pitcairninseln,Pitcairninseln,PN,de
+Polen,Polen,PL,de
+Portugal,Portugal,PT,de
+Puerto Rico,Puerto Rico,PR,de
+Katar,Katar,QA,de
+Réunion,Réunion,RE,de
+Rumänien,Rumänien,RO,de
+Russische Föderation,Russische Föderation,RU,de
+Ruanda,Ruanda,RW,de
+Saint-Barthélemy,Saint-Barthélemy,BL,de
+"St. Helena, Ascension und Tristan da Cunha","St. Helena, Ascension und Tristan da Cunha",SH,de
+St. Kitts und Nevis,St. Kitts und Nevis,KN,de
+St. Lucia,St. Lucia,LC,de
+Saint-Martin (franz. Teil),Saint-Martin (franz. Teil),MF,de
+Saint-Pierre und Miquelon,Saint-Pierre und Miquelon,PM,de
+St. Vincent und die Grenadinen,St. Vincent und die Grenadinen,VC,de
+Samoa,Samoa,WS,de
+San Marino,San Marino,SM,de
+São Tomé und Príncipe,São Tomé und Príncipe,ST,de
+Saudi-Arabien,Saudi-Arabien,SA,de
+Senegal,Senegal,SN,de
+Serbien,Serbien,RS,de
+Seychellen,Seychellen,SC,de
+Sierra Leone,Sierra Leone,SL,de
+Singapur,Singapur,SG,de
+Sint Maarten (niederl. Teil),Sint Maarten (niederl. Teil),SX,de
+Slowakei,Slowakei,SK,de
+Slowenien,Slowenien,SI,de
+Salomonen,Salomonen,SB,de
+Somalia,Somalia,SO,de
+Südafrika,Südafrika,ZA,de
+Südgeorgien und die Südlichen Sandwichinseln,Südgeorgien und die Südlichen Sandwichinseln,GS,de
+Südsudan,Südsudan,SS,de
+Spanien,Spanien,ES,de
+Sri Lanka,Sri Lanka,LK,de
+Sudan,Sudan,SD,de
+Suriname,Suriname,SR,de
+Svalbard und Jan Mayen,Svalbard und Jan Mayen,SJ,de
+Swasiland,Swasiland,SZ,de
+Schweden,Schweden,SE,de
+Schweiz,Schweiz,CH,de
+Syrien,Syrien,SY,de
+"Taiwan, China","Taiwan, China",TW,de
+Tadschikistan,Tadschikistan,TJ,de
+"Tansania, Vereinigte Republik","Tansania, Vereinigte Republik",TZ,de
+Thailand,Thailand,TH,de
+Timor-Leste,Timor-Leste,TL,de
+Togo,Togo,TG,de
+Tokelau,Tokelau,TK,de
+Tonga,Tonga,TO,de
+Trinidad und Tobago,Trinidad und Tobago,TT,de
+Tunesien,Tunesien,TN,de
+Türkei,Türkei,TR,de
+Turkmenistan,Turkmenistan,TM,de
+Turks- und Caicosinseln,Turks- und Caicosinseln,TC,de
+Tuvalu,Tuvalu,TV,de
+Uganda,Uganda,UG,de
+Ukraine,Ukraine,UA,de
+Vereinigte Arabische Emirate,Vereinigte Arabische Emirate,AE,de
+Vereinigtes Königreich,Vereinigtes Königreich,GB,de
+USA,USA,US,de
+United States Minor Outlying Islands,United States Minor Outlying Islands,UM,de
+Uruguay,Uruguay,UY,de
+Usbekistan,Usbekistan,UZ,de
+Vanuatu,Vanuatu,VU,de
+"Venezuela, Bolivarische Republik","Venezuela, Bolivarische Republik",VE,de
+Vietnam,Vietnam,VN,de
+Britische Jungferninseln,Britische Jungferninseln,VG,de
+Amerikanische Jungferninseln,Amerikanische Jungferninseln,VI,de
+Wallis und Futuna,Wallis und Futuna,WF,de
+Westsahara,Westsahara,EH,de
+Jemen,Jemen,YE,de
+Sambia,Sambia,ZM,de
+Simbabwe,Simbabwe,ZW,de

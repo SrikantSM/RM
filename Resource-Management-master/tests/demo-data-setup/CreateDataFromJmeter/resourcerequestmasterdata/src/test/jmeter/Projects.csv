@@ -1,0 +1,25 @@
+ID,name,startDate,endDate,customer_ID,serviceOrganization_code
+I0100,S/4HANA Implementation,-19,8,17100001,DE01
+I0200,Talent Management Prototype,-10,6,17100002,DE01
+I0300,Preparation of Fiori Migration,0,12,17100003,DE01
+I0400,SD data migration Akron Inc.,0,12,17100004,IN01
+I0500,Concur Implementation,0,18,17100005,IN01
+I0600,EWM_INDIA Go-Live in India,0,12,17100006,CA01
+I0700,CRM Implementation,0,12,17100007,CA01
+I0800,SCM Implementation,0,36,17100008,US01
+I0900,Integration to Success Factors,0,20,17100009,US01
+I1000,SCP Resource Management,0,44,17100009,US01
+I1100,Ariba Implementation,-19,8,17100001,DE01
+I1200,HANA Integration,-10,6,17100002,DE01
+I1300,Fieldglass Integration,0,12,17100003,DE01
+I1400,CPM Implementation,0,12,17100004,IN01
+I1500,PPM Integration,0,18,17100005,IN01
+I1600,SD Integration,0,12,17100006,CA01
+I1700,MRS Integration,0,12,17100007,CA01
+I1800,MM Implementation,0,36,17100008,US01
+I1900,Middleware Client Integration,0,20,17100009,US01
+I2000,Miantainenance Planner Implementation,0,44,17100009,US01
+I2100,SAP Projects Cloud Implementation,-19,8,17100001,DE01
+I2200,SAP S/4HANA Integration,-10,6,17100004,IN01
+I2300,SAP Cloud Platform Integration,0,12,17100006,CA01
+I2400,SAP BW Implementation,0,18,17100008,US01

@@ -1,0 +1,18 @@
+code;errorMessage
+RM_SKILL_001;Error while {0} processed {1} data.
+RM_SKILL_002;Record does not have mandatory {0} in {1}.
+RM_SKILL_003;Record with value {0} does not exist in Db entity {1}.
+RM_SKILL_004;Destination service responded with empty response
+RM_SKILL_005;Destination has been configured incorrectly as Destination Find API could not fetch an auth token
+RM_SKILL_006;MDI URL received from Destination response is incorrect or empty
+RM_SKILL_007;Delta token mismatch error
+RM_SKILL_008;Request Conflict error
+RM_SKILL_009;Request timed out with exception: {0}
+RM_SKILL_010;Unknown error occurred with exception: {0}
+RM_SKILL_011;Http Exception occurred with: {0} and: {1}
+RM_SKILL_012;Destination Not Found Exception occurred with: {0}
+RM_SKILL_013;Incompatible language code found in attribute {0}.
+RM_SKILL_014;Workforce Capability type {0} not supported.
+RM_SKILL_015;Cannot delete Catalog {0}, as there are skills assigned to it.
+RM_SKILL_016;Cannot restrict ProficiencySet {0}, as there are unrestricted skills assigned to it.
+RM_SKILL_017;Cannot assign proficiency set {0} to skill {1}, as the proficiency set is restricted.

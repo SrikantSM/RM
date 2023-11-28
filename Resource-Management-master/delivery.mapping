@@ -1,0 +1,8 @@
+{
+	"program": "SAP S4HANA Cloud for projects",
+	"delivery": "SAP Projects Cloud 2310",
+	"jira_keys": [
+		"EPPMC4P-8844",
+		"EPPMC4P-8741"
+	]
+}

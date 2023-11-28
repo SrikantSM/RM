@@ -1,0 +1,127 @@
+# Using rm-umbrella-release-pipeline template for Azure
+trigger:
+  - master
+
+resources:
+  repositories:
+  - repository: piper-pipeline-azure
+    endpoint: github.tools.sap
+    type: githubenterprise
+    name: Cloud4RM/RM-Piper-ADO 
+  - repository: undeplyHelper
+    endpoint: github.tools.sap
+    type: githubenterprise
+    name: Cloud4RM/undeploy-helper
+    
+extends:
+  template: piper-ado-templates/rm-umbrella-master-pipeline.yml@piper-pipeline-azure
+  parameters:
+    checkoutSubmodule: true
+    
+    buildPostSteps:
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      displayName: Publish Test Results
+    - publish: 'db/'
+      artifact: 'DB_Artifact_$(System.JobAttempt)'
+
+    checkoutUndeployHelper:
+    - checkout: undeplyHelper
+    
+    integrationPreSteps:
+    - task: piper@1
+      name: shellExecuteIntegrationTokenReplacement
+      inputs:
+        stepName: shellExecute
+        flags: "--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/tokenReplacement/tokenReplacement.sh"
+        dockerOptions: '--env SERVICE_BROKER_HASH1_KEY=ENV_CANARY_SERVICE_BROKER_HASH1 
+                        --env SERVICE_BROKER_HASH2_KEY=ENV_CANARY_SERVICE_BROKER_HASH2 
+                        --env ENV_MTAEXT_FILENAME="mta_extensions/mta-aws_canaray_e2e.mtaext"'
+
+    integrationOverwriteSteps:
+    - task: piper@1
+      name: sapDownloadArtifactIntegration
+      inputs:
+        stepName: sapDownloadArtifact
+        restorePipelineEnv: $(pipelineEnvironment_b64)
+        restorePipelineDefaults: $(sapDefaults_b64)
+        gitHubConnection: "github.tools.sap"
+    - task: piper@1
+      name: cFDeployIntegration
+      timeoutInMinutes: 120
+      inputs:
+        stepName: cloudFoundryDeploy   
+    
+    integrationTestsSpaceGuid: '323d3953-801f-4454-847c-79936f553926'
+    integrationTestsSubscriptionTestTenant: 'eb9a3ae2-e456-4cd3-a38c-d79e2dba2f79' # c4p-rm-cross
+    integrationCde2eTenant: '062fb6ac-8d1f-4bc8-be49-3fcec4ef6c0b' # c4p-rm-test-cde2e
+    integrationCde2eAppRouterURL: 'https://c4p-rm-test-cde2e-tenant-c4p-rm-test-e2e-rm-approuter.cfapps.sap.hana.ondemand.com'
+    integrationSelfAppRouterURL: 'https://rmdev-tenant-c4p-rm-test-e2e-rm-approuter.cfapps.sap.hana.ondemand.com'
+    integrationDefaultLanguageTenant: '5991abc2-5909-4687-b0b9-1180849a23a0' # c4p-rm-consumer
+    integrationDefaultLanguageTenantSubDomain: 'rm-consumer'
+    integrationDefaultLanguageAppRouterURL: 'https://rm-consumer-tenant-c4p-rm-test-e2e-rm-approuter.cfapps.sap.hana.ondemand.com'
+    integrationApiEndpoint: 'https://api.cf.sap.hana.ondemand.com'
+    integrationSpace: 'test-e2e'
+    integrationOrg: 'c4p-rm'
+    integrationDeployStageName: 'cFDeployIntegration'
+    integrationBGTenantId: '8e9f2b5a-c750-4ee3-9f1d-ac467f9a60df' # c4p-rm-bgtest
+    integrationBGTestsAppRouterURL: 'https://rm-bgtest-tenant-c4p-rm-test-e2e-rm-approuter-idle.cfapps.sap.hana.ondemand.com'
+    
+    acceptancePreSteps:
+    - task: piper@1
+      name: shellExecuteAcceptanceTokenReplacement
+      inputs:
+        stepName: shellExecute
+        flags: "--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/tokenReplacement/tokenReplacement.sh"
+        dockerOptions: '--env SERVICE_BROKER_HASH1_KEY=ENV_CANARY_SERVICE_BROKER_HASH1 
+                        --env SERVICE_BROKER_HASH2_KEY=ENV_CANARY_SERVICE_BROKER_HASH2 
+                        --env ENV_MTAEXT_FILENAME="mta_extensions/mta-aws_canaray_uat.mtaext"'
+        
+    acceptanceTestsSpaceGuid: 'bed273a2-7f00-42e9-8234-05efdc2f9c38'
+    acceptanceTestsSubscriptionTestTenant: 'eb9a3ae2-e456-4cd3-a38c-d79e2dba2f79' # c4p-rm-cross
+
+    preProductionCDPreSteps:
+    - task: piper@1
+      name: shellExecutePreProductionCDTokenReplacement
+      inputs:
+        stepName: shellExecute
+        flags: "--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/tokenReplacement/tokenReplacement.sh"
+        dockerOptions: '--env SERVICE_BROKER_HASH1_KEY=ENV_EU10PREPROD_SERVICE_BROKER_HASH1 
+                        --env SERVICE_BROKER_HASH2_KEY=ENV_EU10PREPROD_SERVICE_BROKER_HASH2 
+                        --env ENV_MTAEXT_FILENAME="mta_extensions/mta-aws-eu10-preprodcd.mtaext"'
+                        
+    preProdCDTestsSpaceGuid: 'ce341e82-ff46-42c6-bc77-b36b1cbc200b'
+    preProdCDTestsSubscriptionTestTenant: '4d84ce58-ca28-4d94-a701-b992b4c9ba40' # c4p-rm-eu10-preprod-cross-consumer
+    preProdCDTestsCde2eTenant: '52b7ba74-66ba-4307-9201-389b8abe1cc5' # c4p-rm-eu10-preprod-consumer
+    preProdCDTestsAppRouterURL: 'https://rm-preprod-consumer-tenant-eu10-preprod-cd-rm-approuter.cfapps.eu10.hana.ondemand.com'
+
+  
+    preProductionEU11CDPreSteps:
+    - task: piper@1
+      name: shellExecutePreProductionEU11CDTokenReplacement
+      inputs:
+        stepName: shellExecute
+        flags: "--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/tokenReplacement/tokenReplacement.sh"
+        dockerOptions: '--env SERVICE_BROKER_HASH1_KEY=ENV_EU11PREPROD_SERVICE_BROKER_HASH1 
+                        --env SERVICE_BROKER_HASH2_KEY=ENV_EU11PREPROD_SERVICE_BROKER_HASH2 
+                        --env ENV_MTAEXT_FILENAME="mta_extensions/mta-aws-eu11-preprodcd.mtaext"'
+                        
+    preProdEU11CDTestsSpaceGuid: '975c0ebd-b339-4e79-9070-b2990a5b2aaf'
+    preProdEU11CDTestsSubscriptionTestTenant: '209d602c-7e5b-4710-bd0e-46fb4a194731' # c4p-rm-eu11-preprod-cross-consumer
+    preProdEU11CDTestsCde2eTenant: '9924933e-2cf1-448f-b76f-da556f088969' # c4p-rm-eu11-preprod-consumer
+    preProdEU11CDTestsAppRouterURL: 'https://rm-preprod-consumer-tenant-eu11-preprod-cd-rm-approuter.cfapps.eu11.hana.ondemand.com'
+
+    preProductionUS10CDPreSteps:
+    - task: piper@1
+      name: shellExecutePreProductionUS10CDTokenReplacement
+      inputs:
+        stepName: shellExecute
+        flags: "--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/tokenReplacement/tokenReplacement.sh"
+        dockerOptions: '--env SERVICE_BROKER_HASH1_KEY=ENV_US10PREPROD_SERVICE_BROKER_HASH1 
+                        --env SERVICE_BROKER_HASH2_KEY=ENV_US10PREPROD_SERVICE_BROKER_HASH2 
+                        --env ENV_MTAEXT_FILENAME="mta_extensions/mta-aws-us10-preprodcd.mtaext"'
+                        
+    preProdUS10CDTestsSpaceGuid: 'ec88caaa-4e69-42f8-a658-49e1d9ebe6b1'
+    preProdUS10CDTestsSubscriptionTestTenant: '39c48a06-f994-4ee8-9211-56cab672a6d1' # c4p-rm-us10-preprod-cross-consumer
+    preProdUS10CDTestsCde2eTenant: '962604a2-1980-4166-96ac-3f247f14bde8' # c4p-rm-us10-preprod-consumer
+    preProdUS10CDTestsAppRouterURL: 'https://rm-preprod-consumer-tenant-us10-preprod-cd-rm-approuter.cfapps.us10.hana.ondemand.com'

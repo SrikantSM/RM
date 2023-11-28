@@ -1,0 +1,39 @@
+{
+    "welcomeFile": "/cp.portal",
+    "authenticationMethod": "route",
+    "routes": [
+        {
+            "source": "^(/applications/.*)$",
+            "target": "$1",
+            "service": "html5-apps-repo-rt",
+            "authenticationType": "xsuaa"
+        },
+        {
+            "source": "^/resources/sap/dfa/help/(.*)$",
+            "target": "$1",
+            "destination": "rm-xray",
+            "csrfProtection": false,
+            "authenticationType": "none"
+        },
+        {
+            "source": "^/sap/dfa/help/(.*)$",
+            "target": "$1",
+            "destination": "rm-xray-data",
+            "csrfProtection": false,
+            "authenticationType": "none"
+        },
+        {
+            "source": "^(/api/rest/v1/.*)$",
+            "target": "$1",
+            "authenticationType": "xsuaa",
+            "destination": "centralServices-srv-api", 
+            "csrfProtection": true
+        },
+        {
+            "source": "^/healthcheck$",
+            "target": "index.html",
+            "localDir": "healthcheck",
+            "authenticationType": "none"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+[submodule "Skill"]
+	path = Skill
+	url = ../Skill.git
+[submodule "Consultant-Profile"]
+	path = Consultant-Profile
+	url = ../Consultant-Profile.git
+[submodule "Assignment"]
+	path = Assignment
+	url = ../Assignment.git
+[submodule "Resource-Request"]
+	path = Resource-Request
+	url = ../Resource-Request.git
+[submodule "Central-Services"]
+	path = Central-Services
+	url = ../Central-Services.git

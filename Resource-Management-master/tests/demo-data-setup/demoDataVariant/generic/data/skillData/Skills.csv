@@ -1,0 +1,30 @@
+ID,externalID,lifecycleStatus_code,name,description,commaSeparatedAlternativeLabels
+8d5a65dc-ac3f-4035-9702-5fedb0bea4c9,SAPTest-0001,0,Java,"The techniques and principles of software development, such fas analysis, algorithms, coding, testing and compiling of programming paradigms in Java2.",Javax
+8ddaa39f-1ec4-485b-b958-1a94ad85d564,SAPTest-0002,0,UI5,The ability to create user interfaces for apps and web pages using the REST full OData protokoll to establish a connection with a backend.,OpenUI5
+b39b756b-d276-4ac0-a246-9af71fa760fb,SAPTest-0003,0,ABAP,"The techniques and principles of software development, such as analysis, algorithms, coding, testing and compiling of programming paradigms in ABAP",SAPs Programming Language
+8ca2a9c5-8617-4a97-a43e-ed4a03019956,SAPTest-0004,0,JavaScript,"The techniques and principles of software development, such as analysis, algorithms, coding, testing and compiling of programming paradigms in JavaScript.","JavaScript 1.7, Escript, Client-side JavaScript, JavaScripts"
+b981f94e-ba34-41e6-99c8-8160a62f5a88,SAPTest-0005,0,Fiori,"User Experience Concept to enable a modern, intuitive and cross-device user experience in the SAP enterprise world.","Fiori 1.0, Fiori 2.0, Fiori 3"
+e8cac7ce-13ff-46f4-8793-83950e341d23,SAPTest-0006,0,Node.js,"The techniques and principles of software development, such as analysis, algorithms, coding, testing in NodeJS.",NodeJS
+65b8d77f-df37-4bc8-b7e1-58409e2506ec,SAPTest-0007,0,Product Management,"The practice of strategically driving the development, market launch, and continual support and improvement of products.",PM
+27a30ad7-8565-4df7-b5f6-329bc57ff0ea,SAPTest-0008,0,UI Development,Technique to create interfaces according to an user interface design where a human user is able to interact with a system.,"User Interface Development, Human Interaction Interface"
+5d49dd2b-9e0e-48d1-9c37-364c4287d701,SAPTest-0009,0,JUnit,"JUnit is a framework for testing Java programs, which is particularly suitable for automated unit tests of individual units.","JUnit 5, JUnit 4"
+9062c994-9a6c-41bc-9ab0-cbc740870d06,SAPTest-0010,0,UIVeri5,Technique to build automated tests for implementing end-to-end tests for UI5 based user interfaces with JavaScript.,UIVerify
+79993cb1-f928-40ed-96aa-5d33c9d4c4a0,SAPTest-0011,0,FioriElements,Technique to create user interfaces with a meta data driven approach bases on UI5.,"FioriElements V2, FioriElements V4"
+0d54b8db-dd5d-45fc-8b18-bc30974ed71a,SAPTest-0012,0,CAP,The techniques and principles of software development to create server side application providing the OData protocol using Java or node.js.,"AP Cloud Application Programming Model, CAP V2, CAP V4"
+5b0529dd-0778-4294-8103-df0ba6860503,SAPTest-0013,0,CloudFoundry,"Knowledge or experience about the Cloud Foundry which is an open source, multi-cloud application platform as a service (PaaS) governed by the Cloud Foundry Foundation.","CF, cf"
+d7df5434-cd56-4938-ad2d-3c5c1121cec4,SAPTest-0014,0,Travel & Transportation,Knowledge about the area of Travel and Transportation.,Travel and Transportation
+0813b742-9a34-4aa1-8a87-bae3107c61ce,SAPTest-0015,0,Container Shipping Lines,Industry solutions for companies that transport passengers or good.,
+5b6096dd-bc91-418c-b29b-e21b4d4110d0,SAPTest-0016,0,Freight Railways / Rail Cargo,Knowledge or experience about Freight Railways / Rail Cargo.,
+54377fe5-0d47-42e6-ac87-95dabdedf46c,SAPTest-0017,0,Mill Products,Knowledge or experience about Mill Products.,
+c0d3a312-f2cb-4277-8d9b-5c81bea3521e,SAPTest-0018,0,Forest/Paper/Packaging,Knowledge or experience about Forest/Paper/Packaging.,
+2cd32ebc-7ee7-4911-9cb4-9c82dcd72bf2,SAPTest-0019,0,Technical Writing,"Ability to work independently and collaborate with an engineering team to develop various documents such as product documentation, troubleshooting materials, as well as contextual help and user assistance content.",Content Writing
+59f26ad6-6ef4-4e6b-862a-59cf9d48bcc9,SAPTest-0020,0,DITA,"Techniques to use DITA based authoring tools to develop structured content keeping in mind content modularity, content reuse and interoperability of DITA documents.",Darwin Information Typing Architecture
+f0dfd121-2e93-4f6a-85de-f760cfc8c5ca,SAPTest-0021,0,Product Testing,Ability to formulate and implement full-scale test strategies and create associated communications documents. Should also possess advanced knowledge of software testing theories and practices.,
+9731c57e-811d-43a5-9dcb-2972f034b4d2,SAPTest-0022,0,Mural,"Ability to use Mural frameworks to define personas, empathy maps, hills, and scenario maps.",
+0d2b1cc8-af48-42bc-84b2-457328257936,SAPTest-0023,0,Qualtrics,"Ability to create a survey, download results into Excel/Word, and how to create panels in order to distribute a survey to email list of participants.",
+6ac12be8-d656-465d-8343-241e2e98d1f7,SAPTest-0024,0,Docker,"Knowledge regarding Docker Containers, Docker Clustering, Docker Swarm & Docker Compose. Ability to design, develop and define the container strategy.",
+2aa745b7-09df-4d42-8cc5-16515b1192e0,SAPTest-0025,0,Jenkins,Ability to setup and optimize continuous integration build jobs using Jenkins.,
+0eef6daf-c8a6-451b-94aa-9d2714feb06b,SAPTest-0026,0,Software Architecture Design,"Ability to design architectural blueprints, develop and execute software solutions. Knowledge regarding tools, technologies and processes to ensure the highest quality product platform.",
+7b9b84a2-3f0a-4759-ac79-0514c9794bdf,SAPTest-0027,0,Axure,"Ability to design, develop, design, or product management to create flow charts, wireframes, and interactive clickable prototypes using Axure.",
+0435f4ee-f0bc-4d89-ac0c-84c814877216,SAPTest-0028,0,SQL,"Knowledge regarding how to access and manipulate databases, execute queries, retrieve data, edit data, and insert new data using SQL.",
+c9bf1d19-c118-4604-9937-e8bf833358da,SAPTest-0029,0,Python,"The techniques and principles of software development, such as analysis, algorithms, coding, testing and compiling of programming paradigms in Python.",

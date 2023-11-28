@@ -1,0 +1,104 @@
+{
+  "destinations": [
+    {
+      "forwardAuthToken": true,
+      "name": "skill-srv-api",
+      "url": "https://test-skill"
+    },
+    {
+      "forwardAuthToken": true,
+      "name": "assignment-srv-api",
+      "url": "https://test-assignment"
+    },
+    {
+      "forwardAuthToken": true,
+      "name": "resourceRequest-srv-api",
+      "url": "https://test-resource-request"
+    },
+    {
+      "forwardAuthToken": true,
+      "name": "consultantProfile-srv-api",
+      "url": "https://test-consultant-profile"
+    }
+  ],
+  "VCAP_SERVICES": {
+    "auditlog": [
+      {
+        "credentials": {
+          "uaa": {
+            "xsappname": "auditlog"
+          }
+        }
+      }
+    ],
+    "saas-registry": [
+      {
+        "label": "saas-registry",
+        "plan": "application",
+        "name": "rm-onboarding",
+        "tags": [
+          "SaaS"
+        ],
+        "instance_name": "rm-onboarding",
+        "credentials": {
+          "appUrls": "{\"getDependencies\":\"https://test-onboarding-url.cfapps.sap.hana.ondemand.com/changed/callback/dependencies\",\"onSubscription\":\"https://test-onboarding-url.cfapps.sap.hana.ondemand.com/changed/callback/tenants/{tenantId}\",\"onSubscriptionAsync\":false,\"onUnSubscriptionAsync\":false,\"callbackTimeoutMillis\":0}"
+        }
+      }
+    ],
+    "xsuaa": [
+      {
+        "label": "xsuaa",
+        "plan": "broker",
+        "name": "rm-uaa",
+        "tags": [
+          "xsuaa"
+        ],
+        "instance_name": "rm-uaa",
+        "credentials": {
+          "clientid": "clientid",
+          "clientsecret": "clientsecret",
+          "url": "url",
+          "xsappname": "xsappname",
+          "tenantmode": "shared",
+          "verificationkey": "-----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx/jN5v1mp/TVn9nTQoYVIUfCsUDHa3Upr5tDZC7mzlTrN2PnwruzyS7w1Jd+StqwW4/vn87ua2YlZzU8Ob0jR4lbOPCKaHIi0kyNtJXQvQ7LZPG8epQLbx0IIP/WLVVVtB8bL5OWuHma3pUnibbmATtbOh5LksQ2zLMngEjUF52JQyzTpjoQkahp0BNe/drlAqO253keiY63FL6belKjJGmSqdnotSXxB2ym+HQ0ShaNvTFLEvi2+ObkyjGWgFpQaoCcGq0KX0y0mPzOvdFsNT+rBFdkHiK+Jl638Sbim1z9fItFbH9hiVwY37R9rLtH1YKi3PuATMjf/DJ7mUluDQIDAQAB-----END PUBLIC KEY-----"
+        }
+      }
+    ],
+    "mt_dependency1": [
+      {
+        "label": "destination",
+        "plan": "standard",
+        "name": "test-destination",
+        "credentials": {
+          "xsappname": "destination"
+        }
+      }
+    ],
+    "mt_dependency2": [
+      {
+        "label": "mt_dependency2",
+        "plan": "standard",
+        "name": "test-mt_dependency2",
+        "credentials": {
+          "saasregistryappname": "mt_dependency2",
+          "uaa": {
+            "xsappname": "mt_dependency2"
+          }
+        }
+      }
+    ],
+    "mt_dependency3": [
+      {
+        "label": "mt_dependency3",
+        "plan": "standard",
+        "name": "test-mt_dependency3",
+        "credentials": {
+          "saasregistryenabled": true,
+          "uaa": {
+            "xsappname": "mt_dependency3"
+          }
+        }
+      }
+    ]
+  }
+}

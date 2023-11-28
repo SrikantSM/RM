@@ -1,0 +1,5 @@
+CODE,DESCRIPTION,KIND_CODE,TIMEBUCKETTYPE_CODE,BOOKINGGRANULARITYINMINUTES
+1,Human resource with daily time bucket and booking granularity of one hour,1,05,60
+2,Human resource with hourly time bucket and booking granularity of one hour,1,06,60
+3,Human resource with quarterly time bucket and booking granularity of one hour,1,02,60
+4,Human resource with monthly time bucket and booking granularity of one hour,1,03,60

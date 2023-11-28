@@ -1,0 +1,26 @@
+{
+  "extends": [
+    "eslint-config-airbnb-base"
+  ],
+  "rules": {
+    "func-names": "off",
+    "max-len": "off",
+    "no-await-in-loop": "off",
+    "no-use-before-define": "off",
+    "valid-jsdoc": "error"
+  },
+  "overrides": [
+    {
+      "env": {
+        "mocha": true
+      },
+      "files": [
+        "test/*.js"
+      ],
+      "rules": {
+        "no-unused-expressions": "off",
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true } ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "@sap/rm",
+  "version": "1.0.0",
+  "description": "Umbrella project for Resource-Management",
+  "scripts": {
+    "build": "cds build --opts lang=[,en,de,en_US_sappsd,en_US_saptrc,en_US_saprigi,es,fr,ru,pt,ja,zh_CN,it,ar,bg,cs,da,el,fi,he,hr,hu,kk,ko,ms,nl,nb,pl,ro,sr,sk,sl,sv,th,tr,uk,zh_TW]",
+    "build-mta": "mbt build --mtar Resource-Management.mtar",
+    "deploy": "cf deploy mta_archives/Resource-Management.mtar -e mta_extensions/mta-aws_canaray_all.mtaext,mta_extensions/mta-aws_canaray_unique_appname.mtaext",
+    "generate-skill-schema": "cds compile Skill/srv --to sql > Skill/srv/src/main/resources/schema.sql",
+    "generate-cs-schema": "cds compile Central-Services/srv --to sql > Central-Services/srv/src/main/resources/schema.sql",
+    "generate-cp-int-schema": "cds compile Consultant-Profile/srv --to sql > Consultant-Profile/integration-srv/src/main/resources/schema.sql",
+    "generate-rr-int-schema": "cds compile Resource-Request/db --to sql > Resource-Request/project-integration-adapter/src/main/resources/schema.sql"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.tools.sap/Cloud4RM/Resource-Management.git"
+  },
+  "dependencies": {
+    "@sap/cds-dk": "6.8.0",
+    "@sap/rm-assignment": "file:Assignment",
+    "@sap/rm-centralServices": "file:Central-Services",
+    "@sap/rm-consultantProfile": "file:Consultant-Profile",
+    "@sap/rm-resourceRequest": "file:Resource-Request",
+    "@sap/rm-skill": "file:Skill"
+  },
+  "cds": {
+    "odata": {
+      "version": "v4"
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
+    }
+  },
+  "engines": {
+    "node": "^18.0.0"
+  }
+}

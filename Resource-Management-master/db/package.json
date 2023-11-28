@@ -1,0 +1,13 @@
+{
+	"name": "rm-db-deployer",
+	"dependencies": {
+		"@sap/hdi-dynamic-deploy": "2.5.5"
+	},
+	"engines": {
+		"node": "^18.0.0"
+	},
+	"scripts": {
+		"postinstall": "node collectArtifacts",
+		"start": "node node_modules/@sap/hdi-dynamic-deploy/"
+	}
+}

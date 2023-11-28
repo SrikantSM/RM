@@ -1,0 +1,27 @@
+{
+    "name": "cross-domain-e2e",
+    "private": true,
+    "scripts": {
+        "debug": "node --no-lazy node_modules/@ui5/uiveri5/src/cli.js uiveri5-config.js",
+        "start": "uiveri5 uiveri5-config.js",
+        "start-verbose": "uiveri5 -v uiveri5-config.js",
+        "test": "npm start",
+        "lint": "eslint \"**/*.js\""
+    },
+    "dependencies": {
+        "@ui5/uiveri5": "^1.45.1",
+        "resourceRequest": "file:../../Resource-Request/tests/smoke-test",
+        "assignment": "file:../../Assignment/tests/smoke-test",
+        "consultantProfile": "file:../../Consultant-Profile/tests/smoke-test",
+        "test-commons": "git+https://github.tools.sap/Cloud4RM/Test-Commons#dd22377e6d0c90afa9ab7fbf602e776dafb08293",
+        "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+        "eslint": "7.32.0",
+        "eslint-config-airbnb-base": "14.2.1",
+        "eslint-plugin-import": "2.22.1"
+    },
+    "engines": {
+        "node": "^14.0.0"
+    }
+}

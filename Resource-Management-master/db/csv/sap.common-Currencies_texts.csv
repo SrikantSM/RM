@@ -1,0 +1,337 @@
+CODE,LOCALE,NAME,DESCR
+AFN,en,Afghani,Afghani
+EUR,en,Euro,Euro
+ALL,en,Lek,Lek
+DZD,en,Algerian Dinar,Algerian Dinar
+USD,en,US Dollar,US Dollar
+AOA,en,Kwanza,Kwanza
+XCD,en,East Caribbean Dollar,East Caribbean Dollar
+ARS,en,Argentine Peso,Argentine Peso
+AMD,en,Armenian Dram,Armenian Dram
+AWG,en,Aruban Florin,Aruban Florin
+AUD,en,Australian Dollar,Australian Dollar
+AZN,en,Azerbaijan Manat,Azerbaijan Manat
+BSD,en,Bahamian Dollar,Bahamian Dollar
+BHD,en,Bahraini Dinar,Bahraini Dinar
+BDT,en,Taka,Taka
+BBD,en,Barbados Dollar,Barbados Dollar
+BYN,en,Belarusian Ruble,Belarusian Ruble
+BZD,en,Belize Dollar,Belize Dollar
+XOF,en,CFA Franc BCEAO,CFA Franc BCEAO
+BMD,en,Bermudian Dollar,Bermudian Dollar
+INR,en,Indian Rupee,Indian Rupee
+BTN,en,Ngultrum,Ngultrum
+BOB,en,Boliviano,Boliviano
+BOV,en,Mvdol,Mvdol
+BAM,en,Convertible Mark,Convertible Mark
+BWP,en,Pula,Pula
+NOK,en,Norwegian Krone,Norwegian Krone
+BRL,en,Brazilian Real,Brazilian Real
+BND,en,Brunei Dollar,Brunei Dollar
+BGN,en,Bulgarian Lev,Bulgarian Lev
+BIF,en,Burundi Franc,Burundi Franc
+CVE,en,Cabo Verde Escudo,Cabo Verde Escudo
+KHR,en,Riel,Riel
+XAF,en,CFA Franc BEAC,CFA Franc BEAC
+CAD,en,Canadian Dollar,Canadian Dollar
+KYD,en,Cayman Islands Dollar,Cayman Islands Dollar
+CLP,en,Chilean Peso,Chilean Peso
+CLF,en,Unidad de Fomento,Unidad de Fomento
+CNY,en,Yuan Renminbi,Yuan Renminbi
+COP,en,Colombian Peso,Colombian Peso
+COU,en,Unidad de Valor Real,Unidad de Valor Real
+KMF,en,Comorian Franc,Comorian Franc
+CDF,en,Congolese Franc,Congolese Franc
+NZD,en,New Zealand Dollar,New Zealand Dollar
+CRC,en,Costa Rican Colon,Costa Rican Colon
+HRK,en,Kuna,Kuna
+CUP,en,Cuban Peso,Cuban Peso
+CUC,en,Peso Convertible,Peso Convertible
+ANG,en,Netherlands Antillean Guilder,Netherlands Antillean Guilder
+CZK,en,Czech Koruna,Czech Koruna
+DKK,en,Danish Krone,Danish Krone
+DJF,en,Djibouti Franc,Djibouti Franc
+DOP,en,Dominican Peso,Dominican Peso
+EGP,en,Egyptian Pound,Egyptian Pound
+SVC,en,El Salvador Colon,El Salvador Colon
+ERN,en,Nakfa,Nakfa
+ETB,en,Ethiopian Birr,Ethiopian Birr
+FKP,en,Falkland Islands Pound,Falkland Islands Pound
+FJD,en,Fiji Dollar,Fiji Dollar
+XPF,en,CFP Franc,CFP Franc
+GMD,en,Dalasi,Dalasi
+GEL,en,Lari,Lari
+GHS,en,Ghana Cedi,Ghana Cedi
+GIP,en,Gibraltar Pound,Gibraltar Pound
+GTQ,en,Quetzal,Quetzal
+GBP,en,Pound Sterling,Pound Sterling
+GNF,en,Guinean Franc,Guinean Franc
+GYD,en,Guyana Dollar,Guyana Dollar
+HTG,en,Gourde,Gourde
+HNL,en,Lempira,Lempira
+HKD,en,Hong Kong Dollar,Hong Kong Dollar
+HUF,en,Forint,Forint
+ISK,en,Iceland Krona,Iceland Krona
+IDR,en,Rupiah,Rupiah
+XDR,en,SDR (Special Drawing Right),SDR (Special Drawing Right)
+IRR,en,Iranian Rial,Iranian Rial
+IQD,en,Iraqi Dinar,Iraqi Dinar
+ILS,en,New Israeli Sheqel,New Israeli Sheqel
+JMD,en,Jamaican Dollar,Jamaican Dollar
+JPY,en,Yen,Yen
+JOD,en,Jordanian Dinar,Jordanian Dinar
+KZT,en,Tenge,Tenge
+KES,en,Kenyan Shilling,Kenyan Shilling
+KPW,en,North Korean Won,North Korean Won
+KRW,en,Won,Won
+KWD,en,Kuwaiti Dinar,Kuwaiti Dinar
+KGS,en,Som,Som
+LAK,en,Lao Kip,Lao Kip
+LBP,en,Lebanese Pound,Lebanese Pound
+LSL,en,Loti,Loti
+ZAR,en,Rand,Rand
+LRD,en,Liberian Dollar,Liberian Dollar
+LYD,en,Libyan Dinar,Libyan Dinar
+CHF,en,Swiss Franc,Swiss Franc
+MOP,en,Pataca,Pataca
+MKD,en,Denar,Denar
+MGA,en,Malagasy Ariary,Malagasy Ariary
+MWK,en,Malawi Kwacha,Malawi Kwacha
+MYR,en,Malaysian Ringgit,Malaysian Ringgit
+MVR,en,Rufiyaa,Rufiyaa
+MRU,en,Ouguiya,Ouguiya
+MUR,en,Mauritius Rupee,Mauritius Rupee
+XUA,en,ADB Unit of Account,ADB Unit of Account
+MXN,en,Mexican Peso,Mexican Peso
+MXV,en,Mexican Unidad de Inversion (UDI),Mexican Unidad de Inversion (UDI)
+MDL,en,Moldovan Leu,Moldovan Leu
+MNT,en,Tugrik,Tugrik
+MAD,en,Moroccan Dirham,Moroccan Dirham
+MZN,en,Mozambique Metical,Mozambique Metical
+MMK,en,Kyat,Kyat
+NAD,en,Namibia Dollar,Namibia Dollar
+NPR,en,Nepalese Rupee,Nepalese Rupee
+NIO,en,Cordoba Oro,Cordoba Oro
+NGN,en,Naira,Naira
+OMR,en,Rial Omani,Rial Omani
+PKR,en,Pakistan Rupee,Pakistan Rupee
+PAB,en,Balboa,Balboa
+PGK,en,Kina,Kina
+PYG,en,Guarani,Guarani
+PEN,en,Sol,Sol
+PHP,en,Philippine Piso,Philippine Piso
+PLN,en,Zloty,Zloty
+QAR,en,Qatari Rial,Qatari Rial
+RON,en,Romanian Leu,Romanian Leu
+RUB,en,Russian Ruble,Russian Ruble
+RWF,en,Rwanda Franc,Rwanda Franc
+SHP,en,Saint Helena Pound,Saint Helena Pound
+WST,en,Tala,Tala
+STN,en,Dobra,Dobra
+SAR,en,Saudi Riyal,Saudi Riyal
+RSD,en,Serbian Dinar,Serbian Dinar
+SCR,en,Seychelles Rupee,Seychelles Rupee
+SLL,en,Leone,Leone
+SGD,en,Singapore Dollar,Singapore Dollar
+XSU,en,Sucre,Sucre
+SBD,en,Solomon Islands Dollar,Solomon Islands Dollar
+SOS,en,Somali Shilling,Somali Shilling
+SSP,en,South Sudanese Pound,South Sudanese Pound
+LKR,en,Sri Lanka Rupee,Sri Lanka Rupee
+SDG,en,Sudanese Pound,Sudanese Pound
+SRD,en,Surinam Dollar,Surinam Dollar
+SZL,en,Lilangeni,Lilangeni
+SEK,en,Swedish Krona,Swedish Krona
+CHE,en,WIR Euro,WIR Euro
+CHW,en,WIR Franc,WIR Franc
+SYP,en,Syrian Pound,Syrian Pound
+TWD,en,New Taiwan Dollar,New Taiwan Dollar
+TJS,en,Somoni,Somoni
+TZS,en,Tanzanian Shilling,Tanzanian Shilling
+THB,en,Baht,Baht
+TOP,en,Pa’anga,Pa’anga
+TTD,en,Trinidad and Tobago Dollar,Trinidad and Tobago Dollar
+TND,en,Tunisian Dinar,Tunisian Dinar
+TRY,en,Turkish Lira,Turkish Lira
+TMT,en,Turkmenistan New Manat,Turkmenistan New Manat
+UGX,en,Uganda Shilling,Uganda Shilling
+UAH,en,Hryvnia,Hryvnia
+AED,en,UAE Dirham,UAE Dirham
+USN,en,US Dollar (Next day),US Dollar (Next day)
+UYU,en,Peso Uruguayo,Peso Uruguayo
+UYI,en,Uruguay Peso en Unidades Indexadas (UI),Uruguay Peso en Unidades Indexadas (UI)
+UZS,en,Uzbekistan Sum,Uzbekistan Sum
+VUV,en,Vatu,Vatu
+VEF,en,Bolívar,Bolívar
+VND,en,Dong,Dong
+YER,en,Yemeni Rial,Yemeni Rial
+ZMW,en,Zambian Kwacha,Zambian Kwacha
+ZWL,en,Zimbabwe Dollar,Zimbabwe Dollar
+AFN,de,Afghani,Afghani
+EUR,de,Euro,Euro
+ALL,de,Lek,Lek
+DZD,de,Algerischer Dinar,Algerischer Dinar
+USD,de,US-Dollar,US-Dollar
+AOA,de,Kwanza,Kwanza
+XCD,de,Ostkaribischer Dollar,Ostkaribischer Dollar
+ARS,de,Argentinischer Peso,Argentinischer Peso
+AMD,de,Armenischer Dram,Armenischer Dram
+AWG,de,Aruba-Florin,Aruba-Florin
+AUD,de,Australischer Dollar,Australischer Dollar
+AZN,de,Aserbaidschan-Manat,Aserbaidschan-Manat
+BSD,de,Bahama-Dollar,Bahama-Dollar
+BHD,de,Bahrain-Dinar,Bahrain-Dinar
+BDT,de,Taka,Taka
+BBD,de,Barbados-Dollar,Barbados-Dollar
+BYN,de,Weißrussischer Rubel,Weißrussischer Rubel
+BZD,de,Belize-Dollar,Belize-Dollar
+XOF,de,CFA-Franc BCEAO,CFA-Franc BCEAO
+BMD,de,Bermuda-Dollar,Bermuda-Dollar
+INR,de,Indische Rupie,Indische Rupie
+BTN,de,Ngultrum,Ngultrum
+BOB,de,Boliviano,Boliviano
+BOV,de,Mvdol,Mvdol
+BAM,de,Konvertible Mark,Konvertible Mark
+BWP,de,Pula,Pula
+NOK,de,Norwegische Krone,Norwegische Krone
+BRL,de,Brasilianischer Real,Brasilianischer Real
+BND,de,Brunei-Dollar,Brunei-Dollar
+BGN,de,Lew,Lew
+BIF,de,Burundi-Franc,Burundi-Franc
+CVE,de,Kap-Verde-Escudo,Kap-Verde-Escudo
+KHR,de,Riel,Riel
+XAF,de,CFA-Franc BEAC,CFA-Franc BEAC
+CAD,de,Kanadischer Dollar,Kanadischer Dollar
+KYD,de,Kaiman-Dollar,Kaiman-Dollar
+CLP,de,Chilenischer Peso,Chilenischer Peso
+CLF,de,Unidad de Fomento,Unidad de Fomento
+CNY,de,Yuan Renminbi,Yuan Renminbi
+COP,de,Kolumbianischer Peso,Kolumbianischer Peso
+COU,de,Unidad de Valor Real,Unidad de Valor Real
+KMF,de,Komoren-Franc,Komoren-Franc
+CDF,de,Kongo-Franc,Kongo-Franc
+NZD,de,Neuseeland-Dollar,Neuseeland-Dollar
+CRC,de,Costa-Rica-Colon,Costa-Rica-Colon
+HRK,de,Kuna,Kuna
+CUP,de,Kubanischer Peso,Kubanischer Peso
+CUC,de,Peso Convertible,Peso Convertible
+ANG,de,Niederländischer Antillen-Gulden,Niederländischer Antillen-Gulden
+CZK,de,Tschechische Krone,Tschechische Krone
+DKK,de,Dänische Krone,Dänische Krone
+DJF,de,Dschibuti-Franc,Dschibuti-Franc
+DOP,de,Dominikanischer Peso,Dominikanischer Peso
+EGP,de,Ägyptisches Pfund,Ägyptisches Pfund
+SVC,de,El-Salvador-Colon,El-Salvador-Colon
+ERN,de,Nakfa,Nakfa
+ETB,de,Äthiopischer Birr,Äthiopischer Birr
+FKP,de,Falkland-Pfund,Falkland-Pfund
+FJD,de,Fidschi-Dollar,Fidschi-Dollar
+XPF,de,CFP-Franc,CFP-Franc
+GMD,de,Dalasi,Dalasi
+GEL,de,Lari,Lari
+GHS,de,Ghana Cedi,Ghana Cedi
+GIP,de,Gibraltar-Pfund,Gibraltar-Pfund
+GTQ,de,Quetzal,Quetzal
+GBP,de,Pfund Sterling,Pfund Sterling
+GNF,de,Franc Guinéen,Franc Guinéen
+GYD,de,Guyana-Dollar,Guyana-Dollar
+HTG,de,Gourde,Gourde
+HNL,de,Lempira,Lempira
+HKD,de,Hongkong-Dollar,Hongkong-Dollar
+HUF,de,Forint,Forint
+ISK,de,Isländische Krone,Isländische Krone
+IDR,de,Rupiah,Rupiah
+XDR,de,SZR (Sonderziehungsrecht),SZR (Sonderziehungsrecht)
+IRR,de,Iranischer Real,Iranischer Real
+IQD,de,Irakischer Dinar,Irakischer Dinar
+ILS,de,Schekel,Schekel
+JMD,de,Jamaika-Dollar,Jamaika-Dollar
+JPY,de,Yen,Yen
+JOD,de,Jordanischer Dinar,Jordanischer Dinar
+KZT,de,Tenge,Tenge
+KES,de,Kenia-Schilling,Kenia-Schilling
+KPW,de,Nordkoreanischer Won,Nordkoreanischer Won
+KRW,de,Südkoreanischer Won,Südkoreanischer Won
+KWD,de,Kuwait-Dinar,Kuwait-Dinar
+KGS,de,Som,Som
+LAK,de,Laotischer Kip,Laotischer Kip
+LBP,de,Libanesisches Pfund,Libanesisches Pfund
+LSL,de,Loti,Loti
+ZAR,de,Rand,Rand
+LRD,de,Liberianischer Dollar,Liberianischer Dollar
+LYD,de,Libyscher Dinar,Libyscher Dinar
+CHF,de,Schweizer Franken,Schweizer Franken
+MOP,de,Pataca,Pataca
+MKD,de,Denar,Denar
+MGA,de,Ariary,Ariary
+MWK,de,Malawi-Kwacha,Malawi-Kwacha
+MYR,de,Ringgit,Ringgit
+MVR,de,Rufiyaa,Rufiyaa
+MRU,de,Ouguiya,Ouguiya
+MUR,de,Mauritius-Rupie,Mauritius-Rupie
+XUA,de,ADB Unit of Account,ADB Unit of Account
+MXN,de,Mexikanischer Peso,Mexikanischer Peso
+MXV,de,Unidad de Inversion (UDI),Unidad de Inversion (UDI)
+MDL,de,Moldauischer Leu,Moldauischer Leu
+MNT,de,Tögrög,Tögrög
+MAD,de,Marokkanischer Dirham,Marokkanischer Dirham
+MZN,de,Metical,Metical
+MMK,de,Kyat,Kyat
+NAD,de,Namibia-Dollar,Namibia-Dollar
+NPR,de,Nepalesische Rupie,Nepalesische Rupie
+NIO,de,Cordoba Oro,Cordoba Oro
+NGN,de,Naira,Naira
+OMR,de,Rial Omani,Rial Omani
+PKR,de,Pakistanische Rupie,Pakistanische Rupie
+PAB,de,Balboa,Balboa
+PGK,de,Kina,Kina
+PYG,de,Guaraní,Guaraní
+PEN,de,Sol,Sol
+PHP,de,Philippinischer Peso,Philippinischer Peso
+PLN,de,Zloty,Zloty
+QAR,de,Katar-Riyal,Katar-Riyal
+RON,de,Rumänischer Leu,Rumänischer Leu
+RUB,de,Russischer Rubel,Russischer Rubel
+RWF,de,Ruanda-Franc,Ruanda-Franc
+SHP,de,St.-Helena-Pfund,St.-Helena-Pfund
+WST,de,Tala,Tala
+STN,de,Dobra,Dobra
+SAR,de,Saudi-Riyal,Saudi-Riyal
+RSD,de,Serbischer Dinar,Serbischer Dinar
+SCR,de,Seychellen-Rupie,Seychellen-Rupie
+SLL,de,Leone,Leone
+SGD,de,Singapur-Dollar,Singapur-Dollar
+XSU,de,Sucre,Sucre
+SBD,de,Salomonen-Dollar,Salomonen-Dollar
+SOS,de,Somalia-Schilling,Somalia-Schilling
+SSP,de,Südsudanesisches Pfund,Südsudanesisches Pfund
+LKR,de,Sri-Lanka-Rupie,Sri-Lanka-Rupie
+SDG,de,Sudanesisches Pfund,Sudanesisches Pfund
+SRD,de,Suriname-Dollar,Suriname-Dollar
+SZL,de,Lilangeni,Lilangeni
+SEK,de,Schwedische Krone,Schwedische Krone
+CHE,de,WIR Euro,WIR Euro
+CHW,de,WIR Franken,WIR Franken
+SYP,de,Syrische Lira,Syrische Lira
+TWD,de,Neuer Taiwan-Dollar,Neuer Taiwan-Dollar
+TJS,de,Somoni,Somoni
+TZS,de,Tansania-Schilling,Tansania-Schilling
+THB,de,Baht,Baht
+TOP,de,Pa’anga,Pa’anga
+TTD,de,Trinidad-und-Tobago-Dollar,Trinidad-und-Tobago-Dollar
+TND,de,Tunesischer Dinar,Tunesischer Dinar
+TRY,de,Türkische Lira,Türkische Lira
+TMT,de,Turkmenistan-Manat,Turkmenistan-Manat
+UGX,de,Uganda-Schilling,Uganda-Schilling
+UAH,de,Hrywnja,Hrywnja
+AED,de,VAE-Dirham,VAE-Dirham
+USN,de,US-Dollar,US-Dollar
+UYU,de,Uruguayischer Peso,Uruguayischer Peso
+UYI,de,Uruguay Peso en Unidades Indexadas (UI),Uruguay Peso en Unidades Indexadas (UI)
+UZS,de,So‘m,So‘m
+VUV,de,Vatu,Vatu
+VEF,de,Bolívar,Bolívar
+VND,de,Dong,Dong
+YER,de,Jemen-Rial,Jemen-Rial
+ZMW,de,Sambischer Kwacha,Sambischer Kwacha
+ZWL,de,Simbabwe-Dollar,Simbabwe-Dollar

@@ -1,0 +1,193 @@
+ID: Resource-Management.extension.eu11.prod
+_schema-version: '3.2'
+extends: Resource-Management
+
+parameters:
+  custom_domain: eu11.resourcemanagement.cloud.sap
+
+modules:
+  - name: rm-db
+    properties:
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  - name: rm-approuter
+    properties:
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+      CORS: "[{\"uriPattern\":\"^(.*)$\",\"allowedOrigin\":[{\"host\":\"*.res.projectscloud.cfapps.eu11.hana.ondemand.com\",\"protocol\":\"https\"},{\"host\":\"*.eu11.resourcemanagement.cloud.sap\",\"protocol\":\"https\"},{\"host\":\"*.wdf.sap.corp\",\"protocol\":\"https\"},{\"host\":\"*.s4hana.cloud.sap\",\"protocol\":\"https\"},{\"host\":\"*.s4hana.ondemand.com\",\"protocol\":\"https\"}]}]"
+    parameters:
+      routes:
+      - route: "*.res.projectscloud.cfapps.eu11.hana.ondemand.com"
+      - route: "*.${custom_domain}"
+    provides:
+    - name: rm-approuter-url
+      properties:
+        ui-tenant-delimiter: "."
+        ui-url-suffix: res.projectscloud.cfapps.eu11.hana.ondemand.com
+        url: "${protocol}://tenant-onboarding.res.projectscloud.cfapps.eu11.hana.ondemand.com"
+        url-suffix-csd: ${custom_domain}
+    requires:
+    - name: rm-approuter-url
+      properties:
+        TENANT_HOST_PATTERN: ^(.*)~{ui-tenant-delimiter}(res.projectscloud.cfapps.eu11.hana.ondemand.com|${custom_domain})
+  - name: skill-srv
+    properties:
+      PROTOCOL: '${protocol}'
+    requires:
+    - name: rm-approuter-url
+      properties:
+        TENANT_DELIMITER: ~{ui-tenant-delimiter}
+        URL_SUFFIX: ~{url-suffix-csd}         
+  - name: rm-service-broker
+    properties:
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  - name: consultantProfile-integration-srv
+    properties:
+      APPLICATION_URL: c4p-rm-eu11-prod-eu11-prod-consultantprofile-integration-srv.cfapps.eu11.hana.ondemand.com
+  - name: centralServices-srv
+    parameters:
+      routes:
+      - route: "${org}-${space}-central-services-srv.cfapps.eu11.hana.ondemand.com"
+  - name: rm-api-gateway
+    parameters:
+      routes:
+      - route: resource-management-api-projectscloud.cfapps.eu11.hana.ondemand.com
+  
+resources:
+  - name: rm-uaa
+    type: com.sap.xs.uaa
+    parameters:
+      service-plan: broker
+      service: xsuaa
+      config:
+        oauth2-configuration:
+          credential-types: [x509, binding-secret, instance-secret]
+          redirect-uris: 
+            - https://*.${custom_domain}/**  
+            - https://*.res.projectscloud.cfapps.eu11.hana.ondemand.com/**
+  - name: rm-service-broker-credentials
+    parameters:
+      config:
+        brokerCredentialsHash:
+          broker-user: serviceBrokerCredentialsHash1
+          broker-user2: serviceBrokerCredentialsHash2
+  - name: rm-metering-service
+    parameters:
+      config:
+        providerToken: meteringProviderToken
+      service-plan: default
+  - name: rm-cloud-logs
+    parameters:
+      config:
+        retentionPeriod: 45
+        saml:
+          admin_group: prod-cloud-logging-admin
+          enabled: true
+          exchange_key: cloudLoggingExchangeKey
+          idp:
+            entity_id: 'https://axtubdeog.accounts400.ondemand.com'
+            metadata_url: 'https://axtubdeog.accounts400.ondemand.com/saml2/metadata'
+          initiated: false
+          roles_key: groups
+          sp:
+            entity_id: eu11-prod-cloud-logging
+  - name: rm-ans
+    parameters:
+      config:
+        configuration:
+          actions:
+            - name: c4p-rm-eu11-prod-slack-notifications
+              properties:
+                destination: ansSlackWebhook
+              state: ENABLED
+              type: SLACK
+          conditions:
+            - description: ''
+              labels: []
+              mandatory: false
+              name: undeployment
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: UNDEPLOYMENT
+            - description: ''
+              labels: []
+              mandatory: false
+              name: deployment
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: DEPLOYMENT
+            - description: ''
+              labels: []
+              mandatory: false
+              name: audit-crash
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.process.crash
+            - description: ''
+              labels: []
+              mandatory: false
+              name: app-start
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.start
+            - description: ''
+              labels: []
+              mandatory: false
+              name: app-stop
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.stop
+            - description: ''
+              labels: []
+              mandatory: false
+              name: audit-update
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.update
+            - description: ''
+              labels: []
+              mandatory: false
+              name: app-crash
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: app.crash
+            - description: ''
+              labels: []
+              mandatory: false
+              name: audit-scale
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.process.scale
+            - description: ''
+              labels: []
+              mandatory: false
+              name: rm-space-memory-usage
+              predicate: GREATER_THAN
+              propertyKey: tags.space_memory_usage_percentage
+              propertyValue: '80'
+            - description: ''
+              labels: []
+              mandatory: false
+              name: audit-delete
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.delete-request
+          subscriptions:
+            - actions:
+                - c4p-rm-eu11-prod-slack-notifications
+              conditions:
+                - rm-space-memory-usage
+              name: rm-space-quota-subscription
+              state: ENABLED
+            - actions:
+                - c4p-rm-eu11-prod-slack-notifications
+              conditions:
+                - audit-crash
+                - audit-update
+                - audit-delete
+                - app-start
+                - app-stop
+                - app-crash
+                - audit-scale
+                - undeployment
+                - deployment
+              name: rm-app-lifecycle-subscription
+              state: ENABLED

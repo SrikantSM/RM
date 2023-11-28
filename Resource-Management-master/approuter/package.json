@@ -1,0 +1,32 @@
+{
+  "name": "rm-approuter",
+  "engines": {
+    "node": "^18.0.0"
+  },
+  "dependencies": {
+    "@sap/approuter": "14.1.2",
+    "uuid": "^8.3.2"
+  },
+  "scripts": {
+    "start": "node index",
+    "lint": "eslint \"{src,test}/**/*.js\"",
+    "ci_lint": "eslint -f jslint-xml \"{src,test}/**/*.js\" > target/eslint.jslint.xml",
+    "test": "nyc --reporter=cobertura --reporter=html --reporter=text --report-dir=target/site/cobertura --temp-directory=target/.nyc_output mocha --reporter mocha-multi-reporters --reporter-options configFile=mocha.config.json"
+  },
+  "devDependencies": {
+    "@sap/xsenv": "^3.1.1",
+    "chai": "^4.3.9",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "7.32.0",
+    "eslint-config-airbnb-base": "14.2.1",
+    "eslint-plugin-import": "2.23.4",
+    "mocha": "^9.0.3",
+    "mocha-junit-reporter": "^2.0.0",
+    "mocha-multi-reporters": "^1.5.1",
+    "nock": "^13.1.1",
+    "nyc": "^15.1.0",
+    "semver":"^7.5.4",
+    "proxyquire": "^2.1.3",
+    "sinon": "^11.1.2"
+  }
+}

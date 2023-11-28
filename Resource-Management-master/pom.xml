@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>Skill/srv</module>
+        <module>Assignment/srv</module>
+        <module>Central-Services/srv</module>
+        <module>Consultant-Profile/srv</module>
+        <module>Consultant-Profile/integration-srv</module>
+        <module>Resource-Request/project-integration-adapter</module>
+        <module>Resource-Request/srv</module>
+    </modules>
+    <name>SAP</name>
+    <groupId>com.sap.c4p</groupId>
+    <artifactId>rm</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+</project>

@@ -1,0 +1,34 @@
+{
+    "name": "demo-data-delete-table",
+    "private": true,
+    "scripts": {
+        "postinstall": "npm run build",
+        "build": "tsc",
+        "mocha-test": "mocha --require source-map-support/register --delay --reporter mocha-multi-reporters --reporter-options configFile=reporter-config.json",
+        "start": "npm run mocha-test target/dist/**/*.js",
+        "all-test": "npm start"
+    },
+    "dependencies": {
+        "axios": "^0.19.0",
+        "chai": "^4.2.0",
+        "form-data": "^3.0.0",
+        "mocha": "^6.2.0",
+        "mocha-junit-reporter": "^1.23.1",
+        "mocha-multi-reporters": "^1.1.7",
+        "mocha-typescript": "^1.1.17",
+        "mochawesome": "^4.0.1",
+        "source-map-support": "^0.5.12",
+        "test-commons": "git+https://github.tools.sap/Cloud4RM/Test-Commons#612e269a500346fa79eb14fca6810e70dc098767",
+        "typescript": "^3.5.3",
+        "uuid": "^3.3.3"
+    },
+    "devDependencies": {
+        "@types/chai": "^4.2.14",
+        "@types/mocha": "^5.2.7",
+        "@types/node": "14.14.7",
+        "@types/uuid": "^8.3.0"
+    },
+    "engines": {
+      "node": "^14.0.0"
+    }
+}

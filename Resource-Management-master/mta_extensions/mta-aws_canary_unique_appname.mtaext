@@ -1,0 +1,60 @@
+---
+ID: Resource-Management.extension.canary.unique.appname
+_schema-version: "3.2"
+extends: Resource-Management.extension.canary
+
+resources:
+  - name: rm-onboarding
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: saas-registry
+      service-plan: application
+      config:
+        xsappname: rm-${org}-${space}
+        appName: rm-${org}-${space}
+
+  - name: rm-uaa
+    type: com.sap.xs.uaa
+    parameters:
+      service-plan: broker
+      service: xsuaa
+      config:
+        xsappname: rm-${org}-${space}
+        oauth2-configuration: 
+          credential-types: [x509, binding-secret, instance-secret]
+  - name: rm-uaa-admin
+    type: com.sap.xs.uaa
+    parameters:
+      service-plan: broker
+      service: xsuaa
+      config:
+        xsappname: rm-admin-${space}
+        foreign-scope-references:
+          - "$XSAPPNAME(broker,rm-${org}-${space}).InitDb"
+          - "$XSAPPNAME(broker,rm-${org}-${space}).MigrateDb"
+          - "$XSAPPNAME(broker,rm-${org}-${space}).Metering.TriggerReporting"
+        role-templates:
+          - name: "ResourceManagementOperator"
+            scope-references:
+              - "$XSAPPNAME(broker,rm-${org}-${space}).InitDb"
+              - "$XSAPPNAME(broker,rm-${org}-${space}).MigrateDb"
+              - "$XSAPPNAME(broker,rm-${org}-${space}).Metering.TriggerReporting"
+
+  - name: rm-personal-data-manager
+    parameters:
+      config:
+        xs-security:
+          xsappname: rm-${org}-${space}
+          authorities:
+            - $ACCEPT_GRANTED_AUTHORITIES
+
+  - name: rm-data-retention-manager
+    parameters:
+      config:
+        xs-security:
+          xsappname: rm-${org}-${space}
+
+  - name: rm-mdi
+    parameters:
+      config:
+        businessSystemId: ResourceManagement-${org}-${space}

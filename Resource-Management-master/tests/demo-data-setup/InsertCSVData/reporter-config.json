@@ -1,0 +1,12 @@
+{
+    "reporterEnabled": "mochawesome, mocha-junit-reporter",
+    "mochawesomeReporterOptions": {
+        "reportDir": "./target/report",
+        "reportFilename": "index"
+    },
+    "mochaJunitReporterReporterOptions": {
+        "mochaFile": "./target/report/JUnit.xml",
+        "includePending": true,
+        "jenkinsMode": true
+    }
+}

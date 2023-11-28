@@ -1,0 +1,341 @@
+ID: Resource-Management.extension.canary.intProd
+_schema-version: '3.2'
+extends: Resource-Management
+parameters:
+  custom_domain: int-prod.resourcemanagement-canary.cloud.sap
+modules:
+  - name: rm-db
+    parameters:
+      idle-domain: cfapps.sap.hana.ondemand.com
+      idle-routes:
+        - idle-route: '${org}-${space}-rm-db-idle.cfapps.sap.hana.ondemand.com'
+        - idle-route: '${org}-${space}-rm-db-idle.internal.cfapps.sap.hana.ondemand.com'
+      routes:
+        - route: '${org}-${space}-rm-db.cfapps.sap.hana.ondemand.com'
+        - route: '${org}-${space}-rm-db.internal.cfapps.sap.hana.ondemand.com'
+    properties:
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+    provides:
+      - name: dynamic-db-deployment
+        properties:
+          url: '${protocol}://${routes/0/route}'
+  - name: rm-approuter
+    parameters:
+      idle-routes:
+        - idle-route: >-
+            rm-consumer-tenant-${org}-${space}-rm-approuter-idle.cfapps.sap.hana.ondemand.com
+        - idle-route: >-
+            rm-consumer-tenant-${org}-${space}-rm-approuter-idle.internal.cfapps.sap.hana.ondemand.com
+        - idle-route: >-
+            rm-bgtest-tenant-${org}-${space}-rm-approuter-idle.cfapps.sap.hana.ondemand.com            
+      routes:
+        - route: >-
+            rm-consumer-tenant-${org}-${space}-rm-approuter.cfapps.sap.hana.ondemand.com
+        - route: >-
+            rm-consumer-tenant-${org}-${space}-rm-approuter.internal.cfapps.sap.hana.ondemand.com
+        - route: >-
+            rm-consumer-tenant-${org}-${space}-rm-approuter.${custom_domain}    
+    properties:
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+      CORS: "[{\"uriPattern\":\"^(.*)$\",\"allowedOrigin\":[{\"host\":\"*.cfapps.sap.hana.ondemand.com\",\"protocol\":\"https\"},{\"host\":\"*.internal.cfapps.sap.hana.ondemand.com\",\"protocol\":\"https\"},{\"host\":\"*.resourcemanagement-canary.cloud.sap\",\"protocol\":\"https\"},{\"host\":\"*.s4hana.ondemand.com\",\"protocol\":\"https\"}]}]"
+      COOKIES: >
+        {
+          "SameSite": "None"
+        }
+    provides:
+    - name: rm-approuter-url
+      properties:
+        ui-tenant-delimiter: '-tenant-'
+        ui-url-suffix: ${org}-${space}-rm-approuter.${custom_domain}
+        url: '${protocol}://${routes/0/route}'
+    requires:
+    - name: rm-approuter-url
+      properties:
+        TENANT_HOST_PATTERN: ^(.*)~{ui-tenant-delimiter}(${org}-${space}-${app-name}.cfapps.sap.hana.ondemand.com|${org}-${space}-rm-approuter.${custom_domain})    
+  - name: skill-srv
+    parameters:
+      memory: 1024M
+      idle-routes:
+        - idle-route: '${org}-${space}-skill-srv-idle.cfapps.sap.hana.ondemand.com'
+        - idle-route: '${org}-${space}-skill-srv-idle.internal.cfapps.sap.hana.ondemand.com'
+      routes:
+        - route: '${org}-${space}-skill-srv.cfapps.sap.hana.ondemand.com'
+        - route: '${org}-${space}-skill-srv.internal.cfapps.sap.hana.ondemand.com'
+    hooks:
+      - name: before-skill-srv-start-db-update
+        parameters:
+          memory: 1024M
+          disk-quota: 512M
+    provides:
+      - name: skill-srv-api
+        properties:
+          url: '${protocol}://${routes/0/route}'
+  - name: resourceRequest-srv
+    parameters:
+      memory: 1024M
+      idle-routes:
+        - idle-route: >-
+            ${org}-${space}-resourcerequest-srv-idle.cfapps.sap.hana.ondemand.com
+        - idle-route: >-
+            ${org}-${space}-resourcerequest-srv-idle.internal.cfapps.sap.hana.ondemand.com
+      routes:
+        - route: >-
+            ${org}-${space}-resourcerequest-srv.cfapps.sap.hana.ondemand.com
+        - route: >-
+            ${org}-${space}-resourcerequest-srv.internal.cfapps.sap.hana.ondemand.com
+    provides:
+      - name: resourceRequest-srv-api
+        properties:
+          url: '${protocol}://${routes/0/route}'
+  - name: project-integration-adapter
+    parameters:
+      memory: 1024M
+      idle-routes:
+        - idle-route: >-
+            ${org}-${space}-project-integration-adapter-idle.cfapps.sap.hana.ondemand.com
+        - idle-route: >-
+            ${org}-${space}-project-integration-adapter-idle.internal.cfapps.sap.hana.ondemand.com
+      routes:
+        - route: >-
+            ${org}-${space}-project-integration-adapter.cfapps.sap.hana.ondemand.com
+        - route: >-
+            ${org}-${space}-project-integration-adapter.internal.cfapps.sap.hana.ondemand.com
+    provides:
+      - name: project-integration-adapter-api
+        properties:
+          url: '${protocol}://${routes/0/route}'
+  - name: assignment-srv
+    parameters:
+      memory: 1024M
+      idle-routes:
+        - idle-route: >-
+            ${org}-${space}-assignment-srv-idle.cfapps.sap.hana.ondemand.com
+        - idle-route: >-
+            ${org}-${space}-assignment-srv-idle.internal.cfapps.sap.hana.ondemand.com
+      routes:
+        - route: '${org}-${space}-assignment-srv.cfapps.sap.hana.ondemand.com'
+        - route: '${org}-${space}-assignment-srv.internal.cfapps.sap.hana.ondemand.com'
+    provides:
+      - name: assignment-srv-api
+        properties:
+          url: '${protocol}://${routes/0/route}'
+  - name: consultantProfile-srv
+    parameters:
+      memory: 1024M          
+      routes:
+        - route: >-
+            ${org}-${space}-consultant-profile-srv.cfapps.sap.hana.ondemand.com
+        - route: >-
+            ${org}-${space}-consultant-profile-srv.internal.cfapps.sap.hana.ondemand.com
+    provides:
+      - name: consultantProfile-srv-api
+        properties:
+          url: '${protocol}://${routes/0/route}'
+  - name: consultantProfile-integration-srv
+    parameters:
+      memory: 1024M
+      idle-routes:
+        - idle-route: >-
+            ${org}-${space}-consultant-profile-integration-srv-idle.cfapps.sap.hana.ondemand.com
+        - idle-route: >-
+            ${org}-${space}-consultant-profile-integration-srv-idle.internal.cfapps.sap.hana.ondemand.com           
+      routes:
+        - route: >-
+            ${org}-${space}-consultant-profile-integration-srv.cfapps.sap.hana.ondemand.com
+        - route: >-
+            ${org}-${space}-consultant-profile-integration-srv.internal.cfapps.sap.hana.ondemand.com
+    properties:
+      APPLICATION_URL: >-
+        ${org}-${space}-consultant-profile-integration-srv.cfapps.sap.hana.ondemand.com
+    provides:
+      - name: consultantProfile-integration-srv-api
+        properties:
+          url: '${protocol}://${routes/0/route}'
+  - name: centralServices-srv
+    parameters:
+      memory: 1024M
+      idle-routes:
+        - idle-route: >-
+            ${org}-${space}-central-services-srv-idle.cfapps.sap.hana.ondemand.com
+        - idle-route: >-
+            ${org}-${space}-central-services-srv-idle.internal.cfapps.sap.hana.ondemand.com          
+      routes:
+        - route: >-
+            ${org}-${space}-central-services-srv.cfapps.sap.hana.ondemand.com
+        - route: >-
+            ${org}-${space}-central-services-srv.internal.cfapps.sap.hana.ondemand.com
+  - name: rm-service-broker
+    parameters:
+      memory: 128M
+      idle-routes:
+        - idle-route: >-
+            ${org}-${space}-rm-service-broker-idle.cfapps.sap.hana.ondemand.com
+        - idle-route: >-
+            ${org}-${space}-rm-service-broker-idle.internal.cfapps.sap.hana.ondemand.com
+      routes:
+        - route: >-
+            ${org}-${space}-rm-service-broker.cfapps.sap.hana.ondemand.com
+        - route: >-
+            ${org}-${space}-rm-service-broker.internal.cfapps.sap.hana.ondemand.com
+    properties:
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  - name: rm-api-gateway
+    parameters:
+      idle-routes:
+        - idle-route: '${org}-${space}-rm-api-idle.cfapps.sap.hana.ondemand.com'
+        - idle-route: '${org}-${space}-rm-api-idle.internal.cfapps.sap.hana.ondemand.com'
+      routes:
+        - route: '${org}-${space}-rm-api.cfapps.sap.hana.ondemand.com'
+        - route: '${org}-${space}-rm-api.internal.cfapps.sap.hana.ondemand.com'
+resources:
+  - name: rm-uaa
+    type: com.sap.xs.uaa
+    parameters:
+      service-plan: broker
+      service: xsuaa
+      config:
+        oauth2-configuration:
+          credential-types: [x509, binding-secret, instance-secret]
+          redirect-uris: 
+            - https://*${org}-${space}-rm-approuter.${custom_domain}/**
+            - https://*${org}-${space}-rm-approuter.internal.cfapps.sap.hana.ondemand.com/**
+            - https://*${org}-${space}-rm-approuter.cfapps.sap.hana.ondemand.com/**
+            - https://*${org}-${space}-rm-approuter-idle.cfapps.sap.hana.ondemand.com/**
+  - name: rm-xray
+    properties:
+      xrayurl: >-
+        https://xraycontrolstebofwk.int.sap.eu2.hana.ondemand.com/xRayControls/resources/sap/dfa/help
+  - name: rm-xray-data
+    properties:
+      xraydataurl: 'https://cp1canary.int.sap.eu2.hana.ondemand.com/dps'
+  - name: rm-data-retention-manager
+    parameters:
+      config:
+        retention-configs:
+          applicationGroupName: 'ResourceManagementINTPROD'
+  - name: rm-service-broker-credentials
+    parameters:
+      config:
+        brokerCredentialsHash:
+          broker-user: serviceBrokerCredentialsHash1
+          broker-user2: serviceBrokerCredentialsHash2
+  - name: rm-metering-service
+    parameters:
+      service-plan: default
+      config:
+        providerToken: meteringProviderToken
+  - name: rm-ans
+    parameters:
+      config:
+        configuration:
+          actions:
+            - name: c4p-rm-int-prod-slack-notifications
+              properties:
+                destination: ansSlackWebhook
+              state: ENABLED
+              type: SLACK
+          conditions:
+            - description: ''
+              labels: []
+              mandatory: false
+              name: undeployment
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: UNDEPLOYMENT
+            - description: ''
+              labels: []
+              mandatory: false
+              name: deployment
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: DEPLOYMENT
+            - description: ''
+              labels: []
+              mandatory: false
+              name: audit-crash
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.process.crash
+            - description: ''
+              labels: []
+              mandatory: false
+              name: app-start
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.start
+            - description: ''
+              labels: []
+              mandatory: false
+              name: app-stop
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.stop
+            - description: ''
+              labels: []
+              mandatory: false
+              name: audit-update
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.update
+            - description: ''
+              labels: []
+              mandatory: false
+              name: app-crash
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: app.crash
+            - description: ''
+              labels: []
+              mandatory: false
+              name: audit-scale
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.process.scale
+            - description: ''
+              labels: []
+              mandatory: false
+              name: rm-space-memory-usage
+              predicate: GREATER_THAN
+              propertyKey: tags.space_memory_usage_percentage
+              propertyValue: '80'
+            - description: ''
+              labels: []
+              mandatory: false
+              name: audit-delete
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.delete-request
+          subscriptions:
+            - actions:
+                - c4p-rm-int-prod-slack-notifications
+              conditions:
+                - rm-space-memory-usage
+              name: rm-space-quota-subscription
+              state: ENABLED
+            - actions:
+                - c4p-rm-int-prod-slack-notifications
+              conditions:
+                - audit-crash
+                - audit-update
+                - audit-delete
+                - app-start
+                - app-stop
+                - app-crash
+                - audit-scale
+                - undeployment
+                - deployment
+              name: rm-app-lifecycle-subscription
+              state: ENABLED
+  - name: rm-destination
+    parameters:
+      config:
+        init_data:
+          subaccount:
+            destinations:
+            - Name: CALM_datacollector_${space}
+              Authentication: NoAuthentication
+              URL: https://eu10.alm.cloud.sap/api
+              ProxyType: Internet
+              Type: HTTP
+            existing_destinations_policy: update
+        version: 1.0.0

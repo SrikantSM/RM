@@ -1,0 +1,90 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>Resource-Management-Perf</groupId>
+    <artifactId>Resource-Management-Perf</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <properties>
+        <testFileForDemoDataUpload>ProjectMasterDataUpload.jmx</testFileForDemoDataUpload>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.lazerycode.jmeter</groupId>
+                <artifactId>jmeter-maven-plugin</artifactId>
+                <version>2.6.0</version>
+                <executions>
+                    <execution>
+                        <id>jmeter-configuration</id>
+                        <goals>
+                            <goal>configure</goal>
+                        </goals>
+
+                    </execution>
+                    <execution>
+                        <id>jmeter-tests</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jmeter</goal>
+                        </goals>
+                        <configuration>
+                            <!-- <proxyConfig> <host>proxy.wdf.sap.corp</host> 
+                                <port>8080</port> <hostExclusions>localhost|*.sap.corp</hostExclusions> </proxyConfig> -->
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <resultsFileFormat>xml</resultsFileFormat>
+                    <generateReports>false</generateReports>
+                    <testResultsTimestamp>false</testResultsTimestamp>
+                    <ignoreResultFailures>true</ignoreResultFailures>
+                    <testFilesIncluded>
+                        <jMeterTestFile>${testFileForDemoDataUpload}</jMeterTestFile>
+                    </testFilesIncluded>
+                </configuration>
+            </plugin>
+            <!-- <plugin> <groupId>com.lazerycode.jmeter</groupId> <artifactId>jmeter-analysis-maven-plugin</artifactId> 
+                <version>1.0.6</version> <executions> <execution> <phase>post-integration-test</phase> 
+                <goals> <goal>analyze</goal> </goals> <configuration> <source>${project.build.directory}/**/*</source> 
+                <targetDirectory>${project.build.directory}/jmeter/results/targetDirectory</targetDirectory> 
+                <sourceDirFailed>true</sourceDirFailed> <processAllFilesFound>true</processAllFilesFound> 
+                </configuration> </execution> </executions> </plugin> -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>transform</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <transformationSets>
+                        <transformationSet>
+                            <dir>target/jmeter/results</dir>
+                            <stylesheet>src/test/jmeter/jmeter-results-to-junit.xsl</stylesheet>
+                            <outputDir>target/surefire-reports</outputDir>
+                            <fileMappers>
+                                <fileMapper
+                                    implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
+                                    <pattern>(.*?)\s(.*?)</pattern>
+                                    <replacement>$1$2</replacement>
+                                    <replaceAll>true</replaceAll>
+                                </fileMapper>
+                                <fileMapper
+                                    implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                    <targetExtension>.xml</targetExtension>
+                                </fileMapper>
+                            </fileMappers>
+                        </transformationSet>
+                    </transformationSets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

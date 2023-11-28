@@ -1,0 +1,289 @@
+ID: Resource-Management.extension.canary.uat
+_schema-version: '3.2'
+extends: Resource-Management
+
+parameters:
+  custom_domain: test-uat.resourcemanagement-canary.cloud.sap
+
+modules:
+  - name: rm-db
+    parameters:
+      idle-domain: internal.cfapps.sap.hana.ondemand.com
+      idle-routes:
+        - idle-route: '${org}-${space}-rm-db-idle.internal.cfapps.sap.hana.ondemand.com'
+      routes:
+        - route: '${org}-${space}-rm-db.internal.cfapps.sap.hana.ondemand.com'
+    properties:
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+    provides:
+      - name: dynamic-db-deployment
+        properties:
+          url: '${protocol}://${routes/0/route}'
+  - name: rm-approuter
+    parameters:
+      instances: 1
+      idle-routes:
+        - idle-route: >-
+            rm-consumer-tenant-${org}-${space}-rm-approuter-idle.internal.cfapps.sap.hana.ondemand.com
+        - idle-route: >-
+            rm-bgtest-tenant-${org}-${space}-rm-approuter-idle.cfapps.sap.hana.ondemand.com          
+      routes:
+        - route: >-
+            rm-consumer-tenant-${org}-${space}-rm-approuter.internal.cfapps.sap.hana.ondemand.com
+        - route: >-
+            rm-consumer-tenant-${org}-${space}-rm-approuter.${custom_domain}    
+    properties:
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+      CORS: "[{\"uriPattern\":\"^(.*)$\",\"allowedOrigin\":[{\"host\":\"*.cfapps.sap.hana.ondemand.com\",\"protocol\":\"https\"},{\"host\":\"*.internal.cfapps.sap.hana.ondemand.com\",\"protocol\":\"https\"},{\"host\":\"*.resourcemanagement-canary.cloud.sap\",\"protocol\":\"https\"},{\"host\":\"*.s4hana.ondemand.com\",\"protocol\":\"https\"}]}]"
+      COOKIES: >
+        {
+          "SameSite": "None"
+        }
+    provides:
+    - name: rm-approuter-url
+      properties:
+        ui-tenant-delimiter: '-tenant-'
+        ui-url-suffix: ${org}-${space}-rm-approuter.${custom_domain}
+        url: '${protocol}://${routes/0/route}'
+    requires:
+    - name: rm-approuter-url
+      properties:
+        TENANT_HOST_PATTERN: ^(.*)~{ui-tenant-delimiter}(${org}-${space}-${app-name}.internal.cfapps.sap.hana.ondemand.com|${org}-${space}-rm-approuter.${custom_domain})      
+  - name: skill-srv
+    parameters:
+      memory: 1024M
+      idle-routes:
+        - idle-route: '${org}-${space}-skill-srv-idle.internal.cfapps.sap.hana.ondemand.com'
+      routes:
+        - route: '${org}-${space}-skill-srv.internal.cfapps.sap.hana.ondemand.com'
+    hooks:
+      - name: before-skill-srv-start-db-update
+        parameters:
+          memory: 1024M
+          disk-quota: 512M
+    provides:
+      - name: skill-srv-api
+        properties:
+          url: '${protocol}://${routes/0/route}'
+    requires:
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+  - name: resourceRequest-srv
+    parameters:
+      memory: 1024M
+      idle-routes:
+        - idle-route: >-
+            ${org}-${space}-resourcerequest-srv-idle.internal.cfapps.sap.hana.ondemand.com
+      routes:
+        - route: >-
+            ${org}-${space}-resourcerequest-srv.internal.cfapps.sap.hana.ondemand.com
+    provides:
+      - name: resourceRequest-srv-api
+        properties:
+          url: '${protocol}://${routes/0/route}'
+    requires:
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+  - name: project-integration-adapter
+    parameters:
+      memory: 1024M
+      idle-routes:
+        - idle-route: >-
+            ${org}-${space}-project-integration-adapter-idle.internal.cfapps.sap.hana.ondemand.com
+      routes:
+        - route: >-
+            ${org}-${space}-project-integration-adapter.internal.cfapps.sap.hana.ondemand.com
+    provides:
+      - name: project-integration-adapter-api
+        properties:
+          url: '${protocol}://${routes/0/route}'
+    requires:
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+  - name: assignment-srv
+    parameters:
+      memory: 1024M
+      idle-routes:
+        - idle-route: >-
+            ${org}-${space}-assignment-srv-idle.internal.cfapps.sap.hana.ondemand.com
+      routes:
+        - route: '${org}-${space}-assignment-srv.internal.cfapps.sap.hana.ondemand.com'
+    provides:
+      - name: assignment-srv-api
+        properties:
+          url: '${protocol}://${routes/0/route}'
+    requires:
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+  - name: consultantProfile-srv
+    parameters:
+      memory: 1024M          
+      routes:
+        - route: >-
+            ${org}-${space}-consultant-profile-srv.internal.cfapps.sap.hana.ondemand.com
+    provides:
+      - name: consultantProfile-srv-api
+        properties:
+          url: '${protocol}://${routes/0/route}'
+    requires:
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+  - name: consultantProfile-integration-srv
+    parameters:
+      memory: 1024M
+      idle-routes:
+        - idle-route: >-
+            ${org}-${space}-consultant-profile-integration-srv-idle.internal.cfapps.sap.hana.ondemand.com            
+      routes:
+        - route: >-
+            ${org}-${space}-consultant-profile-integration-srv.internal.cfapps.sap.hana.ondemand.com
+    properties:
+      APPLICATION_URL: >-
+        ${org}-${space}-consultant-profile-integration-srv.internal.cfapps.sap.hana.ondemand.com
+    provides:
+      - name: consultantProfile-integration-srv-api
+        properties:
+          url: '${protocol}://${routes/0/route}'
+    requires:
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+  - name: centralServices-srv
+    parameters:
+      memory: 1024M
+      idle-routes:
+        - idle-route: >-
+            ${org}-${space}-central-services-srv-idle.internal.cfapps.sap.hana.ondemand.com           
+      routes:
+        - route: >-
+            ${org}-${space}-central-services-srv.internal.cfapps.sap.hana.ondemand.com
+    requires:
+      - name: rm-personal-data-manager
+        parameters:
+          config:
+            fullyQualifiedApplicationName: 'ResourceManagement-${org}-${space}'
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+  - name: rm-service-broker
+    parameters:
+      memory: 128M
+      idle-routes:
+        - idle-route: >-
+            ${org}-${space}-rm-service-broker-idle.internal.cfapps.sap.hana.ondemand.com
+      routes:
+        - route: >-
+            ${org}-${space}-rm-service-broker.internal.cfapps.sap.hana.ondemand.com
+    properties:
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+    requires:
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+  - name: rm-api-gateway
+    parameters:
+      idle-routes:
+        - idle-route: '${org}-${space}-rm-api-idle.internal.cfapps.sap.hana.ondemand.com'
+      routes:
+        - route: '${org}-${space}-rm-api.internal.cfapps.sap.hana.ondemand.com'
+    requires:
+      - name: rm-autoscaler
+        parameters:
+          config:
+            scaling_rules: []
+resources:
+  - name: rm-uaa
+    type: com.sap.xs.uaa
+    parameters:
+      service-plan: broker
+      service: xsuaa
+      config:
+        xsappname: 'rm-${space}'
+        oauth2-configuration:
+          credential-types: [x509, binding-secret, instance-secret]
+          redirect-uris: 
+            - https://*${org}-${space}-rm-approuter.${custom_domain}/**
+            - https://*${org}-${space}-rm-approuter.internal.cfapps.sap.hana.ondemand.com/**
+  - name: rm-uaa-admin
+    type: com.sap.xs.uaa
+    parameters:
+      service-plan: broker
+      service: xsuaa
+      config:
+        xsappname: 'rm-admin-${space}'
+        foreign-scope-references:
+          - '$XSAPPNAME(broker,rm-${space}).InitDb'
+          - '$XSAPPNAME(broker,rm-${space}).MigrateDb'
+          - '$XSAPPNAME(broker,rm-${space}).Metering.TriggerReporting'
+        role-templates:
+          - name: ResourceManagementOperator
+            scope-references:
+              - '$XSAPPNAME(broker,rm-${space}).InitDb'
+              - '$XSAPPNAME(broker,rm-${space}).MigrateDb'
+              - '$XSAPPNAME(broker,rm-${space}).Metering.TriggerReporting'
+  - name: rm-onboarding
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: saas-registry
+      service-plan: application
+      config:
+        xsappname: 'rm-${space}'
+        appName: 'rm-${space}'
+  - name: rm-xray
+    properties:
+      xrayurl: >-
+        https://xraycontrolstebofwk.int.sap.eu2.hana.ondemand.com/xRayControls/resources/sap/dfa/help
+  - name: rm-xray-data
+    properties:
+      xraydataurl: 'https://cp1canary.int.sap.eu2.hana.ondemand.com/dps'
+  - name: rm-personal-data-manager
+    parameters:
+      config:
+        xs-security:
+          xsappname: 'rm-${space}'
+          authorities:
+            - $ACCEPT_GRANTED_AUTHORITIES
+        fullyQualifiedApplicationName: 'ResourceManagement-${org}-${space}'
+  - name: rm-data-retention-manager
+    parameters:
+      config:
+        xs-security:
+          xsappname: 'rm-${space}'
+        retention-configs:
+          applicationGroupName: 'ResourceManagement-${org}-${space}'
+  - name: rm-mdi
+    parameters:
+      config:
+        businessSystemId: 'ResourceManagement-${org}-${space}'
+  - name: rm-service-broker-credentials
+    parameters:
+      config:
+        brokerCredentialsHash:
+          broker-user: serviceBrokerCredentialsHash1
+          broker-user2: serviceBrokerCredentialsHash2
+  - name: rm-destination
+    parameters:
+      config:
+        init_data:
+          subaccount:
+            destinations:
+            - Name: CALM_datacollector_${space}
+              Authentication: NoAuthentication
+              URL: https://eu10.alm.cloud.sap/api
+              ProxyType: Internet
+              Type: HTTP
+            existing_destinations_policy: update
+        version: 1.0.0

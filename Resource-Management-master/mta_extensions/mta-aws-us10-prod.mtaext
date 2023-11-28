@@ -1,0 +1,187 @@
+ID: Resource-Management.extension.us10.prod
+_schema-version: '3.2'
+extends: Resource-Management
+modules:
+  - name: rm-db
+    properties:
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  - name: rm-approuter
+    properties:
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+      CORS: "[{\"uriPattern\":\"^(.*)$\",\"allowedOrigin\":[{\"host\":\"*.res.projectscloud.cfapps.us10.hana.ondemand.com\",\"protocol\":\"https\"},{\"host\":\"*.us10.resourcemanagement.cloud.sap\",\"protocol\":\"https\"},{\"host\":\"*.wdf.sap.corp\",\"protocol\":\"https\"},{\"host\":\"*.s4hana.cloud.sap\",\"protocol\":\"https\"},{\"host\":\"*.s4hana.ondemand.com\",\"protocol\":\"https\"}]}]"
+    parameters:
+      routes:
+      - route: "*.us10.resourcemanagement.cloud.sap"
+    provides:
+    - name: rm-approuter-url
+      properties:
+        ui-tenant-delimiter: "."
+        ui-url-suffix: us10.resourcemanagement.cloud.sap
+        url: "${protocol}://tenant-onboarding.us10.resourcemanagement.cloud.sap"  
+  - name: rm-service-broker
+    properties:
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  - name: consultantProfile-integration-srv
+    properties:
+      APPLICATION_URL: c4p-rm-us10-prod-us10-prod-consultantprofile-integration-srv.cfapps.us10.hana.ondemand.com
+  - name: centralServices-srv
+    parameters:
+      routes:
+      - route: "${org}-${space}-central-services-srv.cfapps.us10.hana.ondemand.com"
+  - name: rm-api-gateway
+    parameters:
+      routes:
+      - route: resource-management-api-projectscloud.cfapps.us10.hana.ondemand.com
+  
+resources:
+  - name: rm-uaa
+    type: com.sap.xs.uaa
+    parameters:
+      service-plan: broker
+      service: xsuaa
+      config:
+        oauth2-configuration:
+          credential-types: [x509, binding-secret, instance-secret]
+          redirect-uris: 
+            - https://*.us10.resourcemanagement.cloud.sap/** 
+  - name: rm-service-broker-credentials
+    parameters:
+      config:
+        brokerCredentialsHash:
+          broker-user: serviceBrokerCredentialsHash1
+          broker-user2: serviceBrokerCredentialsHash2
+  - name: rm-metering-service
+    parameters:
+      config:
+        providerToken: meteringProviderToken
+      service-plan: default
+  - name: rm-cloud-logs
+    parameters:
+      config:
+        retentionPeriod: 45
+        saml:
+          admin_group: prod-cloud-logging-admin
+          enabled: true
+          exchange_key: cloudLoggingExchangeKey
+          idp:
+            entity_id: 'https://axtubdeog.accounts400.ondemand.com'
+            metadata_url: 'https://axtubdeog.accounts400.ondemand.com/saml2/metadata'
+          initiated: false
+          roles_key: groups
+          sp:
+            entity_id: us10-prod-cloud-logging
+  - name: rm-ans
+    parameters:
+      config:
+        configuration:
+          actions:
+            - name: c4p-rm-us10-prod-slack-notifications
+              properties:
+                destination: ansSlackWebhook
+              state: ENABLED
+              type: SLACK
+          conditions:
+            - description: ''
+              labels: []
+              mandatory: false
+              name: undeployment
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: UNDEPLOYMENT
+            - description: ''
+              labels: []
+              mandatory: false
+              name: deployment
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: DEPLOYMENT
+            - description: ''
+              labels: []
+              mandatory: false
+              name: audit-crash
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.process.crash
+            - description: ''
+              labels: []
+              mandatory: false
+              name: app-start
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.start
+            - description: ''
+              labels: []
+              mandatory: false
+              name: app-stop
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.stop
+            - description: ''
+              labels: []
+              mandatory: false
+              name: audit-update
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.update
+            - description: ''
+              labels: []
+              mandatory: false
+              name: app-crash
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: app.crash
+            - description: ''
+              labels: []
+              mandatory: false
+              name: audit-scale
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.process.scale
+            - description: ''
+              labels: []
+              mandatory: false
+              name: rm-space-memory-usage
+              predicate: GREATER_THAN
+              propertyKey: tags.space_memory_usage_percentage
+              propertyValue: '80'
+            - description: ''
+              labels: []
+              mandatory: false
+              name: audit-delete
+              predicate: EQUALS
+              propertyKey: eventType
+              propertyValue: audit.app.delete-request
+          subscriptions:
+            - actions:
+                - c4p-rm-us10-prod-slack-notifications
+              conditions:
+                - rm-space-memory-usage
+              name: rm-space-quota-subscription
+              state: ENABLED
+            - actions:
+                - c4p-rm-us10-prod-slack-notifications
+              conditions:
+                - audit-crash
+                - audit-update
+                - audit-delete
+                - app-start
+                - app-stop
+                - app-crash
+                - audit-scale
+                - undeployment
+                - deployment
+              name: rm-app-lifecycle-subscription
+              state: ENABLED
+  - name: rm-destination
+    parameters:
+      config:
+        init_data:
+          subaccount:
+            destinations:
+            - Name: CALM_datacollector_${space}
+              Authentication: NoAuthentication
+              URL: https://us10-001.alm.cloud.sap/api
+              ProxyType: Internet
+              Type: HTTP
+            existing_destinations_policy: update
+        version: 1.0.0

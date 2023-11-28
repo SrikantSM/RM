@@ -1,0 +1,13 @@
+code;errorMessage
+RM_CP_001;Error while {0} processed {1} data.
+RM_CP_002;Record does not have mandatory {0} in {1}.
+RM_CP_004;Destination service responded with empty response
+RM_CP_005;Destination has been configured incorrectly as Destination Find API could not fetch an auth token
+RM_CP_006;MDI URL received from Destination response is incorrect or empty
+RM_CP_007;Delta token mismatch error
+RM_CP_008;Request Conflict error
+RM_CP_009;Request timed out with exception: {0}
+RM_CP_010;Unknown error occurred with exception: {0}
+RM_CP_011;Http Exception occurred with: {0} and: {1}
+RM_CP_012;Destination Not Found Exception occurred with: {0}
+RM_CP_013;Incompatible language code found in attribute {0}.

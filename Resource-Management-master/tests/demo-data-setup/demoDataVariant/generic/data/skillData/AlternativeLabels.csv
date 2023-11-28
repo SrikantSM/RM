@@ -1,0 +1,54 @@
+ID,language_code,skill_ID,name
+a30a16ff-4d3f-40e8-9a12-c1eada741ec8,de,8d5a65dc-ac3f-4035-9702-5fedb0bea4c9,Javax
+6f215fb9-784f-474f-bada-8cf5eaf250ad,de,8ddaa39f-1ec4-485b-b958-1a94ad85d564,OpenUI5
+2d8f172c-0b5b-4311-854f-22ba9abdb414,de,b39b756b-d276-4ac0-a246-9af71fa760fb,SAPs Programming Language
+1c68f46b-79fb-4ec9-a6c7-e3e058e09c79,de,8ca2a9c5-8617-4a97-a43e-ed4a03019956,JavaScript 1.7
+7e86f58c-be03-4762-9700-e57968c44835,de,8ca2a9c5-8617-4a97-a43e-ed4a03019956,Escript
+752176e3-d481-440f-95ef-ed06bdeda312,de,8ca2a9c5-8617-4a97-a43e-ed4a03019956,Client-side JavaScript
+14359078-7e24-477a-be7e-42a90786f759,de,8ca2a9c5-8617-4a97-a43e-ed4a03019956,JavaScripts
+1422c37b-5169-4958-9ebc-ec0f6d2b1695,de,b981f94e-ba34-41e6-99c8-8160a62f5a88,Fiori 1.0
+417db120-f9d6-4356-aa63-2e09578ef270,de,b981f94e-ba34-41e6-99c8-8160a62f5a88,Fiori 2.0
+802768c8-7fc6-4585-9fdc-e0ff0d0a3373,de,b981f94e-ba34-41e6-99c8-8160a62f5a88,Fiori 3
+1128560a-8166-4ea0-8227-3488dde604b4,de,e8cac7ce-13ff-46f4-8793-83950e341d23,NodeJS
+11d92a5b-f542-4851-b080-e06146c979b2,de,65b8d77f-df37-4bc8-b7e1-58409e2506ec,PM
+477cfa15-1ed8-4e0e-a545-44dcf37b08f3,de,27a30ad7-8565-4df7-b5f6-329bc57ff0ea,Benutzer Schnittstellen Entwicklung
+d8d9b1a7-e350-49ca-aaf5-2a1d34558d6c,de,5d49dd2b-9e0e-48d1-9c37-364c4287d701,JUnit 5
+ce306ebc-f4bc-4d0e-b74e-f64261fece19,de,5d49dd2b-9e0e-48d1-9c37-364c4287d701,JUnit 4
+37782682-146c-4804-908d-03ed45b5509a,de,9062c994-9a6c-41bc-9ab0-cbc740870d06,UIVerify
+40f595f2-ec03-4e46-b343-5cb1e5775de9,de,79993cb1-f928-40ed-96aa-5d33c9d4c4a0,FioriElements V2
+16c6b815-2edc-4d2d-9af7-4b045366fd66,de,79993cb1-f928-40ed-96aa-5d33c9d4c4a0,FioriElements V4
+f4844b3c-5e92-4589-bcc8-8010616205ef,de,0d54b8db-dd5d-45fc-8b18-bc30974ed71a,AP Cloud Application Programming Model
+48c56b2d-32ef-41cc-87ce-e7db42c4c610,de,0d54b8db-dd5d-45fc-8b18-bc30974ed71a,CAP V2
+ee154216-2447-4e1f-a7b8-aecbe4dce48f,de,0d54b8db-dd5d-45fc-8b18-bc30974ed71a,CAP V4
+183177f9-8367-4b2c-94cf-17b52d55c35c,de,5b0529dd-0778-4294-8103-df0ba6860503,CF
+85c0a567-5bdc-4491-8c42-55f907711c36,de,5b0529dd-0778-4294-8103-df0ba6860503,cf
+4d1a8831-4571-4595-9279-c664130fd4b5,de,d7df5434-cd56-4938-ad2d-3c5c1121cec4,Reisen und Transport
+8f9b8762-afdb-41f0-b5d6-5bf04afd70be,de,2cd32ebc-7ee7-4911-9cb4-9c82dcd72bf2,Inhalt schreiben
+8e315840-3e80-45e8-9eed-1c5400ec9a02,de,59f26ad6-6ef4-4e6b-862a-59cf9d48bcc9,Darwin Information Typing Architecture
+2d9676f3-6237-4110-b8e0-79693c14c097,en,8d5a65dc-ac3f-4035-9702-5fedb0bea4c9,Javax
+d7ce60db-1551-4341-83b5-70b104f5a05a,en,8ddaa39f-1ec4-485b-b958-1a94ad85d564,OpenUI5
+03ab58af-6d7b-47af-ad9b-a466c248d488,en,b39b756b-d276-4ac0-a246-9af71fa760fb,SAPs Programming Language
+468af8d6-f843-495c-8df6-96e6e4d14845,en,8ca2a9c5-8617-4a97-a43e-ed4a03019956,JavaScript 1.7
+1673d0b1-3f27-4e0a-93f8-293270a4fdc6,en,8ca2a9c5-8617-4a97-a43e-ed4a03019956,Escript
+f67d89c7-324f-47e5-9ce0-25e2c0b0a96e,en,8ca2a9c5-8617-4a97-a43e-ed4a03019956,Client-side JavaScript
+40c02a2d-625b-4b14-a18e-47c2aa67ab0b,en,8ca2a9c5-8617-4a97-a43e-ed4a03019956,JavaScripts
+f2553a79-fdd5-4939-b0b5-e7ab51f69ae8,en,b981f94e-ba34-41e6-99c8-8160a62f5a88,Fiori 1.0
+6b91cb56-c1ee-4a89-bad7-35c3c96c2448,en,b981f94e-ba34-41e6-99c8-8160a62f5a88,Fiori 2.0
+4b83f510-d87b-4110-848e-af816a4c798d,en,b981f94e-ba34-41e6-99c8-8160a62f5a88,Fiori 3
+ee3460e7-0106-42c0-8492-81185c43636e,en,e8cac7ce-13ff-46f4-8793-83950e341d23,NodeJS
+fe3ce7ed-681a-4317-84c1-a7bf0b32c125,en,65b8d77f-df37-4bc8-b7e1-58409e2506ec,PM
+2834f836-72ca-49fc-9aac-d3095297d6d7,en,27a30ad7-8565-4df7-b5f6-329bc57ff0ea,User Interface Development
+d34b6f2c-4d98-431a-80b5-bdaabd1ff5a2,en,27a30ad7-8565-4df7-b5f6-329bc57ff0ea,Human Interaction Interface
+1c138fb5-50b0-4a56-aba7-c2217c71b329,en,5d49dd2b-9e0e-48d1-9c37-364c4287d701,JUnit 5
+f896669c-8291-4d9c-9e42-d98ae61eba5f,en,5d49dd2b-9e0e-48d1-9c37-364c4287d701,JUnit 4
+01b77041-cb56-4025-bcbf-07150fbab590,en,9062c994-9a6c-41bc-9ab0-cbc740870d06,UIVerify
+efd0760e-c4df-4234-b741-df05635e2120,en,79993cb1-f928-40ed-96aa-5d33c9d4c4a0,FioriElements V2
+9953a510-4981-4233-b2c7-bead94af6f7d,en,79993cb1-f928-40ed-96aa-5d33c9d4c4a0,FioriElements V4
+07b63313-1689-481a-8ef8-7c822ddc6707,en,0d54b8db-dd5d-45fc-8b18-bc30974ed71a,AP Cloud Application Programming Model
+b9b438d3-5e4f-47de-88f2-210058093592,en,0d54b8db-dd5d-45fc-8b18-bc30974ed71a,CAP V2
+ee46e8eb-350c-48f2-89cb-090d57edd26b,en,0d54b8db-dd5d-45fc-8b18-bc30974ed71a,CAP V4
+ca3ed789-dc67-42f4-98aa-35cf5901e810,en,5b0529dd-0778-4294-8103-df0ba6860503,CF
+111cf9dd-afb5-4103-8de9-9867fc29afe8,en,5b0529dd-0778-4294-8103-df0ba6860503,cf
+14316953-56d4-41b7-8bf5-6b07e06a14d8,en,d7df5434-cd56-4938-ad2d-3c5c1121cec4,Travel and Transportation
+8a0e592b-e5b4-416f-945f-d4bba63fd99b,en,2cd32ebc-7ee7-4911-9cb4-9c82dcd72bf2,Content Writing
+54ceb7a5-8661-4d54-8598-d721e8a26f4a,en,59f26ad6-6ef4-4e6b-862a-59cf9d48bcc9,Darwin Information Typing Architecture
