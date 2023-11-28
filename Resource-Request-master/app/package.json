@@ -1,0 +1,18 @@
+{
+    "name": "resourceRequest-app",
+    "description": "Common dependencies for Resource-Request UIs",
+    "private": true,
+    "version": "1.0.0",
+    "dependencies": {
+        "@sap/grunt-sapui5-bestpractice-build": "1.4.13",
+        "grunt": "1.6.1",
+        "grunt-contrib-compress": "^2.0.0",
+        "grunt-run": "0.8.1"
+    },
+    "scripts": {
+        "postinstall": "cd resourceRequestLibrary && npm ci"
+    },
+    "engines": {
+        "node": "^18.0.0"
+    }
+}

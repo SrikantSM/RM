@@ -1,0 +1,5 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "baseBranches": ["master", "release", "hotfix"],
+  "reviewers": ["i072823","I337269", "I310562"]
+}

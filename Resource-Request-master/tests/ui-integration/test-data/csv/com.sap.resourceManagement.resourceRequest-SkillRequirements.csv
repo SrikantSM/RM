@@ -1,0 +1,6 @@
+ID,RESOURCEREQUEST_ID,SKILL_ID,IMPORTANCE_CODE,COMMENT,PROFICIENCYLEVEL_ID
+641cf70d-0ba2-44b8-be34-2a40b0b371fd,0a944173-9b29-400b-8710-c697883cf334,e08cce86-c8a2-11e9-a32f-2a2ae2dbcce4,1,Skill required,8e88cf20-f5f2-40dc-8b8e-e63d8bc868ee
+641cf71d-0ba2-44b8-be34-2a40b0b371fd,16b79902-afa0-4bef-9658-98cd8d67e2e9,e08cd0fc-c8a2-11e9-a32f-2a2ae2dbcce4,1,Skill required,21dd385a-eb5b-4c6a-848e-bce74a48c6da
+641cf71d-0ba2-44b8-be34-2a40b0b37100,16b79902-afa0-4bef-9658-98cd8d671212,e08cce86-c8a2-11e9-a32f-2a2ae2dbcce4,1,Skill required,8e88cf20-f5f2-40dc-8b8e-e63d8bc868ee
+641cf71d-0ba2-44b8-be34-2a40b0b37101,16b79902-afa0-4bef-9658-98cd8d671212,e08cd0fc-c8a2-11e9-a32f-2a2ae2dbcce4,1,Skill required,82dd385a-eb5b-4c6a-846b-bce74a48c6da
+641cf71d-0ba2-44b8-be34-2a40b0b37102,16b79902-afa0-4bef-9658-98cd8d671212,e08ce47a-c8a2-11e9-a32f-2a2ae2dbcce4,1,Skill required,5d054070-5aad-4812-9994-3e8e582dfa7a

@@ -1,0 +1,7 @@
+conceptType,conceptUri,skillType,preferredLabel,altLabels,description,usage
+KnowledgeSkillCompetence,{uuid()},skill/competence,ICT safety,"ICT protection
+information and communication technology safety
+information and communication technologies safety
+ICT welfare maintenance
+ICT security
+ICT well-being  maintenance","Skill is now restricted",restricted

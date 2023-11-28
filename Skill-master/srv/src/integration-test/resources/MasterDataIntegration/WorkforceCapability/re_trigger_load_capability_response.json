@@ -1,0 +1,81 @@
+{
+  "@odata.context": "$metadata#Logs",
+  "value": [
+    {
+      "instance": {
+        "id": "90f40384b2564194be99c59324bc322b",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "CAP-Java"
+          }
+        ],
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "CAP-Java"
+          }
+        ],
+        "proficiencyScale": {
+          "id": "1021"
+        },
+        "capabilityType": {
+          "code": "SKILL"
+        },
+        "catalogAssignment": [
+          {
+            "catalog": {
+              "id": "bc1318bb-9cbd-434c-8ae7-55291b724652"
+            }
+          }
+        ],
+        "status": {
+          "code": "ACTIVE"
+        }
+      },
+      "event": "created",
+      "versionId": "6a130a94-c255-478f-95d8-1244b2fc84b8"
+    },
+    {
+      "instance": {
+        "capabilityType": {
+          "code": "SKILL"
+        },
+        "catalogAssignment": [
+          {
+            "catalog": {
+              "id": "bc1318bb-9cbd-434c-8ae7-55291b724652"
+            }
+          },
+          {
+            "catalog": {
+              "id": "7714e3ebb5304af5a9ecfc95f83794e2"
+            }
+          }
+        ],
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Ability to perform data analysis."
+          }
+        ],
+        "id": "7a2f5e63858d47eda3b3729da9b9db3e",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Data Analytics"
+          }
+        ],
+        "proficiencyScale": {
+          "id": "1021"
+        },
+        "status": {
+          "code": "ACTIVE"
+        }
+      },
+      "event": "created",
+      "versionId": "5649434b-8b39-401a-8fc5-d1e112f22b5d"
+    }
+  ],
+  "@odata.deltaLink": "/v1/odm/5.0.0/sap.odm.workforce.capability.WorkforceCapability/events?$deltatoken=deltaLoadResponseDeltaToken"
+}

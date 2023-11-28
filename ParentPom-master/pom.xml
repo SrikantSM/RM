@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.sap.c4p.rm</groupId>
+	<artifactId>cap-parent</artifactId>
+	<version>16.1.0</version>
+
+	<name>Resource Management CAP Parent</name>
+	<description>Parent pom providing dependency and plugin management for Resource Management CAP applications built with Maven</description>
+	<packaging>pom</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<jdk.version>17</jdk.version>
+		<java.version>17</java.version>
+		<ws.product.version>${project.version}</ws.product.version>
+		<cds-services.version>2.1.1</cds-services.version>
+		<spring.version>3.1.4</spring.version>
+		<sgs-patch.version>sap-02</sgs-patch.version>
+		<security.xsuaa.version>3.1.3</security.xsuaa.version>
+		<cf.logging.version>3.7.1</cf.logging.version>
+		<auditLog.java.client.version>2.6.4</auditLog.java.client.version>
+		<cloud.xs.java.version>1.24.0</cloud.xs.java.version>
+		<java-cfenv-boot.version>2.4.1</java-cfenv-boot.version>
+		<sqlite-jdbc.version>3.40.0.0</sqlite-jdbc.version>
+	</properties>
+
+	<!-- DEPENDENCY VERSION MANAGEMENT -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.sap.cds</groupId>
+				<artifactId>cds-services-bom</artifactId>
+				<version>${cds-services.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sap.sgs</groupId>
+				<artifactId>security-patched-spring-boot-dependencies</artifactId>
+				<version>${spring.version}-${sgs-patch.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- ACTUAL DEPENDENCIES -->
+	<dependencies>
+		<dependency>
+			<groupId>com.sap.cds</groupId>
+			<artifactId>cds-starter-spring-boot-odata</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.cds</groupId>
+			<artifactId>cds-feature-hana</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.cds</groupId>
+			<artifactId>cds-feature-cloudfoundry</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.cds</groupId>
+			<artifactId>cds-feature-xsuaa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.cds</groupId>
+			<artifactId>cds-feature-mt</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.cloud.security.xsuaa</groupId>
+			<artifactId>xsuaa-spring-boot-starter</artifactId>
+			<!-- Version managed in Phosphor as well, but Phosphor doesn't update even patch versions -->
+			<!-- Hence, we'll be managing the xsuaa version manually as well -->
+			<version>${security.xsuaa.version}</version>
+		</dependency>
+
+		<!-- part of com.sap.cloud.security.xsuaa:xsuaa-spring-boot-starter, but overwritten by conflicting -->
+		<!-- versions of other dependencies with higher precedence -->
+		<dependency>
+			<groupId>com.sap.cloud.security.xsuaa</groupId>
+			<artifactId>token-client</artifactId>
+			<version>${security.xsuaa.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.hcp.cf.logging</groupId>
+			<artifactId>cf-java-logging-support-servlet</artifactId>
+			<version>${cf.logging.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.hcp.cf.logging</groupId>
+			<artifactId>cf-java-logging-support-logback</artifactId>
+			<version>${cf.logging.version}</version>
+		</dependency>
+
+		<!-- ACTUATOR TO ENABLE HEALTH CHECKS -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<!-- VALIDATIONS AS USED FOR THE HEALTH CHECK PROPERTIES -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+		<!-- ENABLE POJOS TO ACCESS CONFIGURATION PROPERTIES -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>${sqlite-jdbc.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!--dependencies for audit log -->
+		<dependency>
+			<groupId>com.sap.cp.auditlog</groupId>
+			<artifactId>audit-java-client-api</artifactId>
+			<version>${auditLog.java.client.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.cp.auditlog</groupId>
+			<artifactId>audit-java-client-impl</artifactId>
+			<version>${auditLog.java.client.version}</version>
+		</dependency>
+                
+		<dependency>
+			<groupId>com.sap.cloud.sjb</groupId>
+			<artifactId>xs-env</artifactId>
+			<version>${cloud.xs.java.version}</version>
+		</dependency>
+
+
+		<!-- TO READ CLOUD FOUNDRY ENVIRONMENT'S VCAP VARIABLES -->
+		<dependency>
+			<groupId>io.pivotal.cfenv</groupId>
+			<artifactId>java-cfenv-boot</artifactId>
+			<version>${java-cfenv-boot.version}</version>
+		</dependency>
+		
+		<!-- Temporary fix for CVE-2022-45688, Need to remove the overriding with next dependency update -->
+		<dependency>
+			<groupId>com.sap.cloud.environment.servicebinding</groupId>
+			<artifactId>java-modules-bom</artifactId>
+			<version>0.6.0</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+		<!--CAP 2.0 releated dependency change-->
+		<dependency>
+      <groupId>org.apache.httpcomponents.client5</groupId>
+      <artifactId>httpclient5</artifactId>
+      <version>5.2.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.sap.hcp.cf.logging</groupId>
+      <artifactId>cf-java-logging-support-servlet-jakarta</artifactId>
+      <version>${cf.logging.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sap.cloud.security.xsuaa</groupId>
+      <artifactId>spring-security-compatibility</artifactId>
+      <version>3.1.3</version>
+    </dependency>
+		<!--End of CAP 2.0 releated dependency change-->
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<version>1.3.0</version>
+			</plugin>
+			<!-- CONFIGURE SPRING BOOT PLUGIN -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring.version}</version>
+				<configuration>
+					<skip>false</skip>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- EXECUTE UNIT TESTS -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+			</plugin>
+
+			<!-- CONFIGURE ADDITIONAL SOURCE DIRECTORY FOR GENERATED CLASSES -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/gen/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- CLEAN GENERATED ARTIFACTS -->
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>src/gen</directory>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+
+			<!-- DEFINE JAVA VERSION -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+
+			<!-- WhiteSource Scan -->
+			<plugin>
+				<groupId>org.whitesource</groupId>
+				<artifactId>whitesource-maven-plugin</artifactId>
+				<version>19.5.1</version>
+				<configuration>
+					<orgToken>${env.WHITESOURCE_ORG_KEY}</orgToken>
+					<userKey>${env.WHITESOURCE_USER_KEY}</userKey>
+					<product>SHC - RESOURCE MGT OD 1.0</product>
+					<productVersion>${ws.product.version}</productVersion>
+					<checkPolicies>true</checkPolicies>
+					<failOnError>true</failOnError>
+					<failErrorLevel>ALL</failErrorLevel>
+				</configuration>
+			</plugin>
+			<!-- jacoco prepage-agent has to be executed prior to sonar scan (same
+						phase) -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.8</version>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<!-- GENERATE POJO INTERFACES -->
+				<plugin>
+					<groupId>com.sap.cds</groupId>
+					<artifactId>cds-maven-plugin</artifactId>
+					<version>${cds-services.version}</version>
+					<executions>
+						<execution>
+							<id>cds.generate</id>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+							<configuration>
+								<basePackage />
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<!-- CONFIGURE ECLIPSE -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo</groupId>
+										<artifactId>exec-maven-plugin</artifactId>
+										<versionRange>[0,)</versionRange>
+										<goals>
+											<goal>exec</goal>
+											<goal>java</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+<repositories>
+    <repository>
+      <id>artifactory.build.releases</id>
+      <name>Artifactory Build Releases</name>
+      <url>https://common.repositories.cloud.sap/build.releases/</url>
+    </repository>
+    <repository>
+      <id>artifactory.build.snapshots</id>
+      <name>Artifactory Build Snapshots</name>
+      <url>https://common.repositories.cloud.sap:443/artifactory/build.snapshots/</url>
+    </repository>
+   <repository>
+      <id>artifactory.build.milestones</id>
+      <name>Artifactory Build Milestones</name>
+      <url>https://common.repositories.cloud.sap:443/artifactory/build.milestones/</url>
+    </repository>
+   </repositories>
+</project>

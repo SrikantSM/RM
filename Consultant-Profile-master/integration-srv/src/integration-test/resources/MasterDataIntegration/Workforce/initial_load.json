@@ -1,0 +1,710 @@
+{
+    "log": [
+        {
+            "instance": {
+                "id": "1bbf14ad-1f8b-4aa9-9a1c-48963bc394b3",
+                "externalId": "Workforce1",
+                "profileDetail": [
+                    {
+                        "valid_to": "9999-12-31",
+                        "valid_from": "2019-10-23",
+                        "content": {
+                            "scriptedProfileDetails": [
+                                {
+                                    "firstName": "firstName1",
+                                    "lastName": "lastName1",
+                                    "formalName": "firstName1 lastName1",
+                                    "preferredName": "firstName1 lastName1",
+                                    "initials": "FL"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "emails": [
+                    {
+                        "isDefault": true,
+                        "address": "workforce1@sap.com",
+                        "usage": {
+                            "code": "B"
+                        }
+                    }
+                ],
+                "phones": [
+                    {
+                        "number": "1234567890",
+                        "isDefault": true,
+                        "usage": {
+                            "code": "B"
+                        }
+                    }
+                ],
+                "userAccount": {
+                    "userName": "Workforce1"
+                },
+                "workAssignments": [
+                    {
+                        "externalId": "WorkAssignmentExternal1",
+                        "isContingentWorker": false,
+                        "id": "WorkAssignmentId1",
+                        "detail": [
+                            {
+                                "valid_to": "9999-12-31",
+                                "valid_from": "2020-10-23",
+                                "content": {
+                                    "isPrimary": true
+                                }
+                            }
+                        ],
+                        "jobDetails": [
+                            {
+                                "valid_to": "9999-12-31",
+                                "valid_from": "2020-10-23",
+                                "content": [
+                                    {
+                                        "employeeClass": {
+                                            "code": "M_US"
+                                        },
+                                        "country": {
+                                            "code": "US"
+                                        },
+                                        "costCenter": {
+                                            "id": "a81424ca-9f17-4143-979b-06638a0926b3"
+                                        },
+                                        "jobTitle": "Administrator Demo",
+                                        "orgUnit": {
+                                            "ref": {
+                                                "id": "14f463a7-4a9b-4c1f-9838-09f1202dcda4"
+                                            },
+                                            "externalId": "CORP"
+                                        },
+                                        "supervisorWorkAssignment": {
+                                            "id": "NO_MANAGER"
+                                        },
+                                        "eventReason": {
+                                            "code": "HIRNEW"
+                                        },
+                                        "legalEntity": {
+                                            "externalId": "1710"
+                                        },
+                                        "eventSequence": 1,
+                                        "workingHoursPerWeek": 40.0,
+                                        "fte": 1.0,
+                                        "location": {
+                                            "externalId": "US_GA_1001"
+                                        },
+                                        "job": {
+                                            "ref": {
+                                                "id": "6a12a8a1-ffb4-44ed-9132-fc7bbbbf1b68"
+                                            },
+                                            "externalId": "ADMIN"
+                                        },
+                                        "event": {
+                                            "code": "H"
+                                        },
+                                        "status": {
+                                            "code": "A"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "startDate": "2020-10-23"
+                    }
+                ]
+            },
+            "event": "created",
+            "versionId": "6c8895d9-5f47-42b1-9d54-0bdb5783b888"
+        },
+        {
+            "instance": {
+                "id": "2bbf14ad-1f8b-4aa9-9a1c-48963bc394b3",
+                "externalId": "Workforce2",
+                "profileDetail": [
+                    {
+                        "valid_to": "9999-12-31",
+                        "valid_from": "2020-10-23",
+                        "content": {
+                            "scriptedProfileDetails": [
+                                {
+                                    "firstName": "firstName2",
+                                    "lastName": "lastName2",
+                                    "formalName": "firstName2 lastName2",
+                                    "preferredName": "firstName2 lastName2",
+                                    "initials": "FL"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "emails": [
+                    {
+                        "isDefault": true,
+                        "address": "workforce2@sap.com",
+                        "usage": {
+                            "code": "B"
+                        }
+                    }
+                ],
+                "phones": [
+                    {
+                        "number": "2234567890",
+                        "isDefault": true,
+                        "usage": {
+                            "code": "B"
+                        },
+                        "country":{
+               				"code":"AT"
+           				}
+                    }
+                ],
+                "userAccount": {
+                    "userName": "Workforce2"
+                },
+                "workAssignments": [
+                    {
+                        "externalId": "WorkAssignmentExternal2",
+                        "isContingentWorker": true,
+                        "id": "WorkAssignmentId2",
+                        "detail": [
+                            {
+                                "valid_to": "9999-12-31",
+                                "valid_from": "2020-10-23",
+                                "content": {
+                                    "isPrimary": true
+                                }
+                            }
+                        ],
+                        "jobDetails": [
+                            {
+                                "valid_to": "9999-12-31",
+                                "valid_from": "2020-10-23",
+                                "content": [
+                                    {
+                                        "employeeClass": {
+                                            "code": "M_US"
+                                        },
+                                        "country": {
+                                            "code": "US"
+                                        },
+                                        "costCenter": {
+                                            "id": "a81424ca-9f17-4143-979b-06638a0926b3"
+                                        },
+                                        "jobTitle": "Administrator Demo",
+                                        "orgUnit": {
+                                            "ref": {
+                                                "id": "14f463a7-4a9b-4c1f-9838-09f1202dcda4"
+                                            },
+                                            "externalId": "CORP"
+                                        },
+                                        "supervisorWorkAssignment": {
+                                            "id": "NO_MANAGER"
+                                        },
+                                        "eventReason": {
+                                            "code": "HIRNEW"
+                                        },
+                                        "legalEntity": {
+                                            "externalId": "1710"
+                                        },
+                                        "eventSequence": 1,
+                                        "workingHoursPerWeek": 40.0,
+                                        "fte": 1.0,
+                                        "location": {
+                                            "externalId": "US_GA_1001"
+                                        },
+                                        "job": {
+                                            "ref": {
+                                                "id": "6a12a8a1-ffb4-44ed-9132-fc7bbbbf1b68"
+                                            },
+                                            "externalId": "ADMIN"
+                                        },
+                                        "event": {
+                                            "code": "H"
+                                        },
+                                        "status": {
+                                            "code": "A"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "startDate": "2020-10-23"
+                    },
+                    {
+                        "externalId": "WorkAssignmentExternal9",
+                        "isContingentWorker": true,
+                        "id": "WorkAssignmentId9",
+                        "detail": [],
+                        "jobDetails": [],
+                        "startDate": "2020-10-23"
+                    }
+                ]
+            },
+            "event": "created",
+            "versionId": "f8e60113-dab9-4a30-908c-c5ad09ab588f"
+        },
+        {
+            "instance": {
+                "id": "3bbf14ad-1f8b-4aa9-9a1c-48963bc394b3",
+                "externalId": "Workforce3",
+                "profileDetail": [
+                    {
+                        "valid_to": "9999-12-31",
+                        "valid_from": "2020-10-23",
+                        "content": {
+                            "scriptedProfileDetails": [
+                                {
+                                    "firstName": "firstName3",
+                                    "lastName": "lastName3",
+                                    "formalName": "firstName3 lastName3",
+                                    "preferredName": "firstName3 lastName3",
+                                    "initials": "FL"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "emails": [
+                    {
+                        "isDefault": true,
+                        "address": "workforce3@sap.com",
+                        "usage": {
+                            "code": "B"
+                        }
+                    }
+                ],
+                "phones": [
+                    {
+                        "number": "3234567890",
+                        "isDefault": true,
+                        "usage": {
+                            "code": "B"
+                        },
+                        "country":{
+               				"code":"AT"
+           				}
+                    }
+                ],
+                "userAccount": {
+                    "userName": "Workforce3"
+                },
+                "workAssignments": [
+                    {
+                        "externalId": "WorkAssignmentExternal3",
+                        "isContingentWorker": false,
+                        "id": "WorkAssignmentId3",
+                        "detail": [
+                            {
+                                "valid_to": "9999-12-31",
+                                "valid_from": "2020-10-23",
+                                "content": {
+                                    "isPrimary": true
+                                }
+                            }
+                        ],
+                        "jobDetails": [
+                            {
+                                "valid_to": "9999-12-31",
+                                "valid_from": "2020-10-23",
+                                "content": [
+                                    {
+                                        "employeeClass": {
+                                            "code": "M_US"
+                                        },
+                                        "country": {
+                                            "code": "US"
+                                        },
+                                        "costCenter": {
+                                            "id": "a81424ca-9f17-4143-979b-06638a0926b3"
+                                        },
+                                        "jobTitle": "Administrator Demo",
+                                        "orgUnit": {
+                                            "ref": {
+                                                "id": "14f463a7-4a9b-4c1f-9838-09f1202dcda4"
+                                            },
+                                            "externalId": "CORP"
+                                        },
+                                        "supervisorWorkAssignment": {
+                                            "id": "NO_MANAGER"
+                                        },
+                                        "eventReason": {
+                                            "code": "HIRNEW"
+                                        },
+                                        "legalEntity": {
+                                            "externalId": "1710"
+                                        },
+                                        "eventSequence": 1,
+                                        "workingHoursPerWeek": 40.0,
+                                        "fte": 1.0,
+                                        "location": {
+                                            "externalId": "US_GA_1001"
+                                        },
+                                        "job": {
+                                            "ref": {
+                                                "id": "6a12a8a1-ffb4-44ed-9132-fc7bbbbf1b68"
+                                            },
+                                            "externalId": "ADMIN"
+                                        },
+                                        "event": {
+                                            "code": "H"
+                                        },
+                                        "status": {
+                                            "code": "A"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "startDate": "2020-10-23"
+                    }
+                ]
+            },
+            "event": "created",
+            "versionId": "8b63fa69-f8f9-459a-9f00-ed2568b6820f"
+        },
+        {
+            "instance": {
+                "id": "4bbf14ad-1f8b-4aa9-9a1c-48963bc394b3",
+                "externalId": "Workforce4",
+                "profileDetail": [
+                    {
+                        "valid_to": "9999-12-31",
+                        "valid_from": "2020-10-23",
+                        "content": {
+                            "scriptedProfileDetails": [
+                                {
+                                    "firstName": "firstName4",
+                                    "lastName": "lastName4",
+                                    "formalName": "firstName4 lastName4",
+                                    "preferredName": "firstName4 lastName4"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "emails": [
+                    {
+                        "isDefault": true,
+                        "address": "workforce4@sap.com",
+                        "usage": {
+                            "code": "B"
+                        }
+                    }
+                ],
+                "phones": [
+                    {
+                        "number": "4234567890",
+                        "isDefault": true,
+                        "usage": {
+                            "code": "B"
+                        }
+                    }
+                ],
+                "userAccount": {
+                    "userName": "Workforce4"
+                },
+                "workAssignments": [
+                    {
+                        "externalId": "WorkAssignmentExternal4",
+                        "isContingentWorker": true,
+                        "id": "WorkAssignmentId4",
+                        "detail": [
+                            {
+                                "valid_to": "9999-12-31",
+                                "valid_from": "2020-10-23",
+                                "content": {
+                                    "isPrimary": true
+                                }
+                            }
+                        ],
+                        "jobDetails": [
+                            {
+                                "valid_to": "9999-12-31",
+                                "valid_from": "2020-10-23",
+                                "content": [
+                                    {
+                                        "employeeClass": {
+                                            "code": "M_US"
+                                        },
+                                        "country": {
+                                            "code": "US"
+                                        },
+                                        "costCenter": {
+                                            "id": "a81424ca-9f17-4143-979b-06638a0926b3"
+                                        },
+                                        "jobTitle": "Administrator Demo",
+                                        "orgUnit": {
+                                            "ref": {
+                                                "id": "14f463a7-4a9b-4c1f-9838-09f1202dcda4"
+                                            },
+                                            "externalId": "CORP"
+                                        },
+                                        "supervisorWorkAssignment": {
+                                            "id": "NO_MANAGER"
+                                        },
+                                        "eventReason": {
+                                            "code": "HIRNEW"
+                                        },
+                                        "legalEntity": {
+                                            "externalId": "1710"
+                                        },
+                                        "eventSequence": 1,
+                                        "workingHoursPerWeek": 40.0,
+                                        "fte": 1.0,
+                                        "location": {
+                                            "externalId": "US_GA_1001"
+                                        },
+                                        "job": {
+                                            "ref": {
+                                                "id": "6a12a8a1-ffb4-44ed-9132-fc7bbbbf1b68"
+                                            },
+                                            "externalId": "ADMIN"
+                                        },
+                                        "event": {
+                                            "code": "H"
+                                        },
+                                        "status": {
+                                            "code": "A"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "startDate": "2020-10-23"
+                    }
+                ]
+            },
+            "event": "created",
+            "versionId": "6014a32a-72c9-47d2-9743-11b0b61735bd"
+        },
+        {
+            "instance": {
+                "id": "5bbf14ad-1f8b-4aa9-9a1c-48963bc394b3",
+                "externalId": "Workforce5",
+                "profileDetail": [
+                    {
+                        "valid_to": "9999-12-31",
+                        "valid_from": "2020-10-23",
+                        "content": {
+                            "scriptedProfileDetails": [
+                                {
+                                    "firstName": "firstName5",
+                                    "lastName": "lastName5",
+                                    "formalName": "firstName5 lastName5",
+                                    "preferredName": "firstName5 lastName5"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "emails": [
+                    {
+                        "isDefault": true,
+                        "address": "workforce5@sap.com",
+                        "usage": {
+                            "code": "B"
+                        }
+                    }
+                ],
+                "phones": [
+                    {
+                        "number": "5234567890",
+                        "isDefault": true,
+                        "usage": {
+                            "code": "B"
+                        }
+                    }
+                ],
+                "userAccount": {
+                    "userName": "Workforce5"
+                },
+                "workAssignments": [
+                    {
+                        "externalId": "WorkAssignmentExternal5",
+                        "isContingentWorker": false,
+                        "id": "WorkAssignmentId5",
+                        "detail": [
+                            {
+                                "valid_to": "9999-12-31",
+                                "valid_from": "2020-10-23",
+                                "content": {
+                                    "isPrimary": true
+                                }
+                            }
+                        ],
+                        "jobDetails": [
+                            {
+                                "valid_to": "9999-12-31",
+                                "valid_from": "2020-10-23",
+                                "content": [
+                                    {
+                                        "employeeClass": {
+                                            "code": "M_US"
+                                        },
+                                        "country": {
+                                            "code": "US"
+                                        },
+                                        "costCenter": {
+                                            "id": "a81424ca-9f17-4143-979b-06638a0926b3"
+                                        },
+                                        "jobTitle": "Administrator Demo",
+                                        "orgUnit": {
+                                            "ref": {
+                                                "id": "14f463a7-4a9b-4c1f-9838-09f1202dcda4"
+                                            },
+                                            "externalId": "CORP"
+                                        },
+                                        "supervisorWorkAssignment": {
+                                            "id": "NO_MANAGER"
+                                        },
+                                        "eventReason": {
+                                            "code": "HIRNEW"
+                                        },
+                                        "legalEntity": {
+                                            "externalId": "1710"
+                                        },
+                                        "eventSequence": 1,
+                                        "workingHoursPerWeek": 40.0,
+                                        "fte": 1.0,
+                                        "location": {
+                                            "externalId": "US_GA_1001"
+                                        },
+                                        "job": {
+                                            "ref": {
+                                                "id": "6a12a8a1-ffb4-44ed-9132-fc7bbbbf1b68"
+                                            },
+                                            "externalId": "ADMIN"
+                                        },
+                                        "event": {
+                                            "code": "H"
+                                        },
+                                        "status": {
+                                            "code": "A"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "startDate": "2020-10-23"
+                    }
+                ]
+            },
+            "event": "created",
+            "versionId": "c558768d-ef19-447b-9d26-d90b45bf0556"
+        },
+        {
+            "instance": {
+                "id": "6bbf14ad-1f8b-4aa9-9a1c-48963bc394b3",
+                "externalId": "Workforce6",
+                "profileDetail": [
+                    {
+                        "valid_from": "2020-10-23",
+                        "content": {
+                            "scriptedProfileDetails": [
+                                {
+                                    "firstName": "firstName6",
+                                    "lastName": "lastName6",
+                                    "formalName": "firstName6 lastName6",
+                                    "preferredName": "firstName6 lastName6"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "emails": [
+                    {
+                        "isDefault": true,
+                        "address": "workforce6@sap.com",
+                        "usage": {
+                            "code": "B"
+                        }
+                    }
+                ],
+                "phones": [
+                    {
+                        "number": "7234567890",
+                        "isDefault": true,
+                        "usage": {
+                            "code": "B"
+                        }
+                    }
+                ],
+                "userAccount": {
+                    "userName": "Workforce6"
+                },
+                "workAssignments": [
+                    {
+                        "externalId": "WorkAssignmentExternal7",
+                        "isContingentWorker": true,
+                        "id": "WorkAssignmentId7",
+                        "detail": [
+                            {
+                                "valid_from": "2020-10-23",
+                                "content": {
+                                    "isPrimary": true
+                                }
+                            }
+                        ],
+                        "jobDetails": [
+                            {
+                                "valid_from": "2020-10-23",
+                                "content": [
+                                    {
+                                        "employeeClass": {
+                                            "code": "M_US"
+                                        },
+                                        "country": {
+                                            "code": "US"
+                                        },
+                                        "costCenter": {
+                                            "id": "a81424ca-9f17-4143-979b-06638a0926b3"
+                                        },
+                                        "jobTitle": "Administrator Demo",
+                                        "orgUnit": {
+                                            "ref": {
+                                                "id": "14f463a7-4a9b-4c1f-9838-09f1202dcda4"
+                                            },
+                                            "externalId": "CORP"
+                                        },
+                                        "supervisorWorkAssignment": {
+                                            "id": "NO_MANAGER"
+                                        },
+                                        "eventReason": {
+                                            "code": "HIRNEW"
+                                        },
+                                        "legalEntity": {
+                                            "externalId": "1710"
+                                        },
+                                        "eventSequence": 1,
+                                        "workingHoursPerWeek": 40.0,
+                                        "fte": 1.0,
+                                        "location": {
+                                            "externalId": "US_GA_1001"
+                                        },
+                                        "job": {
+                                            "ref": {
+                                                "id": "6a12a8a1-ffb4-44ed-9132-fc7bbbbf1b68"
+                                            },
+                                            "externalId": "ADMIN"
+                                        },
+                                        "event": {
+                                            "code": "H"
+                                        },
+                                        "status": {
+                                            "code": "A"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "startDate": "2020-10-23"
+                    }
+                ]
+            },
+            "event": "created",
+            "versionId": "bda49385-a84b-4650-ae16-425cfd259781"
+        }
+    ],
+    "nextDeltaToken": "initialLoadResponseDeltaToken",
+    "hasMoreEvents": false
+}

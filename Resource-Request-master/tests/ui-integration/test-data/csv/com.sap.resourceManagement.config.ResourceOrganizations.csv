@@ -1,0 +1,5 @@
+ID;displayId;name;description;serviceOrganization_code;lifeCycleStatus_code
+cae71940-d277-4046-822a-6c60a8f36d64;RORG1;Organization ORG_1 India;Organization ORG_1 India;Org_1;3
+10260314-5ca3-4b6a-870d-50c9f3b12cab;RORG2;Organization ORG_2 Germany;Organization ORG_2 Germany;Org_2;3
+501bcd32-42f3-4d4f-ab01-ba72b1057d4c;RORG3;Organization ORG_3 USA;Organization ORG_3 USA;Org_3;2
+86e69024-6962-4ced-8299-30e26094a115;RORG4;Organization ORG_4 Pakistan;Organization ORG_4 Pakistan;Org_4;3

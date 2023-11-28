@@ -1,0 +1,27 @@
+{
+    "welcomeFile": "test/flpSandbox.html",
+    "authenticationMethod": "route",
+    "logout": {
+        "logoutEndpoint": "/do/logout"
+    },
+    "routes": [
+        {
+            "source": "^(/api/internal/.*)$",
+            "target": "$1",
+            "authenticationType": "xsuaa",
+            "destination": "skill-srv-api"
+        },
+        {
+            "source": "^(/odata/v4/.*)$",
+            "target": "$1",
+            "authenticationType": "xsuaa",
+            "destination": "skill-srv-api"
+        },
+        {
+            "source": "^(.*)$",
+            "target": "$1",
+            "service": "html5-apps-repo-rt",
+            "authenticationType": "xsuaa"
+        }
+    ]
+}

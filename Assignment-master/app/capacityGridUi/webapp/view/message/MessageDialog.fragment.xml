@@ -1,0 +1,55 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<Dialog
+		id="dialog"
+		type="Message"
+		contentHeight="200px"
+		contentWidth="500px"
+		resizable="true"
+		state="Error"
+		afterClose="onAfterClose"
+		class="sapUiNoContentPadding"
+		verticalScrolling="false"
+	>
+		<customHeader>
+			<Toolbar>
+				<Button
+					id="back"
+					icon="sap-icon://arrow-left"
+					press="onBack"
+				/>
+				<Title text="{i18n>ERROR}"/>
+			</Toolbar>
+		</customHeader>
+		<MessageView
+			id="messageView"
+			showDetailsPageHeader="false"
+			itemSelect="onItemSelect"
+			items="{
+				path: 'message>/messages',
+				filters: [{
+					path: 'state',
+					operator: 'EQ',
+					value1: 'transient'
+				}]
+			}"
+		>
+			<MessageItem
+				title="{message>message}"
+				subtitle="{message>description}"
+				activeTitle="false"
+				type="{message>type}"
+				description="{message>description}"
+			/>
+		</MessageView>
+		<buttons>
+			<Button
+				id="close"
+				text="{i18n>CLOSE}"
+				press="onClose"
+			/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

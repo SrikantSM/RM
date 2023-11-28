@@ -1,0 +1,7 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout">
+  <l:HorizontalLayout allowWrapping="true">
+    <Button text="{i18n>ASSIGN}" press=".extension.assignDialog.onCreateAssignment" class="sapUiTinyMarginEnd" />
+    <Button text="{i18n>QUICKASSIGN}" press=".extension.assignActions.onQuickAssign" class="sapUiTinyMarginEnd"/>
+    <!-- <Button text="{i18n>ADD_TO_COMPARE}"></Button> -->
+  </l:HorizontalLayout>
+</core:FragmentDefinition>

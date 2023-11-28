@@ -1,0 +1,14 @@
+# Using Piper general purpose pipeline for Azure
+
+trigger:
+  - master
+
+resources:
+  repositories:
+  - repository: piper-pipeline-azure
+    endpoint: github.tools.sap
+    type: githubenterprise
+    name: Cloud4RM/RM-Piper-ADO
+
+extends:
+  template: piper-ado-templates/rm-testCommon-pipeline.yml@piper-pipeline-azure

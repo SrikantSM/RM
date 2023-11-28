@@ -1,0 +1,97 @@
+ID,workAssignmentID,externalID,parent,startDate,endDate,isContingentWorker
+000900bc-0dfa-b992-a4af-b4ed5bbbcf69,Gwen.Werner,Gwen.Werner,00f6633b-8c6d-0c0c-2afb-0e3fe4c27661,2018-01-01,2018-08-09,false
+e4beae01-a0ef-41fa-9037-e4dc36a12741,Gwen.Werner1,Gwen.Werner1,00f6633b-8c6d-0c0c-2afb-0e3fe4c27661,2018-08-10,2019-02-04,false
+eb1b4575-5f0d-45f9-befa-a3cd43def0ea,Gwen.Werner2,Gwen.Werner2,00f6633b-8c6d-0c0c-2afb-0e3fe4c27661,2019-02-03,9999-12-31,false
+7a4da86a-94cd-4969-a297-cf076038d6f8,Martin.Braun,Martin.Braun,00b3a7f1-ca69-6db7-e40c-8e32e6990561,2017-02-04,2018-04-08,false
+a9e19a53-e9d5-4820-8665-c972b575f646,Martin.Braun1,Martin.Braun1,00b3a7f1-ca69-6db7-e40c-8e32e6990561,2018-04-09,2019-11-11,false
+f09e2fa7-bd0e-4064-acd8-3c9d42baf0e7,Martin.Braun2,Martin.Braun2,00b3a7f1-ca69-6db7-e40c-8e32e6990561,2019-11-12,2020-01-01,false
+d660dbb9-7e5a-4241-ba72-30d08ce8edd2,Martin.Braun3,Martin.Braun3,00b3a7f1-ca69-6db7-e40c-8e32e6990561,2020-01-02,9999-12-31,false
+e5e3d7b8-1891-4d3f-80de-856d80217c88,Sarita.Sen,Sarita.Sen,0013e59c-e066-329a-58d4-f5493f33c5fa,2016-02-05,2018-09-09,false
+9e2550e9-ab47-4807-b39b-0656917a1645,Sarita.Sen1,Sarita.Sen1,0013e59c-e066-329a-58d4-f5493f33c5fa,2018-09-10,2019-12-12,false
+b178837c-545d-4b65-9462-5ffa402464f0,Sarita.Sen2,Sarita.Sen2,0013e59c-e066-329a-58d4-f5493f33c5fa,2019-12-13,9999-12-31,false
+001a3ed7-527c-8eb3-f00a-d44e95125649,Amitabh.Mehta,Amitabh.Mehta,00d8c7df-40a4-41be-17de-6239490ece8d,2019-04-19,9999-12-31,false
+02ffde7c-3b48-4745-8e54-107d17a28261,Keshav.Tamhanakar,Keshav.Tamhanakar,005162b0-d16f-d5fa-170a-7f3b27f7fcff,2019-04-19,9999-12-31,false
+c8fa5539-337c-4565-a109-7a9e177c3e0b,Megha.Sharma,Megha.Sharma,0040f835-3be5-1005-5c60-3759a7d479b8,2019-04-19,9999-12-31,false
+00f103d3-05c3-4fdb-9999-9d400881c533,Damini.Phadanis,Damini.Phadanis,00737664-fcce-96d1-56f5-dc6d97f5f693,2019-04-19,9999-12-31,false
+002a6d7b-0612-8440-78a7-fcae000863a7,Harsh.Shiravadakar,Harsh.Shiravadakar,006ad8d6-d98d-2bc1-52fb-aa0864a1e945,2019-04-19,9999-12-31,false
+f3f0bab0-d1fd-47df-a2c9-90782f8954d2,Hemant.Pai,Hemant.Pai,0056a1e5-a269-d1ee-e22c-75563d5b36fa,2019-04-19,9999-12-31,false
+d00ffad1-56fd-4cbd-9f3a-2b93fcca38a8,Hitesh.Soni,Hitesh.Soni,0016c475-96d1-56f5-dc6d-449decdf982b,2019-04-19,9999-12-31,false
+00eb655f-c131-ee44-9192-08e7c0072795,Anil.Mayadev,Anil.Mayadev,009daa23-5d7a-51e1-d5e8-d02952ead720,2019-04-19,9999-12-31,false
+00b0392c-9184-da6d-8cde-c23c25d14961,Natwar.Badami,Natwar.Badami,00a6f592-794f-1c9d-93f2-3d185bc5e0b2,2019-04-19,9999-12-31,false
+009d2aae-2682-c085-c411-0721e2dfd517,Riddhi.Khalsa,Riddhi.Khalsa,0042d80e-ade8-3460-9c90-87ad54804ce9,2019-04-19,9999-12-31,false
+009363ae-7b87-158a-d4ae-5b26cc3889c8,Sunita.Ramnarine,Sunita.Ramnarine,00fa08f3-bc0b-f26a-0980-e7ebfed8c488,2019-04-19,9999-12-31,false
+00554d1c-a5bb-9ffb-6e43-6f5dbcd5d334,Neerendra.Natt,Neerendra.Natt,00a14fdb-8d19-363f-b46d-a8d46c002546,2019-04-19,9999-12-31,false
+000bc69a-872e-7b96-ff9c-fadd9dd4b6a4,Ishat.Venkatesh,Ishat.Venkatesh,007ef5cb-9112-243c-dd87-19be4ba44356,2019-04-19,9999-12-31,false
+00953803-423e-fb89-37c0-9817ddb3ea85,Nayan.Ravi,Nayan.Ravi,00940b95-3a39-a269-d1ee-e22c4be65d8d,2019-04-19,9999-12-31,false
+002d4d55-bc7d-a89a-b8d8-4c02adb436d8,Lakshmi.Bhatia,Lakshmi.Bhatia,00531529-f26a-0980-e7eb-a70f8ed8d3c9,2019-04-19,9999-12-31,false
+0066b3aa-73f7-b607-1d37-4dbc05d12cd1,Mini.Kale,Mini.Kale,00271c8c-178a-8c6d-0c0c-2afb66797846,2019-04-19,9999-12-31,false
+00fb9404-75c8-e4d1-192f-30462afd34f3,Rohini.Saini,Rohini.Saini,0006a056-d1ee-e22c-7556-2ea11e19fd41,2019-04-19,9999-12-31,false
+00e4e0ce-db27-e58c-2e75-e0e7f846053d,Jiya.Mandal,Jiya.Mandal,00bfeb37-1d49-018d-c78a-55db07b3cd1a,2019-04-19,9999-12-31,false
+0060cb84-7e67-2e66-f6d5-f0159cd5b3b2,Amrit.Manne,Amrit.Manne,000c600a-3ec4-29e1-391f-cd497871a3a2,2019-04-19,9999-12-31,false
+009931d9-34e0-7f3b-5b34-ad68c9a116f0,Sahil.Bose,Sahil.Bose,00abb446-e525-6353-57ba-2029e16d1acf,2019-04-19,9999-12-31,false
+00bfb169-186a-31f2-39e5-5846f2bf554b,Gulab.Borah,Gulab.Borah,00771c1b-e805-7c2f-357a-71b186bab1ff,2019-04-19,9999-12-31,false
+00d67316-ff8d-10cb-a3f5-5c3fc8886bc7,Babita.Johal,Babita.Johal,00178a53-1005-5c60-3759-8a8d2ef98066,2019-04-19,9999-12-31,false
+00da0e49-4078-b7cd-61f3-df211a1eb4bf,Rupesh.Modi,Rupesh.Modi,003a3981-cf0f-c950-9897-99b14d7cd256,2019-04-19,9999-12-31,false
+0077f0c5-7411-cf8f-6992-28b614d821f6,Kamlesh.Shanker,Kamlesh.Shanker,0012cba0-a42f-15aa-7490-ebe5d4a1d904,2019-04-19,9999-12-31,false
+004808d7-9643-4f8d-8bc5-a9b49bbb0a7b,Rakhi.Amble,Rakhi.Amble,0069beda-9d56-ca69-6db7-e40c245f900a,2019-04-19,9999-12-31,false
+00004832-f2ea-ed2b-bc72-bd8ce82569e1,Usha.Gour,Usha.Gour,006f7d8e-0a2c-111f-3180-83b47eb7376c,2019-04-19,9999-12-31,false
+006d29c5-c815-2394-be97-7dbbfe31d4a7,Mukul.Savant,Mukul.Savant,0025e894-5bb4-0d25-4384-5a9abba43315,2019-04-19,9999-12-31,false
+009651ff-7e75-1878-1b04-5e141cf543c0,Divya.Beharry,Divya.Beharry,004c3c7a-4a5d-6073-3fde-fe02c9ee4171,2019-04-19,9999-12-31,false
+0001622e-2e21-0a1a-a0b6-c7f054b755d6,Jawahar.Kibe,Jawahar.Kibe,0014fe97-1c9d-93f2-3d18-ffaeabc5b0f0,2019-04-19,9999-12-31,false
+00f6e3c7-5675-7caf-1924-453774b77458,Kajal.Sankaran,Kajal.Sankaran,00bbf261-2aa7-7cdb-a315-fb22ef750ef4,2019-04-19,9999-12-31,false
+00ef5e35-b3d3-73f7-b607-1d37acf55300,Hema.Oza,Hema.Oza,00df4c71-e346-4b76-7afb-8a3910d0efe4,2019-04-19,9999-12-31,false
+00d0a9dd-e76b-8ab9-bea6-ab34d20052f2,Ben.Zimmermann,Ben.Zimmermann,00743c41-329a-58d4-f549-225cd90edece,2019-04-19,9999-12-31,false
+00a1d066-12b9-ea4b-a396-dfcdfcf5233e,Eshaan.Tillman,Eshaan.Tillman,00086634-4b22-a42f-15aa-74905f33e47c,2019-04-19,9999-12-31,false
+00cc0fab-a780-e3b8-440f-29537f6b09fa,Jonas.Rich,Jonas.Rich,00725d68-7c2f-357a-71b1-d2082c630a9d,2019-04-19,9999-12-31,false
+003d99e6-0a1a-a0b6-c7f0-1ffd8a1da47e,Kaila.Worthington,Kaila.Worthington,0095b777-7836-477d-4897-611f4dbeec8d,2019-04-19,9999-12-31,false
+0024aec7-9a3c-3d8a-b4de-5e05a6b0bc45,Zayne.Denton,Zayne.Denton,005f596f-01e1-9d56-ca69-6db7b0f19b82,2019-04-19,9999-12-31,false
+00701715-cb04-2682-c085-c4117a3e2159,Marian.Mendez,Marian.Mendez,00e52520-8b53-f383-2208-3346d6ba813c,2019-04-19,9999-12-31,false
+0077fb4a-63c4-0deb-8b19-7f80dc592525,Stefanie.M�ller,Stefanie.M�ller,0052288e-4ba3-97fd-b75f-0993946176f5,2019-04-19,9999-12-31, true
+00f12413-e99f-35fa-555b-a78f1a5fcef6,Tobias.Schmidt,Tobias.Schmidt,00ba2c83-b073-7670-04c1-b632ad5b26b9,2019-04-19,9999-12-31, true
+001470ac-9922-686a-6984-3ea46c593565,Thierry.Schneider,Thierry.Schneider,00f94215-42d8-3066-ae94-5e93916e4992,2019-04-19,9999-12-31, true
+00bf6bc2-a2ea-7131-b6b3-8bd397a8cb12,Helen.Fischer,Helen.Fischer,003ec43d-7f0f-4d56-92d8-68f8fc003587,2019-04-19,9999-12-31, true
+00ae14ab-6599-3ab9-8614-a6751e0fecf7,Shayla.Weber,Shayla.Weber,00f9eef7-80d4-9112-243c-dd879345d892,2019-04-19,9999-12-31, true
+00147f23-e6a6-47fd-2c41-f23e0f6a1c2c,Oran.Sch�fer,Oran.Sch�fer,006365a9-9024-6c1e-be52-e48ca2686a1a,2019-04-19,9999-12-31, true
+00fd6858-3c7f-c9d0-38d9-6d383b7996b0,Anaya.Meyer,Anaya.Meyer,004e0258-c490-67de-9acb-87593658bc67,2019-04-19,9999-12-31, true
+00de12a4-22ce-7adb-eb56-8ea4fbdc7815,Leo.Wagner,Leo.Wagner,00b073fa-52fb-aa08-1b83-bed13bc5c031,2019-04-19,9999-12-31, true
+0060dafa-caea-0dfa-b992-a4af40e79a79,Leticia.Becker,Leticia.Becker,00cc2f7c-2bc1-52fb-aa08-1b8329cd95d4,2019-04-19,9999-12-31, true
+007a7c81-6878-5395-63d3-f7fdc35c8327,Kaylie.Bauer,Kaylie.Bauer,006bf1d2-16c4-8d19-363f-b46dcf33d43b,2019-04-19,9999-12-31, true
+002e1233-36b1-6a9d-572c-d55a1a1eb1ce,Leandro.Hoffmann,Leandro.Hoffmann,0001e1a3-6518-9b77-b18d-90f8c4c256df,2019-04-19,9999-12-31, true
+0024a342-ab88-bbc6-9358-083bde30b716,Elias.Schulz,Elias.Schulz,0045b7e8-6353-57ba-2029-1a6a2d7cb3d4,2019-04-19,9999-12-31, true
+00958c21-0441-5675-7caf-1924dbdc5b84,Kristian.Koch,Kristian.Koch,005d7a95-4b76-7afb-8a39-1e630345c851,2019-04-19,9999-12-31, true
+00406a4a-7402-a015-4363-bbb794b890e8,Maren.Adam,Maren.Adam,00ef8a8c-28c8-64ff-81ee-66321ed8e309,2019-04-19,9999-12-31, true
+00e3c6d2-9ff0-8334-8d99-d6828db31a47,Heidi.Mack,Heidi.Mack,00b91287-743c-5980-1f7d-acce42c93ac3,2019-04-19,9999-12-31, true
+00d56891-10d9-d26f-826f-4add2c58f953,Silke.Buchholz,Silke.Buchholz,00922cbc-84ce-7f0f-4d56-92d89e3a895c,2019-04-19,9999-12-31, true
+00055b04-21c3-8fcc-c52b-dc4140a58142,Ivan.Wagner,Ivan.Wagner,0080d4a5-477d-4897-611f-6912f8501787,2019-04-19,9999-12-31, true
+00399f11-1878-1b04-5e14-c64472dfe558,Van.Sporer,Van.Sporer,0084ce7a-391f-cd49-8694-c2cb118ed6ad,2019-04-19,9999-12-31, true
+00027b2a-6b58-6c72-85fa-8ded93f9ad11,Konstantinos.Wagner,Konstantinos.Wagner,00a036df-51e1-d5e8-d029-9e70016e3951,2019-04-19,9999-12-31, true
+0023f760-b1f4-5a1a-d848-ccb007a8bbd1,Rosalinda.Gutkowski,Rosalinda.Gutkowski,00046d5e-5980-1f7d-acce-5e3f7345b810,2019-04-19,9999-12-31, true
+0022dd64-75bd-f9c3-f304-c24b9c16d0db,Bernita.Kilback,Bernita.Kilback,0000c7a7-29e1-391f-cd49-8694582f6ae9,2019-04-19,9999-12-31, true
+00d78d12-3bc4-7122-8839-66a4331b56bd,Grant.Steuber,Grant.Steuber,0053c10c-3066-ae94-5e93-260290af62c9,2019-04-19,9999-12-31, true
+0003270c-a955-1085-fca2-0ce095d13c11,Kayli.Mertz,Kayli.Mertz,002322b6-25e8-4b22-a42f-15aa798b4cda,2019-04-19,9999-12-31, true
+00c750f7-3aab-9c02-8046-4643f9c3cfdd,Susana.Ebert,Susana.Ebert,00c1b115-5315-c490-67de-9acb49cdb456,2019-04-19,9999-12-31, true
+00db19ce-2f2c-3991-827a-35ebe29eb9ee,Devendra.Saga,Devendra.Saga,00794f13-6073-3fde-fe02-857a5cdf88ea,2015-01-01,9999-12-31, true
+009697a6-f3f5-d839-9e36-2b87770ccdf9,Kalpana.Basu,Kalpana.Basu,00eacbd8-bbf2-1d49-018d-c78ac4803ca8,2015-01-01,9999-12-31, true
+000507e6-1b58-34e0-7f3b-5b34427d1042,Doris.Walter,Doris.Walter,003cff5f-4943-8b53-f383-2208bbe64d4c,2015-01-01,9999-12-31, true
+008a0dba-2b95-c80a-f41d-976bfbdc7b06,Rosi.Steiner,Rosi.Steiner,007fbba9-0b46-2aa7-7cdb-a315b90ebe4c,2015-01-01,9999-12-31, true
+009ed690-2017-6599-3ab9-8614e4b76417,Salvatore.Welch,Salvatore.Welch,008f4ce2-12cb-5bb4-0d25-4384f18eb62b,2019-04-19,9999-12-31, true
+001ee38e-821b-7411-cf8f-699284d811b5,Paul.Singh,Paul.Singh,00d98dbd-7670-04c1-b632-a8288a28b5c8,2019-04-19,9999-12-31, true
+004ed601-4f9c-76d6-cee3-3f5ec4752b5e,Diane.Jobs,Diane.Jobs,00f82919-06a0-cf0f-c950-9897512cf057,2019-04-19,9999-12-31, true
+0025bc3e-e7bf-1c1e-779c-119f49c2a30c,Smita.Anderson,Smita.Anderson,00daa7b9-b3a7-6518-9b77-b18df6baa1be,2019-04-19,9999-12-31, true
+0054a13a-67be-3f50-b432-34d2e64ed7ef,Luis.Fernandez,Luis.Fernandez,00f0a488-64ff-81ee-6632-70978a6acfff,2019-04-19,9999-12-31, true
+00578014-1d29-62ab-38cb-832693faaa20,Keith.Meyer,Keith.Meyer,00e805fa-41be-17de-6239-829a8366556d,2019-04-19,9999-12-31, true
+0076e24e-278d-ab94-a6d4-751c70c6392f,Mandy.Stevens,Mandy.Stevens,000febc6-eec4-ade8-3460-9c9027f506d3,2019-04-19,9999-12-31, true
+ccf06e9d-fdcf-4519-8b10-7383421a885a,Sue.Mueller,Sue.Mueller,003526af-a036-e346-4b76-7afbf5fcbbf5,2019-04-19,9999-12-31, true
+1ebe6c8b-ec4d-4c79-a76d-436b60d46616,Volker.Schmidt,Volker.Schmidt,0028c86e-111f-3180-83b4-a9ee68500746,2019-04-19,9999-12-31, true
+7ffcef1c-5a8b-4c47-8729-93e6257896d8,Raveena.Gilmore,Raveena.Gilmore,b4b4f4dc-be3f-4c24-be74-bc5f598709af,2019-04-19,9999-12-31, true
+35f9d521-f62c-4e71-819c-00dec6aad23f,Aedan.Coles,Aedan.Coles,61b9e6fc-dfc3-4780-8bcf-012f2ddb12dc,2019-04-19,9999-12-31, true
+ed7c0195-3598-481d-a4c2-916bcf2430eb,Anastasia.Elliott,Anastasia.Elliott,e59df534-1b8e-4b2f-9633-cca080c33703,2019-04-19,9999-12-31, true
+26e027dc-cd75-4d90-91df-eb5ad0ef7081,Walter.Marquez,Walter.Marquez,d7c80384-eda4-4eaa-ba6b-163738641d74,2019-04-19,9999-12-31, true
+6d5b0d7d-f886-45de-ba57-e408b16ddee1,Arman.Austin,Arman.Austin,1d4d13f6-d0a2-4833-a2d2-18f8b698dad0,2019-04-19,9999-12-31, true
+5ba21b2e-2229-4492-9e80-6dd4c0d0831d,Jakob.Gonzalez,Jakob.Gonzalez,856f7f98-2d61-426c-8a43-e3d4d5c74f8c,2015-01-01,9999-12-31, true
+a4facc26-a58f-4d0d-aa26-242c3548d06c,Cai.Reese,Cai.Reese,23acdb8f-5c82-4250-a4f9-ff9847163e83,2015-01-01,9999-12-31, true
+5a6e0d61-219c-477d-9bfa-64015096685a,Nuha.Monaghan,Nuha.Monaghan,c844f6ed-3279-4a4f-bd03-0b97aa34f5e1,2015-01-01,9999-12-31, true
+fcdcc285-eaa0-4b47-b10d-edc75502afb5,Tamia.Avery,Tamia.Avery,670827ab-31e8-40a0-a4dd-987d7e074e73,2015-01-01,9999-12-31, true
+ce72a27b-8550-4f82-977e-714fadea1012,Lexi.Moreno,Lexi.Moreno,4ab3ffa3-3735-42f4-81ae-324e1168e7db,2015-01-01,9999-12-31, true
+bf2ae084-f251-4776-90bd-c44baea6aaca,Chandler.Vaughan,Chandler.Vaughan,881d48d3-7bdf-47f6-a2be-aec66269758a,2015-01-01,9999-12-31, true
+14f723a5-d68b-4749-a1b1-e868015e7a56,Mark.Rossi,Mark.Rossi,8d6921ad-4ace-4b1c-87a4-1fff75eafb8c,2015-01-01,9999-12-31, true

@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout">
+  <Dialog id="effortdistdateconfirm" icon="sap-icon://SAP-icons-TNT/exceptions" title="{i18n>changeDateRange}" type="Message" core:require="{handler: 'manageResourceRequest/ext/controller/EffortDistributionDateConfirmPopup'}">
+   <content>
+      <Text text="{i18n>confirmMessageChangeDateRange}"/>
+   </content>
+   <beginButton>
+      <Button text="{i18n>change}" press="handler.onConfirmChangeDateRange" type="Emphasized"/>
+   </beginButton>
+   <endButton>
+      <Button text="{i18n>cancel}" press="handler.onClosePopup"/>
+   </endButton>
+  </Dialog>
+</core:FragmentDefinition>

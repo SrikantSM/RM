@@ -1,0 +1,16 @@
+{
+    "name": "performance-tests",
+    "private": true,
+    "scripts": {
+        "start": "node startContainer.js",
+        "run:uiveri5": "uiveri5 uiveri5-config.js",
+        "cleanupDatabase": "node -e \"require('./src/utils').databaseCleanup.execute()\""
+    },
+    "dependencies": {
+        "exceljs": "^4.3.0",
+        "hot-formula-parser": "^4.0.0",
+        "@ui5/uiveri5": "^1.46.1",
+        "xmlhttprequest": "^1.8.0",
+        "test-commons": "git+https://github.tools.sap/Cloud4RM/Test-Commons#a845854471e1f87e1c3782270a8845b9f163ad33"
+    }
+}

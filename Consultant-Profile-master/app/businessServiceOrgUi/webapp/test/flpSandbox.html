@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Business Service Org App</title>
+
+	<script type="text/javascript">
+		window["sap-ushell-config"] = {
+			defaultRenderer: "fiori2",
+			renderers: {
+				fiori2: {
+					componentData: {
+						config: {
+							search: "hidden",
+						},
+					},
+				},
+			},
+			services: {
+				ClientSideTargetResolution: {
+					adapter: {
+						config: {
+							inbounds: {
+								businessServiceOrgUi: {
+									semanticObject: "businessServiceOrgUi",
+									action: "Display",
+									title: "Maintain Service Organizations",
+									signature: {
+										parameters: {},
+										additionalParameters: "allowed",
+									},
+									resolutionResult: {
+										applicationType: "SAPUI5",
+										additionalInformation: "SAPUI5.Component=businessServiceOrgUi",
+										url: "../",
+									},
+								},
+							},
+						},
+					},
+				},
+				NavTargetResolution: {
+					config: {
+						enableClientSideTargetResolution: true,
+					},
+				},
+			},
+			bootstrapPlugins: {
+				RuntimeAuthoringPlugin: {
+					component: "sap.ushell.plugins.rta",
+					config: {
+						validateAppVersion: false,
+					},
+				},
+				PersonalizePlugin: {
+					component: "sap.ushell.plugins.rta-personalize",
+					config: {
+						validateAppVersion: false,
+					},
+				},
+			},
+		};
+
+        var ui5BaseUrl = "https://sapui5.hana.ondemand.com/resources";
+        if (parent && parent.sap) {
+            ui5BaseUrl = parent.sap.ui.require.toUrl("").slice(0,-9);
+        }
+        console.log("ui5BaseUrl: " + ui5BaseUrl);
+
+		var bootstrap = document.createElement("script");
+		bootstrap.setAttribute("src", ui5BaseUrl + "resources/sap-ui-core.js");
+		bootstrap.setAttribute("id", "sap-ui-bootstrap");
+		bootstrap.setAttribute("data-sap-ui-theme", "sap_fiori_3");
+		bootstrap.setAttribute("data-sap-ui-compatVersion", "edge");
+		bootstrap.setAttribute("data-sap-ui-frameOptions", "allow");
+		bootstrap.setAttribute("data-sap-ui-resourceroots", '{"businessServiceOrgUi": "../"}');
+		bootstrap.setAttribute("data-sap-ui-flexibilityServices", '[{"connector":"LocalStorageConnector"}]');
+		bootstrap.setAttribute("data-sap-ui-async", "true");
+		bootstrap.setAttribute("data-sap-ui-oninit", "startFlp");
+		document.head.appendChild(bootstrap);
+
+		function startFlp() {
+			sap.ui.require(["sap/ushell/services/Container"], function () {
+				sap.ushell.bootstrap("local").then(function () {
+					sap.ushell.Container.createRenderer().placeAt("content");
+				});
+			});
+		}
+	</script>
+</head>
+
+<!-- UI Content -->
+
+<body class="sapUiBody" id="content">
+</body>
+</html>

@@ -1,0 +1,4 @@
+ID,costCenterexternalID,supervisorWorkAssignmentExternalID,jobTitle,parent,country_code,validFrom,validTo,legalEntityExternalID,eventSequence
+00e4ad7d-91b3-49fe-8635-e78c57b68ca0,72975bf5-6e74-45d5-b3eb-16cd9d647593,diane.jobs,User Assistance Developer,3f0c80ff-8573-485a-8413-48855551631d,DE,2018-01-01,2028-03-05,LE01,1
+10e4ad7d-91b3-49fe-8635-e78c57b68ca1,72975bf5-6e74-45d5-b3eb-16cd9d647593,diane.jobs,User Assistance Developer,742e3684-3b44-11ea-b77f-2e728ce88125,DE,2018-01-01,2028-03-05,LE01,1
+1aafac6c-e704-47df-b953-a1c964cc5d9c,72975bf5-6e74-45d5-b3eb-16cd9d647593,diane.jobs,User Assistance Developer,3c51b7c6-dbfb-47ab-ae98-e3e1557d1c5d,DE,2018-01-01,2028-03-05,LE01,1 

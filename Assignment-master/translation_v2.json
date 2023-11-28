@@ -1,0 +1,49 @@
+{
+	"collections": [
+		{
+			"collectionName": "C4P_RM_Assignment_UserInterface",
+			"folders": [
+				{
+					"startingFolderPath": "app/capacityGridUi/webapp/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "flp-content/portal-site/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				}
+			]
+		},
+		{
+			"collectionName": "C4P_RM_Assignment_JavaOdata",
+			"folders": [
+				{
+					"startingFolderPath": "srv/src/main/resources/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				}
+			]
+		},
+		{
+			"collectionName": "C4P_RM_Assignment_DB",
+			"folders": [
+			  {
+				"startingFolderPath": "db/src/translation/assignment/**",
+				"sourceFilters": [
+				  "*.properties"
+				]
+			  }
+			]
+		  }
+	],
+	"defaultConfiguration": {
+		"targetFolderPath": ".",
+		"pseudoLocFolderPath": ".",
+		"oneQFolderPath": ".",
+		"targetFileNamingConvention": "[filename]_[langCode].[extension]"
+	}
+}

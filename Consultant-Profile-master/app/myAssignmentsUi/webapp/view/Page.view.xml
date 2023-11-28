@@ -1,0 +1,99 @@
+<mvc:View
+    controllerName="myAssignmentsUi.controller.Page"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:unified="sap.ui.unified"
+    xmlns:l="sap.ui.layout"
+    displayBlock="true"
+    xmlns="sap.m">
+    <App>
+        <Page>
+    <l:DynamicSideContent
+        id="DynamicSideContent"
+        class="sapUiDSCExplored sapUiContentPadding"
+        sideContentVisibility="AlwaysShow"
+        showSideContent="{path: 'stateModel>/legendShown'}"
+        containerQuery="true">
+        <VBox>
+            <PlanningCalendar
+                id="MyPlanningCalendar"
+                calendarWeekNumbering="ISO_8601"
+                showRowHeaders="false"
+                minDate="{path: '/minDate'}"
+			    maxDate="{path: '/maxDate'}"
+                viewKey="MyMonth"
+                rows="{path: '/myAssignments'}"
+                appointmentsVisualization="Filled"
+                appointmentSelect="handleAssignmentSelect"
+                startDateChange="handleStartDateChange"
+                intervalSelect="handleIntervalSelect"
+                legend="PlanningCalendarLegend"
+                groupAppointmentsMode="Expanded"
+                showEmptyIntervalHeaders="true"
+                viewChange = "handleViewChange">
+                <toolbarContent>
+                    <Title text="{i18n>TITLE}" titleStyle="H4"/>
+                    <SearchField width="15%" search="onSearch" />
+                    <ToggleButton pressed="{path: 'stateModel>/legendShown'}" icon="sap-icon://legend" tooltip="{i18n>LEGEND}"/>
+                </toolbarContent>
+                <views>
+                    <PlanningCalendarView
+                        key="MyWeek"
+                        intervalType="Day"
+                        description="{i18n>WEEK_VIEW}"
+                        intervalsS="1"
+                        intervalsM="3"
+                        intervalsL="7">
+                    </PlanningCalendarView>
+                    <PlanningCalendarView
+					    key="MyMonth"
+					    intervalType="Month"
+					    description="{i18n>MONTH_VIEW}"
+					    intervalsS="1"
+					    intervalsM="3"
+					    intervalsL="6">
+				   </PlanningCalendarView>
+                </views>
+                <rows>
+                    <PlanningCalendarRow
+                        intervalHeaders="{path: 'headers', templateShareable: false}"
+                        appointments="{path : 'assignments', templateShareable: false}">
+                        <appointments>
+                            <unified:CalendarAppointment
+                                startDate="{startDate}"
+                                endDate="{endDate}"
+                                title="{title}"
+                                text="{staffedHours} hr"
+                                color="{type}"
+                                tentative="{tentative}">
+                            </unified:CalendarAppointment>
+                        </appointments>
+                        <intervalHeaders>
+                            <unified:CalendarAppointment
+                                startDate="{= ${viewModel>/selectedCalendarMode} === 'MyWeek' ? ${startDate}: ${monthStartDate}}"
+                                endDate="{= ${viewModel>/selectedCalendarMode} === 'MyWeek' ? ${endDate}: ${monthEndDate}}"
+                                title = "{ parts: ['viewModel>/selectedCalendarMode', 'staffedHours', 'capacityHours', 'monthlyStaffedHours', 'monthlyCapacityHours' ], formatter:'.formatCalendarTitle'}"
+                                color="{= ${viewModel>/selectedCalendarMode} === 'MyWeek' ? ${weekColor}: ${monthColor}}">
+                            </unified:CalendarAppointment>
+                        </intervalHeaders>
+                    </PlanningCalendarRow>
+                </rows>
+            </PlanningCalendar>
+        </VBox>
+        <l:sideContent width="200px">
+            <PlanningCalendarLegend id="PlanningCalendarLegend"
+                appointmentItemsHeader="{i18n>ASSIGNMENT_STATUS}"
+                items="{path : '/legendItems', templateShareable: true}"
+                appointmentItems="{path : '/legendAppointmentItems', templateShareable: true}"
+                standardItems="Today,Selected,NonWorkingDay">
+                <items>
+                    <unified:CalendarLegendItem text="{text}" type="{type}" tooltip="{text}" color="{color}"/>
+                </items>
+                <appointmentItems>
+                    <unified:CalendarLegendItem text="{text}" type="{type}" tooltip="{text}" color="{color}"/>
+                </appointmentItems>
+            </PlanningCalendarLegend>
+        </l:sideContent>
+    </l:DynamicSideContent>
+    </Page>
+</App>
+</mvc:View>

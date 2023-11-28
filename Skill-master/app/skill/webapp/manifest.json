@@ -1,0 +1,284 @@
+{
+  "_version": "1.29.0",
+  "sap.app": {
+    "id": "skill",
+    "type": "application",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/SkillService/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0",
+          "localUri": "localService/metadata.xml"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "SkillDisplay": {
+          "semanticObject": "Skill",
+          "action": "Display",
+          "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+          },
+          "icon": "sap-icon://customize",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          },
+          "title": "{{appTitle}}"
+        }
+      },
+      "outbounds": {}
+    }
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "minUI5Version": "1.87",
+      "libs": {
+        "sap.fe.templates": {}
+      },
+      "components": {}
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true,
+          "groupProperties": {
+            "default": {
+              "submit": "Auto"
+            },
+            "collection": {
+              "submit": "Auto"
+            }
+          }
+        }
+      },
+      "catalogAssignment": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {
+          "hasChanged": false
+        }
+      }
+    },
+    "routing": {
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "SkillsList",
+          "target": "SkillsList"
+        },
+        {
+          "pattern": "Skills({key}):?query:",
+          "name": "SkillsDetails",
+          "target": "SkillsDetails"
+        }
+      ],
+      "targets": {
+        "SkillsList": {
+          "type": "Component",
+          "id": "SkillsListReport",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "entitySet": "Skills",
+              "variantManagement": "Page",
+              "initialLoad": true,
+              "navigation": {
+                "Skills": {
+                  "detail": {
+                    "route": "SkillsDetails"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "columns": {
+                    "DataField::name": {
+                      "availability": "Hidden"
+                    },
+                    "DataField::description": {
+                      "formatOptions": {
+                        "textLinesDisplay": "2"
+                      }
+                    }
+                  },
+                  "tableSettings": {
+                    "enableExport": false,
+                    "personalization": {
+                      "sort": true,
+                      "filter": true,
+                      "column": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "SkillsDetails": {
+          "type": "Component",
+          "id": "SkillsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "entitySet": "Skills",
+              "editableHeaderContent": true,
+              "enhanceI18n": "i18n/customDetailsPage.properties",
+              "controlConfiguration": {
+                "texts/@com.sap.vocabularies.UI.v1.LineItem": {
+                  "columns": {
+                    "DataField::description": {
+                      "formatOptions": {
+                        "textLinesDisplay": "2",
+                        "textLinesEdit": "1",
+                        "textMaxLines": "2"
+                      }
+                    }
+                  },
+                  "tableSettings": {
+                    "creationMode": {
+                      "name": "Inline",
+                      "createAtEnd": null
+                    },
+                    "personalization": {
+                      "sort": true,
+                      "filter": true,
+                      "column": false
+                    },
+                    "enableExport": false,
+                    "enablePaste": false
+                  }
+                },
+                "alternativeLabels/@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "creationMode": {
+                      "name": "Inline",
+                      "createAtEnd": null
+                    },
+                    "personalization": {
+                      "sort": true,
+                      "filter": true,
+                      "column": false
+                    },
+                    "enableExport": false,
+                    "enablePaste": false
+                  }
+                },
+                "catalogAssociations/@com.sap.vocabularies.UI.v1.LineItem": {
+                  "columns": {
+                    "DataField::catalog::description": {
+                      "formatOptions": {
+                        "textLinesDisplay": "2"
+                      }
+                    }
+                  },
+                  "tableSettings": {
+                    "creationMode": {
+                      "name": "Inline",
+                      "createAtEnd": null
+                    },
+                    "personalization": {
+                      "sort": true,
+                      "filter": true,
+                      "column": true
+                    },
+                    "enableExport": false,
+                    "enablePaste": false
+                  },
+                  "actions": {
+                    "openUnassignCatalogsDialog": {
+                      "press": "skill.custom.CustomActions.openUnassignCatalogsDialog",
+                      "visible": "{= ${ui>/editMode} !== 'Editable' && %{OID} === null }",
+                      "enabled": true,
+                      "text": "{{unassignCatalogs}}"
+                    },
+                    "openAssignCatalogsDialog": {
+                      "press": "skill.custom.CustomActions.openAssignCatalogsDialog",
+                      "visible": "{= ${ui>/editMode} !== 'Editable' && %{OID} === null }",
+                      "enabled": true,
+                      "text": "{{assignCatalogs}}"
+                    }
+                  }
+                },
+                "proficiencySet/proficiencyLevels/@com.sap.vocabularies.UI.v1.LineItem": {
+                  "columns": {
+                    "DataField::description": {
+                      "formatOptions": {
+                        "textLinesDisplay": "2"
+                      }
+                    }
+                  },
+                  "tableSettings": {
+                    "creationMode": {
+                      "name": "Inline",
+                      "createAtEnd": null
+                    },
+                    "personalization": {
+                      "sort": true,
+                      "filter": true,
+                      "column": true
+                    },
+                    "enableExport": false,
+                    "enablePaste": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {
+          "sap.fe.templates.ListReport.ListReportController": {
+            "controllerName": "skill.ext.controller.ListReportExtension"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "fullWidth": true,
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [
+      "F4704"
+    ],
+    "archeType": "transactional"
+  },
+  "sap.platform.cf": {
+    "oAuthScopes": [
+      "$XSAPPNAME.Skills.Delete",
+      "$XSAPPNAME.Skills.Edit"
+    ]
+  }
+}

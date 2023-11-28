@@ -1,0 +1,27 @@
+general:
+  buildTool: 'npm'
+  productiveBranch: 'master'
+  repository: 'Test-Commons'
+  owner: 'Cloud4RM'
+  vaultBasePath: 'piper/PIPELINE-GROUP-184'
+  vaultPipelineName: 'PIPELINE-11741'
+  vaultServerUrl: 'https://vault.tools.sap'
+  vaultNamespace: 'ies/hyperspace/pipelines'
+  nativeBuild: true
+  vaultTestCredentialEnvPrefix: ENV_
+  vaultTestCredentialPath: secrets
+  vaultTestCredentialKeys: [
+                            # Artifactory credentials
+                            'ARTIFACTORY_AUTH_TOKEN', 'ARTIFACTORY_PASSWORD', 'ARTIFACTORY_USERNAME',
+                            # Github Token
+                            'GITHUB_TOKEN',
+                            ]
+# stages:
+# steps:
+#   artifactPrepareVersion:
+#     gitHttpsCredentialVaultSecretName: 'github'
+#   sapCallStagingService:
+#     url: 'https://staging.repositories.cloud.sap/stage/api'
+#     profile: 'group-184-default'
+#   sapCumulusUpload:
+#     pipelineId: '07b89584-0818-4465-bd79-2190c232ca93'

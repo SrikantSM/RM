@@ -1,0 +1,744 @@
+---
+_schema-version: '3.2'
+ID: consultantProfile
+version: 1.38.0
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+  keep-existing-routes: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm --prefix .. ci .. --only=production
+    - npm ci --only=production
+    - npm run build
+modules:
+- name: consultantProfile-approuter
+  deployed-after:
+  - consultantProfile-flp-content
+  type: approuter.nodejs
+  path: approuter
+  build-parameters:
+    builder: custom
+    commands:
+    - npm ci --only=production
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+    idle-routes:
+    - idle-route: rm-valiant-tenant-${space}-valiant-idle.internal.cfapps.sap.hana.ondemand.com
+    - idle-route: rm-valiant-tenant-${space}-valiant-idle.cfapps.sap.hana.ondemand.com
+    routes:
+    - route: rm-valiant-tenant-${space}-valiant.internal.cfapps.sap.hana.ondemand.com
+    - route: rm-valiant-tenant-${space}-valiant.cfapps.sap.hana.ondemand.com
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  requires:
+  - name: consultantProfile-html5-repo-runtime
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: rm-cloud-logs
+  - name: consultantProfile-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: consultantProfile-portal
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: rm-saas-registry
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: consultantProfile-audit-logs-oauth
+  - name: consultantProfile-srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: consultantProfile-srv-api
+      url: "~{url}"
+  - name: consultantProfile-integration-srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: consultantProfile-integration-srv-api
+      url: "~{url}"
+  - name: consultantProfile-approuter-url
+    properties:
+      TENANT_HOST_PATTERN: "^(.*)~{ui-tenant-delimiter}.*"
+  - name: consultantProfile-xray
+    group: destinations
+    properties:
+      name: consultantProfile-xray
+      url: "~{xrayurl}"
+  - name: consultantProfile-xray-data
+    group: destinations
+    properties:
+      name: consultantProfile-xray-data
+      url: "~{xraydataurl}"
+  provides:
+  - name: consultantProfile-approuter-url
+    properties:
+      ui-tenant-delimiter: "-tenant-"
+      ui-url-suffix: "${protocol}://${routes/0/route}"
+  - name: approuter-consultantProfile
+    properties:
+      url: "${protocol}://${routes/0/route}"
+- name: consultantProfile-ui-content
+  type: com.sap.application.content
+  path: ui-content
+  requires:
+  - name: consultantProfile-html5-repo-host
+    parameters:
+      content-target: true
+      service-key:
+        name: html5-content-deployment-key-${timestamp}
+        config:
+          xsuaa:
+            credential-type: x509
+            x509:
+              key-length: 2048
+              validity: 100
+              validity-type: DAYS
+  build-parameters:
+    ignore:
+    - ".gitkeep"
+    requires:
+    - name: myProjectExperienceUi
+      artifacts:
+      - "./myProjectExperienceUi.zip"
+    - name: projectRoleUi
+      artifacts:
+      - "./projectRoleUi.zip"
+    - name: availabilityUploadUi
+      artifacts:
+      - "./availabilityUploadUi.zip"
+    - name: availabilityUpload
+      artifacts:
+      - "./availabilityUpload.zip"
+    - name: availabilityDownload
+      artifacts:
+      - "./availabilityDownload.zip"
+    - name: businessServiceOrgUi
+      artifacts:
+      - "./businessServiceOrgUi.zip"
+    - name: businessServiceOrgUpload
+      artifacts:
+      - "./businessServiceOrgUpload.zip"
+    - name: replicationScheduleUi
+      artifacts:
+      - "./replicationScheduleUi.zip"
+    - name: myResourcesUi
+      artifacts:
+      - "./myResourcesUi.zip"
+    - name: myAssignmentsUi
+      artifacts:
+      - "./myAssignmentsUi.zip"
+- name: consultantProfile-db
+  type: nodejs
+  path: "../db"
+  parameters:
+    memory: 256M
+    disk-quota: 512M
+    idle-domain: cfapps.sap.hana.ondemand.com
+    idle-routes:
+    - idle-route: "${org}-${space}-consultantProfile-db-idle.internal.cfapps.sap.hana.ondemand.com"
+    - idle-route: "${org}-${space}-consultantProfile-db-idle.cfapps.sap.hana.ondemand.com"
+    routes:
+    - route: "${org}-${space}-consultantProfile-db.internal.cfapps.sap.hana.ondemand.com"
+    - route: "${org}-${space}-consultantProfile-db.cfapps.sap.hana.ondemand.com"
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  requires:
+  - name: rm-cloud-logs
+  - name: consultantProfile-hdi-credentials
+    properties:
+      hdi_dynamic_deploy_user: "~{user}"
+      hdi_dynamic_deploy_password: "~{password}"
+  provides:
+  - name: db_credentials
+    properties:
+      db_url: "${protocol}://${routes/0/route}"
+- name: consultantProfile-srv
+  deployed-after:
+  - consultantProfile-db
+  type: java
+  path: srv
+  parameters:
+    memory: 1024M
+    idle-routes:
+    - idle-route: "${space}-consultantProfile-srv-idle.internal.cfapps.sap.hana.ondemand.com"
+    - idle-route: "${space}-consultantProfile-srv-idle.cfapps.sap.hana.ondemand.com"
+    routes:
+    - route: "${space}-consultantProfile-srv.internal.cfapps.sap.hana.ondemand.com"
+    - route: "${space}-consultantProfile-srv.cfapps.sap.hana.ondemand.com"
+  hooks:
+  - name: before-consultantProfile-srv-start-db-deploy
+    type: task
+    phases:
+    - deploy.application.before-start
+    - blue-green.application.before-start.idle
+    parameters:
+      name: db-schema-update
+      command: sed -i 's/org.springframework.boot.loader.JarLauncher/org.springframework.boot.loader.PropertiesLauncher/g' /home/vcap/staging_info.yml && sed -i 's/-Dsun.net.inetaddr.negative.ttl=0/-Dsun.net.inetaddr.negative.ttl=0 -Dloader.main=com.sap.cds.framework.spring.utils.Deploy/g' /home/vcap/staging_info.yml && jq -r .start_command /home/vcap/staging_info.yml | bash
+      memory: 1024M
+      disk-quota: 1024M
+      buildpack: sap_java_buildpack
+  properties:
+    JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jdk.SAPMachineJDK']"
+    JBP_CONFIG_SAP_MACHINE_JDK: '{ version: 17.+ }'
+    SPRING_PROFILES_ACTIVE: hana
+    CDS_MULTITENANCY_APPUI_URL: "${space}-valiant.cfapps.sap.hana.ondemand.com"
+    CDS_MULTITENANCY_APPUI_TENANTSEPARATOR: "-tenant-"
+    CDS_SECURITY_AUTHENTICATION_NORMALIZEPROVIDERTENANT: false
+    MALWARE_SERVICE_RETRY_ATTEMPT: 2
+    MALWARE_SERVICE_TIMEOUT: 1000
+    ASSIGNMENT_GET_SERVICE_TIMEOUT: 1000
+    ASSIGNMENT_UPDATE_SERVICE_TIMEOUT: 3000
+    ASSIGNMENT_SERVICE_RETRY_ATTEMPT: 2
+    ASSIGNMENT_URL: "https://${org}-${space}-assignment-srv.cfapps.sap.hana.ondemand.com"
+  build-parameters:
+    builder: custom
+    commands:
+    - mvn -B clean package
+    build-result: target/*.jar
+  provides:
+  - name: consultantProfile-srv-api
+    properties:
+      url: "${protocol}://${routes/0/route}"
+  requires:
+  - name: consultantProfile-service-manager
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: consultantProfile-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-cloud-logs
+  - name: consultantProfile-audit-logs-oauth
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: rm-saas-registry
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: db_credentials
+    properties:
+      CDS_MULTITENANCY_DEPLOYER_URL: "~{db_url}"
+  - name: consultantProfile-hdi-credentials
+    properties:
+      CDS_MULTITENANCY_DEPLOYER_USER: "~{user}"
+      CDS_MULTITENANCY_DEPLOYER_PASSWORD: "~{password}"
+  - name: consultantProfile-approuter-url
+    properties:
+      TENANT_DELIMITER: "~{ui-tenant-delimiter}"
+      UI_URL_SUFFIX: "~{ui-url-suffix}"
+  - name: consultantProfile-malware-scanner
+- name: consultantProfile-integration-srv
+  deployed-after:
+  - consultantProfile-db
+  - consultantProfile-srv
+  type: java
+  path: integration-srv
+  parameters:
+    memory: 1024M
+    idle-routes:
+    - idle-route: "${space}-consultantProfile-integration-srv-idle.internal.cfapps.sap.hana.ondemand.com"
+    - idle-route: "${space}-consultantProfile-integration-srv-idle.cfapps.sap.hana.ondemand.com"
+    routes:
+    - route: "${space}-consultantProfile-integration-srv.internal.cfapps.sap.hana.ondemand.com"
+    - route: "${space}-consultantProfile-integration-srv.cfapps.sap.hana.ondemand.com"
+  properties:
+    JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jdk.SAPMachineJDK']"
+    JBP_CONFIG_SAP_MACHINE_JDK: '{ version: 17.+ }'
+    MDI_SERVICE_TIMEOUT: 120000
+    MDI_SERVICE_RETRY_ATTEMPT: 2
+    CDS_SECURITY_AUTHENTICATION_NORMALIZEPROVIDERTENANT: false
+    APPLICATION_URL: "${space}-consultantProfile-integration-srv.cfapps.sap.hana.ondemand.com"
+    SPRING_PROFILES_ACTIVE: hana
+    CDS_MULTITENANCY_APPUI_URL: "${space}-valiant.cfapps.sap.hana.ondemand.com"
+    CDS_MULTITENANCY_APPUI_TENANTSEPARATOR: "-tenant-"
+    JBP_CONFIG_JAVA_OPTS: "[java_opts: '-javaagent:BOOT-INF/lib/opentelemetry-javaagent-1.26.0.jar']"
+    OTEL_JAVAAGENT_ENABLED: true
+    OTEL_RESOURCE_ATTRIBUTES: "account=SAP_Cloud_ALM,serviceType=SPRC,otel.poll.service.type=SPRC,otel.poll.every.second=300"
+    OTEL_SERVICE_NAME: "SAP S/4HANA Cloud for projects, resource management"
+    OTEL_PROPOGATORS: "sapuniversal"
+    OTEL_TRACES_EXPORTER: "none"
+    OTEL_METRICES_EXPORTER: "none"
+    OTEL_JAVAAGENT_EXTENSIONS: "BOOT-INF/lib/otel-agent-ext-java-1.5.1.jar"
+    SKILLS_URL: "https://${org}-${space}-skills-srv.cfapps.sap.hana.ondemand.com"
+  build-parameters:
+    builder: custom
+    commands:
+    - mvn -B clean package
+    build-result: target/*.jar
+  provides:
+  - name: consultantProfile-integration-srv-api
+    properties:
+      url: "${protocol}://${routes/0/route}"
+  requires:
+  - name: consultantProfile-service-manager
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: consultantProfile-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: rm-cloud-logs
+  - name: consultantProfile-mdi
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: consultantProfile-jobScheduler
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: consultantProfile-destination
+  - name: consultantProfile-audit-logs-oauth
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: rm-saas-registry
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: db_credentials
+    properties:
+      CDS_MULTITENANCY_DEPLOYER_URL: "~{db_url}"
+  - name: consultantProfile-hdi-credentials
+    properties:
+      CDS_MULTITENANCY_DEPLOYER_USER: "~{user}"
+      CDS_MULTITENANCY_DEPLOYER_PASSWORD: "~{password}"
+  - name: consultantProfile-approuter-url
+    properties:
+      TENANT_DELIMITER: "~{ui-tenant-delimiter}"
+      UI_URL_SUFFIX: "~{ui-url-suffix}"
+- name: myProjectExperienceUi
+  type: html5
+  path: app/myProjectExperienceUi
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: projectRoleUi
+  type: html5
+  path: app/projectRoleUi
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: availabilityUploadUi
+  type: html5
+  path: app/availabilityUploadUi
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: businessServiceOrgUi
+  type: html5
+  path: app/businessServiceOrgUi
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: availabilityUpload
+  type: html5
+  path: app/availabilityUpload
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: availabilityDownload
+  type: html5
+  path: app/availabilityDownload
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: businessServiceOrgUpload
+  type: html5
+  path: app/businessServiceOrgUpload
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: replicationScheduleUi
+  type: html5
+  path: app/replicationScheduleUi
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: myResourcesUi
+  type: html5
+  path: app/myResourcesUi
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: myAssignmentsUi
+  type: html5
+  path: app/myAssignmentsUi
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+- name: consultantProfile-flp-content
+  deployed-after:
+  - consultantProfile-ui-content
+  type: com.sap.application.content
+  path: flp-content
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  requires:
+  - name: consultantProfile-portal
+    parameters:
+      content-target: true
+      service-key:
+        name: portal-content-deploy-key
+        config:
+          content-endpoint: developer
+  - name: consultantProfile-uaa
+    parameters:
+      service-key:
+        name: rm-flp-content-consultantProfile-uaa-credentials-${timestamp}
+        config:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: consultantProfile-html5-repo-host
+    parameters:
+      service-key:
+        name: flp-content-deployment-key-${timestamp}
+        config:
+          xsuaa:
+            credential-type: x509
+            x509:
+              key-length: 2048
+              validity: 100
+              validity-type: DAYS
+resources:
+- name: consultantProfile-html5-repo-runtime
+  parameters:
+    service-plan: app-runtime
+    service: html5-apps-repo
+  type: org.cloudfoundry.managed-service
+- name: consultantProfile-html5-repo-host
+  parameters:
+    service-plan: app-host
+    service: html5-apps-repo
+    config:
+      sizeLimit: 10
+  type: org.cloudfoundry.managed-service
+- name: consultantProfile-hdi-credentials
+  properties:
+    user: "${generated-user}"
+    password: "${generated-password}"
+- name: consultantProfile-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service-plan: broker
+    service: xsuaa
+    config:
+      xsappname: projExp-${space}
+      oauth2-configuration:
+       credential-types: [x509, binding-secret, instance-secret]
+      tenant-mode: shared
+      scopes:
+      - name: "$XSAPPNAME.JobScheduler"
+        description: scope for job scheduler
+        grant-as-authority-to-apps:
+        - "$XSSERVICENAME(consultantProfile-jobScheduler)"
+      - name: "$XSAPPNAME.ProjRole.Read"
+        description: read of project roles
+      - name: "$XSAPPNAME.ProjRole.Edit"
+        description: edit of project roles
+      - name: "$XSAPPNAME.ProjExp.Read"
+        description: read of consultant's project experience
+      - name: "$XSAPPNAME.MyResources.Read"
+        description: Authorization to read resource profiles
+      - name: "$XSAPPNAME.MyResources.Edit"
+        description: Authorization to edit resource profiles
+      - name: "$XSAPPNAME.ProjExp.Edit"
+        description: edit of consultant's project experience
+      - name: "$XSAPPNAME.MyAssignment.Edit"
+        description: edit of consultant's assignments
+      - name: "$XSAPPNAME.Availability.Upload"
+        description: Authorization to upload Availability
+      - name: "$XSAPPNAME.Availability.Download"
+        description: Authorization to download Availability
+      - name: "$XSAPPNAME.BusinessServiceOrg.Upload"
+        description: Authorization to upload Service Organization
+      - name: "$XSAPPNAME.BusinessServiceOrg.Download"
+        description: Authorization to download Service Organization
+      - name: "$XSAPPNAME.ReplicationSchedules.Read"
+        description: Authorization to read Replication Schedules
+      - name: "$XSAPPNAME.ReplicationSchedules.Edit"
+        description: Authorization to edit & activate Replication Schedules
+      - name: "$XSAPPNAME.mtcallback"
+        description: Onboarding Callback Access
+        grant-as-authority-to-apps:
+        - "$XSAPPNAME(application,sap-provisioning,tenant-onboarding)"
+      - name: "$XSAPPNAME.Callback"
+        description: Onboarding Callback Access
+        grant-as-authority-to-apps:
+        - "$XSAPPNAME(application,sap-provisioning,tenant-onboarding)"
+      - name: "$XSAPPNAME.InitDb"
+        description: Update the database artifacts after deployment of a new version
+        granted-apps:
+        - "$XSAPPNAME(broker,projExp-admin-${space})"
+      - name: "$XSAPPNAME.Integration.Read"
+        description: read for Integration Service
+        grant-as-authority-to-apps:
+        - jobscheduler
+      authorities:
+      - "$XSAPPNAME.ProjExp.Read"
+      - "$XSAPPNAME.ProjExp.Edit"
+      - "$XSAPPNAME.System"
+      attributes:
+      - name: DeliveringResourceOrganization
+        description: Resource Organization of resources for the project staffing
+        valueType: string
+        valueRequired: false
+      - name: ProcessingResourceOrganization
+        description: Resource Organization of resources for the project staffing
+        valueType: string
+        valueRequired: false
+      role-templates:
+      - name: Token_Exchange
+        description: UAA
+        scope-references:
+        - uaa.user
+      - name: ProjectTeamMember
+        description: Users can update their own project experience.
+        scope-references:
+        - uaa.user
+        - "$XSAPPNAME.ProjExp.Read"
+        - "$XSAPPNAME.ProjExp.Edit"
+      - name: MyAssignmentEditor
+        description: Users can edit the assignments.
+        scope-references:
+        - uaa.user
+        - "$XSAPPNAME.MyAssignment.Edit"
+      - name: ResourceManager
+        description: Users can staff resource requests and view the resource utilization.
+        scope-references:
+        - uaa.user
+        - "$XSAPPNAME.MyResources.Read"
+        - "$XSAPPNAME.MyResources.Edit"
+        attribute-references:
+        - ProcessingResourceOrganization
+        - DeliveringResourceOrganization
+      - name: ConfigurationExpert
+        description: Users have access to the configuration applications.
+        scope-references:
+        - uaa.user
+        - "$XSAPPNAME.ProjRole.Read"
+        - "$XSAPPNAME.ProjRole.Edit"
+        - "$XSAPPNAME.Availability.Upload"
+        - "$XSAPPNAME.Availability.Download"
+        - "$XSAPPNAME.BusinessServiceOrg.Upload"
+        - "$XSAPPNAME.BusinessServiceOrg.Download"
+        - "$XSAPPNAME.ReplicationSchedules.Read"
+        - "$XSAPPNAME.ReplicationSchedules.Edit"
+- name: consultantProfile-jobScheduler
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: jobscheduler
+    service-plan: standard
+    config:
+      enable-xsuaa-support: true
+  requires:
+  - name: consultantProfile-uaa
+- name: consultant-profile-admin-uaa
+  type: com.sap.xs.uaa
+  parameters:
+    service-plan: broker
+    service: xsuaa
+    config:
+      xsappname: projExp-admin-${space}
+      tenant-mode: dedicated
+      foreign-scope-references:
+      - "$XSAPPNAME(broker,projExp-${space}).InitDb"
+      role-templates:
+      - name: ResourceManagementOperator
+        description: Perform administrative actions on the deployed RM application
+        scope-references:
+        - "$XSAPPNAME(broker,projExp-${space}).InitDb"
+- name: consultantProfile-portal
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service-plan: standard
+    service: portal
+- name: consultantProfile-xray
+  properties:
+    xrayurl: https://xraycontrolstebofwk.int.sap.eu2.hana.ondemand.com/xRayControls/resources/sap/dfa/help
+- name: consultantProfile-xray-data
+  properties:
+    xraydataurl: https://cp1canary.int.sap.eu2.hana.ondemand.com/dps
+- name: consultantProfile-mdi
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: one-mds
+    service-plan: default
+    config:
+      businessSystemId: RM-${org}-${space}
+- name: rm-saas-registry
+  type: org.cloudfoundry.managed-service
+  requires:
+  - name: approuter-consultantProfile
+  - name: consultantProfile-srv-api
+  parameters:
+    service: saas-registry
+    service-plan: application
+    config:
+      appName: My-Project-Experience-${space}
+      xsappname: projExp-${space}
+      appUrls:
+        getDependencies: "~{approuter-consultantProfile/url}/callback/v1.0/dependencies"
+        onSubscription: "~{consultantProfile-srv-api/url}/mt/v1.0/subscriptions/tenants/{tenantId}"
+- name: consultantProfile-audit-logs-oauth
+  optional: true
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: auditlog
+    service-plan: oauth2
+- name: consultantProfile-destination
+  type: org.cloudfoundry.managed-service
+  parameters: 
+    service: destination
+    service-plan: lite
+- name: consultantProfile-service-manager
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: service-manager
+    service-plan: container
+- name: consultantProfile-malware-scanner
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: malware-scanner
+    service-plan: clamav
+- name: rm-cloud-logs
+  type: org.cloudfoundry.managed-service
+  optional: true
+  parameters: 
+    service: cloud-logging
+    service-plan: standard    

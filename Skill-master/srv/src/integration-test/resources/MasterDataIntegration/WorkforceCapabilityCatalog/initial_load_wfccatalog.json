@@ -1,0 +1,147 @@
+{
+  "@odata.context": "$metadata#Logs",
+  "value": [
+    {
+      "instance": {
+        "id": "7714e3ebb5304af5a9ecfc95f83794e2",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Leadership"
+          },
+          {
+            "lang": "de-GE",
+            "content": "Leadership"
+          }
+        ],
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Leadership"
+          },
+          {
+            "lang": "sp-SP",
+            "content": "Leadership"
+          }
+        ]
+      },
+      "event": "created",
+      "versionId": "29d29686-d733-4c6c-84ab-d7cf3f03fd92"
+    },
+    {
+      "instance": {
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Marketing and Sales Competency"
+          }
+        ],
+        "id": "63c66813dfe942b3bbfbaeff77312c97",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Marketing and Sales Competency"
+          }
+        ]
+      },
+      "event": "created",
+      "versionId": "33bf5ac3-c140-452a-bfac-9d3adc5179c3"
+    },
+    {
+      "instance": {
+        "id": "88795a3b3d054722a326e9d7f3a6218b",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Managing"
+          }
+        ],
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Managing"
+          }
+        ]
+      },
+      "event": "created",
+      "versionId": "0609cf1b-76fb-4677-8865-cf1575fb9412"
+    },
+    {
+      "instance": {
+        "id": "850418ca4d964882b726b82ab9cc27d3",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Communication"
+          }
+        ],
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Communication"
+          }
+        ]
+      },
+      "event": "created",
+      "versionId": "65eb02ce-9444-4016-b6a5-1333315eb755"
+    },
+    {
+      "instance": {
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Cross Functional"
+          }
+        ],
+        "id": "667498d83f014fcb80e112b81bd44472",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Cross Functional"
+          }
+        ]
+      },
+      "event": "created",
+      "versionId": "813cc862-6f54-4340-aca1-08fa9126637f"
+    },
+    {
+      "instance": {
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Core"
+          }
+        ],
+        "id": "bc1318bb-9cbd-434c-8ae7-55291b724652",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Core"
+          }
+        ]
+      },
+      "event": "created",
+      "versionId": "a46ec3b6-c251-45ca-b0cd-66aa1ed11c15"
+    },
+    {
+      "instance": {
+        "id": "b1ca4e9d074f40af9f37857878f51cce",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Technical"
+          }
+        ],
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Technical"
+          }
+        ]
+      },
+      "event": "created",
+      "versionId": "8b89331f-616a-4111-be7d-97c244517979"
+    }
+  ],
+  "@odata.deltaLink": "/v1/odm/5.0.0/sap.odm.workforce.capability.WorkforceCapabilityCatalog/events?$deltatoken=initialLoadResponseDeltaToken"
+}

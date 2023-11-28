@@ -1,0 +1,69 @@
+{
+    "name": "@sap/rm-assignment",
+    "description": "Assignment project for Resource Management",
+    "repository": "https://github.tools.sap/Cloud4RM/Assignment.git",
+    "license": "ISC",
+    "version": "1.0.0",
+    "files": [
+        "db",
+        "srv"
+    ],
+    "dependencies": {
+        "@sap/grunt-sapui5-bestpractice-build": "^1.4.10",
+        "spotless": "^0.0.1",
+        "karma-chrome-launcher": "^3.1.0",
+        "karma-webdriver-launcher": "^1.0.8",
+        "karma": "^6.1.1",
+        "karma-coverage": "^2.2.1",
+        "karma-html-reporter": "^0.2.7",
+        "karma-junit-reporter": "^2.0.1",
+        "karma-qunit": "^4.0.0",
+        "karma-ui5": "^1.1.0",
+        "qunit": "^2.9.3"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.15.0",
+        "eslint": "7.20.0",
+        "eslint-config-airbnb-typescript": "^12.3.1",
+        "eslint-config-google": "^0.14.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-import": "^2.14.0",
+        "eslint-plugin-prettier": "^3.1.3",
+        "eslint-stats": "1.0.1",
+        "npm-run-all": "^4.1.5",
+        "prettier": "^2.0.5",
+        "typescript": "^3.5.3"
+    },
+    "scripts": {
+        "postinstall": "npm run install-ui-apps",
+        "install-ui-apps": "cd app && npm ci",
+        "local-setup": " node utils/local-setup.js",
+        "build": "cd .. && npm run build && npx cds compile Assignment/srv --to sql > Assignment/srv/src/main/resources/schema.sql",
+        "build-mta": "cd .. && npm run build-mta -- --source Assignment",
+        "prepare-server": "cds deploy --to sqlite:srv/local-test.db --no-save",
+        "start-server": "cd ./srv && mvn clean spring-boot:run -Dspring.profiles.active=local-test",
+        "create-openapi-doc": "cds compile srv --service Assignment -o docs --to openapi && cds compile srv --service Assignment -o docs --to edmx && node scripts/modifyOpenAPISpec.js",
+        "lint": "eslint app/capacityGridUi/webapp --ignore-pattern app/capacityGridUi/webapp/test",
+        "lint-stats": "npm run lint-js -- --format node_modules/eslint-stats/byError.js & npm run lint-ts -- --format node_modules/eslint-stats/byError.js",
+        "karma1": "karma start karma1.ci.conf",
+        "karma2": "karma start karma2.ci.conf",
+        "karma3": "karma start karma3.ci.conf"
+    },
+    "cds": {
+        "requires": {
+            "db": {
+                "kind": "hana",
+                "model": [
+                    "db",
+                    "srv"
+                ]
+            }
+        },
+        "odata": {
+            "version": "v4"
+        }
+    },
+    "engines": {
+        "node": "^18.0.0"
+    }
+}

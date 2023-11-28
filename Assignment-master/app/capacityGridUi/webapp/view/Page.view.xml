@@ -1,0 +1,105 @@
+<mvc:View
+	controllerName="capacityGridUi.view.Page"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:uxap="sap.uxap"
+	xmlns:l="sap.ui.layout"
+	xmlns:m="sap.m"
+	busyIndicatorDelay="{app>/busyIndicatorDelay}"
+	displayBlock="true"
+	height="100%"
+	width="100%"
+	class="capacityGridUi"
+>
+	<m:App id="app">
+		<uxap:ObjectPageLayout
+			id="idPage"
+			toggleHeaderOnTitleClick="true"
+			preserveHeaderStateOnScroll="false"
+			headerContentPinnable="false"
+			showFooter="{app>/IsEditMode}"
+		>
+			<uxap:headerTitle>
+				<uxap:ObjectPageDynamicHeaderTitle>
+					<uxap:heading>
+						<mvc:XMLView
+							id="idVariantManagement"
+							viewName="capacityGridUi.view.variant.Variant"
+						/>
+					</uxap:heading>
+				</uxap:ObjectPageDynamicHeaderTitle>
+			</uxap:headerTitle>
+			<uxap:headerContent>
+				<mvc:XMLView
+					id="idHeader"
+					viewName="capacityGridUi.view.header.Header"
+				/>
+			</uxap:headerContent>
+			<uxap:sections>
+				<uxap:ObjectPageSection showTitle="false">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection class="sapUxAPObjectPageSubSectionFitContainer">
+							<l:DynamicSideContent
+								id="DynamicSideContent"
+								sideContentFallDown="BelowM"
+								sideContentPosition="Begin"
+								containerQuery="true"
+								breakpointChanged="onBreakpointChanged"
+								showSideContent="{app>/IsFilterBarOpen}"
+							>
+								<l:mainContent>
+									<mvc:XMLView
+										id="idTable"
+										viewName="capacityGridUi.view.table.Table"
+									/>
+								</l:mainContent>
+								<l:sideContent backgroundDesign="Solid">
+									<mvc:XMLView
+										id="idVerticalFilter"
+										viewName="capacityGridUi.view.filter.FilterBar"
+									/>
+								</l:sideContent>
+							</l:DynamicSideContent>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+			</uxap:sections>
+			<uxap:footer>
+				<m:OverflowToolbar id="idEditFooter">
+					<m:Button
+						id="messagePopoverBtn"
+						visible="{= !!${message>/count}}"
+						icon="{message>/msgButtonIcon}"
+						type="{message>/msgButtonType}"
+						text="{message>/count}"
+						press=".onOpenMessagePopover"
+						ariaHasPopup="Dialog"
+					/>
+					<m:ToolbarSpacer/>
+					<m:Text
+						id="idEditMessageStrip"
+						text="{app>/draftMsg}"
+						visible="{app>/draftMsgVisible}"
+						class="capacityGridUiDraftIndicator sapUiTinyMarginEnd"
+					/>
+					<!-- Q: why are the save/cancel buttons disabled in display mode? we anyway hide the footer toolbar in display mode!
+					     A: the object page layout hides the footer with an animation and the button is visible for short time AFTER the end of busy indication.
+					        A user clicking "nervously" could trigger the save a second time. -->
+					<m:Button
+						id="idSaveButton"
+						enabled="{app>/IsEditMode}"
+						type="Emphasized"
+						text="{i18n>SAVE_BUTTON}"
+						press=".onSave"
+					/>
+					<m:Button
+						id="idCancelButton"
+						enabled="{app>/IsEditMode}"
+						type="Transparent"
+						text="{i18n>CANCEL_BUTTON}"
+						press=".onCancel"
+					/>
+				</m:OverflowToolbar>
+			</uxap:footer>
+		</uxap:ObjectPageLayout>
+	</m:App>
+</mvc:View>

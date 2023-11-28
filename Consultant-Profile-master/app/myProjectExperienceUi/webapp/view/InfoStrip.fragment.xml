@@ -1,0 +1,4 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<ObjectStatus text="{i18n>PHOTO_INFO_TEXT}" icon="sap-icon://information" class="sapMObjectStatusSmall customObjectStatus" state="None" />
+</core:FragmentDefinition> 

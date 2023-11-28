@@ -1,0 +1,9 @@
+{
+  "name": "end-to-end",
+  "private": true,
+  "dependencies": {
+    "uuid": "^8.0.0",
+    "moment": "latest"
+  },
+  "main": "index.js"
+}

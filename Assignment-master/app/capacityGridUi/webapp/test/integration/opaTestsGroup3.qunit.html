@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Capacity Grid - OPA 2</title>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+    <meta charset="UTF-8">
+
+		<script id="sap-ui-bootstrap"
+			src="https://sapui5.hana.ondemand.com/1.114.1/resources/sap-ui-core.js"
+			data-sap-ui-theme="sap_fiori_3"
+			data-sap-ui-resourceroots='{
+				"capacityGridUi": "../../",
+				"test.unit": "./"
+			}'
+			data-sap-ui-oninit="module:capacityGridUi/initMockServer"
+			data-sap-ui-libs="sap.f, sap.m, sap.ui.comp, sap.ui.layout, sap.ui.table, sap.ui.unified"
+			data-sap-ui-animation="false"
+			data-sap-ui-compatVersion="edge"
+			data-sap-ui-async="true">
+		</script>
+
+    <script>
+		jQuery.sap.require("sap.ui.qunit.qunit-css");
+		jQuery.sap.require("sap.ui.thirdparty.qunit");
+		jQuery.sap.require("sap.ui.qunit.qunit-junit");
+		jQuery.sap.require("sap.ui.qunit.qunit-coverage");
+    </script>
+
+    <script src="opaTestsGroup3.qunit.js"></script>
+
+</head>
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+</body>
+</html>

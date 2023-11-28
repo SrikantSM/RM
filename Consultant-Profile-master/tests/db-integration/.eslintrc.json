@@ -1,0 +1,31 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "extends": [
+        "airbnb-typescript/base"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "rules": {
+        "@typescript-eslint/indent": ["error", 4],
+        "import/prefer-default-export": "off",
+        "class-methods-use-this": "off",
+        "max-len": "off",
+        "no-empty-function": "off",
+        "no-useless-constructor": "off",
+        "no-console": "off",
+        "no-restricted-syntax": "off",
+        "linebreak-style": 0,
+        "@typescript-eslint/camelcase": "off",
+        "no-multi-spaces": ["error", { "ignoreEOLComments": true }],
+        "consistent-return": "off",
+        "no-await-in-loop": "off",
+        "valid-jsdoc": "error"
+    }
+}

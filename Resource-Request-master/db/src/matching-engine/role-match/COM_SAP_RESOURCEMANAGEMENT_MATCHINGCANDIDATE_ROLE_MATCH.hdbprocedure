@@ -1,0 +1,38 @@
+PROCEDURE "COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_ROLE_MATCH" (
+    IN resources COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_UUID,
+    IN projectRole_ID NVARCHAR(36),
+    OUT roleMatchResult COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_ROLE_RESULT
+) LANGUAGE SQLSCRIPT SQL SECURITY INVOKER
+READS SQL DATA AS BEGIN 
+
+/*
+This procedure takes all the resources as input and returns all the roles assigned to the resources
+*/
+IF :projectRole_ID = ''
+THEN
+/*
+    If no role filter is passed, then select all the resources    
+*/
+roleMatchResult   = SELECT resources.ID as resource_ID,
+                                 roleAssignments.role_ID as projectRole_ID
+                          FROM :resources as resources
+                          INNER JOIN COM_SAP_RESOURCEMANAGEMENT_WORKFORCE_WORKASSIGNMENT_WORKASSIGNMENTS as workAssignment 
+                                                        on  workAssignment.ID = resources.ID
+                          LEFT OUTER JOIN COM_SAP_RESOURCEMANAGEMENT_EMPLOYEE_PRIOREXPERIENCE_ROLEASSIGNMENTS as roleAssignments
+                                                        on roleAssignments.employee_ID = workAssignment.parent;
+
+ELSE
+/*
+    If role filter is passed, then select resources only having that specific role
+*/
+roleMatchResult   = SELECT resources.ID as resource_ID,
+                                 roleAssignments.role_ID as projectRole_ID
+                          FROM :resources as resources
+                          INNER JOIN COM_SAP_RESOURCEMANAGEMENT_WORKFORCE_WORKASSIGNMENT_WORKASSIGNMENTS as workAssignment 
+                                                        on  workAssignment.ID = resources.ID
+                          INNER JOIN COM_SAP_RESOURCEMANAGEMENT_EMPLOYEE_PRIOREXPERIENCE_ROLEASSIGNMENTS as roleAssignments
+                                                        on roleAssignments.employee_ID = workAssignment.parent
+                          WHERE roleAssignments.role_ID = :projectRole_ID;                                                        
+
+END IF;
+END

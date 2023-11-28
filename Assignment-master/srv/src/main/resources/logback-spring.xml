@@ -1,0 +1,36 @@
+<configuration>
+
+  <springProperty name="rootLevel" source="assignment.logging.rootlevel" />
+  <springProperty name="appLevel" source="assignment.logging.appLevel" />
+  <springProperty name="cfLevel" source="assignment.logging.cflevel" />
+  <springProperty name="appender" source="assignment.logging.appender" />
+
+  <!-- log JSON strings to STDOUT for Cloud Foundry -->
+  <appender name="STDOUT-JSON" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="com.sap.hcp.cf.logback.encoder.JsonEncoder" />
+  </appender>
+
+  <!-- human readable output for local development -->
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%date %-5level [%thread] [%marker] - [%logger{40}] - %msg%n
+      </pattern>
+      <!-- log full logger name and mdc
+      <pattern>%date %-5level [%thread] [%marker] - [%logger] [%mdc] - %msg%n
+      </pattern>
+       -->
+    </encoder>
+  </appender>
+
+  <root level="${rootLevel:-ERROR}">
+    <appender-ref ref="${appender:-STDOUT-JSON}" />
+  </root>
+
+  <logger name="com.sap.c4p.rm.assignment" level="${appLevel:-INFO}" />
+
+  <logger name="com.sap.cds.services" level="${appLevel:-INFO}" />
+
+  <!-- log request details provided by RequestLoggingFilter -->
+  <logger name="com.sap.hcp.cf" level="${cfLevel:-INFO}" />
+
+</configuration>

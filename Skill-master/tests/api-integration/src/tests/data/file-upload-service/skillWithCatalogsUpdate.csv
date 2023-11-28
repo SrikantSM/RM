@@ -1,0 +1,4 @@
+conceptType,conceptUri,skillType,preferredLabel,altLabels,description,catalogs
+KnowledgeSkillCompetence,{uuid()},skill/competence,skillWithCatalogs,"scruples
+beliefs
+morals","VALID DESCRIPTION 1",catalogAPI1 {uuid()}

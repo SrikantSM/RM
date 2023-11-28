@@ -1,0 +1,14 @@
+{
+    "name": "resourceRequestLibrary",
+    "version": "1.0.0",
+    "description": "",
+    "dependencies": {
+        "@ui5/cli": "^3.3.3"
+    },
+    "scripts": {
+        "build": "ui5 build --clean-dest --include-task=generateManifestBundle"
+    },
+    "engines": {
+        "node": "^18.0.0"
+    }
+}

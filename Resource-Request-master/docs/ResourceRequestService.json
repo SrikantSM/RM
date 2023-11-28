@@ -1,0 +1,1124 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Resource Request",
+    "description": "This API enables you to create resource requests in SAP S/4HANA Cloud for projects, resource management to find suitable resource and staff them to projects or other activities. You can also update and delete resource requests and manage the reference objects using this API.",
+    "version": "1.0"
+  },
+  "x-sap-api-type": "ODATAV4",
+  "x-odata-version": "4.0",
+  "x-sap-shortText": "Manage resource requests.",
+  "servers": [
+    {
+      "url": "https://sandbox.api.sap.com/C4PRM/ResourceRequestService/v1/"
+    },
+    {
+      "url": "https://{host}-rm-api.{environment}.{domain}/ResourceRequestService/v1",
+      "variables": {
+        "host": {
+          "default": "c4p",
+          "description": "Your host where SAP S/4HANA Cloud for projects, resource management is deployed"
+        },
+        "environment": {
+          "default": "cfapps",
+          "description": "Your defined environment for SAP S/4HANA Cloud for projects, resource management account"
+        },
+        "domain": {
+          "default": "eu10.hana.ondemand.com"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "Resource Requests",
+      "description": "Resource requests"
+    },
+    {
+      "name": "Reference Objects",
+      "description": "Reference Objects"
+    }
+  ],
+  "paths": {
+    "/ResourceRequests": {
+      "get": {
+        "summary": "Read resource requests.",
+        "tags": [
+          "Resource Requests"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "ID desc",
+                  "displayId",
+                  "displayId desc",
+                  "name",
+                  "name desc",
+                  "referenceObjectId",
+                  "referenceObjectId desc",
+                  "startDate",
+                  "startDate desc",
+                  "endDate",
+                  "endDate desc",
+                  "requiredEffort",
+                  "requiredEffort desc",
+                  "description",
+                  "description desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "displayId",
+                  "name",
+                  "referenceObjectId",
+                  "startDate",
+                  "endDate",
+                  "requiredEffort",
+                  "description"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved resource requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of ResourceRequests",
+                  "properties": {
+                    "@odata.count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ResourceRequestService.ResourceRequests"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new resource request.",
+        "tags": [
+          "Resource Requests"
+        ],
+        "requestBody": {
+          "description": "Resource requests",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourceRequestService.ResourceRequests-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created resource request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceRequestService.ResourceRequests"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "409": {
+            "$ref": "#/components/responses/error_409"
+          }
+        }
+      }
+    },
+    "/ResourceRequests({ID})": {
+      "parameters": [
+        {
+          "description": "The identifier for the resource request.",
+          "in": "path",
+          "name": "ID",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Read a single resource request.",
+        "tags": [
+          "Resource Requests"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "displayId",
+                  "name",
+                  "referenceObjectId",
+                  "startDate",
+                  "endDate",
+                  "requiredEffort",
+                  "description"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved resource request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceRequestService.ResourceRequests"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a resource request.",
+        "tags": [
+          "Resource Requests"
+        ],
+        "requestBody": {
+          "description": "Resource requests",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourceRequestService.ResourceRequests-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a resource request.",
+        "tags": [
+          "Resource Requests"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        }
+      }
+    },
+    "/ReferenceObjects": {
+      "get": {
+        "summary": "Read reference objects.",
+        "tags": [
+          "Reference Objects"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "ID desc",
+                  "displayId",
+                  "displayId desc",
+                  "name",
+                  "name desc",
+                  "typeCode",
+                  "typeCode desc",
+                  "startDate",
+                  "startDate desc",
+                  "endDate",
+                  "endDate desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "displayId",
+                  "name",
+                  "typeCode",
+                  "startDate",
+                  "endDate"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved reference objects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of ReferenceObjects",
+                  "properties": {
+                    "@odata.count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ResourceRequestService.ReferenceObjects"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          }
+        },
+        "description": "Reads reference objects that were created in SAP S/4HANA Cloud for projects, resource management."
+      },
+      "post": {
+        "summary": "Create a new reference object.",
+        "tags": [
+          "Reference Objects"
+        ],
+        "requestBody": {
+          "description": "Reference Objects",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourceRequestService.ReferenceObjects-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created reference object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceRequestService.ReferenceObjects"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "409": {
+            "$ref": "#/components/responses/error_409"
+          }
+        },
+        "description": "Creates reference objects in SAP S/4HANA Cloud for projects, resource management."
+      }
+    },
+    "/ReferenceObjects({ID})": {
+      "parameters": [
+        {
+          "description": "The identifier for the reference object.",
+          "in": "path",
+          "name": "ID",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Read a single reference object.",
+        "tags": [
+          "Reference Objects"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "displayId",
+                  "name",
+                  "typeCode",
+                  "startDate",
+                  "endDate"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved reference object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceRequestService.ReferenceObjects"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Read details of a reference object ID."
+      },
+      "patch": {
+        "summary": "Update a reference object.",
+        "tags": [
+          "Reference Objects"
+        ],
+        "requestBody": {
+          "description": "Reference Objects",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourceRequestService.ReferenceObjects-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Update details of a reference object ID."
+      },
+      "delete": {
+        "summary": "Delete a reference object.",
+        "tags": [
+          "Reference Objects"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Deletes a reference object."
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+        "tags": [
+          "Batch Requests"
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Batch request",
+          "content": {
+            "multipart/mixed;boundary=request-separator": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET ResourceRequests HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Batch response",
+            "content": {
+              "multipart/mixed": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ResourceRequestService.ReferenceObjects": {
+        "title": "Reference Objects",
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "description": "The identifier for the reference object."
+          },
+          "displayId": {
+            "type": "string",
+            "maxLength": 40,
+            "nullable": true,
+            "example": "TestProject",
+            "description": "A human-readable reference object ID."
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 256,
+            "nullable": true,
+            "description": "The name of the reference object."
+          },
+          "typeCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "default": 0,
+            "example": "1",
+            "description": "The type of the reference object [0 - None, 1 - Project]."
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-01-13",
+            "nullable": true,
+            "description": "The start date of the reference object."
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-12-25",
+            "nullable": true,
+            "description": "The end date of the reference object."
+          }
+        },
+        "description": "Reads all reference objects."
+      },
+      "ResourceRequestService.ReferenceObjects-create": {
+        "title": "Reference Objects (for create)",
+        "type": "object",
+        "properties": {
+          "displayId": {
+            "type": "string",
+            "maxLength": 40,
+            "nullable": false,
+            "example": "TestProject",
+            "description": "A human-readable reference object ID."
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 256,
+            "nullable": true,
+            "description": "The name of the reference object."
+          },
+          "typeCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": false,
+            "default": 0,
+            "example": "1",
+            "description": "The type of the reference object [0 - None, 1 - Project]."
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-01-13",
+            "nullable": true,
+            "description": "The start date of the reference object."
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-12-25",
+            "nullable": true,
+            "description": "The end date of the reference object."
+          }
+        },
+        "required": [
+          "displayId",
+          "typeCode"
+        ],
+        "description": "Creates a reference object."
+      },
+      "ResourceRequestService.ReferenceObjects-update": {
+        "title": "Reference Objects (for update)",
+        "type": "object",
+        "properties": {
+          "displayId": {
+            "type": "string",
+            "maxLength": 40,
+            "nullable": true,
+            "example": "TestProject",
+            "description": "A human-readable reference object ID."
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 256,
+            "nullable": true,
+            "description": "The name of the reference object."
+          },
+          "typeCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "default": 0,
+            "example": "1",
+            "description": "The type of the reference object [0 - None, 1 - Project]."
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-01-13",
+            "nullable": true,
+            "description": "The start date of the reference object."
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-12-25",
+            "nullable": true,
+            "description": "The end date of the reference object."
+          }
+        },
+        "description": "Updates details of a reference object ID."
+      },
+      "ResourceRequestService.ResourceRequests": {
+        "title": "Resource requests",
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "description": "The identifier for the resource request."
+          },
+          "displayId": {
+            "type": "string",
+            "maxLength": 10,
+            "nullable": true,
+            "example": "0000000018",
+            "description": "A human-readable resource request ID."
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 256,
+            "nullable": true,
+            "description": "The name of the resource request."
+          },
+          "referenceObjectId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "4837baca-b9ca-42e4-8199-b2d78ee36a52",
+            "nullable": true,
+            "description": "The identifier of the reference object."
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-01-13",
+            "nullable": true,
+            "description": "The start date of the resource request."
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-25",
+            "nullable": true,
+            "description": "The end date of the resource request."
+          },
+          "requiredEffort": {
+            "example": "250",
+            "x-sap-precision": 10,
+            "x-sap-scale": 2,
+            "nullable": true,
+            "description": "The number of hours requested in the resource request.",
+            "type": "number",
+            "minimum": 1
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1024,
+            "nullable": true,
+            "description": "The description of the resource request."
+          }
+        },
+        "description": "Resource requests"
+      },
+      "ResourceRequestService.ResourceRequests-create": {
+        "title": "Resource requests (for create)",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 256,
+            "nullable": false,
+            "description": "The name of the resource request."
+          },
+          "referenceObjectId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "4837baca-b9ca-42e4-8199-b2d78ee36a52",
+            "nullable": true,
+            "description": "The identifier of the reference object."
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-01-13",
+            "nullable": false,
+            "description": "The start date of the resource request."
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-25",
+            "nullable": false,
+            "description": "The end date of the resource request."
+          },
+          "requiredEffort": {
+            "example": "250",
+            "x-sap-precision": 10,
+            "x-sap-scale": 2,
+            "nullable": false,
+            "description": "The number of hours requested in the resource request.",
+            "type": "number",
+            "minimum": 1
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1024,
+            "nullable": true,
+            "description": "The description of the resource request."
+          }
+        },
+        "required": [
+          "startDate",
+          "endDate",
+          "requiredEffort",
+          "name"
+        ],
+        "description": "Resource requests"
+      },
+      "ResourceRequestService.ResourceRequests-update": {
+        "title": "Resource requests (for update)",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 256,
+            "nullable": true,
+            "description": "The name of the resource request."
+          },
+          "referenceObjectId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "4837baca-b9ca-42e4-8199-b2d78ee36a52",
+            "nullable": true,
+            "description": "The identifier of the reference object."
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-01-13",
+            "nullable": true,
+            "description": "The start date of the resource request."
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-25",
+            "nullable": true,
+            "description": "The end date of the resource request."
+          },
+          "requiredEffort": {
+            "example": "250",
+            "x-sap-precision": 10,
+            "x-sap-scale": 2,
+            "nullable": true,
+            "description": "The number of hours requested in the resource request.",
+            "type": "number",
+            "minimum": 1
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1024,
+            "nullable": true,
+            "description": "The description of the resource request."
+          }
+        },
+        "description": "Resource requests"
+      },
+      "count": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+      },
+      "error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "target": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "innererror": {
+                "type": "object",
+                "description": "The structure of this object is service-specific"
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "top": {
+        "name": "$top",
+        "in": "query",
+        "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "example": 50
+      },
+      "skip": {
+        "name": "$skip",
+        "in": "query",
+        "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "count": {
+        "name": "$count",
+        "in": "query",
+        "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "search": {
+        "name": "$search",
+        "in": "query",
+        "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "error": {
+        "description": "Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_400": {
+        "description": "Bad Request - You have provided an invalid request parameter or the payload does not match the expected format. See error message for details.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_401": {
+        "description": "Unauthorized - No valid access token (JWT) has been provided or it has expired.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_403": {
+        "description": "Forbidden - You do not have the necessary authorization to perform this action or to access the requested resource.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_404": {
+        "description": "Not found - The requested resource does not exist.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_409": {
+        "description": "Conflict - Could not create the resource, due to a conflict with an existing one (e.g. a unique value was provided that is already used). See error message for details.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "OAuth2": {
+        "description": "OAuth client credentials (client ID and secret) are required.",
+        "flows": {
+          "clientCredentials": {
+            "scopes": {},
+            "tokenUrl": "https://{UserAccountSubdomain}.authentication.{CfRegion}.hana.ondemand.com/oauth/token"
+          }
+        },
+        "type": "oauth2"
+      }
+    }
+  }
+}

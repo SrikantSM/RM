@@ -1,0 +1,111 @@
+# Active local profile by default
+spring.profiles.active: cloud
+cds.multiTenancy.security.subscriptionScope: Callback
+cds.multiTenancy.security.deploymentScope: InitDb
+cds.multitenancy.datasource.hikari:
+  registerMbeans: true # Required for JMX/Dyntrace monitoring.
+  leakDetectionThreshold: 2000
+  connectionTimeout: 20000 # Needs to be lower than the health check timeout at AvS. Compare https://github.wdf.sap.corp/cap/issues/issues/8103#issuecomment-3098670
+  maxLifetime: 900000 # (15 minutes) Has to be smaller than timeout on HANA Cloud (which defaults to 24h). Recommended to be configured explicitly as per https://github.com/brettwooldridge/HikariCP.
+  minimumIdle: 1 # Each Tenant has its own connection pool with at max maximumPoolSize (default 10) connections. If minimumIdle is unspecified, it will be exactly 10 connections per tenant, which wastes resources.
+  idleTimeout: 300000 # (5 minutes) Time for idle connections to stay alive if unused. If exceeded, the connection will be closed, reducing the pool size down to minimumIdle. Has to be configured if minimumIdle != maximumPoolSize.
+cds.security.xsuaa.normalizeUserNames: false
+
+
+spring:
+  messages:
+    basename: i18n.i18n
+# enable health checks
+management:
+    endpoints:
+        web:
+            exposure:
+                exclude: info     # disable info endpoint
+                include: health
+        jmx:
+            exposure:
+                exclude: "*"      # disable all jmx endpoints
+        enabled-by-default: false
+    endpoint:
+        health:
+            enabled: true
+            show-details: never
+        info:
+            enabled: false
+ 
+
+---
+spring:
+  config:
+    activate:
+      on-profile: default
+  sql:
+    init:
+      mode: always
+  datasource:
+    url: "jdbc:sqlite:file::memory:?cache=shared"
+    driver-class-name: org.sqlite.JDBC
+
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local-test
+  sql:
+    init:
+      mode: never
+  datasource:
+    url: "jdbc:sqlite:file:local-test.db?cache=shared"
+    driver-class-name: org.sqlite.JDBC
+ 
+
+assignment:
+    logging:
+        rootlevel: INFO
+        appender: STDOUT
+        
+---
+spring:
+  config:
+    activate:
+      on-profile: cloud
+  
+cds.security.instance-based-authorization.enabled: true
+
+cds:
+  security.openUnrestrictedEndpoints: false # authenticate all endpoints by default
+  odata-v4.index-page.enabled: false # disable / index page
+
+assignment:
+    logging:
+        rootlevel: INFO
+
+---
+spring:
+  config:
+    activate:
+      on-profile: tenant   
+cds:
+  security:
+    xsuaa:
+      enabled: false
+    mock:
+      enabled: true
+      users:
+        - name: authenticated-user
+          password: pass
+          tenant: 080622fc-180a-4591-85eb-46e1a186533d
+          # tenant: 080...33d (for example, note that the tenant ID is entered without quotes)
+          roles:
+            - ProjExp.Read
+            - Demand.Read
+            - RsceReq.Edit
+            - RsceReq.Read    # to assign candidates
+            - Asgt.Edit       # to assign candidates
+            - Asgt.Read
+            - UtilOvw.Read    # to open Capacity Grid
+          #  - <other roles>  # --> add more roles you require
+
+    

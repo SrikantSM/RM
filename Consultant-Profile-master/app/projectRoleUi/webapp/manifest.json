@@ -1,0 +1,174 @@
+{
+	"_version": "1.8.0",
+	"sap.app": {
+		"id": "projectRoleUi",
+		"type": "application",
+		"title": "{{appTitle}}",
+		"i18n": "i18n/i18n.properties",
+		"ach": "PPM-CLD-RES",
+		"applicationVersion": {
+			"version": "0.0.1"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/odata/v4/ProjectRoleService/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		},
+		"sourceTemplate": {
+			"id": "ui5template.basicSAPUI5ApplicationProject",
+			"-id": "ui5template.smartTemplate",
+			"-version": "1.40.12"
+		},
+		"crossNavigation": {
+			"inbounds": {
+				"configApplicationDisplay": {
+					"semanticObject": "projectRoleUi",
+					"action": "Display",
+					"deviceTypes": {
+						"desktop": true,
+						"tablet": true,
+						"phone": true
+					},
+					"icon": "sap-icon://group",
+					"size": "1x1",
+					"signature": {
+						"parameters": {},
+						"additionalParameters": "allowed"
+					},
+					"title": "{{appTitle}}"
+				}
+			},
+			"outbounds": {}
+		}
+	},
+	"sap.ui5": {
+		"dependencies": {
+			"minUI5Version": "1.72",
+			"libs": {
+				"sap.fe.templates": {}
+			},
+			"components": {}
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true,
+				"settings": {
+					"synchronizationMode": "None",
+					"operationMode": "Server",
+					"autoExpandSelect": true,
+					"earlyRequests": true,
+					"groupProperties": {
+						"default": {
+							"submit": "Auto"
+						},
+						"collection": {
+							"submit": "Auto"
+						}
+					}
+				}
+			}
+		},
+		"routing": {
+			"routes": [
+				{
+					"pattern": ":?query:",
+					"name": "ProjectRoleList",
+					"target": "ProjectRoleList"
+				},
+				{
+					"pattern": "Roles({key}):?query:",
+					"name": "ProjectRoleDetails",
+					"target": "ProjectRoleDetails"
+				}
+			],
+			"targets": {
+				"ProjectRoleList": {
+					"type": "Component",
+					"id": "ProjectRoleListReport",
+					"name": "sap.fe.templates.ListReport",
+					"options": {
+						"settings": {
+							"entitySet": "Roles",
+							"navigation": {
+								"Roles": {
+									"detail": {
+										"route": "ProjectRoleDetails"
+									}
+								}
+							},
+							"variantManagement": "Page",
+							"initialLoad": true,
+							"controlConfiguration": {
+								"@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "ResponsiveTable",
+										"personalization": true,
+										"selectionMode": "None"
+									},
+									"columns": {
+										"DataField::name" : {
+											"availability": "Hidden"
+										}
+									}
+								}
+								
+							}
+						}
+					}
+				},
+				"ProjectRoleDetails": {
+					"type": "Component",
+					"id": "ProjectRoleObjectPage",
+					"name": "sap.fe.templates.ObjectPage",
+					"options": {
+						"settings" : {
+							"entitySet" : "Roles",
+							"editableHeaderContent": false,
+							"controlConfiguration": {
+								"texts/@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"creationMode": {
+											"name": "Inline",
+											"createAtEnd": null
+										},
+										"enableExport": false
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"fullWidth": true
+	},
+	"sap.fiori": {
+		"registrationIds": [
+			"F4706"
+		],
+		"archeType": "transactional"
+	},
+	"sap.platform.cf": {
+		"oAuthScopes": [
+			"$XSAPPNAME.ProjRole.Read",
+			"$XSAPPNAME.ProjRole.Edit"
+		]
+	}
+}

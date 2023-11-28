@@ -1,0 +1,30 @@
+{
+    "name": "@sap/rm-skill",
+    "description": "Skill project for resource management",
+    "repository": "https://github.tools.sap/Cloud4RM/Skill.git",
+    "license": "ISC",
+    "version": "2.0.0",
+    "files": [
+        "db",
+        "srv"
+    ],
+    "scripts": {
+        "postinstall": "npm run install-ui-apps",
+        "install-ui-apps": "cd app && npm ci",
+        "local-setup": "node utils/local-setup.js",
+        "build": "cd .. && npm run build && npx cds compile Skill/srv --to sql > Skill/srv/src/main/resources/schema.sql",
+        "build-java": "npm run build && cd srv && mvn clean install -U",
+        "build-mta": "cd .. && npm run build-mta -- --source Skill",
+        "mockserver": "npm run build && npm run mockserver-run",
+        "mockserver-run": "cd ./srv && mvn -P spotless-profile spotless:check && mvn clean spring-boot:run -U",
+        "mockui": "cd utils/localLaunchpad/ && npm start",
+        "initial-setup": "npm i -g mbt && cd .. && npm ci && cd Skill && npm ci && cd utils/localLaunchpad/ && npm i && cd ../.. && npm run install-test-dependency",
+        "install-test-dependency": "cd tests/api-integration && npm i && cd ../cross-domain-e2e && npm i && cd ../end-to-end && npm i && cd ../ui-integration && npm i && cd ../uiveri5-pages && npm i",
+        "//": "Below are the scripts to enforce formatting,",
+        "spotless-check": "cd ./srv && mvn -P spotless-profile spotless:check",
+        "spotless-apply": "cd ./srv && mvn -P spotless-profile spotless:apply"
+    },
+    "engines": {
+        "node": "^18.0.0"
+    }
+}

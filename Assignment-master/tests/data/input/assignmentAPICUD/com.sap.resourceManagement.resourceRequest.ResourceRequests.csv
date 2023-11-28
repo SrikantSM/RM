@@ -1,0 +1,4 @@
+ID,workpackage_ID,demand_ID,project_ID,startDate,endDate,startTime,endTime,requestStatus_code,releaseStatus_code,requestedCapacityInMinutes,displayId,name,isS4Cloud,processingResourceOrg_ID
+4cc7b653-67f2-449a-9852-7f37d64c5931,RSH_WP1,92bd4ab7-dbd3-45ed-a5d3-90b1d33a2859,P_ID1,2021-07-01,2022-01-31,2021-07-01 00:00:00.000,2022-02-01 00:00:00.000,0,1,60000,0c963a26-c,Resource Request Name 1,true,ROO2
+a1ac39a6-cac2-34dc-94c2-89a0c229174a,RSH_WP2,81ac39a6-cac2-34dc-94c2-8fa0c2291748,P_ID2,2020-11-01,2022-02-28,2020-11-01 00:00:00.000,2022-03-01 00:00:00.000,1,1,6000,bafc8556-7,Resource Request Name 2,true,ROO2
+a1ac39a6-cac2-34dc-94c2-89a0c2291749,RSH_WP3,81ac39a6-cac2-34dc-94c2-8fa0c2291749,P_ID3,2020-11-01,2021-10-31,2020-11-01 00:00:00.000,2021-11-01 00:00:00.000,1,1,6000,6c894eb5-4,Resource Request Name 3,true,ROO3

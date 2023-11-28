@@ -1,0 +1,30 @@
+package com.sap.c4p.rm.skill.config;
+
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
+
+public enum LoggingMarker {
+
+  AUDIT_LOG,
+  FILE_DOWNLOAD,
+  FILE_UPLOAD,
+  LOGGING,
+  MULTITENANCY,
+  PRECOMPILER,
+  REQUEST_FALLBACK_SCOPE,
+  SKILL_IMPORTER,
+  UPLOAD_JOB,
+  DEFAULT_PROFICIENCY_UPSERT,
+  DEFAULT_LANGUAGE_HANDLER,
+  VALIDATION,
+  AUTHORIZATION_EVENT,
+  WORKFORCE_CAPABILITY_REPLICATION,
+  WORKFORCE_CAPABILITY_CATALOG_REPLICATION,
+  WORKFORCE_CAPABILITY_PROFICIENCY_REPLICATION,
+
+  WORKFORCE_CAPABILITY_JOBS;
+
+  public Marker getMarker() {
+    return MarkerFactory.getMarker(this.toString());
+  }
+}

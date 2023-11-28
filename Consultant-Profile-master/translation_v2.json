@@ -1,0 +1,157 @@
+{
+	"collections": [
+		{
+			"collectionName": "C4P_RM_ConsultantProfile_UI",
+			"folders": [
+				{
+					"startingFolderPath": "app/availabilityDownload/webapp/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/availabilityUpload/webapp/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/availabilityUploadUi/webapp/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/availabilityUploadUi/webapp/i18n/ListReport/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/projectRoleUi/webapp/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/myProjectExperienceUi/webapp/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/myResourcesUi/webapp/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/myProjectExperienceUi/webapp/i18n/ListReport/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/projectRoleUi/webapp/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/projectRoleUi/webapp/i18n/ListReport/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/businessServiceOrgUi/webapp/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/businessServiceOrgUpload/webapp/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/replicationScheduleUi/webapp/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/myAssignmentsUi/webapp/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "srv/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "integration-srv/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				}
+			]
+		},
+		{
+			"collectionName": "C4P_RM_ConsultantProfile_Odata",
+			"folders": [
+				{
+					"startingFolderPath": "srv/src/main/resources/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "integration-srv/src/main/resources/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				}
+			]
+		},
+		{
+			"collectionName": "C4P_RM_ConsultantProfile_DB",
+			"folders": [
+				{
+					"startingFolderPath": "db/src/translation/config/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "db/src/translation/integration/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "db/src/translation/organization/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "db/src/translation/workforce/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				}
+			]
+		}
+	],
+	"defaultConfiguration": {
+		"targetFolderPath": ".",
+		"pseudoLocFolderPath": ".",
+		"oneQFolderPath": ".",
+		"targetFileNamingConvention": "[filename]_[langCode].[extension]"
+	}
+}

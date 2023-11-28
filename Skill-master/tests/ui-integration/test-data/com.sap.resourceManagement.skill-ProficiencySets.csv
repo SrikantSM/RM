@@ -1,0 +1,6 @@
+ID,OID,name,description,isCustom
+8a2cc2c3-4a46-47f0-ae67-2ac67c673aae,,Default,Default Proficiency Set,FALSE
+87dd375a-eb3a-4c6a-847f-bce74a48c6da,,Proficiency Set 1,Description Proficiency Set 1,TRUE
+4d054070-5bbd-4812-9994-3e8e582dfa0a,,Proficiency Set 2,Description Proficiency Set 2,TRUE
+727eed27-4317-4e1b-8ddc-6217dad1ab69,,Proficiency Set 3,Description Proficiency Set 3,TRUE
+8a2cc2c3-5bbd-4e1b-8ddc-2ac67c673aad,MDI,MDI Proficiency Set,MDI Prof Set Description,TRUE

@@ -1,0 +1,4 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" >
+    <Link id="requiredEfforts" text="{requestedCapacity} {i18n>unitHours}" core:require="{handler: 'staffResourceRequest/ext/controller/RequestedEfforts'}" press="handler.onOpenCalendarView"
+    enabled="{= %{effortDistributionType_code} !== 0 }"/>
+</core:FragmentDefinition>

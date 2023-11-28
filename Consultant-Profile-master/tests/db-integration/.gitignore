@@ -1,0 +1,10 @@
+node_modules
+.history
+dist
+.idea
+.env
+report
+!.vscode
+src/cert
+report
+

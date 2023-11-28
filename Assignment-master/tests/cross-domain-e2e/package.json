@@ -1,0 +1,9 @@
+{
+    "name": "cross-domain-e2e",
+    "private": true,
+    "dependencies": {
+      "uuid": "^8.0.0",
+      "moment": "latest"
+    },
+    "main": "index.js"
+  } 

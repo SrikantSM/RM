@@ -1,0 +1,470 @@
+---
+_schema-version: 3.2
+ID: assignment
+version: 1.38.0
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+  keep-existing-routes: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm --prefix .. ci .. --only=production
+    - npm ci --only=production
+    - npm run build
+modules:
+- name: assignment-approuter
+  deployed-after:
+  - assignment-flp-content
+  type: approuter.nodejs
+  path: approuter
+  build-parameters:
+    builder: custom
+    commands:
+    - npm ci --only=production
+  parameters:
+    disk-quota: 512M
+    memory: 512M
+    idle-routes:
+    - idle-route: "${org}-${space}-assignment-approuter-idle.internal.cfapps.sap.hana.ondemand.com"
+    - idle-route: "${org}-${space}-assignment-approuter-idle.cfapps.sap.hana.ondemand.com"
+    routes:
+    - route: rm-excelsior-tenant-${org}-${space}-assignment-approuter.internal.cfapps.sap.hana.ondemand.com
+    - route: rm-excelsior-tenant-${org}-${space}-assignment-approuter.cfapps.sap.hana.ondemand.com
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+    SAP_JWT_TRUST_ACL:
+    - clientid: "*"
+      identityzone: sap-provisioning
+    - clientid: sb-assignment-${space}!b7637
+      identityzone: "*"
+  requires:
+  - name: assignment-html5-repo-runtime
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: assignment-logs
+  - name: rm-cloud-logs
+  - name: assignment-service-manager
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: assignment-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: assignment-portal
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: assignment-ui-content
+  - name: assignment-flp-content
+  - name: assignment-onboarding
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: assignment-audit-logs-oauth
+  - name: assignment-srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: assignment-srv-api
+      url: "~{url}"
+  - name: assignment-approuter-url
+    properties:
+      TENANT_HOST_PATTERN: "^(.*)~{ui-tenant-delimiter}.*"
+  provides:
+  - name: assignment-approuter-url
+    properties:
+      ui-tenant-delimiter: "-tenant-"
+      ui-url-suffix: "${org}-${space}-assignment-approuter.internal.cfapps.sap.hana.ondemand.com"
+      url: "${protocol}://${routes/0/route}"
+- name: assignment-ui-content
+  deployed-after:
+  - capacitygrid-ui
+  type: com.sap.application.content
+  path: ui-content
+  build-parameters:
+    ignore:
+    - ".gitkeep"
+    requires:
+    - name: capacitygrid-ui
+      artifacts:
+      - "./deploy-*.zip"
+  requires:
+  - name: assignment-html5-repo-host
+    parameters:
+      content-target: true
+      service-key:
+        name: html5-content-deployment-key-${timestamp}
+        config:
+          xsuaa:
+            credential-type: x509
+            x509:
+              key-length: 2048
+              validity: 100
+              validity-type: DAYS
+- name: assignment-db
+  type: nodejs
+  path: "../db"
+  parameters:
+    memory: 256M
+    disk-quota: 512M
+    idle-domain: cfapps.sap.hana.ondemand.com
+    idle-routes:
+    - idle-route: "${org}-${space}-assignment-db-idle.internal.cfapps.sap.hana.ondemand.com"
+    - idle-route: "${org}-${space}-assignment-db-idle.cfapps.sap.hana.ondemand.com"
+    routes:
+    - route: "${org}-${space}-assignment-db.internal.cfapps.sap.hana.ondemand.com"
+    - route: "${org}-${space}-assignment-db.cfapps.sap.hana.ondemand.com"
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  requires:
+  - name: assignment-logs
+  - name: rm-cloud-logs
+  - name: assignment-audit-logs-oauth
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: assignment-hdi-credentials
+    properties:
+      hdi_dynamic_deploy_user: "~{user}"
+      hdi_dynamic_deploy_password: "~{password}"
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  provides:
+  - name: dynamic-db-deployment
+    properties:
+      db_url: "${protocol}://${routes/0/route}"
+- name: assignment-srv
+  deployed-after:
+  - assignment-db
+  type: java
+  path: srv
+  properties:
+    SPRING_PROFILES_ACTIVE: cloud
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+    JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jre.SAPMachineJRE']"
+    JBP_CONFIG_SAP_MACHINE_JRE: '{ use_offline_repository: false, version: 17.+ }'
+    CDS_SECURITY_AUTHENTICATION_NORMALIZEPROVIDERTENANT: false
+    SAP_JWT_TRUST_ACL:
+    - clientid: "*"
+      identityzone: sap-provisioning
+    - clientid: sb-assignment-${space}!b7637
+      identityzone: "*"
+  build-parameters:
+    builder: custom
+    commands:
+    - mvn -B clean package
+    build-result: target/*.jar
+  parameters:
+    memory: 1024M
+    buildpack: sap_java_buildpack
+    idle-routes:
+    - idle-route: "${org}-${space}-assignment-srv-idle.internal.cfapps.sap.hana.ondemand.com"
+    - idle-route: "${org}-${space}-assignment-srv-idle.cfapps.sap.hana.ondemand.com"
+    routes:
+    - route: "${org}-${space}-assignment-srv.internal.cfapps.sap.hana.ondemand.com"
+    - route: "${org}-${space}-assignment-srv.cfapps.sap.hana.ondemand.com"
+  hooks:
+  - name: start-db-deploy-before-assignment-srv
+    type: task
+    phases:
+    - deploy.application.before-start
+    - blue-green.application.before-start.idle
+    parameters:
+      name: db-schema-update
+      command: sed -i 's/org.springframework.boot.loader.JarLauncher/org.springframework.boot.loader.PropertiesLauncher/g'
+        /home/vcap/staging_info.yml && sed -i 's/-Dsun.net.inetaddr.negative.ttl=0/-Dsun.net.inetaddr.negative.ttl=0
+        -Dloader.main=com.sap.cds.framework.spring.utils.Deploy/g' /home/vcap/staging_info.yml
+        && jq -r .start_command /home/vcap/staging_info.yml | bash
+      memory: 1024M
+      disk-quota: 512M
+  provides:
+  - name: assignment-srv-api
+    properties:
+      url: "${protocol}://${routes/0/route}"
+  requires:
+  - name: rm-destination
+  - name: assignment-service-manager
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: assignment-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: assignment-logs
+  - name: rm-cloud-logs
+  - name: assignment-onboarding
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: assignment-audit-logs-oauth
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: dynamic-db-deployment
+    properties:
+      CDS_MULTITENANCY_DEPLOYER_URL: "~{db_url}"
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  - name: assignment-hdi-credentials
+    properties:
+      CDS_MULTITENANCY_DEPLOYER_USER: "~{user}"
+      CDS_MULTITENANCY_DEPLOYER_PASSWORD: "~{password}"
+  - name: assignment-approuter-url
+    properties:
+      CDS_MULTITENANCY_APPUI_URL: "~{ui-url-suffix}"
+      CDS_MULTITENANCY_APPUI_TENANTSEPARATOR: "~{ui-tenant-delimiter}"
+- name: capacitygrid-ui
+  type: html5
+  path: app/capacityGridUi
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+    properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  requires:
+  - name: assignment-srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      strictSSL: false
+      name: assignment-srv-api
+      url: "~{url}"
+- name: assignment-flp-content
+  deployed-after:
+  - capacitygrid-ui
+  type: com.sap.application.content
+  path: flp-content
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  requires:
+  - name: assignment-portal
+    parameters:
+      content-target: true
+      service-key:
+        name: portal-content-deploy-key
+        config:
+          content-endpoint: developer
+  - name: assignment-uaa
+    parameters:
+      service-key:
+        name: rm-flp-content-assignment-uaa-credentials-${timestamp}
+        config:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: assignment-html5-repo-host
+    parameters:
+      service-key:
+        name: flp-content-deployment-key-${timestamp}
+        config:
+          xsuaa:
+            credential-type: x509
+            x509:
+              key-length: 2048
+              validity: 100
+              validity-type: DAYS
+  - name: assignment-ui-content
+resources:
+- name: assignment-html5-repo-runtime
+  parameters:
+    service-plan: app-runtime
+    service: html5-apps-repo
+  type: org.cloudfoundry.managed-service
+- name: assignment-html5-repo-host
+  parameters:
+    service-plan: app-host
+    service: html5-apps-repo
+  type: org.cloudfoundry.managed-service
+- name: assignment-service-manager
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: service-manager
+    service-plan: container
+- name: assignment-hdi-credentials
+  properties:
+    user: "${generated-user}"
+    password: "${generated-password}"
+- name: assignment-uaa
+  type: com.sap.xs.uaa
+  parameters:
+    service-plan: broker
+    service: xsuaa
+    config:
+      xsappname: assignment-${space}
+      oauth2-configuration:
+       credential-types: [x509, binding-secret, instance-secret]
+      tenant-mode: shared
+      scopes:
+      - name: "$XSAPPNAME.RsceReq.Edit"
+        description: Authorization to edit resource requests
+      - name: "$XSAPPNAME.MyAssignment.Edit"
+        description: edit of consultant's assignments
+      - name: uaa.user
+        description: UAA
+      - name: "$XSAPPNAME.mtcallback"
+        description: Onboarding Callback Access
+        grant-as-authority-to-apps:
+        - "$XSAPPNAME(application,sap-provisioning,tenant-onboarding)"
+      - name: "$XSAPPNAME.Callback"
+        description: Onboarding Callback Access
+        grant-as-authority-to-apps:
+        - "$XSAPPNAME(application,sap-provisioning,tenant-onboarding)"
+      - name: "$XSAPPNAME.Asgt.Edit"
+        description: Authorization to edit assignments
+      - name: "$XSAPPNAME.System"
+        description: Identifies the external consumers in client credential token
+          flow
+      - name: "$XSAPPNAME.UtilOvw.Read"
+        description: Authorization to view the resource utilization overview
+      - name: "$XSAPPNAME.InitDb"
+        description: Update the database artifacts after deployment of a new version
+        granted-apps:
+        - "$XSAPPNAME(broker,assignment-admin-${space})"
+      attributes:
+      - name: ProcessingResourceOrganization
+        description: Resource Organization of resources
+        valueType: string
+        valueRequired: false
+      - name: RequestedResourceOrganization
+        description: Resource Organization requesting resources for the project
+        valueType: string
+        valueRequired: false
+      role-templates:
+      - name: Token_Exchange
+        description: UAA
+        scope-references:
+        - uaa.user
+      - name: ResourceManager
+        description: Users can staff resource requests and view the resource utilization.
+        scope-references:
+        - uaa.user
+        - "$XSAPPNAME.Asgt.Edit"
+        - "$XSAPPNAME.UtilOvw.Read"
+        attribute-references:
+        - ProcessingResourceOrganization
+      - name: MyAssignmentEditor
+        description: Users can edit the assignments.
+        scope-references:
+        - uaa.user
+        - "$XSAPPNAME.MyAssignment.Edit"
+      - name: Requester
+        description: Users can create and manage resource requests.
+        scope-references:
+        - uaa.user
+        - "$XSAPPNAME.RsceReq.Edit"
+        attribute-references:
+        - RequestedResourceOrganization
+      authorities:
+      - "$XSAPPNAME.System"
+- name: assignment-uaa-admin
+  type: com.sap.xs.uaa
+  parameters:
+    service-plan: broker
+    service: xsuaa
+    config:
+      xsappname: assignment-admin-${space}
+      tenant-mode: dedicated
+      foreign-scope-references:
+      - "$XSAPPNAME(broker,assignment-${space}).InitDb"
+      role-templates:
+      - name: ResourceManagementOperator
+        description: Perform administrative actions on the deployed RM application
+        scope-references:
+        - "$XSAPPNAME(broker,assignment-${space}).InitDb"
+- name: assignment-portal
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service-plan: standard
+    service: portal
+- name: assignment-logs
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: application-logs
+    service-plan: lite
+- name: assignment-onboarding
+  type: org.cloudfoundry.managed-service
+  requires:
+  - name: assignment-srv-api
+  - name: assignment-approuter-url
+  parameters:
+    service: saas-registry
+    service-plan: application
+    config:
+      appName: assignment-${space}
+      xsappname: assignment-${space}
+      appUrls:
+        onSubscription: "~{assignment-srv-api/url}/mt/v1.0/subscriptions/tenants/{tenantId}"
+        getDependencies: "~{assignment-approuter-url/url}/callback/v1.0/dependencies"
+- name: rm-destination
+  optional: true
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: destination
+    service-plan: lite
+- name: assignment-audit-logs-oauth
+  optional: true
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: auditlog
+    service-plan: oauth2
+- name: rm-cloud-logs
+  type: org.cloudfoundry.managed-service
+  optional: true
+  parameters:
+    service: cloud-logging
+    service-plan: standard

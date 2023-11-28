@@ -1,0 +1,5 @@
+<core:FragmentDefinition
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:core="sap.ui.core">
+  <mvc:XMLView id="proficiencyLevelXmlViewId" viewName="skill-proficiency.view.ProficiencyLevelsTable" />
+</core:FragmentDefinition>

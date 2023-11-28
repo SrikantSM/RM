@@ -1,0 +1,298 @@
+<mvc:View
+	controllerName="capacityGridUi.view.table.Table"
+	height="100%"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:m="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:core="sap.ui.core"
+	xmlns:dnd="sap.ui.core.dnd"
+	xmlns:plugins="sap.ui.table.plugins"
+>
+	<t:TreeTable
+		id="tblCapacity"
+		firstVisibleRowChanged="onScroll"
+		rowsUpdated="onRowsUpdated"
+		columnResize="onColumnResize"
+		toggleOpenState="onExpandRow"
+		sort="onSort"
+		rootLevel="0"
+		busy="{/busy}"
+		busyIndicatorDelay="{app>/busyIndicatorDelay}"
+		showNoData="true"
+		fixedColumnCount="11"
+		minAutoRowCount="1"
+		visibleRowCountMode="Auto"
+		rowHeight="40px"
+		enableColumnReordering="false"
+		showOverlay="{= ${app>/IsFilterChanged} &amp;&amp; ${app>/IsFilterBarOpen}}"
+		beforeOpenContextMenu="onBeforeContextMenuOpen">
+		<t:plugins>
+			<plugins:MultiSelectionPlugin id="idTableMultiSelectPlugin" selectionChange="onRowSelectionChange"/>
+		</t:plugins>
+		<t:dragDropConfig>
+			<dnd:DragDropInfo
+				sourceAggregation="rows"
+				targetAggregation="rows"
+				dragStart="onDragStart"
+				drop="onDrop"
+				dropEffect="Move"
+				dragEnter="onDragEnter"
+				enabled="{app>/IsEditMode}"/>
+		</t:dragDropConfig>
+		<t:contextMenu>
+			<m:Menu>
+				<m:MenuItem
+					id="idFocusedEditMenuItem"
+					text="{
+						parts: [{
+							path: 'i18n>EDIT_BUTTON'
+						}, {
+							path: '/SelectedResourceCount'
+						}],
+						formatter: '.formatEditButton'
+					}"
+					visible="{app>/IsDisplayMode}"
+					enabled="{/IsFocusedEditOnLimit}"
+					press="onEdit"
+				>
+					<m:customData>
+						<core:CustomData
+							key="EditMode"
+							value="FocusedEdit"
+						/>
+					</m:customData>
+				</m:MenuItem>
+				<m:MenuItem
+					id="idEditMenuItem"
+					text="{i18n>EDIT_ALL_BUTTON}"
+					visible="{app>/IsDisplayMode}"
+					press="onEdit"
+				>
+					<m:customData>
+						<core:CustomData
+							key="EditMode"
+							value="Edit"
+						/>
+					</m:customData>
+				</m:MenuItem>
+				<m:MenuItem
+					text="{i18n>DELETE_ASSIGNMENT}"
+					visible="{= ${child} &amp;&amp; ${app>/IsEditMode} }"
+					enabled="{= ${app>/IsEditMode} &amp;&amp; ${/deleteAsgEnabled} }"
+					press="onDeleteAssignment"
+				/>
+				<m:MenuItem
+					id="idDiscardMenuItem"
+					text="{i18n>REVERT_EDITED_CELLS}"
+					visible="{= ${child} &amp;&amp; ${app>/IsEditMode} }"
+					enabled="{/cancelEnabled}"
+					press="onCancelSelected"
+				/>
+				<m:MenuItem
+					text="{i18n>ADD_ASSIGNMENT}"
+					visible="{= ${parent}  &amp;&amp; ${app>/IsEditMode} }"
+					enabled="{= ${app>/IsEditMode} &amp;&amp; ${/addAsgEnabled} }"
+					press="onAddAssignment"
+				/>
+				<m:MenuItem
+					text="{i18n>COPY_ASSIGNMENT}"
+					visible="{= ${child} &amp;&amp; ${app>/IsEditMode} }"
+					enabled="{= ${app>/IsEditMode} &amp;&amp; ${/copyAsgEnabled} }"
+					press="onCopyAssignment"
+				/>
+				<m:MenuItem
+					text="{i18n>CUT_ASSIGNMENT}"
+					visible="{= ${child} &amp;&amp; ${app>/IsEditMode} }"
+					enabled="{= ${app>/IsEditMode} &amp;&amp; ${/copyAsgEnabled} }"
+					press="onCutAssignment"
+				/>
+				<m:MenuItem
+					text="{i18n>PASTE_ASSIGNMENT}"
+					visible="{= ${parent}  &amp;&amp; ${app>/IsEditMode} }"
+					enabled="{= ${app>/IsEditMode} &amp;&amp; ${/pasteAsgEnabled} }"
+					press="onPasteAssignment"
+				/>
+				<m:MenuItem
+					id="idViewDetailsMenuItem"
+					text="{i18n>VIEW_DETAILS}"
+					enabled="{= ${changeState} !== 'empty'}"
+					press="onOpenViewDetails"
+				/>
+			</m:Menu>
+		</t:contextMenu>
+		<t:rowSettingsTemplate>
+			<t:RowSettings highlight="{
+				parts: ['error', 'warning', 'changed'],
+				formatter: '.formatRowHighlight'
+			}"/>
+		</t:rowSettingsTemplate>
+		<t:extension>
+			<m:OverflowToolbar
+				id="idCapacityToolbar"
+				height="auto"
+			>
+				<m:Title
+					id="idGridTitle"
+					text="{
+						path: '/resourcesCount',
+						formatter: '.formatTitle'
+					}"
+				/>
+				<m:ToggleButton
+					id="idFilterToggleButton"
+					icon="sap-icon://filter"
+					tooltip="{i18n>TOGGLE_FILTER_TOOLTIP}"
+					press="onToggleFilter"
+					type="Transparent"
+					enabled="{app>/IsDisplayMode}"
+					visible="{app>/IsDisplayMode}"
+				/>
+				<m:Label
+					id="idEditingStatus"
+					text="{i18n>EDITING_STATUS}"
+					visible="{app>/IsEditMode}"
+				/>
+				<m:Select
+					id="idEditStatus"
+					text="Editing Status"
+					visible="{app>/IsEditMode}"
+					enabled="{/filterDropDownEnabled}"
+					selectedKey="{/SelectedEditStatus}"
+					change="onEditStatusFilterChange"
+				>
+					<core:ListItem
+						key="All"
+						text="{i18n>ALL}"
+					/>
+					<core:ListItem
+						key="Changed"
+						text="{i18n>CHANGED}"
+					/>
+				</m:Select>
+				<m:ToolbarSpacer/>
+				<m:Button
+					id="idBtnAddAssignment"
+					text="{i18n>ADD_ASSIGNMENT}"
+					visible="{app>/IsEditMode}"
+					enabled="{/addAsgEnabled}"
+					press="onAddAssignment"
+				/>
+				<m:Button
+					id="idBtnDeleteAssignment"
+					text="{i18n>DELETE_ASSIGNMENT}"
+					visible="{app>/IsEditMode}"
+					enabled="{/deleteAsgEnabled}"
+					press="onDeleteAssignment"
+				/>
+				<m:Button
+					id="idBtnRevert"
+					text="{i18n>REVERT_EDITED_CELLS}"
+					visible="{app>/IsEditMode}"
+					enabled="{/cancelEnabled}"
+					press="onCancelSelected"
+					type="Transparent"
+				/>
+				<m:Button
+					id="idBtnEdit"
+					text="{
+						parts: [{
+							path: 'i18n>EDIT_BUTTON'
+						}, {
+							path: '/SelectedResourceCount'
+						}],
+						formatter: '.formatEditButton'
+					}"
+					visible="{app>/IsDisplayMode}"
+					enabled="{= ${/resourcesCount} > 0 &amp;&amp; ${/IsFocusedEditOnLimit}}"
+					press="onEdit"
+					type="Emphasized"
+				>
+					<m:customData>
+						<core:CustomData
+							key="EditMode"
+							value="{= ${/SelectedResourceCount} > 0 ? 'FocusedEdit' : 'Edit'}"
+						/>
+					</m:customData>
+				</m:Button>
+				<m:ToolbarSeparator visible="{app>/IsEditMode}"/>
+				<m:Button
+					id="idBtnCopyAssignment"
+					visible="{= ${app>/IsEditMode} }"
+					type="Transparent"
+					icon="sap-icon://copy"
+					enabled="{= ${app>/IsEditMode} &amp;&amp; ${/copyAsgEnabled} }"
+					tooltip="{i18n>COPY_ASSIGNMENT}"
+					press="onCopyAssignment"
+				/>
+				<m:Button
+					id="idBtnCutAssignment"
+					visible="{= ${app>/IsEditMode} }"
+					type="Transparent"
+					icon="sap-icon://scissors"
+					enabled="{= ${app>/IsEditMode} &amp;&amp; ${/copyAsgEnabled} }"
+					tooltip="{i18n>CUT_ASSIGNMENT}"
+					press="onCutAssignment"
+				/>
+				<m:Button
+					id="idBtnPasteAssignment"
+					visible="{= ${app>/IsEditMode} }"
+					type="Transparent"
+					icon="sap-icon://paste"
+					enabled="{= ${app>/IsEditMode} &amp;&amp; ${/pasteAsgEnabled} }"
+					tooltip="{i18n>PASTE_ASSIGNMENT}"
+					press="onPasteAssignment"
+				/>
+				<m:ToolbarSeparator visible="{app>/IsEditMode}"/>
+				<m:SegmentedButton
+					id="idBtnHideLeadingColumns"
+					selectedKey="{app>/columnsVisibility}"
+				>
+					<m:items>
+						<m:SegmentedButtonItem
+							id="idShowAll"
+							icon="sap-icon://show"
+							key="showAll"
+							tooltip="{i18n>SHOW_ALL}"
+						/>
+						<m:SegmentedButtonItem
+							id="idHideLeading"
+							icon="sap-icon://hide"
+							key="hideLeading"
+							tooltip="{i18n>HIDE_COLUMNS}"
+						/>
+					</m:items>
+				</m:SegmentedButton>
+				<m:Button
+					id="idBtnPersonalization"
+					enabled="{app>/IsDisplayMode}"
+					icon="sap-icon://action-settings"
+					press="onOpenPersoDialog"
+					type="Transparent"
+				/>
+				<m:Button
+					id="idBtnExcel"
+					icon="sap-icon://excel-attachment"
+					tooltip="{i18n>EXPORT_TO_SPREADSHEET}"
+					type="Transparent"
+					press="onExportToExcel"
+					enabled="{= ${app>/IsDisplayMode} &amp;&amp; ${/resourcesCount} > 0}"
+				/>
+			</m:OverflowToolbar>
+			<m:OverflowToolbar
+				id="idInfoToolbar"
+				active="true"
+				visible="{= ${app>/InfoBarFilterCount} > 0 &amp;&amp; !${app>/IsFilterBarOpen}}"
+				design="Info"
+				press="onInfoBar"
+			>
+				<m:Text
+					id="idFilterInfoText"
+					text="{
+						parts: ['app>/InfoBarFilterCount', 'app>/InfoBarItems'],
+						formatter: '.formatInfoBarText'
+					}"
+				/>
+			</m:OverflowToolbar>
+		</t:extension>
+	</t:TreeTable>
+</mvc:View>

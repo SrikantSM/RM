@@ -1,0 +1,43 @@
+import { JobDetail } from 'test-commons';
+
+export const jobDetailData : JobDetail[] = [
+  {
+    ID: '13311b87-5826-4b40-ab14-ab796df0fa8e',
+    costCenterexternalID: '72975bf5-6e74-45d5-b3eb-16cd9d647593',
+    supervisorWorkAssignmentExternalID: '',
+    jobTitle: '',
+    parent: '439669d6-418d-4544-a809-31e8e0de44d6',
+    legalEntityExternalID: 'X',
+    country_code: 'IN',
+    validFrom: '2019-01-01',
+    validTo: '2099-02-03',
+    eventSequence: 1,
+    status_code: 'A',
+  },
+  {
+    ID: 'd640c3c5-fe10-44bf-ac28-ade617b032fc',
+    costCenterexternalID: '72975bf5-6e74-45d5-b3eb-16cd9d647593',
+    supervisorWorkAssignmentExternalID: '',
+    jobTitle: '',
+    parent: 'e59bd6e9-ab93-41fb-9221-8c3a56c9e2a4',
+    legalEntityExternalID: 'X',
+    country_code: 'IN',
+    validFrom: '2019-01-01',
+    validTo: '2099-02-03',
+    eventSequence: 1,
+    status_code: 'A',
+  },
+  {
+    ID: 'd640c3c5-fe10-44bf-ac28-ade617b032fd',
+    costCenterexternalID: '72975bf5-6e74-45d5-b3eb-16cd9d647594',
+    supervisorWorkAssignmentExternalID: '',
+    jobTitle: '',
+    parent: 'e59bd6e9-ab93-41fb-9221-8c3a56c9e2a5',
+    legalEntityExternalID: 'X',
+    country_code: 'IN',
+    validFrom: '2019-01-01',
+    validTo: '2099-02-03',
+    eventSequence: 1,
+    status_code: 'A',
+  },
+];

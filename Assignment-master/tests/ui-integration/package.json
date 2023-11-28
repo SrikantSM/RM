@@ -1,0 +1,30 @@
+{
+    "name": "ui-integration",
+    "private": true,
+    "dependencies": {
+      "concurrently": "^4.1.2",
+      "fs-extra": "^8.1.0",
+      "grunt": "1.6.1",
+      "grunt-cli": "1.4.3",
+      "grunt-karma": "^4.0.0",
+      "karma": "^6.4.2",
+      "karma-chrome-launcher": "^3.1.0",
+      "karma-coverage": "^2.2.1",
+      "karma-html-reporter": "^0.2.7",
+      "karma-junit-reporter": "^2.0.1",
+      "karma-qunit": "^4.0.0",
+      "karma-ui5": "^1.1.0",
+      "qunit": "^2.9.3",
+      "test-commons": "git+https://github.tools.sap/Cloud4RM/Test-Commons#1c754918988b87465f4c6ed570ca5bf6510b502f"
+    },
+    "scripts": {
+      "start": "cd ../../ && npm run karma1",
+      "start-server": "cd ../../srv && mvn -s ../../settings.xml clean spring-boot:run -U -Dspring-boot.run.jvmArguments=\"-Dspring.profiles.active=local-test -Dmaven.test.skip=true\"",
+      "test": "npm start",
+      "all": "npm run capacityGrid -- --runInUmbrella=$npm_config_runInUmbrella",
+      "capacityGrid": "grunt opa_tests --appName=capacityGrid  --testCompiled=true",
+      "start2": "cd ../../ && npm run karma2",
+      "start3": "cd ../../ && npm run karma3",
+      "debug-capacityGrid": "grunt opa_tests --appName=capacityGrid  --testCompiled=false --debugMode=true "
+    }
+  }

@@ -1,0 +1,7 @@
+{
+  "ENV_LANDSCAPE": "sap",
+  "ENV_SPACE_GUID": "",
+  "ENV_SRV_APP_NAME": "resourceRequest-srv",
+  "ENV_CF_USER": "",
+  "ENV_CF_PASSWORD": ""
+}

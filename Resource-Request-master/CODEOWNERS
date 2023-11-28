@@ -1,0 +1,33 @@
+# Code owners are automatically requested for review when someone opens a pull request that modifies code that they own.
+# Code owners are not automatically requested to review draft pull requests.
+
+# Changes in unmatched file should notify Aravinth
+* @I322129
+
+# matching engine changes should notify Srikant and Minesh
+db/src/matching-engine/**/* @I347065 @I311852
+
+# db changes should notify Aravinth
+db/cds/**/* @I322129
+
+# Service Changes should notify Aravinth, Srikant, Minesh
+srv/** @I322129 @I347065 @I311852
+
+# Fiori Changes should notify Dhananjay
+srv/cds/fiori-annotations/** @I353819
+
+# project integration adapter changes should notify Aravinth and Rekha
+project-integration-adapter/** @I322129 @I322644
+
+# App changes should notify Dhananjay
+app/**/* @I353819
+
+# i18n-Properties files changes should notify Swarup and Sreevidya
+db/**/*.properties @I036870
+**/i18n/**/*.properties @I036870 @I072888
+
+# Changes to the TWB config should also notify Swarup and Sreevidya, so translated files that are properties files can be added individually here
+translation_v2.json @I036870 @I072888
+
+# Public API doc should be reviewed by Swarup and Sreevidya
+srv/cds/api-doc/** @I036870 @I072888

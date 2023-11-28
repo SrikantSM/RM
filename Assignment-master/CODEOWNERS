@@ -1,0 +1,10 @@
+# https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+# Code owners are automatically requested for review when someone opens a pull request that modifies code that they own.
+# Code owners are not automatically requested to review draft pull requests.
+
+# i18n-Properties Files
+**/i18n/**/*.properties @I531803 @I036870
+db/**/*.properties @I531803 @I036870
+
+# Changes to the TWB config should notify UA, so translated files that are properties files can be added individually here
+translation_v2.json @I531803 @I036870

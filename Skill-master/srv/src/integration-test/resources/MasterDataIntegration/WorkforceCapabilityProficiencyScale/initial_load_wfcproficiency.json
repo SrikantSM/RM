@@ -1,0 +1,651 @@
+{
+  "@odata.context": "$metadata#Logs",
+  "value": [
+    {
+      "instance": {
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Rating scale with one level: Level 10."
+          }
+        ],
+        "id": "2025",
+        "inverse": false,
+        "max": 2,
+        "min": 1,
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "One Level Proficiency Rating Scale"
+          }
+        ],
+        "proficiency": [
+          {
+            "id": "1d587e23-d60d-4f96-915c-841050b55b0e",
+            "level": 1,
+            "name": [
+              {
+                "lang": "zh-CN",
+                "content": "Level 10"
+              }
+            ],
+            "description": [
+              {
+                "lang": "zh-CN",
+                "content": "Level 10 Rating"
+              }
+            ]
+          }
+        ],
+        "status": {
+          "code": "ACTIVE"
+        }
+      },
+      "event": "created",
+      "versionId": "cdfdd475-2b47-4d37-9624-e34d77be5f79"
+    },
+    {
+      "instance": {
+        "id": "1024",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Language Proficiency Rating Scale(US)"
+          },
+          {
+            "lang": "en-UK",
+            "content": "Language Proficiency Rating Scale(UK)"
+          },
+          {
+            "lang": "EN-UK",
+            "content": "Language Proficiency Rating Scale(UK)"
+          }
+        ],
+        "description": [
+          {
+            "lang": "fr-SP",
+            "content": "Rating scale used for language proficiency(SP)."
+          },
+          {
+            "lang": "DE-GE",
+            "content": "Rating scale used for language proficiency(DE)."
+          }
+        ],
+        "proficiency": [
+          {
+            "id": "491c4fae-8e15-456d-91ba-be3c1c43b261",
+            "level": 0,
+            "name": [
+              {
+                "lang": "en-US-x-saptrc",
+                "content": "None(US)"
+              },
+              {
+                "lang": "en-UK",
+                "content": "None(UK)"
+              },
+              {
+                "lang": "FR-GE",
+                "content": "None(GE)"
+              },
+              {
+                "lang": "fr-GE",
+                "content": "None(DE)"
+              },
+              {
+                "lang": "en-GE",
+                "content": "None(DE)"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US-x-saptrc",
+                "content": "No knowledge of the language(US)."
+              },
+              {
+                "lang": "DE-GE",
+                "content": "No knowledge of the language(GE)."
+              }
+            ]
+          },
+          {
+            "id": "ba0d9dd7-0c0a-4fe6-9464-eaefa07688f1",
+            "level": 1,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Basic"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Basic conversation, limited in reading/writing."
+              }
+            ]
+          },
+          {
+            "id": "cde0eec7-7aa7-4111-8df0-396139ba7014",
+            "level": 2,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Proficient"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Conversational level, proficiency in reading/writing."
+              }
+            ]
+          },
+          {
+            "id": "bea7b2b5-9497-48bc-b02d-7fedc808a84b",
+            "level": 3,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Fluent"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Fluency in coversation, reading, and writing."
+              }
+            ]
+          },
+          {
+            "id": "7331f436-2616-4ff3-8dfc-e28558f8d658",
+            "level": -1971,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Too New to Rate"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Too New to Rate refers to capabilities that are too early to be evaluated."
+              }
+            ]
+          }
+        ],
+        "status": {
+          "code": "ACTIVE"
+        },
+        "max": 3,
+        "min": -1971,
+        "inverse": false
+      },
+      "event": "created",
+      "versionId": "9fc4cef6-63be-4506-8a06-11f572aa54b6"
+    },
+    {
+      "instance": {
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Rating scale with two levels: Level 1 and Level 2."
+          }
+        ],
+        "id": "1025",
+        "inverse": false,
+        "max": 2,
+        "min": 1,
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Two Level Proficiency Rating Scale"
+          }
+        ],
+        "proficiency": [
+          {
+            "id": "9c54ba06-463d-4d2d-8bfa-cac38bfadbec",
+            "level": 1,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Level 1"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Level 1 Rating"
+              }
+            ]
+          },
+          {
+            "id": "6ddec295-9c71-4b19-9a5a-30e9f29339ce",
+            "level": 2,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Level 2"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Level 2 Rating"
+              }
+            ]
+          }
+        ],
+        "status": {
+          "code": "ACTIVE"
+        }
+      },
+      "event": "created",
+      "versionId": "57f0b949-276e-4bd0-8d4b-17e115f9f17b"
+    },
+    {
+      "instance": {
+        "id": "1022",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Three Level Proficiency Rating Scale"
+          }
+        ],
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Three level proficiency rating scale."
+          }
+        ],
+        "proficiency": [
+          {
+            "id": "876fc4e5-51d4-4d87-b2cc-64c3537f4a15",
+            "level": 1,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Beginner"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": ""
+              }
+            ]
+          },
+          {
+            "id": "cce380a8-b3e5-44e1-bdd2-5d1b397a100e",
+            "level": 2,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Intermediate"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": ""
+              }
+            ]
+          },
+          {
+            "id": "30edc330-8779-42a6-a268-753504049570",
+            "level": 3,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Advanced"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": ""
+              }
+            ]
+          }
+        ],
+        "status": {
+          "code": "ACTIVE"
+        },
+        "max": 3,
+        "min": 1,
+        "inverse": false
+      },
+      "event": "created",
+      "versionId": "72f3ef7c-ba98-47ff-b777-a45f29a26279"
+    },
+    {
+      "instance": {
+        "id": "8c821dc2-615c-4f44-b50e-a0a0c3367fda",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "TestProfScale05161202"
+          }
+        ],
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "testing proficiency scale on 05/16 no min, max, inverse"
+          }
+        ],
+        "proficiency": [
+          {
+            "id": "9416cf38-422a-475a-9282-cf4e85fc366c",
+            "level": 1,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Novice"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Little to no experience/knowledge."
+              }
+            ]
+          }
+        ],
+        "status": {
+          "code": "ACTIVE"
+        }
+      },
+      "event": "created",
+      "versionId": "fefdb63c-425d-4f20-94d4-3a217199117b"
+    },
+    {
+      "instance": {
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Proficiency rating scale. Test"
+          }
+        ],
+        "id": "1021",
+        "inverse": false,
+        "max": 3,
+        "min": 1,
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "General Proficiency Rating Scale"
+          }
+        ],
+        "proficiency": [
+          {
+            "id": "b0e3fbc6-4290-4fb7-9185-60a32c3cb1e3",
+            "level": 1,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Beginner"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Beginner level proficiency."
+              }
+            ]
+          },
+          {
+            "id": "7fafae03-d116-4cbd-9008-91afc43cbede",
+            "level": 2,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Intermediate"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Intermediate level proficiency."
+              }
+            ]
+          },
+          {
+            "id": "f1e641af-88a7-475c-9be5-209bf21ffd1d",
+            "level": 3,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Advanced"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Advanced level proficiency."
+              }
+            ]
+          }
+        ],
+        "status": {
+          "code": "ACTIVE"
+        }
+      },
+      "event": "created",
+      "versionId": "556a92aa-e8eb-407e-8a0e-3765bee299e1"
+    },
+    {
+      "instance": {
+        "id": "1020",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Technical Proficiency Rating Scale"
+          }
+        ],
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Rating scale used for technical proficiencies."
+          }
+        ],
+        "proficiency": [
+          {
+            "id": "540a9f21-acf6-43f7-9f31-49dba9337ead",
+            "level": 1,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Novice"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Little to no experience/knowledge."
+              }
+            ]
+          },
+          {
+            "id": "4ded0fa5-1d8d-490d-a9a2-5b7ea9d882f0",
+            "level": 2,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Basic"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Baseline experience/knowledge."
+              }
+            ]
+          },
+          {
+            "id": "94829038-323c-4777-b75f-81a7f1d9b205",
+            "level": 3,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Intermediate"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Working level of experience/knowledge."
+              }
+            ]
+          },
+          {
+            "id": "3dc7c8e2-d830-4287-959e-93f9b94f28fe",
+            "level": 4,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Advanced"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "High level of experience/knowledge."
+              }
+            ]
+          },
+          {
+            "id": "6e6ec248-2a92-461f-837e-3816b255a35d",
+            "level": 5,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "SME"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Subject matter expert in this domain."
+              }
+            ]
+          }
+        ],
+        "status": {
+          "code": "ACTIVE"
+        },
+        "max": 5,
+        "min": 1,
+        "inverse": false
+      },
+      "event": "created",
+      "versionId": "09c751ee-2950-4519-9ee6-cce8149620ac"
+    },
+    {
+      "instance": {
+        "id": "1023",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Five Level Proficiency Rating Scale"
+          }
+        ],
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Five level proficiency rating scale."
+          }
+        ],
+        "proficiency": [
+          {
+            "id": "10963330-016a-42d3-9069-4e0c14a0ee59",
+            "level": 1,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Novice"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Little to no experience/knowledge."
+              }
+            ]
+          },
+          {
+            "id": "d301872d-d608-4d21-85b5-e85d8b8e2dea",
+            "level": 2,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Basic"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Baseline experience/knowledge."
+              }
+            ]
+          },
+          {
+            "id": "1868fecf-0ddd-4082-94d6-0a401dd2fc97",
+            "level": 3,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Intermediate"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Working level of experience/knowledge."
+              }
+            ]
+          },
+          {
+            "id": "46b78a95-199d-4724-99e5-393ddbaf023f",
+            "level": 4,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Advanced"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "High level of experience/knowledge."
+              }
+            ]
+          },
+          {
+            "id": "6749dab8-4673-4a33-9b1b-cfa4956827dd",
+            "level": 5,
+            "name": [
+              {
+                "lang": "en-US",
+                "content": "Expert"
+              }
+            ],
+            "description": [
+              {
+                "lang": "en-US",
+                "content": "Expert in this domain."
+              }
+            ]
+          }
+        ],
+        "status": {
+          "code": "ACTIVE"
+        },
+        "max": 5,
+        "min": 1,
+        "inverse": false
+      },
+      "event": "created",
+      "versionId": "2621759c-d3b4-421b-b683-0956c5d79523"
+    }
+  ],
+  "@odata.deltaLink": "/v1/odm/5.0.0/sap.odm.workforce.capability.WorkforceCapabilityProficiencyScale/events?$deltatoken=initialLoadResponseDeltaToken"
+}

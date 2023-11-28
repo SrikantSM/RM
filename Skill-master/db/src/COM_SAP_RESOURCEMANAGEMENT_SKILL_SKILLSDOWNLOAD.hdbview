@@ -1,0 +1,44 @@
+VIEW COM_SAP_RESOURCEMANAGEMENT_SKILL_SKILLSDOWNLOAD AS SELECT
+  skill.ID AS skillUUID,
+  skill.EXTERNALID AS conceptUri,
+  texts.LOCALE AS locale,
+  texts.NAME AS preferredLabel,
+  texts.DESCRIPTION AS description,
+  STRING_AGG(altLabels.NAME, CHAR(10) ORDER BY altLabels.NAME) AS altLabels,
+  skill.LIFECYCLESTATUS_CODE AS usage,
+  catalogs.NAMES AS catalogs,
+  proficiency.PROFICIENCYSET_NAME AS proficiencySet,
+  proficiency.PROFICIENCYLEVEL_UUID AS proficiencyLevelUUID,
+  proficiency.PROFICIENCYLEVEL AS proficiencyLevel,
+  proficiency.PROFICIENCYLEVEL_NAME AS proficiencyLevelName
+
+FROM "COM_SAP_RESOURCEMANAGEMENT_SKILL_SKILLS" skill
+  LEFT JOIN "COM_SAP_RESOURCEMANAGEMENT_SKILL_SKILLS_TEXTS" texts ON skill.ID = texts.ID
+  LEFT JOIN "COM_SAP_RESOURCEMANAGEMENT_SKILL_ALTERNATIVELABELS" altLabels ON skill.ID = altLabels.SKILL_ID AND texts.LOCALE = altLabels.LANGUAGE_CODE
+
+  LEFT JOIN (
+       SELECT
+         proficiencySets.ID AS PROFICIENCYSET_UUID,
+         proficiencySets.NAME AS PROFICIENCYSET_NAME,
+         proficiencyLevelTexts.LOCALE AS PROFICIENCYTEXT_LOCALE,
+         STRING_AGG(proficiencyLevels.ID, CHAR(10) ORDER BY proficiencyLevels.ID) AS PROFICIENCYLEVEL_UUID,
+         STRING_AGG(proficiencyLevels.RANK, CHAR(10) ORDER BY proficiencyLevels.ID) AS PROFICIENCYLEVEL,
+         STRING_AGG(proficiencyLevelTexts.NAME, CHAR(10) ORDER BY proficiencyLevels.ID) AS PROFICIENCYLEVEL_NAME
+       FROM COM_SAP_RESOURCEMANAGEMENT_SKILL_PROFICIENCYSETS proficiencySets
+       INNER JOIN COM_SAP_RESOURCEMANAGEMENT_SKILL_PROFICIENCYLEVELS proficiencyLevels ON proficiencySets.ID = proficiencyLevels.PROFICIENCYSET_ID
+       LEFT JOIN COM_SAP_RESOURCEMANAGEMENT_SKILL_PROFICIENCYLEVELS_TEXTS proficiencyLevelTexts ON proficiencyLevels.ID = proficiencyLevelTexts.ID
+       GROUP BY proficiencySets.ID, proficiencySets.NAME, proficiencyLevelTexts.LOCALE
+     ) proficiency ON skill.PROFICIENCYSET_ID = proficiency.PROFICIENCYSET_UUID AND texts.LOCALE = proficiency.PROFICIENCYTEXT_LOCALE
+
+  LEFT JOIN (
+    SELECT
+      innerCatalogAssociations.SKILL_ID AS SKILL_ID,
+      STRING_AGG(innerCatalogs.NAME, CHAR(10) ORDER BY innerCatalogs.NAME) AS NAMES
+    FROM COM_SAP_RESOURCEMANAGEMENT_SKILL_CATALOGS innerCatalogs
+    INNER JOIN COM_SAP_RESOURCEMANAGEMENT_SKILL_CATALOGS2SKILLS innerCatalogAssociations ON innerCatalogs.ID = innerCatalogAssociations.CATALOG_ID
+    GROUP BY innerCatalogAssociations.SKILL_ID
+  ) catalogs ON skill.ID = catalogs.SKILL_ID
+
+GROUP BY skill.ID, skill.EXTERNALID, texts.LOCALE, texts.NAME, texts.DESCRIPTION, skill.LIFECYCLESTATUS_CODE, catalogs.NAMES,
+proficiency.PROFICIENCYSET_NAME, proficiency.PROFICIENCYLEVEL_UUID, proficiency.PROFICIENCYLEVEL, proficiency.PROFICIENCYLEVEL_NAME
+ORDER BY skill.ID;

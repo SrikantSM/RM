@@ -1,0 +1,17 @@
+{
+    "ENV_LANDSCAPE": "sap",
+    "ENV_SPACE_GUID": "",
+    "ENV_SRV_APP_NAME": "consultantProfile-srv",
+    "ENV_INTEGRATION_APP_NAME" : "consultantProfile-integration-srv",
+    "ENV_CF_USER": "",
+    "ENV_CF_PASSWORD": "",
+    "ENV_USER_CONFIGURATIONEXPERT": "",
+    "ENV_PASSWORD_CONFIGURATIONEXPERT": "",
+    "ENV_USER_RESOURCEMANAGER_VALIANT": "",
+    "ENV_PASSWORD_RESOURCEMANAGER_VALIANT": "",
+    "ENV_USER_CONSULTANT3": "",
+    "ENV_PASSWORD_CONSULTANT3": "",
+    "ENV_USER_NOT_IN_DB": "",
+    "ENV_PASSWORD_NOT_IN_DB": "",
+    "ENV_LOGIN_HINT_ORIGIN": ""
+}

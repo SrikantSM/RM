@@ -1,0 +1,43 @@
+PROCEDURE "COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_UTILIZATION_PERCENTAGE" (
+    IN resources COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_UUID,
+    IN startTime TIMESTAMP,
+    IN endTime TIMESTAMP,
+    OUT utilizationResult COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_UTILIZATION_RESULT
+) LANGUAGE SQLSCRIPT SQL SECURITY INVOKER --DEFAULT SCHEMA <default_schema_name>
+READS SQL DATA AS BEGIN
+
+
+/*
+   Utilization Percentage calculation based on availability(grossCapacityInMinutes)
+   and assignment(bookedCapacityInMinutes) data of the consultants between the input paramters startTime and endTime.
+
+   If there is no assignment data => bookedCapacityInMinutes would be null, then take zero.
+
+   If there is no availability data maintained => grossCapacityInMinutes wpuld be null, then take zero.
+   NDIV0 takes care of division by zero error and gives zero as the result(Check test case 6).
+
+   startTime and endTime paramters are used on the JOIN condtion instead of where
+   to get the records of the consultant with no availability data maintained.
+*/
+utilizationResult =
+SELECT
+    resourceHeader.ID as resource_ID,
+    (
+        NDIV0(
+            SUM(
+                IFNULL(resourceAvailability.bookedCapacityInMinutes, 0)
+            ),
+            SUM(
+                IFNULL(resourceAvailability.grossCapacityInMinutes, 0)
+            )
+        )
+    ) * 100 as utilizationPercentage
+FROM
+    :RESOURCES as resourceHeader
+    LEFT OUTER JOIN COM_SAP_RESOURCEMANAGEMENT_EMPLOYEE_AVAILABILITY_CAPACITYDATAFORAVAILABILITY as resourceAvailability
+    on resourceAvailability.ID = resourceHeader.ID
+     and startTime >= :startTime  and startTime <= :endTime
+GROUP BY
+    resourceHeader.ID;
+
+END

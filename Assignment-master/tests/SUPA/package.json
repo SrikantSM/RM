@@ -1,0 +1,10 @@
+{
+    "name": "supa",
+    "private": true,
+    "scripts": {},
+    "dependencies": {
+        "moment": "^2.29.1",
+        "xmlhttprequest": "^1.8.0",
+        "test-commons": "git+https://github.tools.sap/Cloud4RM/Test-Commons#1c754918988b87465f4c6ed570ca5bf6510b502f"
+    }
+}

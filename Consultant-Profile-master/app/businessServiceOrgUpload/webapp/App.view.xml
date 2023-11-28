@@ -1,0 +1,48 @@
+<mvc:View controllerName="businessServiceOrgUpload.App" displayBlock="true"
+  xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:semantic="sap.f.semantic"
+  xmlns:u="sap.ui.unified"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc">
+  <App>
+    <semantic:SemanticPage busy="{ui>/busy}">
+        <semantic:dependents>
+            <core:CommandExecution command="Upload" enabled="true" execute=".handleUploadPress" />
+            <core:CommandExecution command="Download" enabled="true" execute=".handleDownloadPress" />
+        </semantic:dependents>
+      <semantic:titleHeading>
+        <Title text="{i18n>appTitle}" />
+      </semantic:titleHeading>
+      <semantic:content>
+        <l:VerticalLayout width="100%" >
+          <MessageStrip id="downloadMessageStrip" text="{i18n>noTemplate}" type="Information" visible="true" showIcon="true" showCloseButton="false">
+            <link>
+              <Link id="downloadButton" visible="true" text="{i18n>dwnldTemplate}" tooltip="{i18n>dwnldTemplateTooltip}" press="cmd:Download" />
+            </link>
+          </MessageStrip>
+          <MessageStrip id="uploadMessageStrip" text="{ui>/messageText}" type="{ui>/messageType}" visible="{ui>/messageVisible}" showIcon="true" showCloseButton="false">
+            <link>
+              <Link id="moreInformationLink" visible="{ui>/messageLinkVisible}" text="{i18n>moreInformation}" press="handleMoreLinkPress" />
+            </link>
+          </MessageStrip>
+          <f:SimpleForm id="fileuploadform" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+            <f:content>
+             <!-- <Button id="downloadButton" text="{i18n>downloadButtonText}" type="Emphasized" press="handleDownloadPress" /> -->
+              <Label text="{i18n>filenameLabel}" labelFor="fileUploader" required="true" />
+              <u:FileUploader id="fileUploader" name="file" width="100%" uploadUrl="{ui>/serviceUri}" sendXHR="true" fileType="csv" maximumFileSize="{ui>/maxFileUploadSize}" change="handleFileChange" fileSizeExceed="handleFileSizeExceed" uploadComplete="handleUploadComplete">
+                  <u:headerParameters>
+                  <u:FileUploaderParameter name="Accept-Language" value="{ui>/userLocale}" />
+									<u:FileUploaderParameter name="x-csrf-token" value="{ui>/csrfToken}" />
+                </u:headerParameters>
+              </u:FileUploader>
+              <Label text="" />
+              <Button id="uploadButton" text="{i18n>uploadButtonText}" type="Emphasized" press="cmd:Upload" />
+            </f:content>
+          </f:SimpleForm>
+        </l:VerticalLayout>
+      </semantic:content>
+    </semantic:SemanticPage>
+  </App>
+</mvc:View>

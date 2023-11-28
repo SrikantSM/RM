@@ -1,0 +1,39 @@
+{
+	"name": "db-integration",
+	"version": "1.0.0",
+	"description": "ConsultantProfile DB Native Artifacts Integration Tests",
+	"scripts": {
+		"postinstall": "npm run build",
+		"build": "npm run lint-all && tsc",
+		"db-test": "mocha --require source-map-support/register --reporter mocha-multi-reporters --reporter-options configFile=reporter-config.json --recursive",
+		"start": "npm run db-test dist",
+		"test": "npm start",
+		"lint-all": "eslint src/**/*",
+		"lint": "eslint"
+	},
+	"dependencies": {
+		"@types/chai": "^3.3.0",
+		"@types/mocha": "^5.2.7",
+		"@types/node": "^14.0.1",
+		"@types/uuid": "^7.0.3",
+		"chai": "^4.2.0",
+		"mocha": "^7.2.0",
+		"mocha-junit-reporter": "^1.23.1",
+		"mocha-multi-reporters": "^1.1.7",
+		"mocha-typescript": "^1.1.17",
+		"mochawesome": "^4.0.1",
+		"moment": "^2.24.0",
+		"querystring": "^0.2.0",
+		"source-map-support": "^0.5.12",
+		"stringify": "^5.2.0",
+		"typescript": "^3.9.2",
+		"test-commons": "git+https://github.tools.sap/Cloud4RM/Test-Commons#592e053d216af8140a5292be311615f9f14a88dc",
+		"uuid": "^8.0.0"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^4.15.1",
+		"eslint": "7.20.0",
+		"eslint-config-airbnb-typescript": "^12.3.1",
+		"eslint-plugin-import": "^2.20.0"
+	}
+}

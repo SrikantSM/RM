@@ -1,0 +1,5 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<ObjectStatus text="{i18n>RESUME_TOOLTIP}" visible="{= ${ui>/editMode} === 'Editable'}" icon="sap-icon://information" class="sapMObjectStatusSmall customObjectStatus" state="None" />
+	<ObjectStatus text="{i18n>RESUME_INFO_TEXT}" visible="{= ${ui>/editMode} === 'Editable'}" icon="sap-icon://information" class="sapMObjectStatusSmall customObjectStatus" state="None" />
+</core:FragmentDefinition> 

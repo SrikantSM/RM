@@ -1,0 +1,10 @@
+# https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+# Code owners are automatically requested for review when someone opens a pull request that modifies code that they own.
+# Code owners are not automatically requested to review draft pull requests.
+
+# i18n-Properties Files are owned by Swarup and Sreevidya
+**/i18n/**/*.properties @I036870 @i046918 @I072888
+db/**/*.properties @I036870 @i046918 @I072888
+
+# Changes to the TWB config should also notify Swarup and Sreevidya, so translated files that are properties files can be added individually here
+translation_v2.json @I036870 @i046918 @I072888

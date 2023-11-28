@@ -1,0 +1,5 @@
+code,isDelivery,description
+DE01,X,Delivery Org (Germany)
+IN01,X,Delivery Org (India)
+CA01,X,Delivery Org (Canada)
+US01,X,Delivery Org (USA)

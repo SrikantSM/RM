@@ -1,0 +1,26 @@
+{
+    "name": "end-to-end",
+    "private": true,
+    "scripts": {
+        "debug": "node --no-lazy --inspect-brk=9229 node_modules/@ui5/uiveri5/src/cli.js uiveri5-config.js",
+        "lint": "eslint \"**/*.js\"",
+        "start": "uiveri5 uiveri5-config.js",
+        "test:myProjectExperience": "uiveri5 uiveri5-config.js --params.local \"--suiteFilter=myProjectExperience\"",
+        "test:manageProjectRoles": "uiveri5 uiveri5-config.js --params.local \"--suiteFilter=manageProjectRoles\"",
+        "test:maintainServiceOrg": "uiveri5 uiveri5-config.js --params.local \"--suiteFilter=maintainServiceOrg\"",
+        "test:maintainAvailability": "uiveri5 uiveri5-config.js --params.local \"--suiteFilter=maintainAvailability\"",
+        "test:myResource": "uiveri5 uiveri5-config.js --params.local \"--suiteFilter=myResource\"",
+        "test:myAssignments": "uiveri5 uiveri5-config.js --params.local \"--suiteFilter=myAssignments\""
+    },
+    "dependencies": {
+        "@ui5/uiveri5": "^1.43.1",
+        "test-commons": "git+https://github.tools.sap/Cloud4RM/Test-Commons#592e053d216af8140a5292be311615f9f14a88dc",
+        "uuid": "^8.0.0",
+        "crypto-random-string": "^3.1.0"
+    },
+    "devDependencies": {
+        "eslint": "7.20.0",
+        "eslint-config-airbnb-base": "14.2.1",
+        "eslint-plugin-import": "2.22.1"
+    }
+}

@@ -1,0 +1,2697 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Assignment",
+    "description": "This API enables you to manage assignments in SAP S/4HANA Cloud for projects, resource management. You can create new assignments or update and delete existing ones. You can also read assignments, either of resources to monitor their utilization or of resource requests to check the staffing status.",
+    "version": "1.0"
+  },
+  "x-sap-api-type": "ODATAV4",
+  "x-odata-version": "4.0",
+  "x-sap-shortText": "Manage assignments for resource requests and resources.",
+  "servers": [
+    {
+      "url": "https://sandbox.api.sap.com/C4PRM/AssignmentService/v1/"
+    },
+    {
+      "url": "https://{host}-rm-api.{environment}.{domain}/AssignmentService/v1",
+      "variables": {
+        "host": {
+          "default": "c4p",
+          "description": "Your host where SAP S/4HANA Cloud for projects, resource management is deployed"
+        },
+        "environment": {
+          "default": "cfapps",
+          "description": "Your defined environment for SAP S/4HANA Cloud for projects, resource management account"
+        },
+        "domain": {
+          "default": "eu10.hana.ondemand.com"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "Assignments",
+      "description": "Assignments"
+    },
+    {
+      "name": "Daily Assignment Distribution",
+      "description": "The daily distribution of the assignment."
+    },
+    {
+      "name": "Work Assignment",
+      "description": "The weekly distribution of the assignment."
+    },
+    {
+      "name": "MonthlyAssignmentDistribution",
+      "description": "The monthly distribution of the assignment."
+    },
+    {
+      "name": "WorkAssignment",
+      "description": "The workAssignment of the resource."
+    }
+  ],
+  "paths": {
+    "/Assignments": {
+      "get": {
+        "summary": "Read assignments.",
+        "tags": [
+          "Assignments"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "ID desc",
+                  "requestID",
+                  "requestID desc",
+                  "resourceID",
+                  "resourceID desc",
+                  "startDate",
+                  "startDate desc",
+                  "endDate",
+                  "endDate desc",
+                  "bookedCapacity",
+                  "bookedCapacity desc",
+                  "isSoftBooked",
+                  "isSoftBooked desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "requestID",
+                  "resourceID",
+                  "startDate",
+                  "endDate",
+                  "bookedCapacity",
+                  "isSoftBooked"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "_workAssignment",
+                  "_dailyAssignmentDistribution",
+                  "_weeklyAssignmentDistribution",
+                  "_monthlyAssignmentDistribution"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved assignments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of Assignments",
+                  "properties": {
+                    "@odata.count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Assignment.Assignments"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          }
+        },
+        "description": "Read assignments that were created in SAP S/4HANA Cloud for projects, resource management."
+      },
+      "post": {
+        "summary": "Create a single assignment.",
+        "tags": [
+          "Assignments"
+        ],
+        "requestBody": {
+          "description": "Assignments",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Assignment.Assignments-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created assignment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment.Assignments"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "409": {
+            "$ref": "#/components/responses/error_409"
+          }
+        },
+        "description": "Create assignments in SAP S/4HANA Cloud for projects, resource management."
+      }
+    },
+    "/Assignments({ID})": {
+      "parameters": [
+        {
+          "description": "The identifier of the assignment.",
+          "in": "path",
+          "name": "ID",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abc001"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Read a single assignment.",
+        "tags": [
+          "Assignments"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "requestID",
+                  "resourceID",
+                  "startDate",
+                  "endDate",
+                  "bookedCapacity",
+                  "isSoftBooked"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "_workAssignment",
+                  "_dailyAssignmentDistribution",
+                  "_weeklyAssignmentDistribution",
+                  "_monthlyAssignmentDistribution"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved assignment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment.Assignments"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Read specific assignment for a given ID."
+      },
+      "patch": {
+        "summary": "Update assignments",
+        "tags": [
+          "Assignments"
+        ],
+        "requestBody": {
+          "description": "Assignments",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Assignment.Assignments-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Update specific assignment for a given ID."
+      },
+      "delete": {
+        "summary": "Delete assignments.",
+        "tags": [
+          "Assignments"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Delete specific assignment for a given ID."
+      }
+    },
+    "/Assignments({ID})/_workAssignment": {
+      "parameters": [
+        {
+          "description": "The identifier of the assignment.",
+          "in": "path",
+          "name": "ID",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abc001"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieve _work assignment of a assignment.",
+        "tags": [
+          "Assignments",
+          "Work Assignment"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "resourceID",
+                  "workAssignmentID"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved _work assignment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment.WorkAssignment"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Read work assignment details for a specific assignment."
+      }
+    },
+    "/Assignments({ID})/_dailyAssignmentDistribution": {
+      "parameters": [
+        {
+          "description": "The identifier of the assignment.",
+          "in": "path",
+          "name": "ID",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abc001"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieve a list of _daily assignment distribution of a assignment.",
+        "tags": [
+          "Assignments",
+          "Daily Assignment Distribution"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "ID desc",
+                  "assignmentID",
+                  "assignmentID desc",
+                  "date",
+                  "date desc",
+                  "calendarWeek",
+                  "calendarWeek desc",
+                  "calendarMonth",
+                  "calendarMonth desc",
+                  "calendarYear",
+                  "calendarYear desc",
+                  "bookedCapacity",
+                  "bookedCapacity desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "assignmentID",
+                  "date",
+                  "calendarWeek",
+                  "calendarMonth",
+                  "calendarYear",
+                  "bookedCapacity"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved _daily assignment distribution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of DailyAssignmentDistribution",
+                  "properties": {
+                    "@odata.count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Assignment.DailyAssignmentDistribution"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Read the daily distribution for a specific assignment."
+      },
+      "post": {
+        "summary": "Create a single _daily assignment distribution of a assignment.",
+        "tags": [
+          "Assignments",
+          "Daily Assignment Distribution"
+        ],
+        "requestBody": {
+          "description": "The daily distribution of the assignment.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Assignment.DailyAssignmentDistribution-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created _daily assignment distribution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment.DailyAssignmentDistribution"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/Assignments({ID})/_weeklyAssignmentDistribution": {
+      "parameters": [
+        {
+          "description": "The identifier of the assignment.",
+          "in": "path",
+          "name": "ID",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abc001"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieve a list of _weekly assignment distribution of a assignment.",
+        "tags": [
+          "Assignments",
+          "Weekly Assignment Distribution"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "assignmentID",
+                  "assignmentID desc",
+                  "calendarWeek",
+                  "calendarWeek desc",
+                  "bookedCapacity",
+                  "bookedCapacity desc",
+                  "weekStartDate",
+                  "weekStartDate desc",
+                  "weekEndDate",
+                  "weekEndDate desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "assignmentID",
+                  "calendarWeek",
+                  "bookedCapacity",
+                  "weekStartDate",
+                  "weekEndDate"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved _weekly assignment distribution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of WeeklyAssignmentDistribution",
+                  "properties": {
+                    "@odata.count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Assignment.WeeklyAssignmentDistribution"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Read the weekly distribution for a specific assignment."
+      },
+      "post": {
+        "summary": "Create a single _weekly assignment distribution of a assignment.",
+        "tags": [
+          "Assignments",
+          "Weekly Assignment Distribution"
+        ],
+        "requestBody": {
+          "description": "The weekly distribution of the assignment.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Assignment.WeeklyAssignmentDistribution-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created _weekly assignment distribution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment.WeeklyAssignmentDistribution"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/Assignments({ID})/_monthlyAssignmentDistribution": {
+      "parameters": [
+        {
+          "description": "The identifier of the assignment.",
+          "in": "path",
+          "name": "ID",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abc001"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieve a list of _monthly assignment distribution of a assignment.",
+        "tags": [
+          "Assignments",
+          "Monthly Assignment Distribution"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "assignmentID",
+                  "assignmentID desc",
+                  "calendarMonth",
+                  "calendarMonth desc",
+                  "bookedCapacity",
+                  "bookedCapacity desc",
+                  "monthStartDate",
+                  "monthStartDate desc",
+                  "monthEndDate",
+                  "monthEndDate desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "assignmentID",
+                  "calendarMonth",
+                  "bookedCapacity",
+                  "monthStartDate",
+                  "monthEndDate"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved _monthly assignment distribution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of MonthlyAssignmentDistribution",
+                  "properties": {
+                    "@odata.count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Assignment.MonthlyAssignmentDistribution"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Read the monthly distribution for a specific assignment."
+      },
+      "post": {
+        "summary": "Create a single _monthly assignment distribution of a assignment.",
+        "tags": [
+          "Assignments",
+          "Monthly Assignment Distribution"
+        ],
+        "requestBody": {
+          "description": "The monthly distribution of the assignment.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Assignment.MonthlyAssignmentDistribution-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created _monthly assignment distribution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment.MonthlyAssignmentDistribution"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/DailyAssignmentDistribution": {
+      "get": {
+        "summary": "Retrieve a list of daily assignment distribution.",
+        "tags": [
+          "Daily Assignment Distribution"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "ID desc",
+                  "assignmentID",
+                  "assignmentID desc",
+                  "date",
+                  "date desc",
+                  "calendarWeek",
+                  "calendarWeek desc",
+                  "calendarMonth",
+                  "calendarMonth desc",
+                  "calendarYear",
+                  "calendarYear desc",
+                  "bookedCapacity",
+                  "bookedCapacity desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "assignmentID",
+                  "date",
+                  "calendarWeek",
+                  "calendarMonth",
+                  "calendarYear",
+                  "bookedCapacity"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved daily assignment distribution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of DailyAssignmentDistribution",
+                  "properties": {
+                    "@odata.count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Assignment.DailyAssignmentDistribution"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          }
+        },
+        "description": "Read the daily distribution records of the assignment."
+      },
+      "post": {
+        "summary": "Create a single daily assignment distribution.",
+        "tags": [
+          "Daily Assignment Distribution"
+        ],
+        "requestBody": {
+          "description": "The daily distribution of the assignment.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Assignment.DailyAssignmentDistribution-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created daily assignment distribution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment.DailyAssignmentDistribution"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "409": {
+            "$ref": "#/components/responses/error_409"
+          }
+        },
+        "description": "Create a daily distribution record of the assignment."
+      }
+    },
+    "/DailyAssignmentDistribution({ID})": {
+      "parameters": [
+        {
+          "description": "The identifier of the daily assignment distribution.",
+          "in": "path",
+          "name": "ID",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "06744567-89ab-cde5-7897-456789ccc333"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieve a single daily assignment distribution.",
+        "tags": [
+          "Daily Assignment Distribution"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "assignmentID",
+                  "date",
+                  "calendarWeek",
+                  "calendarMonth",
+                  "calendarYear",
+                  "bookedCapacity"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved daily assignment distribution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment.DailyAssignmentDistribution"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Read details for a given daily distribution record."
+      },
+      "patch": {
+        "summary": "Change a single daily assignment distribution.",
+        "tags": [
+          "Daily Assignment Distribution"
+        ],
+        "requestBody": {
+          "description": "The daily distribution of the assignment.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Assignment.DailyAssignmentDistribution-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Update details for a given daily distribution record."
+      },
+      "delete": {
+        "summary": "Delete a single daily assignment distribution.",
+        "tags": [
+          "Daily Assignment Distribution"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Delete daily distribution for a given daily distribution record."
+      }
+    },
+    "/WeeklyAssignmentDistribution": {
+      "get": {
+        "summary": "Retrieve a list of weekly assignment distribution.",
+        "tags": [
+          "Weekly Assignment Distribution"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "assignmentID",
+                  "assignmentID desc",
+                  "calendarWeek",
+                  "calendarWeek desc",
+                  "bookedCapacity",
+                  "bookedCapacity desc",
+                  "weekStartDate",
+                  "weekStartDate desc",
+                  "weekEndDate",
+                  "weekEndDate desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "assignmentID",
+                  "calendarWeek",
+                  "bookedCapacity",
+                  "weekStartDate",
+                  "weekEndDate"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved weekly assignment distribution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of WeeklyAssignmentDistribution",
+                  "properties": {
+                    "@odata.count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Assignment.WeeklyAssignmentDistribution"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          }
+        },
+        "description": "Read the weekly distribution records of the assignment."
+      },
+      "post": {
+        "summary": "Create a single weekly assignment distribution.",
+        "tags": [
+          "Weekly Assignment Distribution"
+        ],
+        "requestBody": {
+          "description": "The weekly distribution of the assignment.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Assignment.WeeklyAssignmentDistribution-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created weekly assignment distribution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment.WeeklyAssignmentDistribution"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "409": {
+            "$ref": "#/components/responses/error_409"
+          }
+        },
+        "description": "Create a weekly distribution record of the assignment."
+      }
+    },
+    "/WeeklyAssignmentDistribution(assignmentID={assignmentID},calendarWeek='{calendarWeek}')": {
+      "parameters": [
+        {
+          "description": "The identifier of the assignment.",
+          "in": "path",
+          "name": "assignmentID",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abc001"
+          }
+        },
+        {
+          "description": "The calendar week of the weekly assignment distribution according to ISO specification.",
+          "in": "path",
+          "name": "calendarWeek",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "maxLength": 6,
+            "example": "202213"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieve a single weekly assignment distribution.",
+        "tags": [
+          "Weekly Assignment Distribution"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "assignmentID",
+                  "calendarWeek",
+                  "bookedCapacity",
+                  "weekStartDate",
+                  "weekEndDate"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved weekly assignment distribution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment.WeeklyAssignmentDistribution"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Read details for a given weekly distribution record."
+      },
+      "patch": {
+        "summary": "Change a single weekly assignment distribution.",
+        "tags": [
+          "Weekly Assignment Distribution"
+        ],
+        "requestBody": {
+          "description": "The weekly distribution of the assignment.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Assignment.WeeklyAssignmentDistribution-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Update details for a given weekly distribution record."
+      },
+      "delete": {
+        "summary": "Delete a single weekly assignment distribution.",
+        "tags": [
+          "Weekly Assignment Distribution"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Delete weekly distribution for a given weekly distribution record."
+      }
+    },
+    "/MonthlyAssignmentDistribution": {
+      "get": {
+        "summary": "Retrieve a list of monthly assignment distribution.",
+        "tags": [
+          "Monthly Assignment Distribution"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "assignmentID",
+                  "assignmentID desc",
+                  "calendarMonth",
+                  "calendarMonth desc",
+                  "bookedCapacity",
+                  "bookedCapacity desc",
+                  "monthStartDate",
+                  "monthStartDate desc",
+                  "monthEndDate",
+                  "monthEndDate desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "assignmentID",
+                  "calendarMonth",
+                  "bookedCapacity",
+                  "monthStartDate",
+                  "monthEndDate"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved monthly assignment distribution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of MonthlyAssignmentDistribution",
+                  "properties": {
+                    "@odata.count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Assignment.MonthlyAssignmentDistribution"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          }
+        },
+        "description": "Read the monthly distribution records of the assignment."
+      },
+      "post": {
+        "summary": "Create a single monthly assignment distribution.",
+        "tags": [
+          "Monthly Assignment Distribution"
+        ],
+        "requestBody": {
+          "description": "The monthly distribution of the assignment.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Assignment.MonthlyAssignmentDistribution-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created monthly assignment distribution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment.MonthlyAssignmentDistribution"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "409": {
+            "$ref": "#/components/responses/error_409"
+          }
+        },
+        "description": "Create a monthly distribution record of the assignment."
+      }
+    },
+    "/MonthlyAssignmentDistribution(assignmentID={assignmentID},calendarMonth='{calendarMonth}')": {
+      "parameters": [
+        {
+          "description": "The identifier of the assignment.",
+          "in": "path",
+          "name": "assignmentID",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abc001"
+          }
+        },
+        {
+          "description": "The calendar month of the monthly assignment distribution.",
+          "in": "path",
+          "name": "calendarMonth",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "maxLength": 6,
+            "example": "202203"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieve a single monthly assignment distribution.",
+        "tags": [
+          "Monthly Assignment Distribution"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "assignmentID",
+                  "calendarMonth",
+                  "bookedCapacity",
+                  "monthStartDate",
+                  "monthEndDate"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved monthly assignment distribution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment.MonthlyAssignmentDistribution"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Read details for a given monthly distribution record."
+      },
+      "patch": {
+        "summary": "Change a single monthly assignment distribution.",
+        "tags": [
+          "Monthly Assignment Distribution"
+        ],
+        "requestBody": {
+          "description": "The monthly distribution of the assignment.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Assignment.MonthlyAssignmentDistribution-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Update details for a given monthly distribution record."
+      },
+      "delete": {
+        "summary": "Delete a single monthly assignment distribution.",
+        "tags": [
+          "Monthly Assignment Distribution"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Delete monthly distribution for a given monthly distribution record."
+      }
+    },
+    "/WorkAssignment": {
+      "get": {
+        "summary": "Retrieve a list of work assignment.",
+        "tags": [
+          "Work Assignment"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "resourceID",
+                  "resourceID desc",
+                  "workAssignmentID",
+                  "workAssignmentID desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "resourceID",
+                  "workAssignmentID"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved work assignment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of WorkAssignment",
+                  "properties": {
+                    "@odata.count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Assignment.WorkAssignment"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          }
+        },
+        "description": "Read work assignments that were created in SAP S/4HANA Cloud for projects, resource management."
+      }
+    },
+    "/WorkAssignment({resourceID})": {
+      "parameters": [
+        {
+          "description": "The identifier of the resource.",
+          "in": "path",
+          "name": "resourceID",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "04444567-89ab-cde5-4444-456789ccc333"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieve a single work assignment.",
+        "tags": [
+          "Work Assignment"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "resourceID",
+                  "workAssignmentID"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved work assignment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assignment.WorkAssignment"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          }
+        },
+        "description": "Read specific work assignment details for a given resource ID."
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+        "tags": [
+          "Batch Requests"
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Batch request",
+          "content": {
+            "multipart/mixed;boundary=request-separator": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET Assignments HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Batch response",
+            "content": {
+              "multipart/mixed": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Assignment.Assignments": {
+        "title": "Assignments",
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abc001",
+            "description": "The identifier of the assignment."
+          },
+          "requestID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "51455673-456d-abc1-def1-756789def005",
+            "nullable": true,
+            "description": "The identifier of the resource request."
+          },
+          "resourceID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "04444567-89ab-cde5-4444-456789ccc333",
+            "nullable": true,
+            "description": "The identifier of the resource."
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-25",
+            "nullable": true,
+            "description": "The start date of the assignment."
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-30",
+            "nullable": true,
+            "description": "The end date of the assignment."
+          },
+          "bookedCapacity": {
+            "example": "250",
+            "x-sap-precision": 10,
+            "x-sap-scale": 2,
+            "nullable": true,
+            "description": "The total number of assigned hours.",
+            "type": "number",
+            "minimum": 1,
+            "multipleOf": 1,
+            "maximum": 99999999
+          },
+          "isSoftBooked": {
+            "type": "boolean",
+            "nullable": true,
+            "example": "true",
+            "description": "Indicator for soft-booked assignments."
+          },
+          "_workAssignment": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Assignment.WorkAssignment"
+              }
+            ],
+            "nullable": true,
+            "description": "The workAssignment of the resource."
+          },
+          "_dailyAssignmentDistribution": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Assignment.DailyAssignmentDistribution"
+            },
+            "description": "The daily distribution of the assignment."
+          },
+          "_dailyAssignmentDistribution@odata.count": {
+            "$ref": "#/components/schemas/count"
+          },
+          "_weeklyAssignmentDistribution": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Assignment.WeeklyAssignmentDistribution"
+            },
+            "description": "The weekly distribution of the assignment."
+          },
+          "_weeklyAssignmentDistribution@odata.count": {
+            "$ref": "#/components/schemas/count"
+          },
+          "_monthlyAssignmentDistribution": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Assignment.MonthlyAssignmentDistribution"
+            },
+            "description": "The monthly distribution of the assignment."
+          },
+          "_monthlyAssignmentDistribution@odata.count": {
+            "$ref": "#/components/schemas/count"
+          }
+        },
+        "description": "Assignments"
+      },
+      "Assignment.Assignments-create": {
+        "title": "Assignments (for create)",
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abc001",
+            "description": "The identifier of the assignment."
+          },
+          "requestID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "51455673-456d-abc1-def1-756789def005",
+            "nullable": false,
+            "description": "The identifier of the resource request."
+          },
+          "resourceID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "04444567-89ab-cde5-4444-456789ccc333",
+            "nullable": false,
+            "description": "The identifier of the resource."
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-25",
+            "nullable": true,
+            "description": "The start date of the assignment."
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-30",
+            "nullable": true,
+            "description": "The end date of the assignment."
+          },
+          "isSoftBooked": {
+            "type": "boolean",
+            "nullable": false,
+            "example": "true",
+            "description": "Indicator for soft-booked assignments."
+          }
+        },
+        "required": [
+          "requestID",
+          "resourceID",
+          "isSoftBooked"
+        ],
+        "description": "Assignments"
+      },
+      "Assignment.Assignments-update": {
+        "title": "Assignments (for update)",
+        "type": "object",
+        "properties": {
+          "requestID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "51455673-456d-abc1-def1-756789def005",
+            "nullable": true,
+            "description": "The identifier of the resource request."
+          },
+          "resourceID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "04444567-89ab-cde5-4444-456789ccc333",
+            "nullable": true,
+            "description": "The identifier of the resource."
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-25",
+            "nullable": true,
+            "description": "The start date of the assignment."
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-30",
+            "nullable": true,
+            "description": "The end date of the assignment."
+          },
+          "isSoftBooked": {
+            "type": "boolean",
+            "nullable": true,
+            "example": "true",
+            "description": "Indicator for soft-booked assignments."
+          }
+        },
+        "description": "Assignments"
+      },
+      "Assignment.DailyAssignmentDistribution": {
+        "title": "The daily distribution of the assignment.",
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "06744567-89ab-cde5-7897-456789ccc333",
+            "description": "The identifier of the daily assignment distribution."
+          },
+          "assignmentID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abc001",
+            "nullable": true,
+            "description": "The identifier of the assignment."
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-03-31",
+            "nullable": true,
+            "description": "The date of the daily assignment distribution."
+          },
+          "calendarWeek": {
+            "type": "string",
+            "maxLength": 6,
+            "nullable": true,
+            "example": "202213",
+            "description": "The calendar week of the daily assignment distribution according to ISO specification."
+          },
+          "calendarMonth": {
+            "type": "string",
+            "maxLength": 6,
+            "nullable": true,
+            "example": "202203",
+            "description": "The calendar month of the daily assignment distribution."
+          },
+          "calendarYear": {
+            "type": "string",
+            "maxLength": 4,
+            "nullable": true,
+            "example": "2022",
+            "description": "The calendar year of the daily assignment distribution."
+          },
+          "bookedCapacity": {
+            "anyOf": [
+              {
+                "type": "number",
+                "format": "decimal",
+                "multipleOf": 0.01,
+                "maximum": 99999999.99,
+                "minimum": -99999999.99
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "example": "8",
+            "x-sap-precision": 10,
+            "x-sap-scale": 2,
+            "nullable": true,
+            "description": "The number of assigned hours on this day."
+          }
+        },
+        "description": "The daily distribution of the assignment."
+      },
+      "Assignment.DailyAssignmentDistribution-create": {
+        "title": "The daily distribution of the assignment. (for create)",
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "06744567-89ab-cde5-7897-456789ccc333",
+            "description": "The identifier of the daily assignment distribution."
+          },
+          "assignmentID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abc001",
+            "nullable": false,
+            "description": "The identifier of the assignment."
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-03-31",
+            "nullable": false,
+            "description": "The date of the daily assignment distribution."
+          },
+          "calendarWeek": {
+            "type": "string",
+            "maxLength": 6,
+            "nullable": true,
+            "example": "202213",
+            "description": "The calendar week of the daily assignment distribution according to ISO specification."
+          },
+          "calendarMonth": {
+            "type": "string",
+            "maxLength": 6,
+            "nullable": true,
+            "example": "202203",
+            "description": "The calendar month of the daily assignment distribution."
+          },
+          "calendarYear": {
+            "type": "string",
+            "maxLength": 4,
+            "nullable": true,
+            "example": "2022",
+            "description": "The calendar year of the daily assignment distribution."
+          },
+          "bookedCapacity": {
+            "example": "8",
+            "x-sap-precision": 10,
+            "x-sap-scale": 2,
+            "nullable": false,
+            "description": "The number of assigned hours on this day.",
+            "type": "number",
+            "minimum": 1,
+            "multipleOf": 1,
+            "maximum": 99999999
+          }
+        },
+        "required": [
+          "assignmentID",
+          "date",
+          "bookedCapacity"
+        ],
+        "description": "The daily distribution of the assignment."
+      },
+      "Assignment.DailyAssignmentDistribution-update": {
+        "title": "The daily distribution of the assignment. (for update)",
+        "type": "object",
+        "properties": {
+          "assignmentID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abc001",
+            "nullable": false,
+            "description": "The identifier of the assignment."
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-03-31",
+            "nullable": false,
+            "description": "The date of the daily assignment distribution."
+          },
+          "calendarWeek": {
+            "type": "string",
+            "maxLength": 6,
+            "nullable": true,
+            "example": "202213",
+            "description": "The calendar week of the daily assignment distribution according to ISO specification."
+          },
+          "calendarMonth": {
+            "type": "string",
+            "maxLength": 6,
+            "nullable": true,
+            "example": "202203",
+            "description": "The calendar month of the daily assignment distribution."
+          },
+          "calendarYear": {
+            "type": "string",
+            "maxLength": 4,
+            "nullable": true,
+            "example": "2022",
+            "description": "The calendar year of the daily assignment distribution."
+          },
+          "bookedCapacity": {
+            "example": "8",
+            "x-sap-precision": 10,
+            "x-sap-scale": 2,
+            "nullable": false,
+            "description": "The number of assigned hours on this day.",
+            "type": "number",
+            "minimum": 1,
+            "multipleOf": 1,
+            "maximum": 99999999
+          }
+        },
+        "description": "The daily distribution of the assignment."
+      },
+      "Assignment.MonthlyAssignmentDistribution": {
+        "title": "The monthly distribution of the assignment.",
+        "type": "object",
+        "properties": {
+          "assignmentID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abc001",
+            "description": "The identifier of the assignment."
+          },
+          "calendarMonth": {
+            "type": "string",
+            "maxLength": 6,
+            "example": "202203",
+            "description": "The calendar month of the monthly assignment distribution."
+          },
+          "bookedCapacity": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "example": "8",
+            "description": "The number of assigned hours on this month."
+          },
+          "monthStartDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-03-01",
+            "nullable": true,
+            "description": "The start date of the calendar month."
+          },
+          "monthEndDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-03-31",
+            "nullable": true,
+            "description": "The end date of the calendar month."
+          }
+        },
+        "description": "The monthly distribution of the assignment."
+      },
+      "Assignment.MonthlyAssignmentDistribution-create": {
+        "title": "The monthly distribution of the assignment. (for create)",
+        "type": "object",
+        "properties": {
+          "assignmentID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abc001",
+            "description": "The identifier of the assignment."
+          },
+          "calendarMonth": {
+            "type": "string",
+            "maxLength": 6,
+            "example": "202203",
+            "description": "The calendar month of the monthly assignment distribution."
+          },
+          "bookedCapacity": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": false,
+            "example": "8",
+            "description": "The number of assigned hours on this month."
+          }
+        },
+        "required": [
+          "bookedCapacity"
+        ],
+        "description": "The monthly distribution of the assignment."
+      },
+      "Assignment.MonthlyAssignmentDistribution-update": {
+        "title": "The monthly distribution of the assignment. (for update)",
+        "type": "object",
+        "properties": {
+          "bookedCapacity": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": false,
+            "example": "8",
+            "description": "The number of assigned hours on this month."
+          }
+        },
+        "description": "The monthly distribution of the assignment."
+      },
+      "Assignment.WeeklyAssignmentDistribution": {
+        "title": "The weekly distribution of the assignment.",
+        "type": "object",
+        "properties": {
+          "assignmentID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abc001",
+            "description": "The identifier of the assignment."
+          },
+          "calendarWeek": {
+            "type": "string",
+            "maxLength": 6,
+            "example": "202213",
+            "description": "The calendar week of the weekly assignment distribution according to ISO specification."
+          },
+          "bookedCapacity": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "example": "8",
+            "description": "The number of assigned hours on this week."
+          },
+          "weekStartDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-03-28",
+            "nullable": true,
+            "description": "The start date of the calendar week."
+          },
+          "weekEndDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-04-03",
+            "nullable": true,
+            "description": "The end date of the calendar week."
+          }
+        },
+        "description": "The weekly distribution of the assignment."
+      },
+      "Assignment.WeeklyAssignmentDistribution-create": {
+        "title": "The weekly distribution of the assignment. (for create)",
+        "type": "object",
+        "properties": {
+          "assignmentID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abc001",
+            "description": "The identifier of the assignment."
+          },
+          "calendarWeek": {
+            "type": "string",
+            "maxLength": 6,
+            "example": "202213",
+            "description": "The calendar week of the weekly assignment distribution according to ISO specification."
+          },
+          "bookedCapacity": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": false,
+            "example": "8",
+            "description": "The number of assigned hours on this week."
+          }
+        },
+        "required": [
+          "bookedCapacity"
+        ],
+        "description": "The weekly distribution of the assignment."
+      },
+      "Assignment.WeeklyAssignmentDistribution-update": {
+        "title": "The weekly distribution of the assignment. (for update)",
+        "type": "object",
+        "properties": {
+          "bookedCapacity": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": false,
+            "example": "8",
+            "description": "The number of assigned hours on this week."
+          }
+        },
+        "description": "The weekly distribution of the assignment."
+      },
+      "Assignment.WorkAssignment": {
+        "title": "The workAssignment of the resource.",
+        "type": "object",
+        "properties": {
+          "resourceID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "04444567-89ab-cde5-4444-456789ccc333",
+            "description": "The identifier of the resource."
+          },
+          "workAssignmentID": {
+            "type": "string",
+            "maxLength": 100,
+            "example": "RES.001.EXAMPLE",
+            "description": "The identifier of the work assignment."
+          }
+        },
+        "description": "The workAssignment of the resource."
+      },
+      "count": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+      },
+      "error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "target": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "innererror": {
+                "type": "object",
+                "description": "The structure of this object is service-specific"
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "top": {
+        "name": "$top",
+        "in": "query",
+        "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "example": 50
+      },
+      "skip": {
+        "name": "$skip",
+        "in": "query",
+        "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "count": {
+        "name": "$count",
+        "in": "query",
+        "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "search": {
+        "name": "$search",
+        "in": "query",
+        "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "error": {
+        "description": "Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_400": {
+        "description": "Bad Request - You have provided an invalid request parameter or the payload does not match the expected format. See error message for details.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_401": {
+        "description": "Unauthorized - No valid access token (JWT) has been provided or it has expired.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_403": {
+        "description": "Forbidden - You do not have the necessary authorization to perform this action or to access the requested resource.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_404": {
+        "description": "Not found - The requested resource does not exist.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_409": {
+        "description": "Conflict - Could not create the resource, due to a conflict with an existing one (e.g. a unique value was provided that is already used). See error message for details.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "OAuth2": {
+        "description": "OAuth client credentials (client ID and secret) are required.",
+        "flows": {
+          "clientCredentials": {
+            "scopes": {},
+            "tokenUrl": "https://{UserAccountSubdomain}.authentication.{CfRegion}.hana.ondemand.com/oauth/token"
+          }
+        },
+        "type": "oauth2"
+      }
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "@odata.context": "$metadata#Logs",
+  "value": [
+    {
+      "instance": {
+        "id": "80f40384b2564194be99c59324bc322b",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Technical Writing"
+          },
+          {
+            "lang": "de-GE",
+            "content": "Technical Writing(DE)"
+          }
+        ],
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Ability to effectively communicate technical concepts in writing."
+          },
+          {
+            "lang": "fr-PA",
+            "content": "Ability to effectively communicate technical concepts in writing(DE)."
+          }
+        ],
+        "proficiencyScale": {
+          "id": "1021"
+        },
+        "capabilityType": {
+          "code": "SKILL"
+        },
+        "catalogAssignment": [
+          {
+            "catalog": {
+              "id": "bc1318bb-9cbd-434c-8ae7-55291b724652"
+            }
+          }
+        ],
+        "status": {
+          "code": "ACTIVE"
+        }
+      },
+      "event": "created",
+      "versionId": "6a130a94-c255-478f-95d8-1244b2fc84b8"
+    },
+    {
+      "instance": {
+        "capabilityType": {
+          "code": "SKILL"
+        },
+        "catalogAssignment": [
+          {
+            "catalog": {
+              "id": "7714e3ebb5304af5a9ecfc95f83794e2"
+            }
+          },
+          {
+            "catalog": {
+              "id": "b1ca4e9d074f40af9f37857878f51cce"
+            }
+          }
+        ],
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Ability to perform data analysis."
+          }
+        ],
+        "id": "7a2f5e63858d47eda3b3729da9b9db3e",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Data Analysis"
+          }
+        ],
+        "proficiencyScale": {
+          "id": "1023"
+        },
+        "status": {
+          "code": "ACTIVE"
+        }
+      },
+      "event": "created",
+      "versionId": "5649434b-8b39-401a-8fc5-d1e112f22b5d"
+    },
+    {
+      "instance": {
+        "id": "6d9094d878594e67b28d2bedefe41f66",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "C Programming"
+          }
+        ],
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Ability to program in C."
+          }
+        ],
+        "proficiencyScale": {
+          "id": "1021"
+        },
+        "capabilityType": {
+          "code": "SKILL"
+        },
+        "catalogAssignment": [
+          {
+            "catalog": {
+              "id": "bc1318bb-9cbd-434c-8ae7-55291b724652"
+            }
+          }
+        ],
+        "status": {
+          "code": "ACTIVE"
+        }
+      },
+      "event": "created",
+      "versionId": "ea41070f-7259-42f5-9e6e-c2a606724e96"
+    },
+    {
+      "instance": {
+        "id": "708bd115598f4b4894f948530ad2243f",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "UI Design"
+          }
+        ],
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "UI Design"
+          }
+        ],
+        "proficiencyScale": {
+          "id": "1020"
+        },
+        "capabilityType": {
+          "code": "CERTIFICATE"
+        },
+        "status": {
+          "code": "ACTIVE"
+        }
+      },
+      "event": "created",
+      "versionId": "c0bfce82-d545-4b99-9109-ae193069f464"
+    },
+    {
+      "instance": {
+        "id": "266bf7dc3df645df9feafd95beaf72d4",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Database Design"
+          }
+        ],
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Database Design"
+          }
+        ],
+        "proficiencyScale": {
+          "id": "1020"
+        },
+        "capabilityType": {
+          "code": "EXPERTISE"
+        },
+        "status": {
+          "code": "ACTIVE"
+        }
+      },
+      "event": "created",
+      "versionId": "7ced7850-7591-49eb-8693-6bff8e18f5ed"
+    }
+  ],
+  "@odata.deltaLink": "/v1/odm/5.0.0/sap.odm.workforce.capability.WorkforceCapability/events?$deltatoken=initialLoadResponseDeltaToken"
+}

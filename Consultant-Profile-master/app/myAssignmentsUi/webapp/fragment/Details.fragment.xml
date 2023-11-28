@@ -1,0 +1,38 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+    <ResponsivePopover
+        id="assignmentDetailsPopOver"
+        title="{i18n>ASSIGNMENT}"
+        class="sapUiResponsivePadding-header"
+        placement="Auto">
+        <beginButton>
+            <Button text="{i18n>EDIT_DETAILS}" type="Emphasized" press="editAssignment" visible=
+            "{= ${viewModel>/selectedCalendarMode} === 'MyMonth' &amp;&amp; ${editModel>/isEditable}}"/>
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>VIEW_DETAILS}"  press="onNavigatetoAssignment(${employeeId}, ${assignmentId})"/>
+        </endButton>
+        <f:SimpleForm
+            id="assignmentCustomer"
+            editable="false"
+            layout="ResponsiveGridLayout"
+            singleContainerFullSize="false">
+            <Label text="{i18n>REQUEST_DISPLAYID}" labelFor="requestid"/>
+            <Text id="requestid" text="{requestDisplayId}"/>
+            <Label text="{i18n>WORKITEM_NAME}" labelFor="workItem"/>
+            <Text id="workItem" text="{workItemName}"/>
+            <Label text="{i18n>PROJECTNAME}" labelFor="projectname"/>
+            <Text id="projectname" text="{projectName}"/>
+            <Label text="{i18n>CUSTOMER}" labelFor="customer"/>
+            <Text id="customer" text="{customerName}"/>
+            <Label text="{i18n>ASSIGNED}" labelFor="assigned"/>
+            <Text id="assigned" text="{staffedHours} {i18n>UOM_HOURS}"/>
+            <Label text="{i18n>DURATION}" labelFor="duration"/>
+            <Text id="duration" text="{path: 'assignmentStartDate', formatter: '.dateUtilityFormatter.formatDate'} - {path: 'assignmentEndDate', formatter: '.dateUtilityFormatter.formatDate'}"/>
+            <Label text="{i18n>ASSIGNMENT_STATUS}" labelFor="assignmentStatus"/>
+            <Text id="assignmentStatus" text="{assignmentStatus}"/>
+        </f:SimpleForm>
+    </ResponsivePopover>
+</core:FragmentDefinition>

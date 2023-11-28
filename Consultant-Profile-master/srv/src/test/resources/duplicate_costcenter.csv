@@ -1,0 +1,3 @@
+code,description,isDelivery,companyCode,costCenterID
+Org_1,Organization ORG_1 India,X,CC03,CCEU
+Org_2,Organization ORG_2 Germany,,CC03,CCEU

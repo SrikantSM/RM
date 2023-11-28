@@ -1,0 +1,107 @@
+{
+	"_version": "1.12.0",
+	"sap.app": {
+		"id": "availabilityDownload",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"ach": "PPM-CLD-RES",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"fileDownloadService": {
+				"uri": "/AvailabilityFileDownloadService",
+				"type": "JSON"
+			},
+			"mainService": {
+				"uri": "/odata/v4/AvailabilityFileDownloadService/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		},
+		"crossNavigation": {
+			"inbounds": {
+				"AvailabilityDownload": {
+					"semanticObject": "availabilityUpload",
+					"action": "Download",
+					"deviceTypes": {
+						"desktop": true,
+						"tablet": false,
+						"phone": false
+					},
+					"hideLauncher": true,
+					"icon": "sap-icon://download",
+					"size": "1x1",
+					"signature": {
+						"parameters": {},
+						"additionalParameters": "allowed"
+					},
+					"title": "{{appTitle}}"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"fullWidth": true,
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+    },
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "availabilityDownload.App",
+			"type": "XML",
+			"async": true,
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.68",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {}
+			}
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "availabilityDownload.i18n.i18n"
+				}
+			},
+			"availability": {
+				"dataSource": "mainService",
+				"preload": true,
+				"settings": {
+					"earlyRequests": true,
+					"operationMode": "Server",
+					"synchronizationMode": "None"
+				}
+			}
+		},
+        "commands": {
+            "Download": {
+                "name": "Download",
+                "shortcut": "Shift+Ctrl+D"
+            }
+        }
+	},
+	"sap.fiori": {
+		"registrationIds": [
+			"F5072"
+		],
+		"archeType": "transactional"
+	},
+	"sap.platform.cf": {
+		"oAuthScopes": [
+			"$XSAPPNAME.Availability.Download"
+		]
+	}
+}

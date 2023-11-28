@@ -1,0 +1,7 @@
+ID,startDate,costCenter,costCenterID,costCenterName,emailAddress,mobileNumber,country,resourceName,firstName,lastName,jobTitle,managerName,avgUtilization,bookedHours,availableHours
+e8dd2db2-501f-4f46-8af0-4613a3a3549f,2015-08-15,CCDE (CCDE),CCDE,CCDE,null,null,Germany,null,null,null,Junior Consultant,null,0,0,386
+ac6a4f22-4281-40ec-bd79-8756275e0672,2021-07-30,CCDE (CCDE),CCDE,CCDE,null,null,Germany,null,null,null,Senior Consultant,null,0,0,1080
+dc6a4f22-4281-40ec-bd79-8756275e0672,2021-07-30,CCDE (CCDE),CCDE,CCDE,null,null,Germany,null,null,null,Junior Consultant,null,0,0,1080
+6806862a-3788-441c-9b00-bd52013711b3,2015-10-31,CCDE (CCDE),CCDE,CCDE,null,null,Germany,null,null,null,Resource Manager,null,19,200,1080
+fc6a4f22-4281-40ec-bd79-8756275e0672,2014-07-30,CCDE (CCDE),CCDE,CCDE,null,null,Germany,null,null,null,Senior Consultant,null,43,424,984
+cc6a4f22-4281-40ec-bd79-8756275e0672,2014-07-30,CCDE (CCDE),CCDE,CCDE,null,null,Germany,null,null,null,Senior Consultant,null,0,0,1080

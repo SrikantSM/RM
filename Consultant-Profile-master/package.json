@@ -1,0 +1,36 @@
+{
+    "name": "@sap/rm-consultantProfile",
+    "description": "Consultant Profile project for Resource Management",
+    "repository": {
+        "type": "git",
+        "url": "https://github.tools.sap/Cloud4RM/Consultant-Profile.git"
+    },
+    "license": "ISC",
+    "version": "1.0.0",
+    "engines": {
+        "node": "^18.0.0"
+    },
+    "files": [
+        "db",
+        "srv",
+        "integration-srv"
+    ],
+    "scripts": {
+        "postinstall": "npm run install-ui-apps",
+        "install-ui-apps": "cd app && npm ci",
+        "create-openapi-doc": "cd .. && npm run build && npx cds compile Consultant-Profile/srv --service ProjectExperienceService -o Consultant-Profile/docs --to openapi && npx cds compile Consultant-Profile/srv --service ProjectExperienceService -o Consultant-Profile/docs --to edmx && node Consultant-Profile/scripts/modifyOpenAPISpec.js",
+        "create-openapi-doc-availability": "cd .. && npm run build && npx cds compile Consultant-Profile/integration-srv --service WorkforceAvailabilityService -o Consultant-Profile/docs --to openapi && npx cds compile Consultant-Profile/integration-srv --service WorkforceAvailabilityService -o Consultant-Profile/docs --to edmx && node Consultant-Profile/scripts/modifyOpenApiSpec-WorkforceAvailability.js",
+        "build": "cd .. && npm run build && npx cds compile Consultant-Profile/srv --to sql > Consultant-Profile/srv/src/main/resources/schema.sql && npx cds compile Consultant-Profile/integration-srv --to sql > Consultant-Profile/integration-srv/src/main/resources/schema.sql",
+        "build-mta": "cd .. && npm run build-mta -- --source Consultant-Profile",
+        "prepare-mockserver": "npm run build && cd srv && mvn clean install -U",
+        "prepare-integration-mockserver": "npm run build && cd integration-srv && mvn clean install -U",
+        "mockserver-integration": "cd integration-srv && mvn clean spring-boot:run -U -Dspring-boot.run.jvmArguments=\"-Dspring.profiles.active=local-test -Dmaven.test.skip=true\"",
+        "mockserver": "cd srv && mvn clean spring-boot:run -U -Dspring-boot.run.jvmArguments=\"-Dspring.profiles.active=local-test -Dmaven.test.skip=true\"",
+        "prepare-mockUi": "cd utils/localLaunchpad && npm install",
+        "mockUi": "cd utils/localLaunchpad && npm start",
+        "prepare-mock-integration-server": "npm run build && cd integration-srv && mvn clean install -U",
+        "mock-integration-server": "cd integration-srv && mvn clean spring-boot:run -U -Dspring-boot.run.jvmArguments=\"-Dspring.profiles.active=local-test\"",
+        "local-setup": "node utils/local-setup.js",
+        "spotless-apply": "cd ./srv && mvn -P spotless-profile spotless:apply"
+    }
+}

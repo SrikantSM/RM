@@ -1,0 +1,5 @@
+code,description,isDelivery,companyCode,costCenterID
+SO2,Service Organization 2,X,C003,C003XYZ01
+SO2,Service Organization 2,X,C003,C003XYZ02
+SO1,Service Organization 1,X,C003,C003XYZ03
+SO1,Service Organization 1,X,C003,C003XYZ04

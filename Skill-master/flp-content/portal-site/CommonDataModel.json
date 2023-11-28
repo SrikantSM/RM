@@ -1,0 +1,139 @@
+{
+    "identification": {
+        "sourceSystemType": "DEV",
+        "modifiedAt": 1515336025601,
+        "entityType": "bundle",
+        "description": "CDM Default Description",
+        "id": "xaa7cc8e-f3b8-11e7-c095-000000700f4x",
+        "title": "CDM Default Title"
+    },
+    "payload": {
+        "catalogs": [
+            {
+                "_version": "3.0.0",
+                "identification": {
+                    "id": "68ecfa3e-8375-4886-8279-8317bef22066-1525241944918",
+                    "i18n": "i18n/ui.properties",
+                    "entityType": "catalog",
+                    "title": "{{uiCatalog}}",
+                    "description": "{{uiCatalogDesc}}"
+                },
+                "payload": {
+                    "viz": [
+                        {
+                            "vizId": "Skill-Display",
+                            "appId": "skill"
+                        },
+                        {
+                            "vizId": "Skill-Upload",
+                            "appId": "skill-upload"
+                          },
+                        {
+                            "vizId": "Skill-Download",
+                            "appId": "skill-download"
+                        },
+                        {
+                            "vizId": "SkillCatalog-Display",
+                            "appId": "skill-catalog"
+                        },
+                        {
+                            "vizId": "Proficiency-Display",
+                            "appId": "skill-proficiency"
+                        }
+                    ]
+                }
+            }
+        ],
+        "groups": [
+            {
+                "_version": "3.0.0",
+                "identification": {
+                    "id": "f53b0c33-52d7-4b7e-b42d-353e22214291-1525085442672",
+                    "i18n": "i18n/ui.properties",
+                    "description": "",
+                    "entityType": "group",
+                    "title": "{{uiGroup}}"
+                },
+                "payload": {
+                    "viz": [
+                        {
+                            "id": "36a73c6b-e577-433a-9865-d7420aa99fb0-1525092145203",
+                            "appId": "skill",
+                            "vizId": "Skill-Display"
+                        },
+                        {
+                            "id": "36a73c6b-e577-433a-9865-d7420aa99fb0-1525092145234",
+                            "appId": "skill-catalog",
+                            "vizId": "SkillCatalog-Display"
+                        },
+                        {
+                            "id": "36a73c6b-e577-433a-9865-d7420aa99fb0-1525092145235",
+                            "appId": "skill-proficiency",
+                            "vizId": "Proficiency-Display"
+                        }
+                    ]
+                }
+            }
+        ],
+        "sites": [
+            {
+                "_version": "3.0.0",
+                "identification": {
+                    "id": "03746a20-8d5f-11e7-a2b9-055f624a0e89",
+                    "namespace": "",
+                    "entityType": "site",
+                    "layer": "vendor",
+                    "description": "",
+                    "i18n": "",
+                    "title": "Default"
+                },
+                "payload": {
+                    "config": {
+                        "ushellConfig": {
+                            "renderers": {
+                                "fiori2": {
+                                    "componentData": {
+                                        "config": {
+                                            "enableTilesOpacity": false,
+                                            "enablePersonalization": true,
+                                            "enableSetLanguage": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "sap.cloud.portal": {
+                        "config": {
+                            "isOnline": "true",
+                            "templateTitle": "SAP Fiori Launchpad",
+                            "ui5VersionNumber": "1.114.1",
+                            "theme.id": "sap_fiori_3",
+                            "theme.active": [
+                                "sap_fiori_3_hcb",
+                                "sap_fiori_3_hcw",
+                                "sap_fiori_3_dark",
+                                "sap_fiori_3",
+                                "sap_belize",
+                                "sap_belize_plus"
+                            ],
+                            "skipVariantResolving": true,
+                            "siteHashVersion": "-254165915",
+                            "InAppHelp": {
+                                "config": {
+                                    "enabled": true,
+                                    "productName": "PPRM_OD",
+                                    "productVersion": "SHIP"
+                                }
+                            }
+                        }
+                    },
+                    "groupsOrder": [
+                        "f53b0c33-52d7-4b7e-b42d-353e22214291-1525085442672"
+                    ]
+                }
+            }
+        ]
+    },
+    "_version": "3.0.0"
+}

@@ -1,0 +1,7 @@
+ID,startDate,costCenter,costCenterID,costCenterName,emailAddress,mobileNumber,country,resourceName,firstName,lastName,jobTitle,managerName,avgUtilization,bookedHours,availableHours,workerType
+11942b97-d7ce-4cb0-90db-6430288a32bc,2017-03-21,CCIN (CCIN),CCIN,CCIN,mister.smith@sap.com,+1-419-6100003,Germany,Mister Smith,Mister,Smith,Senior Consultant,darth.vader (Darth Vader),0,0,696,Employee
+fc6a4f22-4281-40ec-bd79-8756275e0672,2014-07-30,CCDE (CCDE),CCDE,CCDE,darth.vader@sap.com,+91-81419-41006,Germany,Darth Vader,Darth,Vader,Senior Consultant,darth.vader (Darth Vader),0,0,696,Employee
+6806862a-3788-441c-9b00-bd52013711b3,2015-10-31,CCDE (CCDE),CCDE,CCDE,santa.claus@sap.com,+49-6227-31002,Germany,Santa Claus,Santa,Claus,Resource Manager,darth.vader (Darth Vader),0,0,696,External Worker
+cc6a4f22-4281-40ec-bd79-8756275e0672,2014-07-30,CCDE (CCDE),CCDE,CCDE,katie.lerhihan11@sap.com,+91-81419-41009	,Germany,Katie Lerhihan,Katie,Lerhihan,Senior Consultant,darth.vader (Darth Vader),0,0,696,Employee
+d771ad92-26e5-4aed-9173-49406112b5b2,2012-09-14,CCDE (CCDE),CCDE,CCDE,luke.skywalker@sap.com,+91-81419-41004,Germany,Luke Skywalker,Luke,Skywalker,Junior Consultant,darth.vader (Darth Vader),0,0,696,Employee
+e8dd2db2-501f-4f46-8af0-4613a3a3549f,2015-08-15,CCIN (CCIN),CCIN,CCIN,calvin.hobbes@sap.com,+1-418-5100005,Germany,Calvin Hobbes,Calvin,Hobbes,Junior Consultant,darth.vader (Darth Vader),0,0,696,External Worker

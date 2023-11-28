@@ -1,0 +1,109 @@
+#Default Properties
+spring:
+  codec:
+    max-in-memory-size: 10MB
+  profiles:
+    active: local-test
+  messages:
+    basename: i18n.i18n
+# enable health checks
+management:
+  endpoints:
+    web:
+      exposure:
+        exclude: info     # disable info endpoint
+        include: health
+    jmx:
+      exposure:
+        exclude: "*"      # disable all jmx endpoints
+    enabled-by-default: false
+  endpoint:
+    health:
+      enabled: true
+    info:
+      enabled: false
+# Enable HikariCP Plugin
+cds.multitenancy.datasource.hikari:
+  registerMbeans: true
+  leakDetectionThreshold: 2000
+  connectionTimeout: 20000 # Needs to be lower than the health check timeout at AvS. Compare https://github.wdf.sap.corp/cap/issues/issues/8103#issuecomment-3098670
+  maxLifetime: 900000 # (15 minutes) Has to be smaller than timeout on HANA Cloud (which defaults to 24h). Recommended to be configured explicitly as per https://github.com/brettwooldridge/HikariCP.
+  minimumIdle: 1 # Each Tenant has its own connection pool with at max maximumPoolSize (default 10) connections. If minimumIdle is unspecified, it will be exactly 10 connections per tenant, which wastes resources.
+  idleTimeout: 300000 # (5 minutes) Time for idle connections to stay alive if unused. If exceeded, the connection will be closed, reducing the pool size down to minimumIdle. Has to be configured if minimumIdle != maximumPoolSize.
+
+
+# Profiles and their purpose
+# local-test:       Profile to run the application locally with No CF information.
+# local-int-test:   Profile to run the application locally with CF information.
+# integration-test: Profile to run the integration while mocking remote calls only.
+# hana:             Profile to run the application at cloud foundry
+
+# Configuring the spring profiles to run with in-memory database.
+---
+spring:
+  config:
+    activate:
+      on-profile: local-test|local-int-test|integration-test
+  datasource:
+    url: "jdbc:sqlite:file::memory:?cache=shared"
+    driver-class-name: org.sqlite.JDBC
+    hikari:
+      maximum-pool-size: 1
+  sql:
+    init:
+      mode: always
+server:
+  port: 8081
+
+OTEL_JAVAAGENT_ENABLED: false
+
+# Configuring the spring profiles to run with in-memory database and with few preloaded data.
+---
+spring:
+  config:
+    activate:
+      on-profile: local-test|local-int-test
+  sql:
+    init:
+      data-locations: file:src/integration-test/resources/replication-schedule.sql
+      
+# Configuring the spring profiles to have local security and non-tenant information.
+---
+spring:
+  config:
+    activate:
+      on-profile: local-test|integration-test
+
+APPLICATION_URL: dummyApplicationUrl.com
+SKILLS_URL: dummySkillsUrl.com
+
+cds:
+  security:
+    xsuaa:
+      enabled: false
+    mock:
+      users:
+        - name: authenticated-user@sap.com
+          password: pass
+          roles:
+            - ReplicationSchedules.Read
+            - ReplicationSchedules.Edit
+            - JobScheduler
+            - System
+
+# Spring profile for cloud foundry environment
+---
+spring:
+  config:
+    activate:
+      on-profile: hana
+  main:
+    banner-mode: "off"
+server:
+    compression:
+        enabled: true
+        mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json,application/xml,text/css,application/atom+xml,application/http,multipart/mixed
+    tomcat:
+        compression: on
+        compressableMimeTypes: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json,application/xml,text/css,application/atom+xml,application/http,multipart/mixed
+

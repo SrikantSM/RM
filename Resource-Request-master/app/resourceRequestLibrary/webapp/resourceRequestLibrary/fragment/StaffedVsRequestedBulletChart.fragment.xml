@@ -1,0 +1,9 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mc="sap.suite.ui.microchart">
+	<VBox id="BookedCapacityBulletChart" displayInline="true">
+		<mc:BulletMicroChart tooltip="{i18ned>STATUS}: {staffingStatus/description}&#10;{i18ned>STAFFED}: {= ${staffingStatus/bookedCapacity} ? ${staffingStatus/bookedCapacity} : 0} {i18ned>unitHours}&#10;{i18ned>REQUIRED}: {= ${requestedCapacity} ? ${requestedCapacity} : 0} {i18ned>unitHours}" size="M" minValue="0" targetValue="{= ${requestedCapacity} ? ${requestedCapacity} : 0}" scale=" {i18ned>unitHours}">
+			<mc:BulletMicroChartData
+				value="{= ${staffingStatus/bookedCapacity} ? ${staffingStatus/bookedCapacity} : 0}"
+			/>
+		</mc:BulletMicroChart>
+	</VBox>
+</core:FragmentDefinition>

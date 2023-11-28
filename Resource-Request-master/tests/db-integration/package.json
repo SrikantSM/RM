@@ -1,0 +1,38 @@
+{
+    "name": "integration-tests",
+    "version": "1.0.0",
+    "description": "ResourceRequest Integration Tests",
+    "scripts": {
+        "postinstall": "npm run build",
+        "build": "tsc",
+        "start": "tsc && mocha --timeout 999999 --require source-map-support/register --reporter mocha-multi-reporters --reporter-options configFile=reporter-config.json --recursive dist",
+        "test": "npm start",
+        "lint": "eslint src/**/*.ts",
+        "lint-fix": "npm run lint -- --fix"
+    },
+    "dependencies": {
+        "chai": "3.3.0",
+        "test-commons": "git+https://github.tools.sap/Cloud4RM/Test-Commons#99532125e5be513b1a417501e002c4f81cd84bfb",
+        "mocha": "^7.2.0",
+        "mocha-junit-reporter": "^1.23.1",
+        "mocha-multi-reporters": "^1.1.7",
+        "mocha-typescript": "^1.1.17",
+        "mochawesome": "^4.0.1",
+        "moment": "^2.24.0",
+        "querystring": "^0.2.0",
+        "source-map-support": "^0.5.12",
+        "stringify": "^5.2.0",
+        "typescript": "^3.5.3",
+        "uuid": "^8.0.0"
+    },
+    "devDependencies": {
+        "@types/chai": "^3.3.0",
+        "@types/mocha": "^7.0.2",
+        "@types/node": "^14.14.28",
+        "@typescript-eslint/eslint-plugin": "4.15.0",
+        "eslint": "7.20.0",
+        "eslint-config-airbnb-typescript": "12.3.1",
+        "eslint-plugin-import": "2.22.1",
+        "eslint-plugin-jsx-a11y": "^6.1.1"
+    }
+}

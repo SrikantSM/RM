@@ -1,0 +1,14 @@
+{
+    "welcomeFile": "launchpad/index.html",
+    "logout": {
+        "logoutEndpoint": "/do/logout"
+    },
+    "authenticationMethod": "none",
+    "routes": [
+        {
+            "source": "^/launchpad/(.*)$",
+            "target": "$1",
+            "localDir": "webapp"
+        }
+    ]
+}

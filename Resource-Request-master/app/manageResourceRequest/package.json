@@ -1,0 +1,9 @@
+{
+  "name": "myUI",
+  "description": "",
+  "dependencies": {},
+  "scripts": {},
+  "engines": {
+    "node": "^18.0.0"
+  }
+}

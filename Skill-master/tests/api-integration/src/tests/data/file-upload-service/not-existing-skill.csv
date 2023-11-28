@@ -1,0 +1,2 @@
+conceptType,conceptUri,skillType,preferredLabel,altLabels,description
+KnowledgeSkillCompetence,{uuid()},skill/competence,values,"label","Description of new skill"

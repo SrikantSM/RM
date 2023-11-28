@@ -1,0 +1,8 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout">
+    <l:VerticalLayout core:require="{handler: 'resourceRequestLibrary/controller/CustomColumn'}">
+        <HBox alignItems="Center">
+            <Avatar showBorder="true" displaySize="XS" src="../staffResourceRequest/odata/v4/ProcessResourceRequestService/ConsultantProfileHeaders({workforcePersonID})/profilePhoto/profileThumbnail" initials="{initials}"/>
+            <Link class="sapUiTinyMarginBegin" text="{resourceName}" press="handler.linkPressed" wrapping="true"/>
+        </HBox>
+    </l:VerticalLayout>
+</core:FragmentDefinition>

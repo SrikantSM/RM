@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+    <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+    <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="ProjectExperienceService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="Profiles" EntityType="ProjectExperienceService.Profiles">
+          <NavigationPropertyBinding Path="_primaryWorkAssignment" Target="PrimaryWorkAssignment"/>
+          <NavigationPropertyBinding Path="_skillAssignments" Target="SkillAssignments"/>
+          <NavigationPropertyBinding Path="_externalWorkExperience" Target="ExternalWorkExperience"/>
+        </EntitySet>
+        <EntitySet Name="PrimaryWorkAssignment" EntityType="ProjectExperienceService.PrimaryWorkAssignment"/>
+        <EntitySet Name="SkillAssignments" EntityType="ProjectExperienceService.SkillAssignments"/>
+        <EntitySet Name="ExternalWorkExperience" EntityType="ProjectExperienceService.ExternalWorkExperience">
+          <NavigationPropertyBinding Path="_skillAssignments" Target="ExternalWorkExperienceSkillAssignments"/>
+        </EntitySet>
+        <EntitySet Name="ExternalWorkExperienceSkillAssignments" EntityType="ProjectExperienceService.ExternalWorkExperienceSkillAssignments"/>
+      </EntityContainer>
+      <EntityType Name="Profiles">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="workforcePersonExternalID" Type="Edm.String" MaxLength="100"/>
+        <Property Name="firstName" Type="Edm.String"/>
+        <Property Name="lastName" Type="Edm.String"/>
+        <Property Name="emailAddress" Type="Edm.String" MaxLength="256"/>
+        <Property Name="mobileNumber" Type="Edm.String"/>
+        <Property Name="changedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <NavigationProperty Name="_primaryWorkAssignment" Type="ProjectExperienceService.PrimaryWorkAssignment">
+          <ReferentialConstraint Property="ID" ReferencedProperty="profileID"/>
+        </NavigationProperty>
+        <NavigationProperty Name="_skillAssignments" Type="Collection(ProjectExperienceService.SkillAssignments)"/>
+        <NavigationProperty Name="_externalWorkExperience" Type="Collection(ProjectExperienceService.ExternalWorkExperience)"/>
+      </EntityType>
+      <EntityType Name="PrimaryWorkAssignment">
+        <Key>
+          <PropertyRef Name="profileID"/>
+        </Key>
+        <Property Name="profileID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="jobTitle" Type="Edm.String" MaxLength="256"/>
+        <Property Name="managerWorkAssignmentExternalID" Type="Edm.String" MaxLength="100"/>
+        <Property Name="officeLocation" Type="Edm.String" MaxLength="256"/>
+        <Property Name="costCenterID" Type="Edm.String" MaxLength="10"/>
+        <Property Name="costCenterDisplayName" Type="Edm.String" MaxLength="30"/>
+        <Property Name="workAssignmentID" Type="Edm.String" MaxLength="100"/>
+        <Property Name="resourceID" Type="Edm.Guid"/>
+      </EntityType>
+      <EntityType Name="SkillAssignments">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="profileID" Type="Edm.Guid"/>
+        <Property Name="skillID" Type="Edm.Guid"/>
+        <Property Name="proficiencyLevelID" Type="Edm.Guid"/>
+        <Property Name="skillName" Type="Edm.String" MaxLength="256"/>
+        <Property Name="proficiencyLevelName" Type="Edm.String" MaxLength="256"/>
+        <Property Name="skillUsage" Type="Edm.Int32"/>
+        <Property Name="changedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="changedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+      </EntityType>
+      <EntityType Name="ExternalWorkExperience">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="profileID" Type="Edm.Guid"/>
+        <Property Name="company" Type="Edm.String" MaxLength="100"/>
+        <Property Name="project" Type="Edm.String" MaxLength="40"/>
+        <Property Name="customer" Type="Edm.String" MaxLength="100"/>
+        <Property Name="role" Type="Edm.String" MaxLength="100"/>
+        <Property Name="startDate" Type="Edm.Date"/>
+        <Property Name="endDate" Type="Edm.Date"/>
+        <Property Name="comments" Type="Edm.String" MaxLength="2096"/>
+        <NavigationProperty Name="_skillAssignments" Type="Collection(ProjectExperienceService.ExternalWorkExperienceSkillAssignments)">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <Property Name="changedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="changedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+      </EntityType>
+      <EntityType Name="ExternalWorkExperienceSkillAssignments">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="externalWorkExperienceID" Type="Edm.Guid"/>
+        <Property Name="profileID" Type="Edm.Guid"/>
+        <Property Name="skillID" Type="Edm.Guid"/>
+        <Property Name="proficiencyLevelID" Type="Edm.Guid"/>
+        <Property Name="skillName" Type="Edm.String" MaxLength="256"/>
+        <Property Name="proficiencyLevelName" Type="Edm.String" MaxLength="256"/>
+        <Property Name="skillUsage" Type="Edm.Int32"/>
+        <Property Name="changedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="changedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+      </EntityType>
+      <Annotations Target="ProjectExperienceService.EntityContainer">
+        <Annotation Term="Core.Description" String="Project Experience"/>
+        <Annotation Term="Core.LongDescription" String="This API enables you to manage the project experience information of your workforce in SAP S/4HANA Cloud for projects, resource management. You can read, create, update, and delete the external work experience or a qualification of a workforce. For reasons of data protection and privacy, only batch requests are available."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.Profiles">
+        <Annotation Term="Capabilities.Updatable" Bool="false"/>
+        <Annotation Term="Capabilities.Deletable" Bool="false"/>
+        <Annotation Term="Capabilities.Insertable" Bool="false"/>
+        <Annotation Term="Core.LongDescription" String="Profiles"/>
+        <Annotation Term="Core.Description" String="Read the project experience information of your workforce."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.EntityContainer/Profiles">
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.ReadRestrictions">
+          <Record Type="Capabilities.ReadRestrictionsType">
+            <PropertyValue Property="Description" String="Fetches profiles of all workers."/>
+            <PropertyValue Property="ReadByKeyRestrictions">
+              <Record Type="Capabilities.ReadByKeyRestrictionsType">
+                <PropertyValue Property="Description" String="Fetches profile of a single worker."/>
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.Profiles/ID">
+        <Annotation Term="Core.Description" String="The identifier of the profile."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.Profiles/workforcePersonExternalID">
+        <Annotation Term="Core.Description" String="The identifier of the worker from the source system, for example, from SAP SuccessFactors."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.Profiles/firstName">
+        <Annotation Term="Core.Description" String="The first name of the worker."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="John"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.Profiles/lastName">
+        <Annotation Term="Core.Description" String="The last name of the worker."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="Doe"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.Profiles/emailAddress">
+        <Annotation Term="Core.Description" String="The email address of the worker."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="john.doe@abc.com"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.Profiles/mobileNumber">
+        <Annotation Term="Core.Description" String="The cell phone number of the worker."/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.Profiles/changedAt">
+        <Annotation Term="Core.Description" String="The date and time when the profile was lasted updated."/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.Profiles/_primaryWorkAssignment">
+        <Annotation Term="Core.Description" String="The current primary work assignment of the worker."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.Profiles/_skillAssignments">
+        <Annotation Term="Core.Description" String="The assignments of skills to the profile."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.Profiles/_externalWorkExperience">
+        <Annotation Term="Core.Description" String="The assignments that the worker completed in their previous companies."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.PrimaryWorkAssignment">
+        <Annotation Term="Capabilities.Updatable" Bool="false"/>
+        <Annotation Term="Capabilities.Deletable" Bool="false"/>
+        <Annotation Term="Capabilities.Insertable" Bool="false"/>
+        <Annotation Term="Core.LongDescription" String="PrimaryWorkAssignment"/>
+        <Annotation Term="Core.Description" String="The current primary work assignment of the worker"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.EntityContainer/PrimaryWorkAssignment">
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.ReadRestrictions">
+          <Record Type="Capabilities.ReadRestrictionsType">
+            <PropertyValue Property="Description" String="Fetches the current primary work assignment of all workers."/>
+            <PropertyValue Property="ReadByKeyRestrictions">
+              <Record Type="Capabilities.ReadByKeyRestrictionsType">
+                <PropertyValue Property="Description" String="Fetches the current primary work assignment of a single worker."/>
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.PrimaryWorkAssignment/profileID">
+        <Annotation Term="Core.Description" String="The identifier of the profile."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.PrimaryWorkAssignment/jobTitle">
+        <Annotation Term="Core.Description" String="The job title of the worker within the company."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="Developer"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.PrimaryWorkAssignment/managerWorkAssignmentExternalID">
+        <Annotation Term="Core.Description" String="The identifier of the work assignment of the worker's manager."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.PrimaryWorkAssignment/officeLocation">
+        <Annotation Term="Core.Description" String="The physical location of the worker's office."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="Walldorf"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.PrimaryWorkAssignment/costCenterID">
+        <Annotation Term="Core.Description" String="The identifier of the cost center that the worker belongs to."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.PrimaryWorkAssignment/costCenterDisplayName">
+        <Annotation Term="Core.Description" String="The display name of the cost center that the worker belongs to."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.PrimaryWorkAssignment/workAssignmentID">
+        <Annotation Term="Core.Description" String="The identifier of the work assignment."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.PrimaryWorkAssignment/resourceID">
+        <Annotation Term="Core.Description" String="The identifier of the resource."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.SkillAssignments">
+        <Annotation Term="Core.LongDescription" String="SkillAssignments"/>
+        <Annotation Term="Core.Description" String="The assignments of skills to the profile."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.EntityContainer/SkillAssignments">
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="true"/>
+            <PropertyValue Property="Description" String="Creates skills assignment of a single worker."/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="true"/>
+            <PropertyValue Property="Description" String="Updates skills assignment of a single worker."/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="true"/>
+            <PropertyValue Property="Description" String="Deletes skills assignment of a single worker."/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.ReadRestrictions">
+          <Record Type="Capabilities.ReadRestrictionsType">
+            <PropertyValue Property="Description" String="Fetches skills assignment of all workers."/>
+            <PropertyValue Property="ReadByKeyRestrictions">
+              <Record Type="Capabilities.ReadByKeyRestrictionsType">
+                <PropertyValue Property="Description" String="Fetches skills assignment of a single worker."/>
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.SkillAssignments/ID">
+        <Annotation Term="Core.Description" String="The identifier of the skill assignment."/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.SkillAssignments/profileID">
+        <Annotation Term="Core.Description" String="The identifier of the profile."/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.SkillAssignments/skillID">
+        <Annotation Term="Core.Description" String="The identifier of the skill."/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.SkillAssignments/proficiencyLevelID">
+        <Annotation Term="Core.Description" String="The identifier of the proficiency level that the worker has in the skill."/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.SkillAssignments/skillName">
+        <Annotation Term="Core.Description" String="The name of the skill."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="Java"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.SkillAssignments/proficiencyLevelName">
+        <Annotation Term="Core.Description" String="The name of the proficiency level that the worker has in the skill."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="Expert"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.SkillAssignments/skillUsage">
+        <Annotation Term="Core.Description" String="The usage status of the skill. The usage of the skill can be restricted or unrestricted."/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.SkillAssignments/changedBy">
+        <Annotation Term="Core.Description" String="The user by whom the skill assignment was last updated."/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.SkillAssignments/changedAt">
+        <Annotation Term="Core.Description" String="The date and time when the skill assignment was last updated."/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperience">
+        <Annotation Term="Core.LongDescription" String="ExternalWorkExperience"/>
+        <Annotation Term="Core.Description" String="The assignments that the worker completed in their previous companies."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.EntityContainer/ExternalWorkExperience">
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="true"/>
+            <PropertyValue Property="Description" String="Creates an external work experience of a single worker."/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="true"/>
+            <PropertyValue Property="Description" String="Updates an external work experience of a single worker."/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="true"/>
+            <PropertyValue Property="Description" String="Deletes an external work experience of a single worker."/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.ReadRestrictions">
+          <Record Type="Capabilities.ReadRestrictionsType">
+            <PropertyValue Property="Description" String="Fetches external work experiences of all workers."/>
+            <PropertyValue Property="ReadByKeyRestrictions">
+              <Record Type="Capabilities.ReadByKeyRestrictionsType">
+                <PropertyValue Property="Description" String="Fetches external work experiences of a single worker."/>
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperience/ID">
+        <Annotation Term="Core.Description" String="The identifier of the external work experience entry.​"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperience/profileID">
+        <Annotation Term="Core.Description" String="The identifier of the profile."/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperience/company">
+        <Annotation Term="Core.Description" String="The name of the company."/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperience/project">
+        <Annotation Term="Core.Description" String="The name of the project."/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperience/customer">
+        <Annotation Term="Core.Description" String="The name of the customer."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperience/role">
+        <Annotation Term="Core.Description" String="The role of the worker in the project."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="Consultant"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperience/startDate">
+        <Annotation Term="Core.Description" String="The start date of the assignment or project."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="15.07.2022"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperience/endDate">
+        <Annotation Term="Core.Description" String="The end date of the assignment or project."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="14.07.2023"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperience/comments">
+        <Annotation Term="Core.Description" String="Additional information about the assignment or project."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperience/_skillAssignments">
+        <Annotation Term="Core.Description" String="The assignments of skills to the external work experience entry."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperience/changedBy">
+        <Annotation Term="Core.Description" String="The user by whom the external work experience was last updated."/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperience/changedAt">
+        <Annotation Term="Core.Description" String="The date and time when the external work experience was last updated."/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperienceSkillAssignments">
+        <Annotation Term="Core.LongDescription" String="ExternalWorkExperienceSkillAssignments"/>
+        <Annotation Term="Core.Description" String="The assignments of skills to the external work experience entry.​"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.EntityContainer/ExternalWorkExperienceSkillAssignments">
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="true"/>
+            <PropertyValue Property="Description" String="Creates a skill for an external work experience of a single worker."/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="true"/>
+            <PropertyValue Property="Description" String="Updates the skill for an external work experience of a single worker."/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="true"/>
+            <PropertyValue Property="Description" String="Deletes a skill from an external work experience of a single worker."/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.ReadRestrictions">
+          <Record Type="Capabilities.ReadRestrictionsType">
+            <PropertyValue Property="Description" String="Fetches external work experience skills of all workers."/>
+            <PropertyValue Property="ReadByKeyRestrictions">
+              <Record Type="Capabilities.ReadByKeyRestrictionsType">
+                <PropertyValue Property="Description" String="Fetches external work experience skills of a single worker."/>
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperienceSkillAssignments/ID">
+        <Annotation Term="Core.Description" String="The identifier of the external work experience skill assignment."/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperienceSkillAssignments/externalWorkExperienceID">
+        <Annotation Term="Core.Description" String="The identifier of the external work experience entry."/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperienceSkillAssignments/profileID">
+        <Annotation Term="Core.Description" String="The identifier of the profile."/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperienceSkillAssignments/skillID">
+        <Annotation Term="Core.Description" String="The identifier of the skill."/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperienceSkillAssignments/proficiencyLevelID">
+        <Annotation Term="Core.Description" String="The identifier of the proficiency level that the worker has in the skill."/>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperienceSkillAssignments/skillName">
+        <Annotation Term="Core.Description" String="The name of the skill."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="Java"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperienceSkillAssignments/proficiencyLevelName">
+        <Annotation Term="Core.Description" String="The name of the proficiency level that the worker has in the skill."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="Expert"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperienceSkillAssignments/skillUsage">
+        <Annotation Term="Core.Description" String="The usage status of the skill. The usage of the skill can be restricted or unrestricted."/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperienceSkillAssignments/changedBy">
+        <Annotation Term="Core.Description" String="The user by whom the skill assignment for an external work experience was last updated."/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="ProjectExperienceService.ExternalWorkExperienceSkillAssignments/changedAt">
+        <Annotation Term="Core.Description" String="The date and time when the skill assignment for an external work experience was last updated."/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

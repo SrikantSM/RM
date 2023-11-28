@@ -1,0 +1,137 @@
+<mvc:View controllerName="skill-upload.App" displayBlock="true"
+  xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:semantic="sap.f.semantic"
+  xmlns:u="sap.ui.unified"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc" core:require="{ formatMessage: 'sap/base/strings/formatMessage' }">
+  <App>
+    <semantic:SemanticPage busy="{ui>/busy}">
+      <semantic:titleHeading>
+        <Title text="{i18n>appTitle}" />
+      </semantic:titleHeading>
+      <semantic:content>
+        <l:VerticalLayout id="messageStripVerticalLayout" width="100%" binding="{path: 'skill>/UploadJob', parameters: {$expand : 'uploadErrors($orderby=type)'}}">
+          <!-- <PullToRefresh id="pullToRefresh" refresh="handlePullRefresh" /> -->
+          <l:customData>
+            <core:CustomData key="uploadjobid" value="{= ${skill>ID} || '' }" writeToDom="true" />
+          </l:customData>
+          <l:content>
+            <MessageStrip id="uploadMessageStripSuccess" text="{parts: [
+              {path: 'i18n>uploadSuccess'},
+              {path: 'skill>skillsTotalCount'},
+              {path: 'skill>createdSkillsCount'},
+              {path: 'skill>updatedSkillsCount'}
+              ], formatter: 'formatMessage'}" type="Success" visible="{parts: [
+              {path: 'skill>state', targetType: 'any'},
+              {path: 'skill>jobOwner', targetType: 'any'},
+              {path: 'skill>/WhoAmI/userName', targetType: 'any'}
+              ], formatter: '.formatter.messageStripVisibleSuccess'}" showIcon="true" showCloseButton="true" class="sapUiTinyMarginTop">
+            </MessageStrip>
+            <MessageStrip id="uploadMessageStripWarning" text="{parts: [
+              {path: 'i18n>uploadWarning'},
+              {path: 'skill>skillsTotalCount'},
+              {path: 'skill>createdSkillsCount'},
+              {path: 'skill>updatedSkillsCount'},
+              {path: 'skill>failedSkillsCount'}
+              ], formatter: 'formatMessage'}" type="Warning" visible="{parts: [
+              {path: 'skill>state', targetType: 'any'},
+              {path: 'skill>jobOwner', targetType: 'any'},
+              {path: 'skill>/WhoAmI/userName', targetType: 'any'}
+              ], formatter: '.formatter.messageStripVisibleWarning'}" showIcon="true" showCloseButton="true" class="sapUiTinyMarginTop">
+              <link>
+                <Link id="showDetailsWarningLink" visible="true" text="{i18n>showDetails}" press="handleShowDetailsLinkPress" />
+              </link>
+            </MessageStrip>
+            <MessageStrip id="uploadMessageStripInterrupt" text="{parts: [
+              {path: 'skill>skillsTotalCount'},
+              {path: 'skill>createdSkillsCount'},
+              {path: 'skill>updatedSkillsCount'},
+              {path: 'skill>failedSkillsCount'},
+              {path: 'skill>unprocessedSkillsCount'}
+              ], formatter: '.formatter.messageStripInterrupt'}" type="Error" visible="{parts: [
+              {path: 'skill>state', targetType: 'any'},
+              {path: 'skill>jobOwner', targetType: 'any'},
+              {path: 'skill>/WhoAmI/userName', targetType: 'any'}
+              ], formatter: '.formatter.messageStripVisibleInterrupt'}" showIcon="true" showCloseButton="true" class="sapUiTinyMarginTop">
+            </MessageStrip>
+            <MessageStrip id="uploadMessageStripError" text="{
+              path: 'skill>uploadErrors/0/errorMessage', formatter: '.formatter.messageStripTextError'}" type="Error" visible="{parts: [
+              {path: 'skill>state', targetType: 'any'},
+              {path: 'skill>jobOwner', targetType: 'any'},
+              {path: 'skill>/WhoAmI/userName', targetType: 'any'}
+              ], formatter: '.formatter.messageStripVisibleError'}" showIcon="true" showCloseButton="true" class="sapUiTinyMarginTop">
+            </MessageStrip>
+            <MessageStrip id="uploadMessageStripRunning" text="{parts:[
+              {path: 'i18n>uploadRunning'},
+              {path: 'skill>unprocessedSkillsCount'},
+              {path: 'skill>skillsTotalCount'}
+              ], formatter: 'formatMessage'}" type="Information" visible="{parts: [
+              {path: 'skill>state', targetType: 'any'},
+              {path: 'skill>jobOwner', targetType: 'any'},
+              {path: 'skill>/WhoAmI/userName', targetType: 'any'}
+              ], formatter: '.formatter.messageStripVisibleRunning'}" showIcon="true" showCloseButton="true" class="sapUiTinyMarginTop">
+              <customData>
+                <core:CustomData key="uploadrunning" value="true" writeToDom="true" />
+              </customData>
+            </MessageStrip>
+            <MessageStrip id="uploadMessageStripLastUpdatedBy" text="{parts: [
+              {path: 'i18n>uploadLastUpdatedBy'},
+              {path: 'skill>startedAt'},
+              {path: 'skill>jobOwner'}
+              ], formatter: 'formatMessage'}" type="Information" visible="{parts: [
+              {path: 'skill>state', targetType: 'any'},
+              {path: 'skill>jobOwner', targetType: 'any'},
+              {path: 'skill>/WhoAmI/userName', targetType: 'any'}
+              ], formatter: '.formatter.messageStripVisibleLastUpdatedBy'}" showIcon="true" showCloseButton="true" class="sapUiTinyMarginTop">
+            </MessageStrip>
+            <MessageStrip id="uploadMessageStripUploadRunningBy" text="{parts: [
+              {path: 'i18n>uploadRunningBy'},
+              {path: 'skill>jobOwner'},
+              {path: 'skill>unprocessedSkillsCount'},
+              {path: 'skill>skillsTotalCount'}
+              ], formatter: 'formatMessage'}" type="Warning" visible="{parts: [
+              {path: 'skill>state', targetType: 'any'},
+              {path: 'skill>jobOwner', targetType: 'any'},
+              {path: 'skill>/WhoAmI/userName', targetType: 'any'}
+              ], formatter: '.formatter.messageStripVisibleUploadRunningBy'}" showIcon="true" showCloseButton="true" class="sapUiTinyMarginTop">
+              <customData>
+                <core:CustomData key="uploadrunning" value="true" writeToDom="true" />
+              </customData>
+            </MessageStrip>
+            <MessageStrip id="messageStripWithoutUploadJob" text="{ui>/messageText}" type="{ui>/messageType}" visible="{ui>/messageVisible}" showIcon="true" showCloseButton="true" class="sapUiTinyMarginTop">
+              <customData>
+                <core:CustomData key="messageCode" value="{ui>/messageCode}" writeToDom="true" />
+              </customData>
+            </MessageStrip>
+            <f:SimpleForm id="fileuploadform" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+              <f:content>
+                <Label text="{i18n>filenameLabel}" labelFor="fileUploader" required="true" />
+                <u:FileUploader id="fileUploader" name="file" width="100%" uploadUrl="{ui>/serviceUri}" sendXHR="true" fileType="csv" maximumFileSize="{ui>/maxFileUploadSize}" change="handleFileChange" fileSizeExceed="handleFileSizeExceed" uploadComplete="handleUploadComplete">
+                  <u:headerParameters>
+                    <!--we must use sendXHR to set headers. This drops support for IE9.-->
+                    <u:FileUploaderParameter name="Accept-Language" value="{ui>/userLocale}" />
+                    <u:FileUploaderParameter name="Content-Language" value="{ui>/uploadLanguage}" />
+                    <u:FileUploaderParameter name="x-csrf-token" value="{ui>/csrfToken}" />
+                  </u:headerParameters>
+                </u:FileUploader>
+                <Label text="{i18n>languageLabel}" labelFor="languageInput"/>
+                <Input value="{ui>/uploadLanguage}" required="true" id="languageInput" showSuggestion="true" suggestionItems="{skill>/Languages}">
+                  <suggestionItems>
+                    <core:ListItem key="{skill>code}" text="{skill>code}" additionalText="{skill>name}"/>
+                  </suggestionItems>
+                </Input>
+                <Label text="" />
+                <Button id="uploadButton" text="{i18n>uploadButtonText}" type="Emphasized" press="handleUploadPress" binding="{path: 'skill>/UploadJob'}" enabled="{parts: [
+                  {path: 'skill>state', targetType: 'any'},
+                  {path: 'ui>/busy', targetType: 'any'}
+                  ], formatter: '.formatter.uploadButtonEnabled'}" />
+              </f:content>
+            </f:SimpleForm>
+          </l:content>
+        </l:VerticalLayout>
+      </semantic:content>
+    </semantic:SemanticPage>
+  </App>
+</mvc:View>

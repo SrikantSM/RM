@@ -1,0 +1,7 @@
+/*
+Table type used as a place holder for Utilization Percentage results
+*/
+TYPE COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_UTILIZATION_RESULT AS TABLE (
+    resource_ID NVARCHAR(36),
+    utilizationPercentage DECIMAL(6,2)
+)

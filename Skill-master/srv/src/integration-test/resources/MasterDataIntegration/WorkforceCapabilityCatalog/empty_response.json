@@ -1,0 +1,5 @@
+{
+  "@odata.context": "$metadata#Logs",
+  "value": [],
+  "@odata.deltaLink": "/v1/odm/5.0.0/sap.odm.workforce.capability.WorkforceCapabilityCatalog/events?$deltatoken=emptyResponseDeltaToken"
+}

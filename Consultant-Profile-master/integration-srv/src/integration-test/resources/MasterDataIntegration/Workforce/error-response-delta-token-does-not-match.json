@@ -1,0 +1,7 @@
+ {
+ "error":{
+ 	"code":"DeltaTokenDoesNotMatchRequest",
+ 	"message":"The consuming system or requested entity type and version does not match the delta token. Please only use delta tokens in the context of one consuming system, entity type and version.",
+ 	"details":[]
+ 	}
+ }

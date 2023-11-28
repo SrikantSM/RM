@@ -1,0 +1,4 @@
+ID,OID,externalID,name,description,lifecycleStatus_code,proficiencySet_ID
+78b45b28-b08d-4ff8-af5f-cce8a5bf7b45,,78b45b28-b08d-4ff8-af5f-cce8a5bf7b45,skill for catalog opa tests,skill for catalog opa tests description,0,8a2cc2c3-4a46-47f0-ae67-2ac67c673aae
+fa9d86b7-52b8-43a0-ae63-f7a0ac5ee507,,fa9d86b7-52b8-43a0-ae63-f7a0ac5ee507,skill for skill opa tests,skill for skill opa tests description,0,8a2cc2c3-4a46-47f0-ae67-2ac67c673aae
+5ea9707c-1704-11ee-be56-0242ac120002,MDI,5ea9707c-1704-11ee-be56-0242ac120002,MDI Skill name,MDI skill description,0,8a2cc2c3-5bbd-4e1b-8ddc-2ac67c673aad

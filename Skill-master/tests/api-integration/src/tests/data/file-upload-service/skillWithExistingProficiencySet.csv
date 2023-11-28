@@ -1,0 +1,4 @@
+conceptType,conceptUri,skillType,preferredLabel,altLabels,description,proficiencySet
+KnowledgeSkillCompetence,{uuid()},skill/competence,values,"scruples
+beliefs
+morals","VALID DESCRIPTION 1",Correct Proficiency Set

@@ -1,0 +1,7 @@
+ {
+ "error":{
+ 	"code":"DeltaTokenMismatch",
+ 	"message":"The delta token provided in the request belongs to either a different system or entity type.",
+ 	"details":[]
+ 	}
+ }

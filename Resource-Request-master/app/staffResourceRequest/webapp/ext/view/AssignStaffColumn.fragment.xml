@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout">
+  <l:HorizontalLayout allowWrapping="true">
+    <Button type="Transparent" icon="sap-icon://edit" tooltip="{i18n>EDIT_ASSIGNED_TOOLTIP}" press=".extension.assignDialog.onUpdateAssignment" class="sapUiTinyMarginEnd" />
+    <Button type="Transparent" icon="sap-icon://decline" tooltip="{i18n>UNASSIGN_TOOLTIP}" press=".extension.assignActions.onUnAssign" class="sapUiTinyMarginEnd"/>
+  </l:HorizontalLayout>
+</core:FragmentDefinition>

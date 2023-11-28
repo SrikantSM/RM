@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout">
+  <Dialog id="effortdistconfirm" icon="sap-icon://SAP-icons-TNT/exceptions" title="{i18n>changeMethodType}" type="Message" core:require="{handler: 'manageResourceRequest/ext/controller/EffortDistributionConfirmPopup'}">
+   <content>
+      <Text visible="{flag>/bDataLoss}" text="{i18n>dataLossMessage}"/>
+      <Text visible="{= !${flag>/bDataLoss}}" text="{i18n>dataLossAggregationMessage}"/>
+   </content>
+   <beginButton>
+      <Button text="{i18n>change}" press="handler.onConfirmDistType" type="Emphasized"/>
+   </beginButton>
+   <endButton>
+      <Button text="{i18n>cancel}" press="handler.onClosePopup"/>
+   </endButton>
+  </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,8 @@
+/*
+Table type used as a place holder for matching results
+*/
+TYPE COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_AVAILABILITY_RESULT AS TABLE (
+	resourceRequest_ID NVARCHAR(36), 
+    resource_ID NVARCHAR(36),
+    availabilityMatchPercentage DECIMAL(6,2)
+)

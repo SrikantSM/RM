@@ -1,0 +1,40 @@
+{
+    "name": "CP_CS_51c2cff27e944d4d8e983284727b8493",
+    "description": "Job to replicate the cost center data from MDI system.",
+    "action": "https://dev-4-consultantProfile-integration-srv.internal.cfapps.sap.hana.ondemand.com/replicateCostCenter/rm-valiant",
+    "active": true,
+    "httpMethod": "POST",
+    "user": null,
+    "startTime": null,
+    "endTime": null,
+    "signatureVersion": 0,
+    "jobType": "HTTP_ENDPOINT",
+    "tenantId": "51c2cff2-7e94-4d4d-8e98-3284727b8493",
+    "subDomain": "rm-valiant",
+    "createdAt": "2020-09-30 10:12:33",
+    "_id": 206026,
+    "schedules": [
+        {
+            "scheduleId": "0b50415e-447c-4423-9d45-34ef77c1e71e",
+            "description": "Schedule to trigger the periodic cost center data replication from the MDI system.",
+            "data": null,
+            "type": "recurring",
+            "repeatInterval": "30 minutes",
+            "active": false,
+            "startTime": "2020-09-30 10:12:32",
+            "endTime": null,
+            "nextRunAt": null
+        },
+        {
+            "scheduleId": "7644d17d-52bf-4032-864e-21a26d4588e2",
+            "description": "Schedule to trigger the initial cost center data replication from the MDI system.",
+            "data": null,
+            "type": "one-time",
+            "active": false,
+            "startTime": "2020-09-30 10:12:32",
+            "endTime": null,
+            "time": "now",
+            "nextRunAt": null
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+  "name": "local-launchpad",
+  "dependencies": {
+    "@sap/approuter": "14.1.2",
+    "grunt": "^1.6.1",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-symlink": "^1.0.0",
+    "http-proxy": "^1.18.1",
+    "npm-run-all": "^4.1.5"
+  },
+  "scripts": {
+    "build:skill": "grunt --gruntfile ../../app/skill/Gruntfile.js",
+    "build:upload": "grunt --gruntfile ../../app/upload/Gruntfile.js",
+    "build:download": "grunt --gruntfile ../../app/download/Gruntfile.js",
+    "build:catalog": "grunt --gruntfile ../../app/catalog/Gruntfile.js",
+    "build:proficiency": "grunt --gruntfile ../../app/proficiency/Gruntfile.js",
+    "buildAndCollectUI": "run-p build:* --aggregate-output && grunt collectUI",
+    "debug": "grunt setupSymlinks && node index.js",
+    "start": "npm run buildAndCollectUI && node index.js",
+    "lint": "eslint \"**/*.js\""
+  },
+  "devDependencies": {
+    "eslint": "7.20.0",
+    "eslint-config-airbnb-base": "14.2.1",
+    "eslint-plugin-import": "2.22.1",
+    "grunt-cli": "1.4.3",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-npm-command": "^0.1.2"
+  },
+  "engines": {
+    "node": "^18.0.0"
+  }
+}

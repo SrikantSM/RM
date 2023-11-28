@@ -1,0 +1,68 @@
+import { WorkAssignment } from 'test-commons';
+
+export const workAssignmentData: WorkAssignment[] = [
+  {
+    ID: '027e84cc-4d62-4146-8b06-37b44f3f6552',
+    parent: 'c7dff55e-c880-4495-bbca-13541eed4897',
+    workAssignmentID: '5wa0aa7d-a1dd-4de1-afbd-9adb433395bf',
+    externalID: 'EXTERNALID1',
+    startDate: '2018-01-01',
+    endDate: '2020-01-01',
+  },
+  {
+    ID: '16afa716-7d2e-48dc-9272-56774e769f9a',
+    parent: '5ba1aa7d-a1dd-4de1-afbd-9adb433395bf',
+    workAssignmentID: '5wa1aa7d-a1dd-4de1-afbd-9adb433395bf',
+    externalID: 'EXTERNALID2',
+    startDate: '2018-01-01',
+    endDate: '2020-01-01',
+  },
+  {
+    ID: '8c65ba27-523c-4f4e-940c-5bb6a4867db5',
+    parent: 'd629ae17-4817-4087-bb50-95889112e300',
+    workAssignmentID: '5wa2aa7d-a1dd-4de1-afbd-9adb433395bf',
+    externalID: 'EXTERNALID3',
+    startDate: '2018-01-01',
+    endDate: '2020-01-01',
+  },
+  {
+    ID: 'eb4b6d3d-bbf1-4b20-ad61-78f6b06d72e0',
+    parent: 'b2ceff3c-bbd7-41d7-908d-ffa33896c6d4',
+    workAssignmentID: '5wa3aa7d-a1dd-4de1-afbd-9adb433395bf',
+    externalID: 'EXTERNALID4',
+    startDate: '2018-01-01',
+    endDate: '2020-01-01',
+  },
+  {
+    ID: 'aeab0b4c-b955-4740-a3ac-32d753aa0c5b',
+    parent: '7d176583-7159-415a-8b44-b4ff336df1b6',
+    workAssignmentID: '5wa4aa7d-a1dd-4de1-afbd-9adb433395bf',
+    externalID: 'EXTERNALID5',
+    startDate: '2018-01-01',
+    endDate: '2020-01-01',
+  },
+  {
+    ID: '9266657a-f0ce-4d7d-94bc-ff2b8321eb34',
+    parent: '9411baf9-f9a1-4a9c-aa1e-dd4b5b89eeee',
+    workAssignmentID: '90be0909-28a9-47dd-8829-af9476e86951',
+    externalID: 'EXTERNALID6',
+    startDate: '2018-01-01',
+    endDate: '2018-01-01',
+  },
+  {
+    ID: 'bb08eb6f-47bb-4e26-a701-16a075d0b905',
+    parent: 'e1011e36-ae2a-11e9-a2a3-2a2ae2dbcce4',
+    workAssignmentID: '5wa1aa7d-a1dd-4de1-afbd-9adb433395bf',
+    externalID: 'EXTERNALID7',
+    startDate: '2018-01-01',
+    endDate: '2022-01-01',
+  },
+  {
+    ID: 'b6170953-b353-40cf-b86a-c0a3ce55ad1d',
+    parent: 'e1011e36-ae2a-11e9-a2a3-2a2ae2dbcce6',
+    workAssignmentID: '5wa1aa7d-a1dd-4de1-afbd-9adb433395bf',
+    externalID: 'EXTERNALID8',
+    startDate: '2018-01-01',
+    endDate: '2022-01-01',
+  },
+];

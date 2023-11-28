@@ -1,0 +1,945 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Project Experience",
+    "description": "This API enables you to manage the project experience information of your workforce in SAP S/4HANA Cloud for projects, resource management. You can read, create, update, and delete the external work experience or a qualification of a workforce. For reasons of data protection and privacy, only batch requests are available.",
+    "version": "1.0"
+  },
+  "x-sap-api-type": "ODATAV4",
+  "x-odata-version": "4.0",
+  "x-sap-shortText": "Manage the project experience information of your workforce.",
+  "servers": [
+    {
+      "url": "https://sandbox.api.sap.com/C4PRM/ProjectExperienceService/v1/"
+    },
+    {
+      "url": "https://{host}-rm-api.{environment}.{domain}/ProjectExperienceService/v1",
+      "variables": {
+        "host": {
+          "default": "c4p",
+          "description": "Your host where SAP S/4HANA Cloud for projects, resource management is deployed"
+        },
+        "environment": {
+          "default": "cfapps",
+          "description": "Your defined environment for SAP S/4HANA Cloud for projects, resource management account"
+        },
+        "domain": {
+          "default": "eu10.hana.ondemand.com"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Batch request",
+          "content": {
+            "multipart/mixed;boundary=request-separator": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$skip=0&$top=2 HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$orderby=changedAt HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$orderby=workforcePersonExternalID HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$filter=workforcePersonExternalID%20eq%20'JaneDoe' HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$filter=firstName%20eq%20'John' HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$filter=lastName%20eq%20'Doe' HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_primaryWorkAssignment,_skillAssignments,_externalWorkExperience($expand=_skillAssignments) HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_primaryWorkAssignment HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_skillAssignments HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_externalWorkExperience HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_externalWorkExperience($expand=_skillAssignments) HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_primaryWorkAssignment,_skillAssignments HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_primaryWorkAssignment,_externalWorkExperience HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_skillAssignments,_externalWorkExperience HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_primaryWorkAssignment,_externalWorkExperience($expand=_skillAssignments) HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_skillAssignments,_externalWorkExperience($expand=_skillAssignments) HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_primaryWorkAssignment($filter=workAssignmentID%20eq%20'Richard.Roe') HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_primaryWorkAssignment($filter=resourceID%20eq%20001a3ed7-527c-8eb3-f00a-d44e95125649) HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_primaryWorkAssignment($filter=costCenterID%20eq%20'CC07') HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_skillAssignments($filter=profileID%20eq%200013e59c-e066-329a-58d4-f5493f33c5fa) HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_skillAssignments($filter=skillID%20eq%2054377fe5-0d47-42e6-ac87-95dabdedf46c) HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_externalWorkExperience($filter=profileID%20eq%200013e59c-e066-329a-58d4-f5493f33c5fa) HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_externalWorkExperience($expand=_skillAssignments($filter=externalWorkExperienceID%20eq%20e2225ac9-80cb-485f-a3e3-1ccaf8a8dd13)) HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_externalWorkExperience($expand=_skillAssignments($filter=profileID%20eq%200013e59c-e066-329a-58d4-f5493f33c5fa)) HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET Profiles?$expand=_externalWorkExperience($expand=_skillAssignments($filter=skillID%20eq%208ddaa39f-1ec4-485b-b958-1a94ad85d564)) HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET PrimaryWorkAssignment HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET SkillAssignments HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nPOST SkillAssignments HTTP/1.1\nContent-Type: application/json\n\n{\n\"ID\":\"277ee374-2b93-45a1-8a20-517d92e3f976\",\n\"profileID\":\"0013e59c-e066-329a-58d4-f5493f33c5fa\",\n\"skillID\": \"6ac12be8-d656-465d-8343-241e2e98d1f7\",\n\"proficiencyLevelID\": \"7d4c44a1-b262-4c51-b0ca-de845e96e643\"\n}\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nPATCH SkillAssignments(277ee374-2b93-45a1-8a20-517d92e3f976) HTTP/1.1\nContent-Type: application/json\n\n{\n\"skillID\": \"8ddaa39f-1ec4-485b-b958-1a94ad85d564\",\n\"proficiencyLevelID\": \"e27c7b52-0560-4eec-9f1d-9b5faf31e509\"\n}\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nPUT SkillAssignments(277ee374-2b93-45a1-8a20-517d92e3f976) HTTP/1.1\nContent-Type: application/json\n\n{\n\"profileID\":\"0013e59c-e066-329a-58d4-f5493f33c5fa\",\n\"skillID\": \"6ac12be8-d656-465d-8343-241e2e98d1f7\",\n\"proficiencyLevelID\": \"7d4c44a1-b262-4c51-b0ca-de845e96e643\"\n}\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nDELETE SkillAssignments(277ee374-2b93-45a1-8a20-517d92e3f976) HTTP/1.1\n\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET ExternalWorkExperience HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nPOST ExternalWorkExperience HTTP/1.1\nContent-Type: application/json\n\n{\n\"ID\":\"e77ee293-3fcd-49e8-852f-782de83d028b\",\n\"profileID\":\"0013e59c-e066-329a-58d4-f5493f33c5fa\",\n\"company\": \"SampleCompany\",\n\"project\": \"SampleProject\",\n\"role\": \"SampleRole\",\n\"startDate\": \"1970-01-01\",\n\"endDate\": \"1971-01-01\"\n}\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nPATCH ExternalWorkExperience(e77ee293-3fcd-49e8-852f-782de83d028b) HTTP/1.1\nContent-Type: application/json\n\n{\n\"company\": \"UpdateSampleCompany\",\n\"project\": \"UpdateSampleProject\",\n\"role\": \"UpdateSampleRole\"\n}\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nPUT ExternalWorkExperience(e77ee293-3fcd-49e8-852f-782de83d028b) HTTP/1.1\nContent-Type: application/json\n\n{\n\"profileID\":\"0013e59c-e066-329a-58d4-f5493f33c5fa\",\n\"company\": \"SampleCompany\",\n\"project\": \"SampleProject\",\n\"role\": \"SampleRole\",\n\"startDate\": \"1970-01-01\",\n\"endDate\": \"1971-01-01\"\n}\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nDELETE ExternalWorkExperience(e77ee293-3fcd-49e8-852f-782de83d028b) HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET ExternalWorkExperience?$expand=_skillAssignments HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nPOST ExternalWorkExperience HTTP/1.1\nContent-Type: application/json\n\n{\n\"ID\":\"e77ee293-3fcd-49e8-852f-782de83d028b\",\n\"profileID\":\"0013e59c-e066-329a-58d4-f5493f33c5fa\",\n\"company\": \"SampleCompany\",\n\"project\": \"SampleProject\",\n\"role\": \"SampleRole\",\n\"startDate\": \"1970-01-01\",\n\"endDate\": \"1971-01-01\",\n\"_skillAssignments\":\n[{\n\"ID\":\"02be98a7-af4e-41d0-9eab-78ac3edd3fd4\",\n\"externalWorkExperienceID\":\"e77ee293-3fcd-49e8-852f-782de83d028b\",\n\"profileID\":\"0013e59c-e066-329a-58d4-f5493f33c5fa\",\n\"skillID\": \"6ac12be8-d656-465d-8343-241e2e98d1f7\",\n\"proficiencyLevelID\": \"7d4c44a1-b262-4c51-b0ca-de845e96e643\"\n}]\n}\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nPATCH ExternalWorkExperience(e77ee293-3fcd-49e8-852f-782de83d028b) HTTP/1.1\nContent-Type: application/json\n\n{\n\"company\": \"UpdateSampleCompany\",\n\"project\": \"UpdateSampleProject\",\n\"role\": \"UpdateSampleRole\"\n}\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nPUT ExternalWorkExperience(e77ee293-3fcd-49e8-852f-782de83d028b) HTTP/1.1\nContent-Type: application/json\n\n{\n\"profileID\":\"0013e59c-e066-329a-58d4-f5493f33c5fa\",\n\"company\": \"SampleCompany\",\n\"project\": \"SampleProject\",\n\"role\": \"SampleRole\",\n\"startDate\": \"1970-01-01\",\n\"endDate\": \"1971-01-01\",\n\"_skillAssignments\":\n[{\n\"ID\":\"02be98a7-af4e-41d0-9eab-78ac3edd3fd4\",\n\"externalWorkExperienceID\":\"e77ee293-3fcd-49e8-852f-782de83d028b\",\n\"profileID\":\"0013e59c-e066-329a-58d4-f5493f33c5fa\",\n\"skillID\": \"6ac12be8-d656-465d-8343-241e2e98d1f7\",\n\"proficiencyLevelID\": \"7d4c44a1-b262-4c51-b0ca-de845e96e643\"\n}]\n}\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nDELETE ExternalWorkExperience(e77ee293-3fcd-49e8-852f-782de83d028b) HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET ExternalWorkExperienceSkillAssignments HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nPOST ExternalWorkExperienceSkillAssignments HTTP/1.1\nContent-Type: application/json\n\n{\n\"ID\":\"02be98a7-af4e-41d0-9eab-78ac3edd3fd4\",\n\"externalWorkExperienceID\":\"e2225ac9-80cb-485f-a3e3-1ccaf8a8dd13\",\n\"profileID\":\"0013e59c-e066-329a-58d4-f5493f33c5fa\",\n\"skillID\": \"6ac12be8-d656-465d-8343-241e2e98d1f7\",\n\"proficiencyLevelID\": \"7d4c44a1-b262-4c51-b0ca-de845e96e643\"\n}\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nPATCH ExternalWorkExperienceSkillAssignments(02be98a7-af4e-41d0-9eab-78ac3edd3fd4) HTTP/1.1\nContent-Type: application/json\n\n{\n\"skillID\": \"79993cb1-f928-40ed-96aa-5d33c9d4c4a0\",\n\"proficiencyLevelID\": \"7d4c44a1-b262-4c51-b0ca-de845e96e643\"\n}\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nPUT ExternalWorkExperienceSkillAssignments(02be98a7-af4e-41d0-9eab-78ac3edd3fd4) HTTP/1.1\nContent-Type: application/json\n\n{\n\"externalWorkExperienceID\":\"e2225ac9-80cb-485f-a3e3-1ccaf8a8dd13\",\n\"profileID\":\"0013e59c-e066-329a-58d4-f5493f33c5fa\",\n\"skillID\": \"6ac12be8-d656-465d-8343-241e2e98d1f7\",\n\"proficiencyLevelID\": \"7d4c44a1-b262-4c51-b0ca-de845e96e643\"\n}\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nDELETE ExternalWorkExperienceSkillAssignments(02be98a7-af4e-41d0-9eab-78ac3edd3fd4) HTTP/1.1\n\n\n--request-separator--"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Batch response",
+            "content": {
+              "multipart/mixed": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+              }
+            }
+          },
+          "201": {
+            "$ref": "#/components/responses/success_201"
+          },
+          "204": {
+            "$ref": "#/components/responses/success_204"
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          },
+          "405": {
+            "$ref": "#/components/responses/error_405"
+          },
+          "409": {
+            "$ref": "#/components/responses/error_409"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "multipart/mixed;boundary=request-separator"
+            },
+            "description": "Indicates the media type of the resource."
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProjectExperienceService.ExternalWorkExperience": {
+        "title": "The assignments that the worker completed in their previous companies.",
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "description": "The identifier of the external work experience entry.​"
+          },
+          "profileID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": true,
+            "description": "The identifier of the profile."
+          },
+          "company": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": true,
+            "description": "The name of the company."
+          },
+          "project": {
+            "type": "string",
+            "maxLength": 40,
+            "nullable": true,
+            "description": "The name of the project."
+          },
+          "customer": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": true,
+            "description": "The name of the customer."
+          },
+          "role": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": true,
+            "example": "Consultant",
+            "description": "The role of the worker in the project."
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "example": "15.07.2022",
+            "nullable": true,
+            "description": "The start date of the assignment or project."
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "example": "14.07.2023",
+            "nullable": true,
+            "description": "The end date of the assignment or project."
+          },
+          "comments": {
+            "type": "string",
+            "maxLength": 2096,
+            "nullable": true,
+            "description": "Additional information about the assignment or project."
+          },
+          "_skillAssignments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectExperienceService.ExternalWorkExperienceSkillAssignments"
+            },
+            "description": "The assignments of skills to the external work experience entry."
+          },
+          "_skillAssignments@odata.count": {
+            "$ref": "#/components/schemas/count"
+          },
+          "changedBy": {
+            "type": "string",
+            "maxLength": 255,
+            "nullable": true,
+            "description": "The user by whom the external work experience was last updated."
+          },
+          "changedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true,
+            "description": "The date and time when the external work experience was last updated."
+          }
+        },
+        "description": "The assignments that the worker completed in their previous companies."
+      },
+      "ProjectExperienceService.ExternalWorkExperience-create": {
+        "title": "The assignments that the worker completed in their previous companies. (for create)",
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "description": "The identifier of the external work experience entry.​"
+          },
+          "profileID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": false,
+            "description": "The identifier of the profile."
+          },
+          "company": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": false,
+            "description": "The name of the company."
+          },
+          "project": {
+            "type": "string",
+            "maxLength": 40,
+            "nullable": false,
+            "description": "The name of the project."
+          },
+          "customer": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": true,
+            "description": "The name of the customer."
+          },
+          "role": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": false,
+            "example": "Consultant",
+            "description": "The role of the worker in the project."
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "example": "15.07.2022",
+            "nullable": false,
+            "description": "The start date of the assignment or project."
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "example": "14.07.2023",
+            "nullable": false,
+            "description": "The end date of the assignment or project."
+          },
+          "comments": {
+            "type": "string",
+            "maxLength": 2096,
+            "nullable": true,
+            "description": "Additional information about the assignment or project."
+          }
+        },
+        "required": [
+          "profileID",
+          "company",
+          "project",
+          "role",
+          "startDate",
+          "endDate"
+        ],
+        "description": "The assignments that the worker completed in their previous companies."
+      },
+      "ProjectExperienceService.ExternalWorkExperience-update": {
+        "title": "The assignments that the worker completed in their previous companies. (for update)",
+        "type": "object",
+        "properties": {
+          "profileID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": false,
+            "description": "The identifier of the profile."
+          },
+          "company": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": false,
+            "description": "The name of the company."
+          },
+          "project": {
+            "type": "string",
+            "maxLength": 40,
+            "nullable": false,
+            "description": "The name of the project."
+          },
+          "customer": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": true,
+            "description": "The name of the customer."
+          },
+          "role": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": false,
+            "example": "Consultant",
+            "description": "The role of the worker in the project."
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "example": "15.07.2022",
+            "nullable": false,
+            "description": "The start date of the assignment or project."
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "example": "14.07.2023",
+            "nullable": false,
+            "description": "The end date of the assignment or project."
+          },
+          "comments": {
+            "type": "string",
+            "maxLength": 2096,
+            "nullable": true,
+            "description": "Additional information about the assignment or project."
+          }
+        },
+        "description": "The assignments that the worker completed in their previous companies."
+      },
+      "ProjectExperienceService.ExternalWorkExperienceSkillAssignments": {
+        "title": "The assignments of skills to the external work experience entry.​",
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "description": "The identifier of the external work experience skill assignment."
+          },
+          "externalWorkExperienceID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": true,
+            "description": "The identifier of the external work experience entry."
+          },
+          "profileID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": true,
+            "description": "The identifier of the profile."
+          },
+          "skillID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": true,
+            "description": "The identifier of the skill."
+          },
+          "proficiencyLevelID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": true,
+            "description": "The identifier of the proficiency level that the worker has in the skill."
+          },
+          "skillName": {
+            "type": "string",
+            "maxLength": 256,
+            "nullable": true,
+            "example": "Java",
+            "description": "The name of the skill."
+          },
+          "proficiencyLevelName": {
+            "type": "string",
+            "maxLength": 256,
+            "nullable": true,
+            "example": "Expert",
+            "description": "The name of the proficiency level that the worker has in the skill."
+          },
+          "skillUsage": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "description": "The usage status of the skill. The usage of the skill can be restricted or unrestricted."
+          },
+          "changedBy": {
+            "type": "string",
+            "maxLength": 255,
+            "nullable": true,
+            "description": "The user by whom the skill assignment for an external work experience was last updated."
+          },
+          "changedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true,
+            "description": "The date and time when the skill assignment for an external work experience was last updated."
+          }
+        },
+        "description": "The assignments of skills to the external work experience entry.​"
+      },
+      "ProjectExperienceService.ExternalWorkExperienceSkillAssignments-create": {
+        "title": "The assignments of skills to the external work experience entry.​ (for create)",
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "description": "The identifier of the external work experience skill assignment."
+          },
+          "externalWorkExperienceID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": false,
+            "description": "The identifier of the external work experience entry."
+          },
+          "profileID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": false,
+            "description": "The identifier of the profile."
+          },
+          "skillID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": false,
+            "description": "The identifier of the skill."
+          },
+          "proficiencyLevelID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": false,
+            "description": "The identifier of the proficiency level that the worker has in the skill."
+          }
+        },
+        "required": [
+          "externalWorkExperienceID",
+          "profileID",
+          "skillID",
+          "proficiencyLevelID"
+        ],
+        "description": "The assignments of skills to the external work experience entry.​"
+      },
+      "ProjectExperienceService.ExternalWorkExperienceSkillAssignments-update": {
+        "title": "The assignments of skills to the external work experience entry.​ (for update)",
+        "type": "object",
+        "properties": {
+          "externalWorkExperienceID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": false,
+            "description": "The identifier of the external work experience entry."
+          },
+          "profileID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": false,
+            "description": "The identifier of the profile."
+          },
+          "skillID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": false,
+            "description": "The identifier of the skill."
+          },
+          "proficiencyLevelID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": false,
+            "description": "The identifier of the proficiency level that the worker has in the skill."
+          }
+        },
+        "description": "The assignments of skills to the external work experience entry.​"
+      },
+      "ProjectExperienceService.PrimaryWorkAssignment": {
+        "title": "The current primary work assignment of the worker",
+        "type": "object",
+        "properties": {
+          "profileID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "description": "The identifier of the profile."
+          },
+          "jobTitle": {
+            "type": "string",
+            "maxLength": 256,
+            "nullable": true,
+            "example": "Developer",
+            "description": "The job title of the worker within the company."
+          },
+          "managerWorkAssignmentExternalID": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": true,
+            "description": "The identifier of the work assignment of the worker's manager."
+          },
+          "officeLocation": {
+            "type": "string",
+            "maxLength": 256,
+            "nullable": true,
+            "example": "Walldorf",
+            "description": "The physical location of the worker's office."
+          },
+          "costCenterID": {
+            "type": "string",
+            "maxLength": 10,
+            "nullable": true,
+            "description": "The identifier of the cost center that the worker belongs to."
+          },
+          "costCenterDisplayName": {
+            "type": "string",
+            "maxLength": 30,
+            "nullable": true,
+            "description": "The display name of the cost center that the worker belongs to."
+          },
+          "workAssignmentID": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": true,
+            "description": "The identifier of the work assignment."
+          },
+          "resourceID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": true,
+            "description": "The identifier of the resource."
+          }
+        },
+        "description": "The current primary work assignment of the worker"
+      },
+      "ProjectExperienceService.Profiles": {
+        "title": "Read the project experience information of your workforce.",
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "description": "The identifier of the profile."
+          },
+          "workforcePersonExternalID": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": true,
+            "description": "The identifier of the worker from the source system, for example, from SAP SuccessFactors."
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true,
+            "example": "John",
+            "description": "The first name of the worker."
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true,
+            "example": "Doe",
+            "description": "The last name of the worker."
+          },
+          "emailAddress": {
+            "type": "string",
+            "maxLength": 256,
+            "nullable": true,
+            "example": "john.doe@abc.com",
+            "description": "The email address of the worker."
+          },
+          "mobileNumber": {
+            "type": "string",
+            "nullable": true,
+            "description": "The cell phone number of the worker."
+          },
+          "changedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true,
+            "description": "The date and time when the profile was lasted updated."
+          },
+          "_primaryWorkAssignment": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProjectExperienceService.PrimaryWorkAssignment"
+              }
+            ],
+            "nullable": true,
+            "description": "The current primary work assignment of the worker."
+          },
+          "_skillAssignments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectExperienceService.SkillAssignments"
+            },
+            "description": "The assignments of skills to the profile."
+          },
+          "_skillAssignments@odata.count": {
+            "$ref": "#/components/schemas/count"
+          },
+          "_externalWorkExperience": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectExperienceService.ExternalWorkExperience"
+            },
+            "description": "The assignments that the worker completed in their previous companies."
+          },
+          "_externalWorkExperience@odata.count": {
+            "$ref": "#/components/schemas/count"
+          }
+        },
+        "description": "Read the project experience information of your workforce."
+      },
+      "ProjectExperienceService.SkillAssignments": {
+        "title": "The assignments of skills to the profile.",
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "description": "The identifier of the skill assignment."
+          },
+          "profileID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": true,
+            "description": "The identifier of the profile."
+          },
+          "skillID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": true,
+            "description": "The identifier of the skill."
+          },
+          "proficiencyLevelID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": true,
+            "description": "The identifier of the proficiency level that the worker has in the skill."
+          },
+          "skillName": {
+            "type": "string",
+            "maxLength": 256,
+            "nullable": true,
+            "example": "Java",
+            "description": "The name of the skill."
+          },
+          "proficiencyLevelName": {
+            "type": "string",
+            "maxLength": 256,
+            "nullable": true,
+            "example": "Expert",
+            "description": "The name of the proficiency level that the worker has in the skill."
+          },
+          "skillUsage": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "description": "The usage status of the skill. The usage of the skill can be restricted or unrestricted."
+          },
+          "changedBy": {
+            "type": "string",
+            "maxLength": 255,
+            "nullable": true,
+            "description": "The user by whom the skill assignment was last updated."
+          },
+          "changedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true,
+            "description": "The date and time when the skill assignment was last updated."
+          }
+        },
+        "description": "The assignments of skills to the profile."
+      },
+      "ProjectExperienceService.SkillAssignments-create": {
+        "title": "The assignments of skills to the profile. (for create)",
+        "type": "object",
+        "properties": {
+          "profileID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": false,
+            "description": "The identifier of the profile."
+          },
+          "skillID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": false,
+            "description": "The identifier of the skill."
+          },
+          "proficiencyLevelID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": false,
+            "description": "The identifier of the proficiency level that the worker has in the skill."
+          }
+        },
+        "required": [
+          "profileID",
+          "skillID",
+          "proficiencyLevelID"
+        ],
+        "description": "The assignments of skills to the profile."
+      },
+      "ProjectExperienceService.SkillAssignments-update": {
+        "title": "The assignments of skills to the profile. (for update)",
+        "type": "object",
+        "properties": {
+          "profileID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": false,
+            "description": "The identifier of the profile."
+          },
+          "skillID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": false,
+            "description": "The identifier of the skill."
+          },
+          "proficiencyLevelID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": false,
+            "description": "The identifier of the proficiency level that the worker has in the skill."
+          }
+        },
+        "description": "The assignments of skills to the profile."
+      },
+      "count": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+      },
+      "error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "target": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "innererror": {
+                "type": "object",
+                "description": "The structure of this object is service-specific"
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "top": {
+        "name": "$top",
+        "in": "query",
+        "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "example": 50
+      },
+      "skip": {
+        "name": "$skip",
+        "in": "query",
+        "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "count": {
+        "name": "$count",
+        "in": "query",
+        "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "search": {
+        "name": "$search",
+        "in": "query",
+        "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "error": {
+        "description": "Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_400": {
+        "description": "Bad Request - You have provided an invalid request parameter or the payload does not match the expected format. See error message for details.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_401": {
+        "description": "Unauthorized - No valid access token (JWT) has been provided or it has expired.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_403": {
+        "description": "Forbidden - You do not have the necessary authorization to perform this action or to access the requested resource.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_404": {
+        "description": "Not found - The requested resource does not exist.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_405": {
+        "description": "Method Not Allowed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_409": {
+        "description": "Conflict - Could not create the resource, due to a conflict with an existing one (e.g. a unique value was provided that is already used). See error message for details.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "success_201": {
+        "description": "Created - The request has been fulfilled, resulting in the creation of a new resource.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ProjectExperienceService.SkillAssignments-create"
+            }
+          }
+        }
+      },
+      "success_204": {
+        "description": "No Content - The server successfully processed the request, and is not returning any content."
+      }
+    },
+    "securitySchemes": {
+      "OAuth2": {
+        "description": "OAuth client credentials (client ID and secret) are required.",
+        "flows": {
+          "clientCredentials": {
+            "scopes": {},
+            "tokenUrl": "https://{UserAccountSubdomain}.authentication.{CfRegion}.hana.ondemand.com/oauth/token"
+          }
+        },
+        "type": "oauth2"
+      }
+    }
+  }
+}

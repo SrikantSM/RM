@@ -1,0 +1,63 @@
+{
+    "name": "@sap/rm-resourceRequest",
+    "description": "Resource request project for resource management",
+    "repository": "https://github.tools.sap/Cloud4RM/Resource-Request.git",
+    "license": "ISC",
+    "version": "1.0.0",
+    "files": [
+        "db",
+        "srv"
+    ],
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.15.0",
+        "eslint": "7.20.0",
+        "eslint-config-airbnb-typescript": "^12.3.1",
+        "eslint-config-google": "^0.14.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-import": "^2.14.0",
+        "eslint-plugin-prettier": "^3.1.3",
+        "eslint-stats": "1.0.1",
+        "npm-run-all": "^4.1.5",
+        "prettier": "^2.0.5",
+        "typescript": "^3.5.3"
+    },
+    "scripts": {
+        "postinstall": "npm run install-ui-apps",
+        "install-ui-apps": "cd app && npm ci",
+        "local-setup": " node utils/local-setup.js",
+        "create-openapi-doc": "cds compile srv --service ResourceRequestService -o docs --to openapi && cds compile srv --service ResourceRequestService -o docs --to edmx && node scripts/modifyOpenAPISpec.js",
+        "build": "cd .. && npm run build && npx cds compile Resource-Request/srv --to sql > Resource-Request/srv/src/main/resources/schema.sql && npx cds compile Resource-Request/db --to sql > Resource-Request/project-integration-adapter/src/main/resources/schema.sql && node Resource-Request/scripts/nativeHana.js",
+        "mockserver-run": "cd ./srv && mvn -P spotless-profile spotless:check && mvn clean spring-boot:run -U -Dspring-boot.run.jvmArguments=\"-Dspring.profiles.active=local-test\"",
+        "mockui": "cd utils/localLaunchpad/ && npm start",
+        "mock": "npm run build && run-p -r -l mockserver-run mockui",
+        "build-mta": "cd .. && npm run build-mta -- --source Resource-Request",
+        "mockserver": "npm run build && npm run mockserver-run",
+        "initial-setup": "npm i -g mbt && cd .. && npm ci && cd Resource-Request && npm ci && cd app && npm ci && cd ../utils/localLaunchpad/ && npm i && cd ../.. && npm run install-test-dependency",
+        "install-test-dependency": "cd tests/api-integration && npm i && cd ../db-integration && npm i && cd ../end-to-end && npm i && cd ../ui-integration && npm i",
+        "//": "Below are the scripts to enforce formatting,",
+        "lint-app-js": "eslint -c .eslint-app.json --ext .js app --ignore-pattern app/**/test",
+        "lint-tests-js": "eslint --ext .js tests app/manageResourceRequest/webapp/test app/staffResourceRequest/webapp/test app/resourceRequestLibrary/webapp/resourceRequestLibrary/test",
+        "lint": "npm run lint-app-js && npm run lint-tests-js",
+        "lint-fix": "npm run lint-app-js -- --fix && npm run lint-tests-js -- --fix",
+        "lint-stats": "npm run lint-js -- --format node_modules/eslint-stats/byError.js & npm run lint-ts -- --format node_modules/eslint-stats/byError.js",
+        "spotless-check": "cd ./srv && mvn -P spotless-profile spotless:check && cd ../project-integration-adapter && mvn -P spotless-profile spotless:check",
+        "spotless-apply": "cd ./srv && mvn -P spotless-profile spotless:apply && cd ../project-integration-adapter && mvn -P spotless-profile spotless:apply"
+    },
+    "engines": {
+        "node": "^18.0.0"
+    },
+    "cds": {
+        "requires": {
+            "db": {
+                "kind": "hana",
+                "model": [
+                    "db",
+                    "srv"
+                ]
+            }
+        },
+        "odata": {
+            "version": "v4"
+        }
+    }
+}

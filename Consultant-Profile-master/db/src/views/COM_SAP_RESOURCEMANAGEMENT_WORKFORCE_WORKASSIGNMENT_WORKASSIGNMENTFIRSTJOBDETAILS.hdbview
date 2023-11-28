@@ -1,0 +1,14 @@
+VIEW COM_SAP_RESOURCEMANAGEMENT_WORKFORCE_WORKASSIGNMENT_WORKASSIGNMENTFIRSTJOBDETAILS AS SELECT
+  ID,
+  parent,
+  validFrom,
+  validTo,
+  costCenterExternalID,
+  country_code,
+  country_name,
+  jobTitle,
+  status_code,
+  supervisorWorkAssignmentExternalID,
+  ROW_NUMBER() OVER (PARTITION BY parent ORDER BY validFrom) as jobDetailSequenceNumber
+FROM COM_SAP_RESOURCEMANAGEMENT_WORKFORCE_WORKASSIGNMENT_JOBDETAILSMAXEVENTSEQUENCE
+where SESSION_CONTEXT('VALID-FROM') <= SESSION_CONTEXT('VALID-TO') and validFrom <= SESSION_CONTEXT('VALID-TO') and validTo > SESSION_CONTEXT('VALID-FROM');

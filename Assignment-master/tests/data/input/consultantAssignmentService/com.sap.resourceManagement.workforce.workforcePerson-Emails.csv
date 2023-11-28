@@ -1,0 +1,3 @@
+ID,address,isDefault,parent,createdAt,modifiedAt,CREATEDBY,MODIFIEDBY,DESCRIPTION,USAGE_CODE
+f9c5803e-834e-43eb-bead-301796d6c5de,sapc4prmauthpipelineconsultant@global.corp.sap,TRUE,5e04af13-bf05-4745-a320-42523752ea1c,2020-11-11 00:00:00.000,2020-11-11 00:00:00.000,,,santa.claus@sap.com,office
+61eea55b-6158-46ea-a288-1a9f6a86b603,luke.skywalker@sap.com,TRUE,831bdc1a-3c89-4df7-b1af-505ee0444c54,2020-11-11 00:00:00.000,2020-11-11 00:00:00.000,,,luke.skywalker@sap.com,office

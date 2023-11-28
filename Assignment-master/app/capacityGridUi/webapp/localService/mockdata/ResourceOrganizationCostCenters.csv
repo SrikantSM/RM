@@ -1,0 +1,7 @@
+costCenterId,costCenterDescription,resourceOrganizationDisplayId,resourceOrganizationName
+US01,Cost Center US01,RM-TA-US01,Delivery Org Unit America (USA)
+US02,Cost Center US02,RM-TA-US02,Delivery Org Unit America (USA)
+DE01,Cost Center DE01,RM-TA-DE01,Delivery Org Unit Germany (DE)
+DE02,Cost Center DE02,RM-TA-DE02,Delivery Org Unit Germany (DE)
+IN01,Cost Center IN01,RM-TA-IN01,Delivery Org Unit India (IN)
+IN02,Cost Center IN02,RM-TA-IN02,Delivery Org Unit India (IN)

@@ -1,0 +1,35 @@
+{
+    "name": "local-launchpad",
+    "dependencies": {
+        "@sap/approuter": "14.1.2",
+        "grunt": "^1.6.1",
+        "grunt-contrib-clean": "^1.1.0",
+        "grunt-contrib-copy": "^1.0.0",
+        "grunt-contrib-symlink": "^1.0.0",
+        "http-proxy": "^1.18.0",
+        "npm-run-all": "^4.1.5"
+    },
+    "scripts": {
+        "build:myProjectExperienceUi": "grunt --gruntfile ../../app/myProjectExperienceUi/Gruntfile.js",
+        "build:projectRoleUi": "grunt --gruntfile ../../app/projectRoleUi/Gruntfile.js",
+        "build:availabilityUploadUi": "grunt --gruntfile ../../app/availabilityUploadUi/Gruntfile.js",
+        "build:availabilityUpload": "grunt --gruntfile ../../app/availabilityUpload/Gruntfile.js",
+        "build:availabilityDownload": "grunt --gruntfile ../../app/availabilityDownload/Gruntfile.js",
+        "build:businessServiceOrgUi": "grunt --gruntfile ../../app/businessServiceOrgUi/Gruntfile.js",
+        "build:businessServiceOrgUpload": "grunt --gruntfile ../../app/businessServiceOrgUpload/Gruntfile.js",
+        "build:replicationScheduleUi": "grunt --gruntfile ../../app/replicationScheduleUi/Gruntfile.js",
+        "build:myResourcesUi": "grunt --gruntfile ../../app/myResourcesUi/Gruntfile.js",
+        "build:myAssignmentsUi": "grunt --gruntfile ../../app/myAssignmentsUi/Gruntfile.js",
+        "buildAndCollectUI": "run-p build:* --aggregate-output && grunt collectUI",
+        "debug": "grunt setupSymlinks && node index.js",
+        "start": "npm run buildAndCollectUI && node index.js"
+    },
+    "devDependencies": {
+        "grunt-contrib-concat": "^1.0.1",
+        "grunt-npm-command": "^0.1.2",
+        "grunt-cli": "1.4.3"
+    },
+    "engines": {
+        "node": "^18.0.0"
+    }
+}

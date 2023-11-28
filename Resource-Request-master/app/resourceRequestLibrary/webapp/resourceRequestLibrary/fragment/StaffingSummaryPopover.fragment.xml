@@ -1,0 +1,71 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:microchart="sap.suite.ui.microchart"
+        xmlns:core="sap.ui.core">
+    <ResponsivePopover
+        title="{i18n>ASSIGNMENT_STATUS_LABEL}"
+        class="sapUiContentPadding">
+        <content>
+            <List showSeparators="None">
+                <CustomListItem>
+                    <ObjectStatus id="labelRequested" title="{i18ned>REQUIRED_EFFORT}" text="{= ${staffingSummaryModel>/requestedCapacity} ? ${staffingSummaryModel>/requestedCapacity} : 0} {i18ned>unitHours}"
+                                  class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginBottom" />
+                </CustomListItem>
+                <CustomListItem>
+                    <HBox alignItems="Center" class="sapUiSmallMarginBegin sapUiSmallMarginEnd">
+                        <microchart:StackedBarMicroChart
+                            width="50px"
+                            height="2rem"
+                            tooltip="{i18ned>HARD_BOOKED_COLOUR}"
+                            showLabels="false"
+                            ariaLabelledBy="labelHardBooked">
+                            <microchart:bars>
+                                <microchart:StackedBarMicroChartBar
+                                        value="100"
+                                        displayValue=""
+                                        valueColor="sapUiChartPaletteQualitativeHue22" />
+                            </microchart:bars>
+                        </microchart:StackedBarMicroChart>
+                        <ObjectStatus id="labelHardBooked" title="{i18ned>HARD_BOOKINGS}" text="{= ${staffingSummaryModel>/bookedCapacityHard} ? ${staffingSummaryModel>/bookedCapacityHard} : 0} {i18ned>unitHours}" class="sapUiTinyMarginBegin" />
+                    </HBox>
+                </CustomListItem>
+                <CustomListItem>
+                    <HBox alignItems="Center" class="sapUiSmallMarginBegin sapUiSmallMarginEnd">
+                        <microchart:StackedBarMicroChart
+                            width="50px"
+                            height="2rem"
+                            tooltip="{i18ned>SOFT_BOOKED_COLOUR}"
+                            showLabels="false"
+                            ariaLabelledBy="labelSoftBooked">
+                            <microchart:bars>
+                                <microchart:StackedBarMicroChartBar
+                                        value="100"
+                                        displayValue=""
+                                        valueColor="sapUiChartPaletteQualitativeHue1" />
+                            </microchart:bars>
+                        </microchart:StackedBarMicroChart>
+                        <ObjectStatus id="labelSoftBooked" title="{i18ned>SOFT_BOOKINGS}" text="{= ${staffingSummaryModel>/bookedCapacitySoft} ? ${staffingSummaryModel>/bookedCapacitySoft} : 0} {i18ned>unitHours}" class="sapUiTinyMarginBegin" />
+                    </HBox>
+                </CustomListItem>
+                <CustomListItem>
+                    <HBox alignItems="Center" class="sapUiSmallMarginBegin sapUiSmallMarginEnd">
+                        <microchart:StackedBarMicroChart
+                            width="50px"
+                            height="2rem"
+                            tooltip="{i18ned>UNSTAFFED_COLOUR}"
+                            showLabels="false"
+                            ariaLabelledBy="labelUnstaffed">
+                            <microchart:bars>
+                                <microchart:StackedBarMicroChartBar
+                                        value="100"
+                                        displayValue=""
+                                        valueColor="sapUiChartPaletteSemanticNeutralLight3" />
+                            </microchart:bars>
+                        </microchart:StackedBarMicroChart>
+                        <ObjectStatus id="labelUnstaffed" title="{i18ned>UNSTAFFED}" text="{= ${staffingSummaryModel>/remainingCapacity} ? ${staffingSummaryModel>/remainingCapacity} : 0} {i18ned>unitHours}" class="sapUiTinyMarginBegin" />
+                    </HBox>
+                </CustomListItem>
+            </List>
+        </content>
+    </ResponsivePopover>
+</core:FragmentDefinition>

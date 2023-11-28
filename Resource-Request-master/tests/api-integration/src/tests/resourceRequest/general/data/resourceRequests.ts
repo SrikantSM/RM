@@ -1,0 +1,61 @@
+import { ResourceRequest } from 'test-commons';
+
+const moment = require('moment');
+const uuid = require('uuid').v4;
+
+export const resourceRequest: ResourceRequest [] = [
+  {
+  ID: '5c4398bd-d835-441e-9636-54b2ae58b192',
+  name: `Name_${uuid()}`,
+  displayId: uuid().substring(26),
+  isS4Cloud: true,
+  demand_ID: 'ab188671-2ce5-4258-928f-1b76ea251f46',
+  workpackage_ID: 'RRAPIPROJ.1.1',
+  project_ID: 'RRAPIPROJ',
+  projectRole_ID: 'b2ee640f-707a-4a63-8a56-ede4ab6bbc73',
+  priority_code: 2,
+  requestedResourceOrg_ID: 'ROO1',
+  processingResourceOrg_ID: '',
+  requestStatus_code: 0,
+  releaseStatus_code: 0,
+  resourceKind_code: '0',
+  startDate: moment(new Date('2019-01-01')).format('YYYY-MM-DD'),
+  endDate: moment(new Date('2019-01-28')).format('YYYY-MM-DD'),
+  startTime: '2019-01-01T00:00:00Z',
+  endTime: '2019-02-02T00:00:00Z',
+  resourceManager: '',
+  processor: '',
+  requestedCapacity: 100,
+  requestedUnit: 'duration-hour',
+  requestedCapacityInMinutes: 0,
+  description:
+    'Budget constraints/high demand in the Project so please assign accordingly. Low cost resource required',
+  },
+  {
+    ID: '576c6577-1852-4a1a-9ccd-c38869a0d98d',
+    name: `Name_${uuid()}`,
+    displayId: uuid().substring(26),
+    isS4Cloud: false,
+    demand_ID: '',
+    workpackage_ID: 'RRAPIPROJ.1.1',
+    project_ID: 'RRAPIPROJ',
+    projectRole_ID: 'b2ee640f-707a-4a63-8a56-ede4ab6bbc73',
+    priority_code: 2,
+    requestedResourceOrg_ID: 'ROO1',
+    processingResourceOrg_ID: '',
+    requestStatus_code: 0,
+    releaseStatus_code: 0,
+    resourceKind_code: '0',
+    startDate: moment(new Date('2019-01-01')).format('YYYY-MM-DD'),
+    endDate: moment(new Date('2019-01-28')).format('YYYY-MM-DD'),
+    startTime: '2019-01-01T00:00:00Z',
+    endTime: '2019-02-02T00:00:00Z',
+    resourceManager: '',
+    processor: '',
+    requestedCapacity: 100,
+    requestedUnit: 'duration-hour',
+    requestedCapacityInMinutes: 0,
+    description:
+      'Budget constraints/high demand in the Project so please assign accordingly. Low cost resource required',
+  },
+]

@@ -1,0 +1,210 @@
+# Using Piper general purpose pipeline for Azure
+
+trigger:
+  - release
+  - master
+  - hotfix
+
+parameters:
+  - name: cfApiEndPoint
+    type: string
+    default: 'https://api.cf.sap.hana.ondemand.com'
+  - name: testOrgName
+    type: string
+    default: 'c4p-rm-stargazer'
+
+  - name: testSpaceName
+    type: string
+    default: 'dev-test'
+  - name: testSpaceGuid
+    type: string
+    default: '3af24a22-1f6c-4c2d-ae93-17d1f4ec8616'
+  - name: defaultLanguageAppRouterURL
+    type: string
+    default: 'https://rm-stargazer-tenant-c4p-rm-stargazer-dev-test-skill-approuter.cfapps.sap.hana.ondemand.com'
+
+  - name: testSpaceNameRelease
+    type: string
+    default: 'rel-test'
+  - name: testSpaceGuidRelease
+    type: string
+    default: '860d43e9-3b4b-44dd-8b35-24f5b71f633c'
+  - name: defaultLanguageAppRouterURLRelease
+    type: string
+    default: 'https://rm-stargazer-tenant-c4p-rm-stargazer-rel-test-skill-approuter.cfapps.sap.hana.ondemand.com'
+
+  - name: landscape
+    type: string
+    default: sap
+  - name: appName
+    type: string
+    default: 'skill-srv'
+
+resources:
+  repositories:
+  - repository: piper-pipeline-azure
+    endpoint: github.tools.sap
+    type: githubenterprise
+    name: Cloud4RM/RM-Piper-ADO
+  - repository: Umbrella
+    endpoint: github.tools.sap
+    type: githubenterprise
+    name: Cloud4RM/Resource-Management
+
+extends:
+  template: piper-ado-templates/rm-domain-pipeline.yml@piper-pipeline-azure
+  parameters:
+    # General Purpose
+    umbrellaClone:
+    - checkout: Umbrella
+      submodules: true
+    domainName: 'Skill'
+
+    # Build
+    buildPostSteps:
+    - publish: 'Skill/srv/target'
+      artifact: 'Sonar1Artifact'
+
+    # Sonar 1
+    sonar1SrvSonarProjectKey: 'com.sap.c4p.rm:skill-srv'
+    sonar1SrvSonarProjectBaseDir: 'srv'
+    sonar1AdditionalSonarProperties:  'sonar.coverage.exclusions=src/main/java/com/sap/c4p/rm/skill/Application.java, src/main/java/com/sap/c4p/rm/skill/config/**/*.java, src/main/java/com/sap/c4p/rm/skill/controllers/UploadJobController.java,src/main/java/com/sap/c4p/rm/skill/utils/CfUtils.java, src/main/java/com/sap/c4p/rm/skill/services/LocalAuditLogService.java, src/main/java/com/sap/c4p/rm/skill/exceptions/HealthCheckException.java, src/main/java/com/sap/c4p/rm/skill/mdiintegration/cloudfoundry/service/jobscheduler/service/JobSchedulerServiceLocalImpl.java, src/main/java/com/sap/c4p/rm/skill/mdiintegration/processor/workforcecapability/dto/**/*.java, src/main/java/com/sap/c4p/rm/skill/mdiintegration/processor/workforcecapabilitycatalog/dto/**/*.java, src/main/java/com/sap/c4p/rm/skill/mdiintegration/processor/workforceproficiencyscale/dto/**/*.java, src/main/java/com/sap/c4p/rm/skill/mdiintegration/processor/common/dto/Error.java, src/main/java/com/sap/c4p/rm/skill/mdiintegration/processor/common/dto/ErrorResponse.java'
+
+    sonar1PreSteps:
+    - download: current
+      artifact: 'Sonar1Artifact'
+    - bash: 'mv ../Sonar1Artifact srv/target'
+
+    # Deploy
+    deploycfAPIEndPoint: ${{ parameters.cfApiEndPoint }}
+    deploycfOrg: ${{ parameters.testOrgName }}
+    deploycfSpace: ${{ parameters.testSpaceName }}
+    deploycfSpaceRelease: ${{ parameters.testSpaceNameRelease }}
+    deployMtarFileName: 'skill.mtar'
+
+    # API Test
+    acceptance1StageName: 'API Tests'
+    acceptance1PostSteps:
+    - task: piper@1
+      displayName: API Test
+      inputs:
+        stepName: shellExecute
+        flags: '--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/runTests.sh'
+        dockerImage: ppiper/node-browsers:v25
+        dockerOptions: '--env DOMAIN="."
+                        --env TEST_PATH="tests/api-integration"
+                        --env ENV_LANDSCAPE="sap"
+                        --env CF_SPACE_GUID_MASTER=${{ parameters.testSpaceGuid }}
+                        --env CF_SPACE_GUID_RELEASE=${{ parameters.testSpaceGuidRelease }}
+                        --env ENV_SRV_APP_NAME="skill-srv"'
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      displayName: Publish Skill API Test Results(XML)
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'tests/api-integration/target/report/*.xml'
+    - task: PublishPipelineArtifact@1
+      condition: failed()
+      inputs:
+        targetPath: 'Skill/tests/api-integration/target/report/'
+        artifact: 'S_API_Attempt_$(System.JobAttempt)'
+        publishLocation: 'pipeline'
+
+    # E2E Test - Skill 1
+    acceptance2StageName: 'End To End Tests'
+    acceptance2PostSteps:
+    - task: piper@1
+      displayName: Run Skills E2E - Skills--Upload--Download
+      inputs:
+        stepName: shellExecute
+        flags: "--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/runTests.sh"
+        dockerImage: ppiper/node-browsers:v25
+        dockerOptions: '--env DOMAIN="."
+                        --env TEST_PATH="tests/end-to-end"
+                        --env ADDITIONAL_FLAGS_FOR_START_COMMAND="-- --suiteFilter=skill,uploadDownload --config.connectionConfigs.direct.binaries.chromedriver.version=111.0.5563.19"
+                        --env ENV_LANDSCAPE="sap"
+                        --env ENV_SRV_APP_NAME="skill-srv"
+                        --env CF_SPACE_GUID_MASTER=${{ parameters.testSpaceGuid }}
+                        --env CF_SPACE_GUID_RELEASE=${{ parameters.testSpaceGuidRelease }}
+                        --env ENV_APPROUTER_URL_MASTER=${{parameters.defaultLanguageAppRouterURL}}
+                        --env ENV_APPROUTER_URL_RELEASE=${{parameters.defaultLanguageAppRouterURLRelease}}
+                        --env ENV_IDP_HOST="axtubdeog.accounts400.ondemand.com"
+                        --env ENV_BROWSER_NAME="chrome"
+                        --env ENV_PLATFORM_NAME="linux"'
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      displayName: Publish Skill E2E Results(XML)
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'tests/end-to-end/target/**/*.xml'
+    - task: PublishPipelineArtifact@1
+      condition: failed()
+      inputs:
+        targetPath: 'tests/end-to-end/target/report/screenshots/'
+        artifact: 'S_E2E_Attempt_$(System.JobAttempt)'
+        publishLocation: 'pipeline'
+
+
+    # E2E Test - Skill 2
+    acceptance3StageName: 'End To End Tests'
+    acceptance3PostSteps:
+    - task: piper@1
+      displayName: Run Skills E2E - Common--Catalogs--Proficiencies
+      inputs:
+        stepName: shellExecute
+        flags: "--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/runTests.sh"
+        dockerImage: ppiper/node-browsers:v25
+        dockerOptions: '--env DOMAIN="."
+                        --env TEST_PATH="tests/end-to-end"
+                        --env ADDITIONAL_FLAGS_FOR_START_COMMAND="-- --suiteFilter=common,catalog,proficiency --config.connectionConfigs.direct.binaries.chromedriver.version=111.0.5563.19"
+                        --env ENV_LANDSCAPE="sap"
+                        --env ENV_SRV_APP_NAME="skill-srv"
+                        --env CF_SPACE_GUID_MASTER=${{ parameters.testSpaceGuid }}
+                        --env CF_SPACE_GUID_RELEASE=${{ parameters.testSpaceGuidRelease }}
+                        --env ENV_APPROUTER_URL_MASTER=${{parameters.defaultLanguageAppRouterURL}}
+                        --env ENV_APPROUTER_URL_RELEASE=${{parameters.defaultLanguageAppRouterURLRelease}}
+                        --env ENV_IDP_HOST="axtubdeog.accounts400.ondemand.com"
+                        --env ENV_BROWSER_NAME="chrome"
+                        --env ENV_PLATFORM_NAME="linux"'
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      displayName: Publish Skill E2E Results(XML)
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'tests/end-to-end/target/**/*.xml'
+    - task: PublishPipelineArtifact@1
+      condition: failed()
+      inputs:
+        targetPath: 'tests/end-to-end/target/report/screenshots/'
+        artifact: 'S_E2E_Attempt_$(System.JobAttempt)'
+        publishLocation: 'pipeline'
+
+    # End to End Test Case Generation
+    acceptance4StageName: 'E2E Test Case Generation'
+    acceptance4PostSteps:
+    - task: piper@1
+      displayName: Generate and Push Test Case Documents
+      inputs:
+        stepName: shellExecute
+        flags: "--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/endtoEndTestCaseGeneration.sh"
+        dockerImage: ppiper/node-browsers:v25
+        dockerOptions: '--env DOMAIN="."
+                        --env TEST_PATH="tests/end-to-end"
+                        --env ADDITIONAL_FLAGS_FOR_START_COMMAND="-- --config.connectionConfigs.direct.binaries.chromedriver.version=111.0.5563.19"
+                        --env ENV_LANDSCAPE="sap"
+                        --env ENV_SRV_APP_NAME="skill-srv"
+                        --env CF_SPACE_GUID_MASTER=${{ parameters.testSpaceGuid }}
+                        --env CF_SPACE_GUID_RELEASE=${{ parameters.testSpaceGuidRelease }}
+                        --env ENV_APPROUTER_URL_MASTER=${{parameters.defaultLanguageAppRouterURL}}
+                        --env ENV_APPROUTER_URL_RELEASE=${{parameters.defaultLanguageAppRouterURLRelease}}
+                        --env ENV_IDP_HOST="axtubdeog.accounts400.ondemand.com"
+                        --env ENV_BROWSER_NAME="chrome"
+                        --env ENV_PLATFORM_NAME="linux"
+                        --env REPOSITORY="Cloud4RM/ResourceManagementDocumentation"
+                        --env CREATE_PR="true"'
+
+    uIIntegration2StageName: 'N/A'
+
+    updateSaaSApprouterName: 'skill-approuter'
+    updateSaaSSpaceGuidMaster: ${{ parameters.testSpaceGuid }}
+    updateSaaSSpaceGuidRelease: ${{ parameters.testSpaceGuidRelease }}

@@ -1,0 +1,10 @@
+sap.ui.define([
+    "./BaseController",
+    "./Page.controller",
+    "./AssignmentDataManager",
+    "./DataTransformer",
+    "./DateUtility",
+    "./WeekCalendarModel",
+    "./WeekCalendarDateHelper",
+    "./WeekCalendarUtility"
+]);

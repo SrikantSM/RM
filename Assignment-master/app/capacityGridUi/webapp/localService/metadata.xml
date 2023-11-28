@@ -1,0 +1,1503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+    <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+    <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+    <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="CapacityService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="ResourceOrganizations" EntityType="CapacityService.ResourceOrganizations"/>
+        <EntitySet Name="ResourceOrganizationCostCenters" EntityType="CapacityService.ResourceOrganizationCostCenters"/>
+        <EntitySet Name="ResourceDetails" EntityType="CapacityService.ResourceDetails"/>
+        <EntitySet Name="SkillsConsumptionVH" EntityType="CapacityService.SkillsConsumptionVH">
+          <NavigationPropertyBinding Path="catalogAssociations" Target="Catalogs2SkillsConsumption"/>
+          <NavigationPropertyBinding Path="alternativeLabels" Target="AlternativeLabelsConsumption"/>
+          <NavigationPropertyBinding Path="lifecycleStatus" Target="LifecycleStatus"/>
+          <NavigationPropertyBinding Path="texts" Target="SkillsConsumptionVH_texts"/>
+          <NavigationPropertyBinding Path="localized" Target="SkillsConsumptionVH_texts"/>
+        </EntitySet>
+        <EntitySet Name="ProjectsVH" EntityType="CapacityService.ProjectsVH">
+          <NavigationPropertyBinding Path="customer" Target="CustomerVH"/>
+          <NavigationPropertyBinding Path="workPackages" Target="WorkPackages"/>
+        </EntitySet>
+        <EntitySet Name="ProjectRoles" EntityType="CapacityService.ProjectRoles"/>
+        <EntitySet Name="WorkerTypesVH" EntityType="CapacityService.WorkerTypesVH"/>
+        <EntitySet Name="RequestsVH" EntityType="CapacityService.RequestsVH"/>
+        <EntitySet Name="CustomerVH" EntityType="CapacityService.CustomerVH"/>
+        <EntitySet Name="ReferenceObjectType" EntityType="CapacityService.ReferenceObjectType">
+          <NavigationPropertyBinding Path="texts" Target="ReferenceObjectType_texts"/>
+          <NavigationPropertyBinding Path="localized" Target="ReferenceObjectType_texts"/>
+        </EntitySet>
+        <EntitySet Name="ReferenceObject" EntityType="CapacityService.ReferenceObject">
+          <NavigationPropertyBinding Path="typeCode" Target="ReferenceObjectType"/>
+        </EntitySet>
+        <EntitySet Name="AssignmentsDetailsForCapacityGrid" EntityType="CapacityService.AssignmentsDetailsForCapacityGrid">
+          <NavigationPropertyBinding Path="monthlyAggregatedAssignments" Target="AssignmentBucketsYearMonthAggregate"/>
+          <NavigationPropertyBinding Path="weeklyAggregatedAssignments" Target="AssignmentBucketsYearWeekAggregate"/>
+          <NavigationPropertyBinding Path="dailyAssignments" Target="AssignmentBucketsPerDay"/>
+        </EntitySet>
+        <EntitySet Name="AssignmentBucketsYearMonthAggregate" EntityType="CapacityService.AssignmentBucketsYearMonthAggregate"/>
+        <EntitySet Name="AssignmentBucketsYearWeekAggregate" EntityType="CapacityService.AssignmentBucketsYearWeekAggregate"/>
+        <EntitySet Name="AssignmentBucketsPerDay" EntityType="CapacityService.AssignmentBucketsPerDay"/>
+        <EntitySet Name="RequestDetailsForEachAssignment" EntityType="CapacityService.RequestDetailsForEachAssignment"/>
+        <EntitySet Name="ResourceAssignment" EntityType="CapacityService.ResourceAssignment">
+          <NavigationPropertyBinding Path="project" Target="ProjectsVH"/>
+          <NavigationPropertyBinding Path="projectRole" Target="ProjectRoles"/>
+          <NavigationPropertyBinding Path="customer" Target="CustomerVH"/>
+        </EntitySet>
+        <EntitySet Name="capacityGridHeaderTemporal" EntityType="CapacityService.capacityGridHeaderTemporal">
+          <NavigationPropertyBinding Path="resourceAssignment" Target="ResourceAssignment"/>
+          <NavigationPropertyBinding Path="managerDetails" Target="ManagerProfileData"/>
+        </EntitySet>
+        <EntitySet Name="capacityGridMonthlyUtilizationTemporal" EntityType="CapacityService.capacityGridMonthlyUtilizationTemporal"/>
+        <EntitySet Name="capacityGridHeaderKPITemporal" EntityType="CapacityService.capacityGridHeaderKPITemporal"/>
+        <EntitySet Name="capacityGridDailyUtilizationTemporal" EntityType="CapacityService.capacityGridDailyUtilizationTemporal"/>
+        <EntitySet Name="capacityGridWeeklyUtilizationTemporal" EntityType="CapacityService.capacityGridWeeklyUtilizationTemporal"/>
+        <EntitySet Name="AssignmentStatus" EntityType="CapacityService.AssignmentStatus">
+          <NavigationPropertyBinding Path="texts" Target="AssignmentStatus_texts"/>
+          <NavigationPropertyBinding Path="localized" Target="AssignmentStatus_texts"/>
+        </EntitySet>
+        <EntitySet Name="averageResourceUtilizationFor12WeeksTileResponse" EntityType="CapacityService.averageResourceUtilizationFor12WeeksTileResponse"/>
+        <EntitySet Name="Catalogs2SkillsConsumption" EntityType="CapacityService.Catalogs2SkillsConsumption">
+          <NavigationPropertyBinding Path="skill" Target="SkillsConsumptionVH"/>
+        </EntitySet>
+        <EntitySet Name="AlternativeLabelsConsumption" EntityType="CapacityService.AlternativeLabelsConsumption">
+          <NavigationPropertyBinding Path="language" Target="Languages"/>
+        </EntitySet>
+        <EntitySet Name="LifecycleStatus" EntityType="CapacityService.LifecycleStatus">
+          <NavigationPropertyBinding Path="texts" Target="LifecycleStatus_texts"/>
+          <NavigationPropertyBinding Path="localized" Target="LifecycleStatus_texts"/>
+        </EntitySet>
+        <EntitySet Name="WorkPackages" EntityType="CapacityService.WorkPackages">
+          <NavigationPropertyBinding Path="project" Target="ProjectsVH"/>
+        </EntitySet>
+        <EntitySet Name="ManagerProfileData" EntityType="CapacityService.ManagerProfileData"/>
+        <EntitySet Name="Languages" EntityType="CapacityService.Languages">
+          <NavigationPropertyBinding Path="texts" Target="Languages_texts"/>
+          <NavigationPropertyBinding Path="localized" Target="Languages_texts"/>
+        </EntitySet>
+        <EntitySet Name="SkillsConsumptionVH_texts" EntityType="CapacityService.SkillsConsumptionVH_texts"/>
+        <EntitySet Name="ReferenceObjectType_texts" EntityType="CapacityService.ReferenceObjectType_texts"/>
+        <EntitySet Name="AssignmentStatus_texts" EntityType="CapacityService.AssignmentStatus_texts"/>
+        <EntitySet Name="LifecycleStatus_texts" EntityType="CapacityService.LifecycleStatus_texts"/>
+        <EntitySet Name="Languages_texts" EntityType="CapacityService.Languages_texts"/>
+      </EntityContainer>
+      <EntityType Name="ResourceOrganizations">
+        <Property Name="resourceOrganizationDisplayId" Type="Edm.String" MaxLength="5"/>
+        <Property Name="resourceOrganizationName" Type="Edm.String" MaxLength="256"/>
+        <Property Name="resourceOrganizationDescription" Type="Edm.String" MaxLength="1024"/>
+        <Property Name="costCenterId" Type="Edm.String" MaxLength="10"/>
+      </EntityType>
+      <EntityType Name="ResourceOrganizationCostCenters">
+        <Key>
+          <PropertyRef Name="costCenterId"/>
+        </Key>
+        <Property Name="costCenterId" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="costCenterDescription" Type="Edm.String" MaxLength="40"/>
+        <Property Name="resourceOrganizationDisplayId" Type="Edm.String" MaxLength="5"/>
+        <Property Name="resourceOrganizationName" Type="Edm.String" MaxLength="256"/>
+      </EntityType>
+      <EntityType Name="ResourceDetails">
+        <Key>
+          <PropertyRef Name="resource_ID"/>
+        </Key>
+        <Property Name="resource_ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="firstName" Type="Edm.String" MaxLength="128"/>
+        <Property Name="lastName" Type="Edm.String" MaxLength="128"/>
+        <Property Name="fullName" Type="Edm.String"/>
+        <Property Name="costCenterID" Type="Edm.String" MaxLength="10"/>
+        <Property Name="resourceOrgCode" Type="Edm.String" MaxLength="5"/>
+      </EntityType>
+      <EntityType Name="SkillsConsumptionVH">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="externalID" Type="Edm.String" MaxLength="4000"/>
+        <Property Name="proficiencySet_ID" Type="Edm.Guid"/>
+        <NavigationProperty Name="catalogAssociations" Type="Collection(CapacityService.Catalogs2SkillsConsumption)"/>
+        <NavigationProperty Name="alternativeLabels" Type="Collection(CapacityService.AlternativeLabelsConsumption)"/>
+        <Property Name="commaSeparatedAlternativeLabels" Type="Edm.String" MaxLength="4000"/>
+        <Property Name="description" Type="Edm.String" MaxLength="4000"/>
+        <Property Name="name" Type="Edm.String" MaxLength="256"/>
+        <Property Name="lifecycleStatus_code" Type="Edm.Int32" Nullable="false" DefaultValue="0"/>
+        <NavigationProperty Name="lifecycleStatus" Type="CapacityService.LifecycleStatus">
+          <ReferentialConstraint Property="lifecycleStatus_code" ReferencedProperty="code"/>
+        </NavigationProperty>
+        <NavigationProperty Name="texts" Type="Collection(CapacityService.SkillsConsumptionVH_texts)">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="CapacityService.SkillsConsumptionVH_texts"/>
+        <Property Name="code" Type="Edm.Int32"/>
+        <Property Name="commaSeparatedCatalogs" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="ProjectsVH">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.String" MaxLength="24" Nullable="false"/>
+        <Property Name="name" Type="Edm.String" MaxLength="40"/>
+        <NavigationProperty Name="customer" Type="CapacityService.CustomerVH">
+          <ReferentialConstraint Property="customer_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="customer_ID" Type="Edm.String" MaxLength="10"/>
+        <Property Name="startDate" Type="Edm.Date"/>
+        <Property Name="endDate" Type="Edm.Date"/>
+        <NavigationProperty Name="workPackages" Type="Collection(CapacityService.WorkPackages)" Partner="project">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="ProjectRoles">
+        <Key>
+          <PropertyRef Name="projectRole_ID"/>
+        </Key>
+        <Property Name="projectRole_ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="code" Type="Edm.String" MaxLength="4"/>
+        <Property Name="name" Type="Edm.String" MaxLength="30"/>
+        <Property Name="description" Type="Edm.String" MaxLength="255"/>
+      </EntityType>
+      <EntityType Name="WorkerTypesVH">
+        <Property Name="workerTypeName" Type="Edm.String" MaxLength="255"/>
+        <Property Name="workerTypeDescription" Type="Edm.String" MaxLength="1000"/>
+      </EntityType>
+      <EntityType Name="RequestsVH">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="displayId" Type="Edm.String" MaxLength="10"/>
+        <Property Name="name" Type="Edm.String" MaxLength="256"/>
+        <Property Name="startDate" Type="Edm.Date"/>
+        <Property Name="endDate" Type="Edm.Date"/>
+        <Property Name="projectName" Type="Edm.String" MaxLength="40"/>
+        <Property Name="projectRoleName" Type="Edm.String" MaxLength="30"/>
+        <Property Name="projectId" Type="Edm.String" MaxLength="24"/>
+        <Property Name="processingResourceOrganizationName" Type="Edm.String" MaxLength="256"/>
+        <Property Name="processingResourceOrganizationId" Type="Edm.String" MaxLength="5"/>
+        <Property Name="customerId" Type="Edm.String" MaxLength="10"/>
+        <Property Name="customerName" Type="Edm.String" MaxLength="100"/>
+        <Property Name="requestedCapacityInHours" Type="Edm.Int32"/>
+        <Property Name="requestStatusCode" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="CustomerVH">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="name" Type="Edm.String" MaxLength="100"/>
+      </EntityType>
+      <EntityType Name="ReferenceObjectType">
+        <Key>
+          <PropertyRef Name="code"/>
+        </Key>
+        <Property Name="code" Type="Edm.Int32" Nullable="false" DefaultValue="0"/>
+        <Property Name="name" Type="Edm.String"/>
+        <NavigationProperty Name="texts" Type="Collection(CapacityService.ReferenceObjectType_texts)">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="CapacityService.ReferenceObjectType_texts">
+          <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="ReferenceObject">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="displayId" Type="Edm.String" MaxLength="40"/>
+        <Property Name="name" Type="Edm.String" MaxLength="256"/>
+        <NavigationProperty Name="typeCode" Type="CapacityService.ReferenceObjectType">
+          <ReferentialConstraint Property="typeCode_code" ReferencedProperty="code"/>
+        </NavigationProperty>
+        <Property Name="typeCode_code" Type="Edm.Int32" DefaultValue="0"/>
+        <Property Name="startDate" Type="Edm.Date"/>
+        <Property Name="endDate" Type="Edm.Date"/>
+      </EntityType>
+      <EntityType Name="AssignmentsDetailsForCapacityGrid">
+        <Key>
+          <PropertyRef Name="assignment_ID"/>
+        </Key>
+        <Property Name="assignment_ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="resource_ID" Type="Edm.Guid"/>
+        <Property Name="resourceRequest_ID" Type="Edm.Guid"/>
+        <Property Name="assignmentStatusCode" Type="Edm.Int32" DefaultValue="0"/>
+        <Property Name="assignmentStatusText" Type="Edm.String"/>
+        <Property Name="costCenterID" Type="Edm.String" MaxLength="10"/>
+        <Property Name="resourceOrgCode" Type="Edm.String" MaxLength="5"/>
+        <Property Name="assignmentStartDate" Type="Edm.Date"/>
+        <Property Name="assignmentEndDate" Type="Edm.Date"/>
+        <Property Name="requestStartDate" Type="Edm.Date"/>
+        <Property Name="requestEndDate" Type="Edm.Date"/>
+        <Property Name="requestDisplayId" Type="Edm.String" MaxLength="10"/>
+        <Property Name="requestName" Type="Edm.String" MaxLength="256"/>
+        <Property Name="projectId" Type="Edm.String" MaxLength="24"/>
+        <Property Name="projectName" Type="Edm.String" MaxLength="40"/>
+        <Property Name="workItemName" Type="Edm.String" MaxLength="40"/>
+        <Property Name="referenceObjectId" Type="Edm.String" MaxLength="40"/>
+        <Property Name="referenceObjectName" Type="Edm.String" MaxLength="256"/>
+        <Property Name="referenceObjectTypeName" Type="Edm.String"/>
+        <Property Name="referenceObjectTypeCode" Type="Edm.Int32" DefaultValue="0"/>
+        <Property Name="customerId" Type="Edm.String" MaxLength="10"/>
+        <Property Name="customerName" Type="Edm.String" MaxLength="100"/>
+        <Property Name="projectRoleName" Type="Edm.String" MaxLength="30"/>
+        <Property Name="totalRequestBookedCapacityInHours" Type="Edm.Int32"/>
+        <Property Name="assignmentDurationInHours" Type="Edm.Int32"/>
+        <Property Name="requestedCapacityInHours" Type="Edm.Int32"/>
+        <Property Name="remainingRequestedCapacityInHours" Type="Edm.Int32"/>
+        <Property Name="isAssignmentEditable" Type="Edm.Boolean"/>
+        <Property Name="action" Type="Edm.Int32"/>
+        <Property Name="referenceAssignment" Type="Edm.Guid"/>
+        <Property Name="requestStatusCode" Type="Edm.Int32"/>
+        <Property Name="requestStatusDescription" Type="Edm.String"/>
+        <NavigationProperty Name="monthlyAggregatedAssignments" Type="Collection(CapacityService.AssignmentBucketsYearMonthAggregate)"/>
+        <NavigationProperty Name="weeklyAggregatedAssignments" Type="Collection(CapacityService.AssignmentBucketsYearWeekAggregate)"/>
+        <NavigationProperty Name="dailyAssignments" Type="Collection(CapacityService.AssignmentBucketsPerDay)"/>
+      </EntityType>
+      <EntityType Name="AssignmentBucketsYearMonthAggregate">
+        <Key>
+          <PropertyRef Name="assignment_ID"/>
+          <PropertyRef Name="timePeriod"/>
+        </Key>
+        <Property Name="assignment_ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="timePeriod" Type="Edm.String" MaxLength="6" Nullable="false"/>
+        <Property Name="startDate" Type="Edm.Date"/>
+        <Property Name="endDate" Type="Edm.Date"/>
+        <Property Name="action" Type="Edm.Int32"/>
+        <Property Name="bookedCapacityInHours" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="AssignmentBucketsYearWeekAggregate">
+        <Key>
+          <PropertyRef Name="assignment_ID"/>
+          <PropertyRef Name="timePeriod"/>
+        </Key>
+        <Property Name="assignment_ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="timePeriod" Type="Edm.String" MaxLength="6" Nullable="false"/>
+        <Property Name="startDate" Type="Edm.Date"/>
+        <Property Name="endDate" Type="Edm.Date"/>
+        <Property Name="action" Type="Edm.Int32"/>
+        <Property Name="bookedCapacityInHours" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="AssignmentBucketsPerDay">
+        <Key>
+          <PropertyRef Name="assignment_ID"/>
+          <PropertyRef Name="timePeriod"/>
+        </Key>
+        <Property Name="assignment_ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="timePeriod" Type="Edm.String" Nullable="false"/>
+        <Property Name="date" Type="Edm.Date"/>
+        <Property Name="action" Type="Edm.Int32"/>
+        <Property Name="bookedCapacityInHours" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="RequestDetailsForEachAssignment">
+        <Key>
+          <PropertyRef Name="resourceRequest_ID"/>
+        </Key>
+        <Property Name="resourceRequest_ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="requestDisplayId" Type="Edm.String" MaxLength="10"/>
+        <Property Name="requestName" Type="Edm.String" MaxLength="256"/>
+        <Property Name="requestStartDate" Type="Edm.Date"/>
+        <Property Name="requestEndDate" Type="Edm.Date"/>
+        <Property Name="requestedResourceOrganizationDisplayId" Type="Edm.String" MaxLength="5"/>
+        <Property Name="requestedResourceOrganizationName" Type="Edm.String" MaxLength="256"/>
+        <Property Name="requestedResourceOrganizationDescription" Type="Edm.String" MaxLength="1024"/>
+        <Property Name="requestStatusCode" Type="Edm.Int32"/>
+        <Property Name="requestStatusDescription" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="ResourceAssignment">
+        <Key>
+          <PropertyRef Name="assignment_ID"/>
+        </Key>
+        <Property Name="assignment_ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="resourceRequest_ID" Type="Edm.Guid"/>
+        <Property Name="resource_ID" Type="Edm.Guid"/>
+        <Property Name="costCenterID" Type="Edm.String" MaxLength="10"/>
+        <Property Name="resourceOrgCode" Type="Edm.String" MaxLength="5"/>
+        <Property Name="startDate" Type="Edm.Date"/>
+        <Property Name="endDate" Type="Edm.Date"/>
+        <Property Name="assignmentExists" Type="Edm.Boolean"/>
+        <Property Name="assignmentStatusCode" Type="Edm.Int32" DefaultValue="0"/>
+        <Property Name="displayId" Type="Edm.String" MaxLength="10"/>
+        <NavigationProperty Name="project" Type="CapacityService.ProjectsVH">
+          <ReferentialConstraint Property="project_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="project_ID" Type="Edm.String" MaxLength="24"/>
+        <NavigationProperty Name="projectRole" Type="CapacityService.ProjectRoles">
+          <ReferentialConstraint Property="projectRole_ID" ReferencedProperty="projectRole_ID"/>
+        </NavigationProperty>
+        <Property Name="projectRole_ID" Type="Edm.Guid"/>
+        <Property Name="referenceObjectId" Type="Edm.String" MaxLength="40"/>
+        <Property Name="referenceObjectName" Type="Edm.String" MaxLength="256"/>
+        <Property Name="referenceObjectTypeName" Type="Edm.String"/>
+        <Property Name="referenceObjectTypeCode" Type="Edm.Int32" DefaultValue="0"/>
+        <NavigationProperty Name="customer" Type="CapacityService.CustomerVH">
+          <ReferentialConstraint Property="customer_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="customer_ID" Type="Edm.String" MaxLength="10"/>
+      </EntityType>
+      <EntityType Name="capacityGridHeaderTemporal">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="validFrom"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="JobDetailsID" Type="Edm.Guid"/>
+        <Property Name="validFrom" Type="Edm.Date" Nullable="false"/>
+        <Property Name="validTo" Type="Edm.Date"/>
+        <Property Name="startDate" Type="Edm.Date"/>
+        <Property Name="endDate" Type="Edm.Date"/>
+        <Property Name="emailAddress" Type="Edm.String" MaxLength="256"/>
+        <Property Name="mobileNumber" Type="Edm.String"/>
+        <Property Name="resourceName" Type="Edm.String"/>
+        <Property Name="firstName" Type="Edm.String" MaxLength="128"/>
+        <Property Name="lastName" Type="Edm.String" MaxLength="128"/>
+        <Property Name="workforcePersonID" Type="Edm.Guid"/>
+        <Property Name="avgUtilization" Type="Edm.Int32"/>
+        <Property Name="bookedHours" Type="Edm.Int32"/>
+        <Property Name="availableHours" Type="Edm.Int32"/>
+        <Property Name="freeHours" Type="Edm.Int32"/>
+        <Property Name="employeeID" Type="Edm.Guid"/>
+        <Property Name="employeeExternalID" Type="Edm.String" MaxLength="100"/>
+        <Property Name="jobTitle" Type="Edm.String" MaxLength="256"/>
+        <Property Name="country" Type="Edm.String" MaxLength="255"/>
+        <Property Name="countryCode" Type="Edm.String" MaxLength="3"/>
+        <Property Name="resourceOrganizationName" Type="Edm.String" MaxLength="256"/>
+        <Property Name="resourceOrganizationId" Type="Edm.String" MaxLength="5"/>
+        <Property Name="costCenter" Type="Edm.String"/>
+        <Property Name="costCenterName" Type="Edm.String" MaxLength="30"/>
+        <Property Name="costCenterForDisplay" Type="Edm.String"/>
+        <Property Name="resourceOrganizationNameForDisplay" Type="Edm.String" MaxLength="256"/>
+        <Property Name="resourceOrganizationIdForDisplay" Type="Edm.String" MaxLength="5"/>
+        <Property Name="workerType" Type="Edm.String" MaxLength="255"/>
+        <Property Name="assignmentExistsForTheResource" Type="Edm.Boolean"/>
+        <Property Name="isPhotoPresent" Type="Edm.Boolean"/>
+        <Property Name="supervisorWorkAssignmentExternalID" Type="Edm.String" MaxLength="100"/>
+        <NavigationProperty Name="resourceAssignment" Type="Collection(CapacityService.ResourceAssignment)"/>
+        <NavigationProperty Name="managerDetails" Type="CapacityService.ManagerProfileData">
+          <ReferentialConstraint Property="supervisorWorkAssignmentExternalID" ReferencedProperty="externalID"/>
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="capacityGridMonthlyUtilizationTemporal">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="timePeriod"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="timePeriod" Type="Edm.String" MaxLength="6" Nullable="false"/>
+        <Property Name="utilization" Type="Edm.Int32"/>
+        <Property Name="validFrom" Type="Edm.Date"/>
+        <Property Name="bookedHours" Type="Edm.Int32"/>
+        <Property Name="availableHours" Type="Edm.Int32"/>
+        <Property Name="freeHours" Type="Edm.Int32"/>
+        <Property Name="resourceOrganizationId" Type="Edm.String" MaxLength="5"/>
+      </EntityType>
+      <EntityType Name="capacityGridHeaderKPITemporal">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="freeResourcesCount" Type="Edm.Int32"/>
+        <Property Name="resourceCount" Type="Edm.Int32"/>
+        <Property Name="totalAvgUtilPercentage" Type="Edm.Int32"/>
+        <Property Name="overstaffedResourcesCount" Type="Edm.Int32"/>
+        <Property Name="validFrom" Type="Edm.Date"/>
+        <Property Name="resourceOrganizationId" Type="Edm.String" MaxLength="5"/>
+        <Property Name="deliveryOrgCode" Type="Edm.String" MaxLength="5"/>
+        <Property Name="bookedHours" Type="Edm.Int32"/>
+        <Property Name="availableHours" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="capacityGridDailyUtilizationTemporal">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="timePeriod"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="timePeriod" Type="Edm.Date" Nullable="false"/>
+        <Property Name="validFrom" Type="Edm.Date"/>
+        <Property Name="utilization" Type="Edm.Int32"/>
+        <Property Name="bookedHours" Type="Edm.Int32"/>
+        <Property Name="availableHours" Type="Edm.Int32"/>
+        <Property Name="freeHours" Type="Edm.Int32"/>
+        <Property Name="resourceOrganizationId" Type="Edm.String" MaxLength="5"/>
+      </EntityType>
+      <EntityType Name="capacityGridWeeklyUtilizationTemporal">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="timePeriod"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="timePeriod" Type="Edm.String" MaxLength="6" Nullable="false"/>
+        <Property Name="utilization" Type="Edm.Int32"/>
+        <Property Name="validFrom" Type="Edm.Date"/>
+        <Property Name="bookedHours" Type="Edm.Int32"/>
+        <Property Name="availableHours" Type="Edm.Int32"/>
+        <Property Name="freeHours" Type="Edm.Int32"/>
+        <Property Name="resourceOrganizationId" Type="Edm.String" MaxLength="5"/>
+      </EntityType>
+      <EntityType Name="AssignmentStatus">
+        <Key>
+          <PropertyRef Name="code"/>
+        </Key>
+        <Property Name="code" Type="Edm.Int32" Nullable="false" DefaultValue="0"/>
+        <Property Name="name" Type="Edm.String"/>
+        <NavigationProperty Name="texts" Type="Collection(CapacityService.AssignmentStatus_texts)">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="CapacityService.AssignmentStatus_texts">
+          <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="averageResourceUtilizationFor12WeeksTileResponse">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="number" Type="Edm.Int32"/>
+        <Property Name="numberFactor" Type="Edm.String"/>
+        <Property Name="numberState" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="Catalogs2SkillsConsumption">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="catalog_ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="skill_ID" Type="Edm.Guid" Nullable="false"/>
+        <NavigationProperty Name="skill" Type="CapacityService.SkillsConsumptionVH">
+          <ReferentialConstraint Property="skill_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="AlternativeLabelsConsumption">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="skill_ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="name" Type="Edm.String" MaxLength="256"/>
+        <NavigationProperty Name="language" Type="CapacityService.Languages">
+          <ReferentialConstraint Property="language_code" ReferencedProperty="code"/>
+        </NavigationProperty>
+        <Property Name="language_code" Type="Edm.String" MaxLength="14"/>
+      </EntityType>
+      <EntityType Name="LifecycleStatus">
+        <Key>
+          <PropertyRef Name="code"/>
+        </Key>
+        <Property Name="name" Type="Edm.String" MaxLength="255"/>
+        <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+        <Property Name="code" Type="Edm.Int32" Nullable="false"/>
+        <NavigationProperty Name="texts" Type="Collection(CapacityService.LifecycleStatus_texts)">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="CapacityService.LifecycleStatus_texts">
+          <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="WorkPackages">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.String" MaxLength="40" Nullable="false"/>
+        <Property Name="name" Type="Edm.String" MaxLength="60"/>
+        <NavigationProperty Name="project" Type="CapacityService.ProjectsVH" Partner="workPackages">
+          <ReferentialConstraint Property="project_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="project_ID" Type="Edm.String" MaxLength="24"/>
+        <Property Name="startDate" Type="Edm.Date"/>
+        <Property Name="endDate" Type="Edm.Date"/>
+      </EntityType>
+      <EntityType Name="ManagerProfileData">
+        <Key>
+          <PropertyRef Name="externalID"/>
+        </Key>
+        <Property Name="externalID" Type="Edm.String" MaxLength="100" Nullable="false"/>
+        <Property Name="managerId" Type="Edm.Guid"/>
+        <Property Name="mangerEmailAddress" Type="Edm.String" MaxLength="256"/>
+        <Property Name="managerMobilePhoneNumber" Type="Edm.String"/>
+        <Property Name="managerName" Type="Edm.String"/>
+        <Property Name="validFrom" Type="Edm.Date" Nullable="false"/>
+        <Property Name="validTo" Type="Edm.Date"/>
+      </EntityType>
+      <EntityType Name="Languages">
+        <Key>
+          <PropertyRef Name="code"/>
+        </Key>
+        <Property Name="name" Type="Edm.String" MaxLength="255"/>
+        <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+        <Property Name="code" Type="Edm.String" MaxLength="14" Nullable="false"/>
+        <NavigationProperty Name="texts" Type="Collection(CapacityService.Languages_texts)">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="CapacityService.Languages_texts">
+          <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="SkillsConsumptionVH_texts">
+        <Key>
+          <PropertyRef Name="ID_texts"/>
+        </Key>
+        <Property Name="ID_texts" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="locale" Type="Edm.String" MaxLength="14"/>
+        <Property Name="ID" Type="Edm.Guid"/>
+        <Property Name="commaSeparatedAlternativeLabels" Type="Edm.String" MaxLength="4000"/>
+        <Property Name="description" Type="Edm.String" MaxLength="4000"/>
+        <Property Name="name" Type="Edm.String" MaxLength="256"/>
+      </EntityType>
+      <EntityType Name="ReferenceObjectType_texts">
+        <Key>
+          <PropertyRef Name="locale"/>
+          <PropertyRef Name="code"/>
+        </Key>
+        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+        <Property Name="code" Type="Edm.Int32" Nullable="false" DefaultValue="0"/>
+        <Property Name="name" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="AssignmentStatus_texts">
+        <Key>
+          <PropertyRef Name="locale"/>
+          <PropertyRef Name="code"/>
+        </Key>
+        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+        <Property Name="code" Type="Edm.Int32" Nullable="false" DefaultValue="0"/>
+        <Property Name="name" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="LifecycleStatus_texts">
+        <Key>
+          <PropertyRef Name="locale"/>
+          <PropertyRef Name="code"/>
+        </Key>
+        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+        <Property Name="name" Type="Edm.String" MaxLength="255"/>
+        <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+        <Property Name="code" Type="Edm.Int32" Nullable="false"/>
+      </EntityType>
+      <EntityType Name="Languages_texts">
+        <Key>
+          <PropertyRef Name="locale"/>
+          <PropertyRef Name="code"/>
+        </Key>
+        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+        <Property Name="name" Type="Edm.String" MaxLength="255"/>
+        <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+        <Property Name="code" Type="Edm.String" MaxLength="14" Nullable="false"/>
+      </EntityType>
+      <Annotations Target="CapacityService.EntityContainer/ResourceOrganizations">
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.ResourceOrganizations/resourceOrganizationName">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.EntityContainer/ResourceOrganizationCostCenters">
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.ResourceOrganizationCostCenters/resourceOrganizationName">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.EntityContainer/ResourceDetails">
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.ResourceDetails/fullName">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.EntityContainer/SkillsConsumptionVH">
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.SkillsConsumptionVH/externalID">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.SkillsConsumptionVH/commaSeparatedAlternativeLabels">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.SkillsConsumptionVH/commaSeparatedCatalogs">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.EntityContainer/ProjectsVH">
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.EntityContainer/ProjectRoles">
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.ProjectRoles/code">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.ProjectRoles/name">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.WorkerTypesVH">
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.EntityContainer/WorkerTypesVH">
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.WorkerTypesVH/workerTypeName">
+        <Annotation Term="Common.Label" String="Name"/>
+      </Annotations>
+      <Annotations Target="CapacityService.WorkerTypesVH/workerTypeDescription">
+        <Annotation Term="Common.Label" String="Description"/>
+      </Annotations>
+      <Annotations Target="CapacityService.EntityContainer/RequestsVH">
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.RequestsVH/startDate">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.RequestsVH/endDate">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.RequestsVH/projectRoleName">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.RequestsVH/processingResourceOrganizationName">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.RequestsVH/requestedCapacityInHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.RequestsVH/requestStatusCode">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Open"/>
+              <PropertyValue Property="Value" Int="0"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Resolved"/>
+              <PropertyValue Property="Value" Int="1"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.EntityContainer/CustomerVH">
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.EntityContainer/ReferenceObjectType">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.ReferenceObjectType/code">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="None"/>
+              <PropertyValue Property="Value" Int="0"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Project"/>
+              <PropertyValue Property="Value" Int="1"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.EntityContainer/ReferenceObject">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.ReferenceObject/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="Created On"/>
+      </Annotations>
+      <Annotations Target="CapacityService.ReferenceObject/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="A user's unique ID"/>
+        <Annotation Term="Common.Label" String="Created By"/>
+      </Annotations>
+      <Annotations Target="CapacityService.ReferenceObject/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="Changed On"/>
+      </Annotations>
+      <Annotations Target="CapacityService.ReferenceObject/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="A user's unique ID"/>
+        <Annotation Term="Common.Label" String="Changed By"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentsDetailsForCapacityGrid/assignmentStatusCode">
+        <Annotation Term="Core.Computed" Bool="false"/>
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Hardbooked"/>
+              <PropertyValue Property="Value" Int="0"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Softbooked"/>
+              <PropertyValue Property="Value" Int="1"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Proposed"/>
+              <PropertyValue Property="Value" Int="2"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Accepted"/>
+              <PropertyValue Property="Value" Int="3"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Rejected"/>
+              <PropertyValue Property="Value" Int="4"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentsDetailsForCapacityGrid/requestStartDate">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentsDetailsForCapacityGrid/requestEndDate">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentsDetailsForCapacityGrid/referenceObjectTypeCode">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="None"/>
+              <PropertyValue Property="Value" Int="0"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Project"/>
+              <PropertyValue Property="Value" Int="1"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentsDetailsForCapacityGrid/projectRoleName">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentsDetailsForCapacityGrid/totalRequestBookedCapacityInHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentsDetailsForCapacityGrid/assignmentDurationInHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentsDetailsForCapacityGrid/requestedCapacityInHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentsDetailsForCapacityGrid/remainingRequestedCapacityInHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentsDetailsForCapacityGrid/isAssignmentEditable">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentsDetailsForCapacityGrid/action">
+        <Annotation Term="Core.Computed" Bool="false"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentsDetailsForCapacityGrid/referenceAssignment">
+        <Annotation Term="Core.Computed" Bool="false"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentsDetailsForCapacityGrid/requestStatusCode">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Open"/>
+              <PropertyValue Property="Value" Int="0"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Resolved"/>
+              <PropertyValue Property="Value" Int="1"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentBucketsYearMonthAggregate/startDate">
+        <Annotation Term="Core.Computed" Bool="false"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentBucketsYearMonthAggregate/endDate">
+        <Annotation Term="Core.Computed" Bool="false"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentBucketsYearMonthAggregate/action">
+        <Annotation Term="Core.Computed" Bool="false"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentBucketsYearMonthAggregate/bookedCapacityInHours">
+        <Annotation Term="Core.Computed" Bool="false"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentBucketsYearWeekAggregate/startDate">
+        <Annotation Term="Core.Computed" Bool="false"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentBucketsYearWeekAggregate/endDate">
+        <Annotation Term="Core.Computed" Bool="false"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentBucketsYearWeekAggregate/action">
+        <Annotation Term="Core.Computed" Bool="false"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentBucketsYearWeekAggregate/bookedCapacityInHours">
+        <Annotation Term="Core.Computed" Bool="false"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentBucketsPerDay/action">
+        <Annotation Term="Core.Computed" Bool="false"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentBucketsPerDay/bookedCapacityInHours">
+        <Annotation Term="Core.Computed" Bool="false"/>
+      </Annotations>
+      <Annotations Target="CapacityService.EntityContainer/RequestDetailsForEachAssignment">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.RequestDetailsForEachAssignment/requestStartDate">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.RequestDetailsForEachAssignment/requestEndDate">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.RequestDetailsForEachAssignment/requestedResourceOrganizationName">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.RequestDetailsForEachAssignment/requestStatusCode">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Open"/>
+              <PropertyValue Property="Value" Int="0"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Resolved"/>
+              <PropertyValue Property="Value" Int="1"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.EntityContainer/ResourceAssignment">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.ResourceAssignment/startDate">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.ResourceAssignment/endDate">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.ResourceAssignment/assignmentExists">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.ResourceAssignment/assignmentStatusCode">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Hardbooked"/>
+              <PropertyValue Property="Value" Int="0"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Softbooked"/>
+              <PropertyValue Property="Value" Int="1"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Proposed"/>
+              <PropertyValue Property="Value" Int="2"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Accepted"/>
+              <PropertyValue Property="Value" Int="3"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Rejected"/>
+              <PropertyValue Property="Value" Int="4"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.ResourceAssignment/referenceObjectTypeCode">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="None"/>
+              <PropertyValue Property="Value" Int="0"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Project"/>
+              <PropertyValue Property="Value" Int="1"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderTemporal">
+        <Annotation Term="Core.AlternateKeys">
+          <Collection>
+            <Record Type="Core.AlternateKey">
+              <PropertyValue Property="Key">
+                <Collection>
+                  <Record Type="Core.PropertyRef">
+                    <PropertyValue Property="Name" PropertyPath="JobDetailsID"/>
+                    <PropertyValue Property="Alias" String="JobDetailsID"/>
+                  </Record>
+                </Collection>
+              </PropertyValue>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.EntityContainer/capacityGridHeaderTemporal">
+        <Annotation Term="Core.AlternateKeys">
+          <Collection>
+            <Record Type="Core.AlternateKey">
+              <PropertyValue Property="Key">
+                <Collection>
+                  <Record Type="Core.PropertyRef">
+                    <PropertyValue Property="Name" PropertyPath="JobDetailsID"/>
+                    <PropertyValue Property="Alias" String="JobDetailsID"/>
+                  </Record>
+                </Collection>
+              </PropertyValue>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderTemporal/mobileNumber">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderTemporal/resourceName">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderTemporal/avgUtilization">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderTemporal/bookedHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderTemporal/availableHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderTemporal/freeHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderTemporal/resourceOrganizationName">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderTemporal/costCenter">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderTemporal/costCenterForDisplay">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderTemporal/resourceOrganizationNameForDisplay">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderTemporal/workerType">
+        <Annotation Term="Common.Label" String="Name"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderTemporal/assignmentExistsForTheResource">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderTemporal/isPhotoPresent">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridMonthlyUtilizationTemporal/utilization">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridMonthlyUtilizationTemporal/bookedHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridMonthlyUtilizationTemporal/availableHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridMonthlyUtilizationTemporal/freeHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderKPITemporal/freeResourcesCount">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderKPITemporal/resourceCount">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderKPITemporal/totalAvgUtilPercentage">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderKPITemporal/overstaffedResourcesCount">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderKPITemporal/bookedHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridHeaderKPITemporal/availableHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridDailyUtilizationTemporal/utilization">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridDailyUtilizationTemporal/bookedHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridDailyUtilizationTemporal/availableHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridDailyUtilizationTemporal/freeHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridWeeklyUtilizationTemporal/utilization">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridWeeklyUtilizationTemporal/bookedHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridWeeklyUtilizationTemporal/availableHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.capacityGridWeeklyUtilizationTemporal/freeHours">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentStatus/code">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Hardbooked"/>
+              <PropertyValue Property="Value" Int="0"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Softbooked"/>
+              <PropertyValue Property="Value" Int="1"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Proposed"/>
+              <PropertyValue Property="Value" Int="2"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Accepted"/>
+              <PropertyValue Property="Value" Int="3"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Rejected"/>
+              <PropertyValue Property="Value" Int="4"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.EntityContainer/Catalogs2SkillsConsumption">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.Catalogs2SkillsConsumption/catalog_ID">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.Catalogs2SkillsConsumption/skill_ID">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.EntityContainer/AlternativeLabelsConsumption">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.AlternativeLabelsConsumption/skill_ID">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AlternativeLabelsConsumption/name">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AlternativeLabelsConsumption/language">
+        <Annotation Term="Common.Label" String="Language"/>
+        <Annotation Term="Core.Description" String="A language code as specified in ISO 639-1"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AlternativeLabelsConsumption/language_code">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+        <Annotation Term="Common.Label" String="Language"/>
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="Language"/>
+            <PropertyValue Property="CollectionPath" String="Languages"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="language_code"/>
+                  <PropertyValue Property="ValueListProperty" String="code"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Description" String="A language code as specified in ISO 639-1"/>
+      </Annotations>
+      <Annotations Target="CapacityService.LifecycleStatus">
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.LifecycleStatus/name">
+        <Annotation Term="Common.Label" String="Name"/>
+      </Annotations>
+      <Annotations Target="CapacityService.LifecycleStatus/descr">
+        <Annotation Term="Common.Label" String="Description"/>
+      </Annotations>
+      <Annotations Target="CapacityService.ManagerProfileData/managerMobilePhoneNumber">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.ManagerProfileData/managerName">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.Languages">
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.Languages/name">
+        <Annotation Term="Common.Label" String="Name"/>
+      </Annotations>
+      <Annotations Target="CapacityService.Languages/descr">
+        <Annotation Term="Common.Label" String="Description"/>
+      </Annotations>
+      <Annotations Target="CapacityService.Languages/code">
+        <Annotation Term="Common.Text" Path="name"/>
+        <Annotation Term="Common.Label" String="Language Code"/>
+      </Annotations>
+      <Annotations Target="CapacityService.SkillsConsumptionVH_texts/locale">
+        <Annotation Term="Common.Label" String="Language Code"/>
+      </Annotations>
+      <Annotations Target="CapacityService.SkillsConsumptionVH_texts/commaSeparatedAlternativeLabels">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CapacityService.SkillsConsumptionVH_texts/description">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.SkillsConsumptionVH_texts/name">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="CapacityService.ReferenceObjectType_texts/locale">
+        <Annotation Term="Common.Label" String="Language Code"/>
+      </Annotations>
+      <Annotations Target="CapacityService.ReferenceObjectType_texts/code">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="None"/>
+              <PropertyValue Property="Value" Int="0"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Project"/>
+              <PropertyValue Property="Value" Int="1"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentStatus_texts/locale">
+        <Annotation Term="Common.Label" String="Language Code"/>
+      </Annotations>
+      <Annotations Target="CapacityService.AssignmentStatus_texts/code">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Hardbooked"/>
+              <PropertyValue Property="Value" Int="0"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Softbooked"/>
+              <PropertyValue Property="Value" Int="1"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Proposed"/>
+              <PropertyValue Property="Value" Int="2"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Accepted"/>
+              <PropertyValue Property="Value" Int="3"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Rejected"/>
+              <PropertyValue Property="Value" Int="4"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CapacityService.LifecycleStatus_texts/locale">
+        <Annotation Term="Common.Label" String="Language Code"/>
+      </Annotations>
+      <Annotations Target="CapacityService.LifecycleStatus_texts/name">
+        <Annotation Term="Common.Label" String="Name"/>
+      </Annotations>
+      <Annotations Target="CapacityService.LifecycleStatus_texts/descr">
+        <Annotation Term="Common.Label" String="Description"/>
+      </Annotations>
+      <Annotations Target="CapacityService.Languages_texts/locale">
+        <Annotation Term="Common.Label" String="Language Code"/>
+      </Annotations>
+      <Annotations Target="CapacityService.Languages_texts/name">
+        <Annotation Term="Common.Label" String="Name"/>
+      </Annotations>
+      <Annotations Target="CapacityService.Languages_texts/descr">
+        <Annotation Term="Common.Label" String="Description"/>
+      </Annotations>
+      <Annotations Target="CapacityService.Languages_texts/code">
+        <Annotation Term="Common.Text" Path="name"/>
+        <Annotation Term="Common.Label" String="Language Code"/>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

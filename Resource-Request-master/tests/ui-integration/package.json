@@ -1,0 +1,43 @@
+{
+  "name": "ui-integration",
+  "private": true,
+  "dependencies": {
+    "npm-run-all": "^4.1.5",
+    "fs-extra": "^8.1.0",
+    "grunt": "1.6.1",
+    "grunt-cli": "1.4.3",
+    "grunt-karma": "^4.0.2",
+    "karma": "^6.1.1",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-coverage": "^2.2.1",
+    "karma-html-reporter": "^0.2.7",
+    "karma-junit-reporter": "^2.0.1",
+    "karma-qunit": "^4.0.0",
+    "karma-ui5": "^1.1.0",
+    "qunit": "^2.9.3"
+  },
+  "scripts": {
+    "start": "npm run prepare-umbrella && npm run prepare-server && run-p -r -l start-server main",
+    "start2": "npm run prepare-umbrella && npm run prepare-server && run-p -r -l start-server effort-distribution",
+    "prepare-umbrella": "cd ../../../ && npm ci",
+    "prepare-server": "cd ../../ && npm ci && npm run build",
+    "start-server": "cd ../../ && cd ./srv && mvn -s ../../settings.xml clean spring-boot:run -U -Dspring-boot.run.jvmArguments=\"-Dspring.profiles.active=local-test\"",
+    "test": "npm start",
+    "main": "run-s -n -c main:*",
+    "effort-distribution": "run-s -n -c ed:*",
+    "main:resourceRequest": "grunt opa_tests --appName=manageResourceRequest --testCompiled=true",
+    "main:resourceRequestCustomJourney": "grunt opa_tests --appName=manageResourceRequest --testCompiled=true --customJourney=true",
+    "ed:dailyEffortDistribution": "grunt opa_tests --appName=manageResourceRequest --testCompiled=true --effortDistribution=daily",
+    "ed:weeklyEffortDistribution": "grunt opa_tests --appName=manageResourceRequest --testCompiled=true --effortDistribution=weekly",
+    "main:processResourceRequest": "grunt opa_tests --appName=staffResourceRequest  --testCompiled=true",
+    "ed:staffEffortDistribution": "grunt opa_tests --appName=staffResourceRequest --testCompiled=true --effortDistribution=all",
+    "ed:resourceRequestLibrary-unit": "grunt unit_tests --appName=resourceRequestLibrary --testCompiled=false --testFlag=unit",
+    "debug-resourceRequest": "grunt opa_tests --appName=manageResourceRequest --testCompiled=false --debugMode=true",
+    "debug-resourceRequestCustomJourney": "grunt opa_tests --appName=manageResourceRequest --testCompiled=false --debugMode=true --customJourney=true",
+    "debug-dailyEffortDistribution": "grunt opa_tests --appName=manageResourceRequest --testCompiled=false --debugMode=true --effortDistribution=daily",
+    "debug-weeklyEffortDistribution": "grunt opa_tests --appName=manageResourceRequest --testCompiled=false --debugMode=true --effortDistribution=weekly",
+    "debug-processResourceRequest": "grunt opa_tests --appName=staffResourceRequest --testCompiled=false --debugMode=true",
+    "debug-staffEffortDistribution": "grunt opa_tests --appName=staffResourceRequest --testCompiled=false --debugMode=true --effortDistribution=all",
+    "debug-resourceRequestLibrary-unit": "grunt unit_tests --appName=resourceRequestLibrary --testCompiled=false --testFlag=unit --debugMode=true"
+  }
+}

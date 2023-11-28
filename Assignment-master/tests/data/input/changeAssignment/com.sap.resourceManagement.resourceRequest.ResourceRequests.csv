@@ -1,0 +1,3 @@
+ID,workpackage_ID,demand_ID,startDate,endDate,startTime,endTime,requestStatus_code,releaseStatus_code,displayId,name,isS4Cloud
+b2bd4ab7-dbd3-45ed-a5d3-90b1d33a285b,RSH_WP,92bd4ab7-dbd3-45ed-a5d3-90b1d33a2859,2019-10-01,2020-01-01,2019-10-01 00:00:00.000,2020-01-01 00:00:00.000,1,1,bf4bbb77-8,Resource Request Name 1,true
+4cc7b653-67f2-449a-9852-7f37d64c5931,RSH_WP,92bd4ab7-dbd3-45ed-a5d3-90b1d33a2859,2019-10-01,2020-01-01,2019-10-01 00:00:00.000,2020-01-01 00:00:00.000,0,1,cb1a336a-d,Resource Request Name 2,true

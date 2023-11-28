@@ -1,0 +1,56 @@
+ID,name,startDate,endDate,project_ID
+I0300.1.4,Solution validation and testing,2021-01-01,2021-05-31,I0300
+I0800.1.2,Solution Design and architecture,2020-10-01,2021-04-30,I0800
+I0400.1.3,POC and development,2020-09-01,2021-02-28,I0400
+I1000.1.4,Solution validation and testing,2023-06-01,2023-10-31,I1000
+I0800.1.3,POC and development,2021-03-01,2022-09-30,I0800
+I0700.1.2,Solution Design and architecture,2020-08-01,2020-12-31,I0700
+I0600.1.4,Solution validation and testing,2021-02-01,2021-04-30,I0600
+I0800.1.5,Maintenance and Support,2022-12-01,2023-06-30,I0800
+I0700.1.5,Maintenance and Support,2021-04-01,2021-06-30,I0700
+I0900.1.3,POC and development,2020-10-01,2021-09-30,I0900
+I0900.1.5,Maintenance and Support,2021-10-01,2022-02-28,I0900
+I1000.1.3,POC and development,2021-09-01,2023-06-30,I1000
+I0600.1.3,POC and development,2020-09-01,2021-03-31,I0600
+I1000.1.1,Business blue printing,2020-06-01,2021-04-30,I1000
+I0800.1.1,Business blue printing,2020-06-01,2020-12-31,I0800
+I0500.1.4,Solution validation and testing,2021-07-01,2021-10-31,I0500
+I0500.1.1,Business blue printing,2020-06-01,2020-09-30,I0500
+I0100.1.5,Maintenance and Support,2020-11-01,2021-02-28,I0100
+I1100.1.4,Solution validation and testing,2018-01-01,2019-12-31,I1100
+I0100.1.2,Solution Design and architecture,2019-02-01,2019-04-30,I0100
+I0300.1.3,POC and development,2020-10-01,2021-02-28,I0300
+I1000.1.5,Maintenance and Support,2023-09-01,2024-02-29,I1000
+I1000.1.2,Solution Design and architecture,2021-02-01,2021-10-31,I1000
+I0900.1.1,Business blue printing,2020-06-01,2020-10-31,I0900
+I0800.1.4,Solution validation and testing,2022-07-01,2022-12-31,I0800
+I1100.1.5,Maintenance and Support,2018-01-01,2019-12-31,I1100
+I0700.1.4,Solution validation and testing,2021-01-01,2021-04-30,I0700
+I1100.1.1,Business blue printing,2018-01-01,2019-12-31,I1100
+I0200.1.4,Solution validation and testing,2021-09-01,2022-02-28,I0200
+I0200.1.5,Maintenance and Support,2022-02-01,2022-06-30,I0200
+I0500.1.3,POC and development,2020-11-01,2021-09-30,I0500
+I0300.1.2,Solution Design and architecture,2020-09-01,2020-12-31,I0300
+I0100.1.1,Business blue printing,2018-11-01,2019-01-31,I0100
+I0400.1.2,Solution Design and architecture,2020-08-01,2020-11-30,I0400
+I0500.1.5,Maintenance and Support,2021-09-01,2021-12-31,I0500
+I0200.1.3,POC and development,2020-11-01,2022-02-28,I0200
+I0600.1.1,Business blue printing,2020-06-01,2020-09-30,I0600
+I0200.1.1,Business blue printing,2020-06-01,2020-12-31,I0200
+I0300.1.5,Maintenance and Support,2021-04-01,2021-06-30,I0300
+I0400.1.1,Business blue printing,2020-06-01,2020-09-30,I0400
+I0300.1.1,Business blue printing,2020-06-01,2020-10-31,I0300
+I0100.1.4,Solution validation and testing,2020-07-01,2020-10-31,I0100
+I1100.1.3,POC and development,2018-01-01,2019-12-31,I1100
+I0400.1.5,Maintenance and Support,2021-03-01,2021-06-30,I0400
+I0400.1.4,Solution validation and testing,2021-01-01,2021-04-30,I0400
+I0200.1.2,Solution Design and architecture,2020-10-01,2021-04-30,I0200
+I1100.1.2,Solution Design and architecture,2018-01-01,2019-12-31,I1100
+I0900.1.2,Solution Design and architecture,2020-09-01,2020-12-31,I0900
+I0700.1.1,Business blue printing,2020-06-01,2020-09-30,I0700
+I0700.1.3,POC and development,2020-10-01,2021-03-31,I0700
+I0900.1.4,Solution validation and testing,2021-08-01,2021-11-30,I0900
+I0500.1.2,Solution Design and architecture,2020-09-01,2020-12-31,I0500
+I0600.1.5,Maintenance and Support,2021-03-01,2021-06-30,I0600
+I0600.1.2,Solution Design and architecture,2020-08-01,2020-11-30,I0600
+I0100.1.3,POC and development,2019-05-01,2020-06-30,I0100

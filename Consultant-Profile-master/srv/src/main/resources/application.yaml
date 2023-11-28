@@ -1,0 +1,113 @@
+#Default Properties
+spring:
+  profiles:
+    active: default
+  messages:
+    basename: i18n.i18n
+    always-use-message-format: true
+  servlet:
+    multipart:
+      max-file-size: 2MB
+# enable health checks
+management:
+  endpoints:
+    web:
+      exposure:
+        exclude: info     # disable info endpoint
+        include: health
+    jmx:
+      exposure:
+        exclude: "*"      # disable all jmx endpoints
+    enabled-by-default: false
+  endpoint:
+    health:
+      enabled: true
+    info:
+      enabled: false
+malware:
+  service:
+    retry:
+      attempt: 2
+    timeout: 1000
+
+cds.multiTenancy.security.deploymentScope: InitDb
+#Instance based authorizations
+cds.security.instance-based-authorization.enabled: true
+# Enable HikariCP Plugin
+cds.multitenancy.datasource.hikari:
+  registerMbeans: true
+  leakDetectionThreshold: 2000
+  connectionTimeout: 20000 # Needs to be lower than the health check timeout at AvS. Compare https://github.wdf.sap.corp/cap/issues/issues/8103#issuecomment-3098670
+  maxLifetime: 900000 # (15 minutes) Has to be smaller than timeout on HANA Cloud (which defaults to 24h). Recommended to be configured explicitly as per https://github.com/brettwooldridge/HikariCP.
+  minimumIdle: 1 # Each Tenant has its own connection pool with at max maximumPoolSize (default 10) connections. If minimumIdle is unspecified, it will be exactly 10 connections per tenant, which wastes resources.
+  idleTimeout: 300000 # (5 minutes) Time for idle connections to stay alive if unused. If exceeded, the connection will be closed, reducing the pool size down to minimumIdle. Has to be configured if minimumIdle != maximumPoolSize.
+
+# Local development profile with an in-memory database
+---
+spring:
+  config:
+    activate:
+      on-profile: default | local-test
+  datasource:
+    url: "jdbc:sqlite:file::memory:?cache=shared"
+    driver-class-name: org.sqlite.JDBC
+  sql:
+    init:
+      mode: always
+      schema-locations:
+        - classpath:schema.sql
+        # Custom Schema to provide the native hana view definition for SQLite Database.
+        - classpath:schema_with_native_view/V1_schema.sql
+
+# Local testing profile with an in-memory database for UI Integration Tests
+---
+spring:
+  config:
+    activate:
+      on-profile: local-test
+  datasource:
+    hikari:
+      maximum-pool-size: 1
+      maxLifetime: 0
+  sql:
+    init:
+      data-locations:
+        - file:../tests/ui-integration/data.sql
+        - classpath:fixedData/fixedData.sql
+# Mockuser configuration for local profiles
+cds:
+  security:
+    xsuaa:
+      enabled: false
+    mock:
+      users:
+      - name: authenticated-user@sap.com
+        password: pass
+        roles:
+          - ProjRole.Read
+          - ProjRole.Edit
+          - ProjExp.Read
+          - ProjExp.Edit
+          - MyResources.Read
+          - MyResources.Edit
+          - Availability.Upload
+          - Availability.Download
+          - BusinessServiceOrg.Upload
+          - BusinessServiceOrg.Download
+          - System
+        additional:
+          email: authenticated-user@sap.com
+---
+spring:
+  config:
+    activate:
+      on-profile: hana
+  main:
+    banner-mode: "off" # Disable startup banner in the cloud
+server:
+    compression:
+        enabled: true
+        mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json,application/xml,text/css,application/atom+xml,application/http,multipart/mixed
+    tomcat:
+        compression: on
+        compressableMimeTypes: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json,application/xml,text/css,application/atom+xml,application/http,multipart/mixed

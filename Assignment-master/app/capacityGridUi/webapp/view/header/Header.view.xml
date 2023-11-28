@@ -1,0 +1,155 @@
+<mvc:View
+	controllerName="capacityGridUi.view.header.Header"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:m="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<l:VerticalLayout
+		class="sapUiSmallMarginBeginEnd"
+		width="14rem"
+	>
+		<m:Label
+			id="idViewLabel"
+			text="{i18n>VIEW}"
+			labelFor="idViewButton"
+		/>
+		<m:SegmentedButton
+			id="idViewButton"
+			selectedKey="{app>/selectedView}"
+			selectionChange=".onViewSelectChange"
+			items="{header>/Views}"
+			width="100%"
+			enabled="{app>/IsDisplayMode}"
+		>
+			<m:items>
+				<m:SegmentedButtonItem
+					text="{header>Text}"
+					tooltip="{header>Text}"
+					key="{header>Key}"
+				/>
+			</m:items>
+		</m:SegmentedButton>
+	</l:VerticalLayout>
+	<l:VerticalLayout class="sapUiSmallMarginBeginEnd">
+		<m:Label
+			id="idTimeFrame"
+			text="{i18n>TIME_PERIOD}"
+			labelFor="dateRangeInput"
+		/>
+		<l:HorizontalLayout>
+			<m:Button
+				id="prevTimePeriodButton"
+				icon="sap-icon://slim-arrow-left"
+				press="onShowPrevious"
+				type="Transparent"
+				enabled="{app>/IsDisplayMode}"
+				tooltip="{i18n>PREVIOUS_PERIOD_UTIL_TOOLTIP}"
+			/>
+			<m:DynamicDateRange
+				id="idDynamicDateRange"
+				value="{date>/dateValue}"
+				change="onDynamicDateRangeChanage"
+				width="{env>/filterInputWidth}"
+				enabled="{app>/IsDisplayMode}"
+				standardOptions="[]"
+			/>
+			<m:Button
+				id="nextTimePeriodButton"
+				icon="sap-icon://slim-arrow-right"
+				press="onShowNext"
+				type="Transparent"
+				enabled="{app>/IsDisplayMode}"
+				tooltip="{i18n>NEXT_PERIOD_UTIL_TOOLTIP}"
+			/>
+		</l:HorizontalLayout>
+	</l:VerticalLayout>
+	<l:VerticalLayout
+		class="sapUiSmallMarginBeginEnd"
+		visible="{= !${app>/IsFocusedEdit}}"
+	>
+		<m:Label
+			id="idAvgUtilHLabel"
+			text="{i18n>AVERAGE_UTILIZATION}"
+			class="sapUiSmallMarginRight"
+			labelFor="idAvgUtilizationStatus"
+		/>
+		<!--
+			why a custom CSS class?
+			 - ObjectStatus + class sapMObjectStatusLarge: the text is not bold and that is out of sync with the object numbers
+			 - ObjectNumber + class sapMObjectNumberLarge: the font size of the inverted number is smaller than the non-inverted object numbers
+		-->
+		<m:ObjectStatus
+			id="idAvgUtilizationStatus"
+			class="capacityGridUiHeaderStatus"
+			busy="{header>/kpisBusy}"
+			busyIndicatorDelay="{app>/busyIndicatorDelay}"
+			inverted="true"
+			state="{
+				path: 'header>/avgUtilization',
+				formatter: '.formatUtilizationPercentState'
+			}"
+			text="{header>/avgUtilization}%"
+		/>
+	</l:VerticalLayout>
+	<l:VerticalLayout
+		class="sapUiSmallMarginBeginEnd"
+		visible="{= !${app>/IsFocusedEdit}}"
+	>
+		<m:Label
+			id="idTotalResourcesLabel"
+			text="{i18n>TOTAL_RESOURCES}"
+		/>
+		<m:VBox>
+			<m:ObjectNumber
+				id="idTotalResources"
+				class="sapMObjectNumberLarge"
+				busy="{header>/kpisBusy}"
+				busyIndicatorDelay="{app>/busyIndicatorDelay}"
+				number="{header>/totalResources}"
+				emphasized="true"
+				state="None"
+			/>
+		</m:VBox>
+	</l:VerticalLayout>
+	<l:VerticalLayout
+		class="sapUiSmallMarginBeginEnd"
+		visible="{= !${app>/IsFocusedEdit}}"
+	>
+		<m:Label
+			id="idheaderFreeResLabel"
+			text="{i18n>FREE_RESOURCES}"
+		/>
+		<m:VBox alignContent="Stretch">
+			<m:ObjectNumber
+				id="idheaderFreeRes"
+				class="sapMObjectNumberLarge"
+				busy="{header>/kpisBusy}"
+				busyIndicatorDelay="{app>/busyIndicatorDelay}"
+				number="{header>/freeResources}"
+				emphasized="true"
+				state="None"
+			/>
+		</m:VBox>
+	</l:VerticalLayout>
+	<l:VerticalLayout
+		class="sapUiSmallMarginBeginEnd"
+		visible="{= !${app>/IsFocusedEdit}}"
+	>
+		<m:Label
+			id="idheaderOBResLabel"
+			text="{i18n>OVERBOOKED_RESOURCES}"
+		/>
+		<m:VBox>
+			<m:ObjectNumber
+				id="idheaderOBRes"
+				class="sapMObjectNumberLarge"
+				busy="{header>/kpisBusy}"
+				busyIndicatorDelay="{app>/busyIndicatorDelay}"
+				number="{header>/overbookedResources}"
+				emphasized="true"
+				state="None"
+			/>
+		</m:VBox>
+	</l:VerticalLayout>
+</mvc:View>

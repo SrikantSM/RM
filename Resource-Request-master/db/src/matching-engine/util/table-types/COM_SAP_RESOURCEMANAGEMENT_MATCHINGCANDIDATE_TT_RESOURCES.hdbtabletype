@@ -1,0 +1,8 @@
+/*Table type used as a placeholder for UUID fields
+like Resource UUID and Resource request UUID fields
+*/
+TYPE COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_RESOURCES AS TABLE (
+		ID NVARCHAR(36),
+        VALIDFROM DATE,
+        VALIDTO DATE
+)

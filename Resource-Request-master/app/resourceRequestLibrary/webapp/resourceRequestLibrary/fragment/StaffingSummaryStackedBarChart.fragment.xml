@@ -1,0 +1,12 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mc="sap.suite.ui.microchart">
+    <VBox id="StaffingsummaryStackedBarChart" displayInline="true">
+        <mc:StackedBarMicroChart size="M" displayZeroValue="false" press=".extension.resourceRequestLibrary.fragment.StaffingSummaryStackedBarChart.onOpenStaffingSummary" class="sapUiTinyMarginTop sapUiSmallMarginEnd"
+        tooltip = "{i18ned>HARD_BOOKED}: {= ${staffingStatus/bookedCapacityHard} ? ${staffingStatus/bookedCapacityHard} : 0} {i18ned>unitHours}&#10;{i18ned>SOFT_BOOKED}: {= ${staffingStatus/bookedCapacitySoft} ? ${staffingStatus/bookedCapacitySoft} : 0} {i18ned>unitHours}&#10;{i18ned>UNSTAFFED}: {= ${staffingStatus/remainingCapacity} ? ${staffingStatus/remainingCapacity} : 0} {i18ned>unitHours}">
+            <mc:bars>
+                <mc:StackedBarMicroChartBar value="{= ${staffingStatus/bookedCapacityHard} ? ${staffingStatus/bookedCapacityHard} : 0}" displayValue="{= ${staffingStatus/bookedCapacityHard} ? ${staffingStatus/bookedCapacityHard} : 0} {i18ned>unitHours}" valueColor="{= (${staffingStatus/requestedCapacity} &gt; 0) ? 'sapUiChartPaletteQualitativeHue22': 'sapUiChartPaletteSemanticNeutralLight3'}"/>
+                <mc:StackedBarMicroChartBar value="{= ${staffingStatus/bookedCapacitySoft} ? ${staffingStatus/bookedCapacitySoft} : 0}" displayValue="{= ${staffingStatus/bookedCapacitySoft} ? ${staffingStatus/bookedCapacitySoft} : 0} {i18ned>unitHours}" valueColor="sapUiChartPaletteQualitativeHue1"/>
+                <mc:StackedBarMicroChartBar value="{= ${staffingStatus/remainingCapacity} ? ${staffingStatus/remainingCapacity} : 0}" displayValue="{= ${staffingStatus/remainingCapacity} ? ${staffingStatus/remainingCapacity} : 0} {i18ned>unitHours}" valueColor="sapUiChartPaletteSemanticNeutralLight3"/>
+            </mc:bars>
+        </mc:StackedBarMicroChart>
+    </VBox>
+</core:FragmentDefinition>

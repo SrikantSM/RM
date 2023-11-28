@@ -1,0 +1,98 @@
+<mvc:View
+        controllerName="availabilityDownload.App"
+        displayBlock="true"
+        xmlns="sap.m"
+        xmlns:l="sap.ui.layout"
+        xmlns:f="sap.ui.layout.form"
+        xmlns:semantic="sap.f.semantic"
+        xmlns:u="sap.ui.unified"
+        xmlns:core="sap.ui.core"
+        xmlns:mvc="sap.ui.core.mvc">
+
+    <App id="availabilityFileDownload">
+        <semantic:SemanticPage busy="{ui>/busy}">
+            <semantic:dependents>
+                <core:CommandExecution command="Download" enabled="true" execute=".handleDownloadPress" />
+            </semantic:dependents>
+            <semantic:titleHeading>
+                <Title text="{i18n>appTitle}" />
+            </semantic:titleHeading>
+            <semantic:content>
+                <l:VerticalLayout width="100%">
+                    <MessageStrip
+                            id="downloadMessageStrip"
+                            text="{ui>/messageText}"
+                            type="{ui>/messageType}"
+                            visible="{ui>/messageVisible}"
+                            showIcon="true" showCloseButton="false">
+                    </MessageStrip>
+                    <f:SimpleForm
+                            id="filedownloadform"
+                            editable="true"
+                            layout="ResponsiveGridLayout"
+                            labelSpanXL="3"
+                            labelSpanL="3"
+                            labelSpanM="3"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="4"
+                            emptySpanL="4"
+                            emptySpanM="4"
+                            emptySpanS="0"
+                            columnsXL="1"
+                            columnsL="1"
+                            columnsM="1"
+                            singleContainerFullSize="false">
+                        <f:content>
+                            <VBox alignContent="Center" justifyContent="Center">
+								<Label text="{i18n>infoText}" labelFor="rbCostCenter"/>
+									<RadioButton id="rbCostCenter" text="{i18n>costCenter}" selected="true" select="handleSelectionChange"/>
+                                        <Input id="costCenterInput" 
+                                                showValueHelp="true" required="true" showSuggestion="true" 
+                                                valueHelpRequest="onCostCenterInput" 
+                                                selectedKey="{ui>/selectedCostCenterId}"
+                                                suggest="onSuggestCostCenter"
+                                                suggestionItems="{availability>/AvailabilityCostCenter}"
+                                                change = "handleChange">
+                                                    <suggestionItems>
+                                                        <core:ListItem text="{availability>s4CostCenterId}" key="{availability>s4CostCenterId}"/>
+                                                    </suggestionItems>
+                                        </Input>
+                                        
+                                        <RadioButton id="rbWorkforceID" text="{i18n>workforceID}" select="handleSelectionChange"/>
+                                            <Input id="workforceIDInput" 
+                                                showValueHelp="true" required="true" showSuggestion="true"
+                                                valueHelpRequest="onWorkForceIdInput"
+                                                selectedKey="{ui>/selectedWorkForceId}"
+                                                suggest="onSuggestWorkForcePerson"
+                                                suggestionItems="{availability>/AvailabilityWorkForcePersonID}"
+                                                change = "handleChange">
+                                                    <suggestionItems>
+                                                        <core:Item text="{availability>workForcePersonExternalId}" key="{availability>workForcePersonExternalId}"/>
+                                                    </suggestionItems>
+                                            </Input>
+
+                                <Label text="{i18n>timePeriod}" labelFor="datePick" required="true"/>
+                                <DateRangeSelection
+                                    calendarWeekNumbering="ISO_8601"
+                                        id="datePick"
+                                        showFooter="true"
+                                        change="handleDateChange"/>
+                                <Label text="{i18n>plannedWorkingHours}" labelFor="plannedWorkingHoursInput"/>
+                                <Input id="plannedWorkingHoursInput"
+                                       type="Number"
+                                />
+                                <Label text="{i18n>plannedNonWorkingHours}" labelFor="plannedNonWorkingHoursInput"/>
+                                <Input id="plannedNonWorkingHoursInput"
+                                       type="Number"
+                                />
+                                <Label/>
+                                <Button id="downloadButton" text="{i18n>downloadButtonText}" type="Emphasized" press="cmd:Download" />
+                            </VBox>
+                        </f:content>
+                    </f:SimpleForm>
+                </l:VerticalLayout>
+            </semantic:content>
+        </semantic:SemanticPage>
+    </App>
+</mvc:View>

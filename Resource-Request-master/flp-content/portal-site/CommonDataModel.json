@@ -1,0 +1,143 @@
+{
+    "identification": {
+        "sourceSystemType": "DEV",
+        "modifiedAt": 1515336025601,
+        "entityType": "bundle",
+        "description": "CDM Default Description",
+        "id": "xaa7cc8e-f3b8-11e7-c095-000000700f4x",
+        "title": "CDM Default Title"
+    },
+    "payload": {
+        "catalogs": [
+            {
+                "_version": "3.0.0",
+                "identification": {
+                    "id": "68ecfa3e-8375-4886-8279-8317bef22066-1525241944918",
+                    "i18n": "i18n/ui.properties",
+                    "entityType": "catalog",
+                    "title": "{{uiCatalog}}",
+                    "description": "{{uiCatalogDesc}}"
+                },
+                "payload": {
+                    "viz": [
+                        {
+                            "vizId": "ResourceRequest-Manage",
+                            "appId": "manageResourceRequest"
+                        },
+                        {
+                            "vizId": "ResourceRequest-Display",
+                            "appId": "staffResourceRequest"
+                        }
+                    ]
+                }
+            }
+        ],
+        "groups": [
+            {
+                "_version": "3.0.0",
+                "identification": {
+                    "id": "7e5610e3-e0e8-4ad9-beda-9b227e164604-1525085442672",
+                    "i18n": "i18n/ui.properties",
+                    "description": "",
+                    "entityType": "group",
+                    "title": "{{projectManagerGroup}}"
+                },
+                "payload": {
+                    "viz": [
+                        {
+                            "id": "e3274589-2e5e-41ed-af19-8d297519631e-1525092145203",
+                            "appId": "manageResourceRequest",
+                            "vizId": "ResourceRequest-Manage"
+                        }
+                    ]
+                }
+            },
+            {
+                "_version": "3.0.0",
+                "identification": {
+                    "id": "d8b603cb-2c1e-46f2-8020-7cd70c66c614-1525085442672",
+                    "i18n": "i18n/ui.properties",
+                    "description": "",
+                    "entityType": "group",
+                    "title": "{{resourceManagerGroup}}"
+                },
+                "payload": {
+                    "viz": [
+                        {
+                            "id": "0dbfa041-e1b5-424b-b836-87b7d8a08db6-1525092145203",
+                            "appId": "staffResourceRequest",
+                            "vizId": "ResourceRequest-Display"
+                        }
+                    ]
+                }
+            }
+        ],
+        "sites": [
+            {
+                "_version": "3.0.0",
+                "identification": {
+                    "id": "03746a20-8d5f-11e7-a2b9-055f624a0e89",
+                    "namespace": "",
+                    "entityType": "site",
+                    "layer": "vendor",
+                    "description": "",
+                    "i18n": "",
+                    "title": "Default"
+                },
+                "payload": {
+                    "config": {
+                        "ushellConfig": {
+                            "renderers": {
+                                "fiori2": {
+                                    "componentData": {
+                                        "config": {
+                                            "enableTilesOpacity": false,
+                                            "enablePersonalization": true,
+                                            "enableSetLanguage": true,
+                                            "enableHelp" : true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "sap.cloud.portal": {
+                        "config": {
+                            "isOnline": "true",
+                            "templateTitle": "SAP Fiori Launchpad",
+                            "ui5VersionNumber": "1.114.1",
+                            "theme.id": "sap_horizon",
+                            "theme.active": [
+                                "sap_horizon",
+                                "sap_horizon_dark",
+                                "sap_horizon_hcb",
+                                "sap_horizon_hcw",
+                                "sap_fiori_3",
+                                "sap_fiori_3_hcb",
+                                "sap_fiori_3_hcw",
+                                "sap_fiori_3_dark",
+                                "sap_belize",
+                                "sap_belize_plus"
+                            ],
+                            "skipVariantResolving": true,
+                            "siteHashVersion": "-254165915",
+                            "InAppHelp": {
+								"config": {
+									"enabled": true,
+									"showWhatsNew": true,
+									"productName": "PPRM_OD",
+									"productVersion": "latest"
+								}
+							}
+                        }
+                    },
+                    "groupsOrder": [
+                        "7e5610e3-e0e8-4ad9-beda-9b227e164604-1525085442672",
+                        "d8b603cb-2c1e-46f2-8020-7cd70c66c614-1525085442672"
+                    ]
+                }
+            }
+        ]
+    },
+    "_version": "3.0.0"
+}

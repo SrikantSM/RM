@@ -1,0 +1,16 @@
+ID,externalID,lifecycleStatus_code,name,description,proficiencySet_ID
+e08cce86-c8a2-11e9-a32f-2a2ae2dbcce4,e08cce86-c8a2-11e9-a32f-2a2ae2dbcce4,0,Core Data Service,Description for Core Data Service,8a2cc2c3-4a46-47f0-ae67-2ac67c673aae
+e08cd0fc-c8a2-11e9-a32f-2a2ae2dbcce4,e08cd0fc-c8a2-11e9-a32f-2a2ae2dbcce4,0,NodeJavaScript,Description for NodeJavaScript,57dd375a-eb3a-4c6a-847f-bce74a48c6d5
+e08cd250-c8a2-11e9-a32f-2a2ae2dbcce4,e08cd250-c8a2-11e9-a32f-2a2ae2dbcce4,0,UI5,Description for UI5,57dd375a-eb3a-4c6a-847f-bce74a48c6d5
+e08cd5b6-c8a2-11e9-a32f-2a2ae2dbcce4,e08cd5b6-c8a2-11e9-a32f-2a2ae2dbcce4,0,PM,Description for PM,57dd375a-eb3a-4c6a-847f-bce74a48c6d5
+e08cd728-c8a2-11e9-a32f-2a2ae2dbcce4,e08cd728-c8a2-11e9-a32f-2a2ae2dbcce4,0,Fiori,Description for Fiori,57dd375a-eb3a-4c6a-847f-bce74a48c6d5
+e08cd854-c8a2-11e9-a32f-2a2ae2dbcce4,e08cd854-c8a2-11e9-a32f-2a2ae2dbcce4,0,UI Developer,Description for UI Developer,57dd375a-eb3a-4c6a-847f-bce74a48c6d5
+e08cd976-c8a2-11e9-a32f-2a2ae2dbcce4,e08cd976-c8a2-11e9-a32f-2a2ae2dbcce4,0,Java9,Description for Java9,57dd375a-eb3a-4c6a-847f-bce74a48c6d5
+e08cdaa2-c8a2-11e9-a32f-2a2ae2dbcce4,e08cdaa2-c8a2-11e9-a32f-2a2ae2dbcce4,0,UI-integration,Description for UI-integration,57dd375a-eb3a-4c6a-847f-bce74a48c6d5
+e08cdbc4-c8a2-11e9-a32f-2a2ae2dbcce4,e08cdbc4-c8a2-11e9-a32f-2a2ae2dbcce4,0,Junits testing,Description for Junits testing,4d054070-5bbd-4812-9994-3e8e582dfa0a
+e08cde94-c8a2-11e9-a32f-2a2ae2dbcce4,e08cde94-c8a2-11e9-a32f-2a2ae2dbcce4,0,JS,Description for JS,4d054070-5bbd-4812-9994-3e8e582dfa0a
+e08cdff2-c8a2-11e9-a32f-2a2ae2dbcce4,e08cdff2-c8a2-11e9-a32f-2a2ae2dbcce4,0,UI Veri5,Description for UI Veri5,4d054070-5bbd-4812-9994-3e8e582dfa0a
+e08ce114-c8a2-11e9-a32f-2a2ae2dbcce4,e08ce114-c8a2-11e9-a32f-2a2ae2dbcce4,0,ABAP,Description for ABAP,4d054070-5bbd-4812-9994-3e8e582dfa0a
+e08ce236-c8a2-11e9-a32f-2a2ae2dbcce4,e08ce236-c8a2-11e9-a32f-2a2ae2dbcce4,0,Fiori Elements,Description for Fiori Elements,4d054070-5bbd-4812-9994-3e8e582dfa0a
+e08ce358-c8a2-11e9-a32f-2a2ae2dbcce4,e08ce358-c8a2-11e9-a32f-2a2ae2dbcce4,0,CAP,Description for CAP,4d054070-5bbd-4812-9994-3e8e582dfa0a
+e08ce47a-c8a2-11e9-a32f-2a2ae2dbcce4,e08ce47a-c8a2-11e9-a32f-2a2ae2dbcce4,0,Cloud Foundry,Description for Cloud Foundry,4d054070-5bbd-4812-9994-3e8e582dfa0a

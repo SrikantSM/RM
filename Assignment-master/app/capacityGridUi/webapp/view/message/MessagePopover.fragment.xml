@@ -1,0 +1,29 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<MessagePopover
+		id="messagePopover"
+		activeTitlePress=".onPressActiveTitlePress"
+		groupItems="false"
+		items="{
+			path: 'message>/messages',
+			filters: [{
+				path: 'state',
+				operator: 'EQ',
+				value1: 'persistent'
+			}]
+		}"
+	>
+		<MessageItem
+			title="{message>message}"
+			subtitle="{message>description}"
+			activeTitle="{
+				path: 'message>target',
+				formatter: '.isPositionable'
+			}"
+			type="{message>type}"
+			description="{message>description}"
+		/>
+	</MessagePopover>
+</core:FragmentDefinition>

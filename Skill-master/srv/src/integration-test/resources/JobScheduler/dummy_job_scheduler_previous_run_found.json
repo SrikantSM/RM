@@ -1,0 +1,42 @@
+{
+    "total": 3,
+    "results": [
+        {
+            "runId": "0938beb9-b7e8-46a0-973c-f3242ba6afc4",
+            "httpStatus": null,
+            "executionTimestamp": null,
+            "runStatus": "SCHEDULED",
+            "runState": "SCHEDULED",
+            "statusMessage": "The job has been scheduled for a future run",
+            "scheduleTimestamp": "2020-10-21 07:20:01",
+            "completionTimestamp": null,
+            "runText": "[{\"time\":\"2020-10-21 07:20:01\",\"text\":\"Next run at 2020-10-21 07:24:59 (UTC)\",\"type\":\"SCHEDULED\",\"code\":null}]"
+        },
+        {
+            "runId": "0938beb9-b7e8-46a0-973c-f3242ba6afc5",
+            "httpStatus": 202,
+            "executionTimestamp": "2020-10-21 07:19:59",
+            "runStatus": "RUNNING",
+            "runState": "ACK_RECVD",
+            "statusMessage": "The request for job execution has been acknowledged by the endpoint ",
+            "scheduleTimestamp": "2020-10-21 07:19:59",
+            "completionTimestamp": "2020-10-21 07:20:00",
+            "runText": "[{\"time\":\"2020-10-21 07:19:59\",\"text\":\"Next run at 2020-10-21 07:19:59 (UTC)\",\"type\":\"SCHEDULED\",\"code\":null},{\"time\":\"2020-10-21 07:19:59\",\"text\":\"\",\"type\":\"TRIGGERED\",\"code\":null},{\"time\":\"2020-10-21 07:20:00\",\"text\":\"Workforce Replication Correlation ID: CP_Replication_WF_ID-6bb049a8-dca6-4f1e-7a24-7f62792b7930\",\"type\":\"ACK_RECVD\",\"code\":202}]"
+        },
+        {
+            "runId": "0938beb9-b7e8-46a0-973c-f3242ba6afc6",
+            "httpStatus": 202,
+            "executionTimestamp": "2020-10-21 07:19:59",
+            "runStatus": "RUNNING",
+            "runState": "ACK_RECVD",
+            "statusMessage": "The request for job execution has been acknowledged by the endpoint ",
+            "scheduleTimestamp": "2020-10-21 07:14:59",
+            "completionTimestamp": "2020-10-21 07:15:00",
+            "runText": "[{\"time\":\"2020-10-21 07:14:59\",\"text\":\"Next run at 2020-10-21 07:14:59 (UTC)\",\"type\":\"SCHEDULED\",\"code\":null},{\"time\":\"2020-10-21 07:14:59\",\"text\":\"\",\"type\":\"TRIGGERED\",\"code\":null},{\"time\":\"2020-10-21 07:20:00\",\"text\":\"Workforce Replication Correlation ID: CP_Replication_WF_ID-6bb049a8-dca6-4f1e-7a24-7f62792b7930\",\"type\":\"ACK_RECVD\",\"code\":202}]"
+        }
+    ],
+    "pagination_enabled": true,
+    "restricted_results": false,
+    "prev_url": null,
+    "next_url": null
+}

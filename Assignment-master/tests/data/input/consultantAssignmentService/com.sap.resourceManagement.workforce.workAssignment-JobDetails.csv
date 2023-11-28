@@ -1,0 +1,3 @@
+ID,costCenterexternalID,supervisorWorkAssignmentExternalID,jobTitle,parent,validFrom,validTo,legalEntityExternalID,country_code,createdAt,modifiedAt,CREATEDBY,MODIFIEDBY,FTE,WORKINGHOURSPERWEEK,WORKINGDAYSPERWEEK,JOBEXTERNALID,eventSequence
+a1710d48-046b-11ea-8d71-362b9e155667,6bdb4dc8-6eea-4ef3-a995-08191b1990e0,darth.vader,Resource Manager,6806862a-3788-441c-9b00-bd52013711b3,2011-06-15,9999-12-31,AUGE,DE,2020-11-11 00:00:00.000,2020-11-11 00:00:00.000,,,,40,5,,1
+a1710984-046b-11ea-8d71-362b9e155667,e2514af2-7aed-46fc-9f04-90342ef46cc8,darth.vader,Junior Consultant,d771ad92-26e5-4aed-9173-49406112b5b2,2021-07-01,9999-12-31,AUGE,DE,2020-11-11 00:00:00.000,2020-11-11 00:00:00.000,,,,40,5,,1

@@ -1,0 +1,15 @@
+{
+    "name": "consultantProfile-approuter",
+    "engines": {
+        "node": "^18.0.0"
+    },
+    "dependencies": {
+        "@sap/approuter": "14.1.2",
+        "eslint": "7.20.0",
+        "got": "^11.8.2"
+    },
+    "scripts": {
+        "start": "node index.js",
+        "lint": "eslint \"**/*.js\""
+    }
+}

@@ -1,0 +1,243 @@
+PROCEDURE RM_FILL_TIME_DIMENSION (
+  in iv_time_bucket_type_code  VARCHAR(2),
+  in iv_start_time             TIMESTAMP,
+  in iv_end_time               TIMESTAMP,
+  out ev_number_of_records     BIGINT
+)
+LANGUAGE SQLSCRIPT AS
+BEGIN
+---Procedure RM_FILL_TIME_DIMENSION is used to fill time dimension data in COM_SAP_RESOURCEMANAGEMENT_SYSTEM_DATA_TIMEDIMENSION_DATA---
+/*
+The below logic uses the input start and end date and generates records to be inserted 
+into the time dimension data table for every interval specified by the input iv_time_bucket_type_code
+*/
+  DECLARE lv_minutes_multiplier TINYINT;
+  DECLARE lv_run_start_time     TIMESTAMP;
+  DECLARE lv_run_end_time       TIMESTAMP;
+  DECLARE lv_time               TIMESTAMP;
+  DECLARE lv_next_time          TIMESTAMP;
+  DECLARE lv_year               VARCHAR(4);
+  DECLARE lv_quarter            VARCHAR(2);
+  DECLARE lv_month              VARCHAR(2);
+  DECLARE lv_week               VARCHAR(2);
+  DECLARE lv_week_year          VARCHAR(8);
+  DECLARE lv_date               DAYDATE;
+  DECLARE lv_day                VARCHAR(2);
+  DECLARE lv_day_of_week_n      TINYINT;
+  DECLARE lv_day_of_week        VARCHAR(1);
+  DECLARE lv_hour               VARCHAR(2);
+  DECLARE lv_minute             VARCHAR(2);
+  DECLARE lv_d_start_time       TIMESTAMP;
+  DECLARE lv_d_end_time         TIMESTAMP;
+  DECLARE lv_d_year             VARCHAR(4);
+  DECLARE lv_d_quarter          VARCHAR(2);
+  DECLARE lv_d_year_quarter     VARCHAR(7);
+  DECLARE lv_d_month            VARCHAR(2);
+  DECLARE lv_d_year_month       VARCHAR(7);
+  DECLARE lv_d_week             VARCHAR(2);
+  DECLARE lv_d_year_week        VARCHAR(8);
+  DECLARE lv_calquater          VARCHAR(5);
+  DECLARE lv_calmonth           VARCHAR(6);
+  DECLARE lv_calweek            VARCHAR(6);
+  DECLARE lv_datetime_sap       VARCHAR(14);
+  DECLARE lv_date_sap           VARCHAR(8);
+
+  ev_number_of_records := 0;
+  IF :iv_start_time > :iv_end_time THEN -- if inputs iv_start_time is greater than iv_end_time, returns 0 number of records
+    RETURN;
+  END IF;
+  IF :iv_time_bucket_type_code = '01' THEN  --Year -- lv_run_start_time uses iv_start_time's year
+    lv_run_start_time   := TO_TIMESTAMP( TO_VARCHAR(:iv_start_time, 'YYYY') || '-01-01 00:00:00.0000000', 'YYYY-MM-DD HH24:MI:SS.FF7');
+    lv_run_end_time     := TO_TIMESTAMP( TO_VARCHAR(:iv_end_time, 'YYYY')   || '-12-31 23:59:59.9999999', 'YYYY-MM-DD HH24:MI:SS.FF7');
+  ELSEIF :iv_time_bucket_type_code = '02' THEN -- Quarter -- lv_run_start_time uses iv_start_time's quarter's first month
+    lv_run_start_time   := TO_TIMESTAMP( TO_VARCHAR(:iv_start_time, 'YYYY') || '-' || ( (SUBSTRING(QUARTER(:iv_start_time),7,1)*3) -2) || '-01 00:00:00.0000000', 'YYYY-MM-DD HH24:MI:SS.FF7');
+    lv_run_end_time     := TO_TIMESTAMP( TO_VARCHAR(:iv_end_time, 'YYYY-MM')   || '-' || TO_VARCHAR(LAST_DAY(:iv_end_time), 'DD') || ' 23:59:59.9999999', 'YYYY-MM-DD HH24:MI:SS.FF7');
+  ELSEIF :iv_time_bucket_type_code = '03' THEN -- Month -- lv_run_start_time uses iv_start_time's year and month
+    lv_run_start_time   := TO_TIMESTAMP( TO_VARCHAR(:iv_start_time, 'YYYY-MM') || '-01 00:00:00.0000000', 'YYYY-MM-DD HH24:MI:SS.FF7');
+    lv_run_end_time     := TO_TIMESTAMP( TO_VARCHAR(:iv_end_time, 'YYYY-MM')   || '-' || TO_VARCHAR(LAST_DAY(:iv_end_time), 'DD') || ' 23:59:59.9999999', 'YYYY-MM-DD HH24:MI:SS.FF7');
+  ELSEIF :iv_time_bucket_type_code = '04' THEN -- Week -- lv_run_start_time uses iv_start_time's year, month and day and moves the date to the start of that week
+    lv_run_start_time   := TO_TIMESTAMP( TO_VARCHAR(:iv_start_time, 'YYYY-MM-DD') || ' 00:00:00.0000000', 'YYYY-MM-DD HH24:MI:SS.FF7');
+    lv_run_start_time   := TO_TIMESTAMP(TO_VARCHAR(ADD_DAYS(:lv_run_start_time, - WEEKDAY(:lv_run_start_time)), 'YYYY-MM-DD') || ' 00:00:00.0000000', 'YYYY-MM-DD HH24:MI:SS.FF7');
+    lv_run_end_time     := TO_TIMESTAMP( TO_VARCHAR(:iv_end_time, 'YYYY-MM-DD')   || ' 23:59:59.9999999', 'YYYY-MM-DD HH24:MI:SS.FF7');
+  ELSEIF :iv_time_bucket_type_code = '05' THEN -- Day -- lv_run_start_time uses iv_start_time's date
+    lv_run_start_time   := TO_TIMESTAMP( TO_VARCHAR(:iv_start_time, 'YYYY-MM-DD') || ' 00:00:00.0000000', 'YYYY-MM-DD HH24:MI:SS.FF7');
+    lv_run_end_time     := TO_TIMESTAMP( TO_VARCHAR(:iv_end_time, 'YYYY-MM-DD')   || ' 23:59:59.9999999', 'YYYY-MM-DD HH24:MI:SS.FF7');
+  ELSEIF :iv_time_bucket_type_code = '06' THEN -- Hour -- lv_run_start_time uses iv_start_time's date and hour
+    lv_run_start_time   := TO_TIMESTAMP( TO_VARCHAR(:iv_start_time, 'YYYY-MM-DD HH24') || ':00:00.0000000', 'YYYY-MM-DD HH24:MI:SS.FF7');
+    lv_run_end_time     := TO_TIMESTAMP( TO_VARCHAR(:iv_end_time, 'YYYY-MM-DD HH24')   || ':59:59.9999999', 'YYYY-MM-DD HH24:MI:SS.FF7');
+  ELSEIF :iv_time_bucket_type_code = '07' THEN -- 30 Minute buckets -- lv_run_start_time uses iv_start_time's date and hour
+    lv_run_start_time     := TO_TIMESTAMP( TO_VARCHAR(:iv_start_time, 'YYYY-MM-DD HH24') || ':00:00.0000000', 'YYYY-MM-DD HH24:MI:SS.FF7');
+    lv_run_end_time       := TO_TIMESTAMP( TO_VARCHAR(:iv_end_time, 'YYYY-MM-DD HH24')   || ':59:59.9999999', 'YYYY-MM-DD HH24:MI:SS.FF7');
+    lv_minutes_multiplier := 30;
+  ELSEIF :iv_time_bucket_type_code = '08' THEN -- 15 Minute buckets -- lv_run_start_time uses iv_start_time's date and hour
+    lv_run_start_time     := TO_TIMESTAMP( TO_VARCHAR(:iv_start_time, 'YYYY-MM-DD HH24') || ':00:00.0000000', 'YYYY-MM-DD HH24:MI:SS.FF7');
+    lv_run_end_time       := TO_TIMESTAMP( TO_VARCHAR(:iv_end_time, 'YYYY-MM-DD HH24')   || ':59:59.9999999', 'YYYY-MM-DD HH24:MI:SS.FF7');
+    lv_minutes_multiplier := 15;
+  ELSE -- if incorrect iv_time_bucket_type_code is entered, returns 0 number of records
+    RETURN;
+  END IF;
+	
+CREATE LOCAL TEMPORARY COLUMN TABLE #RM_GT_TIME_DIMENSION (
+    DATETIMESTAMP TIMESTAMP NOT NULL,
+    DATE_SQL DATE,
+    DATETIME_SAP NVARCHAR(14),
+    DATE_SAP NVARCHAR(8),
+    YEAR NVARCHAR(4),
+    QUARTER NVARCHAR(2),
+    MONTH NVARCHAR(2),
+    WEEK NVARCHAR(2),
+    WEEK_YEAR NVARCHAR(4),
+    DAY_OF_WEEK NVARCHAR(2),
+    DAY NVARCHAR(2),
+    HOUR NVARCHAR(2),
+    MINUTE NVARCHAR(2),
+    HALF_HOUR_INDEX NVARCHAR(1),
+    QUARTER_HOUR_INDEX NVARCHAR(1),
+    CALQUARTER NVARCHAR(5),
+    CALMONTH NVARCHAR(6),
+    CALWEEK NVARCHAR(6)
+  );
+  
+  lv_time              := :lv_run_start_time;
+  WHILE :lv_time <= :lv_run_end_time DO
+    ev_number_of_records := :ev_number_of_records + 1;
+    lv_year              := TO_NVARCHAR(:lv_time,'YYYY');
+    lv_quarter           := SUBSTRING(QUARTER(:lv_time),6,2);     -- quarter(date) := 2011-Q4 
+    lv_calquater         := :lv_year || SUBSTRING(QUARTER(:lv_time),7,1); 
+    lv_month             := TO_NVARCHAR(:lv_time,'MM');
+    lv_calmonth          := :lv_year || :lv_month;
+    lv_week              := SUBSTRING(isoweek(:lv_time), 7,2);    -- isoweek(date) := 2011-W22
+    lv_week_year         := isoweek(:lv_time);
+    lv_date              := CAST(:LV_TIME AS date);
+    lv_day               := TO_NVARCHAR(:LV_TIME,'DD');
+    lv_day_of_week_n     := WEEKDAY(:LV_TIME) + 1;
+    lv_day_of_week       := TO_NVARCHAR(:lv_day_of_week_n);
+    lv_hour              := TO_NVARCHAR(:lv_time,'HH24');
+    lv_minute            := TO_NVARCHAR(:lv_time,'MI');
+    lv_date_sap          := :lv_year || :lv_month || :lv_day;
+    lv_datetime_sap      := :lv_date_sap || :lv_hour || :lv_minute || TO_NVARCHAR(:lv_time,'SS');
+    lv_next_time         := :lv_time;
+    CALL RM_COMPUTE_CALENDAR_WEEK(
+      iv_time         => :lv_time,
+      ev_start_time   => :lv_d_start_time,
+      ev_end_time     => :lv_d_end_time,
+      ev_year         => :lv_d_year,
+      ev_quarter      => :lv_d_quarter,
+      ev_year_quarter => :lv_d_year_quarter,
+      ev_month        => :lv_d_month,
+      ev_year_month   => :lv_d_year_month,
+      ev_week         => :lv_week,
+      ev_year_week    => :lv_week_year
+      
+    );
+    lv_calweek           := :lv_week_year || :lv_week;
+
+    IF :iv_time_bucket_type_code = '01' THEN  --Year
+      lv_next_time      := TO_TIMESTAMP(TO_VARCHAR(ADD_YEARS(:lv_time, 1), 'YYYY') || '-01-01 00:00:00.000000', 'YYYY-MM-DD HH24:MI:SS.FF7');
+    ELSEIF :iv_time_bucket_type_code = '02' THEN -- Quarter
+      lv_next_time      := TO_TIMESTAMP(TO_VARCHAR(ADD_MONTHS(:lv_time, 3), 'YYYY-MM') || '-01 00:00:00.000000', 'YYYY-MM-DD HH24:MI:SS.FF7');
+    ELSEIF :iv_time_bucket_type_code = '03' THEN -- Month
+      lv_next_time      := TO_TIMESTAMP(TO_VARCHAR(ADD_MONTHS(:lv_time, 1), 'YYYY-MM') || '-01 00:00:00.000000', 'YYYY-MM-DD HH24:MI:SS.FF7');
+    ELSEIF :iv_time_bucket_type_code = '04' THEN -- Week
+      lv_next_time      := TO_TIMESTAMP(TO_VARCHAR(ADD_DAYS(:lv_time, 7), 'YYYY-MM-DD') || ' 00:00:00.000000', 'YYYY-MM-DD HH24:MI:SS.FF7');
+    ELSEIF :iv_time_bucket_type_code = '05' THEN -- Date
+      lv_next_time      := TO_TIMESTAMP(TO_VARCHAR(ADD_DAYS(:lv_time, 1), 'YYYY-MM-DD') || ' 00:00:00.000000', 'YYYY-MM-DD HH24:MI:SS.FF7');
+    ELSEIF :iv_time_bucket_type_code = '06' THEN -- Hour
+      lv_next_time      := ADD_SECONDS(:lv_time, 3600);
+    ELSEIF :iv_time_bucket_type_code = '07' OR   -- 30 Minutes
+           :iv_time_bucket_type_code = '08' THEN -- 15 Minutes
+      lv_next_time      := ADD_SECONDS(:lv_time, :lv_minutes_multiplier * 60);
+    END IF;
+
+    INSERT INTO #RM_GT_TIME_DIMENSION
+    (
+         DATETIMESTAMP,
+         DATE_SQL,
+         DATETIME_SAP,
+         DATE_SAP,
+         YEAR,
+         QUARTER,
+         MONTH,
+         WEEK,
+         WEEK_YEAR,
+         DAY_OF_WEEK,
+         DAY,
+         HOUR,
+         MINUTE,
+         CALQUARTER,
+         CALMONTH,
+         CALWEEK
+    ) VALUES (
+         :lv_time,
+         :lv_date,
+         :lv_datetime_sap,
+         :lv_date_sap,
+         :lv_year,
+         :lv_quarter,
+         :lv_month,
+         :lv_week,
+         :lv_week_year,
+         :lv_day_of_week,
+         :lv_day,
+         :lv_hour,
+         :lv_minute,
+         :lv_calquater,
+         :lv_calmonth,
+         :lv_calweek
+    );
+    lv_time := :lv_next_time;
+  END WHILE;
+
+  UPSERT COM_SAP_RESOURCEMANAGEMENT_SYSTEM_DATA_TIMEDIMENSION_DATA
+    (
+      DATETIMESTAMP,
+      DATE_SQL,
+      DATETIME_SAP,
+      DATE_SAP,
+      YEAR,
+      QUARTER,
+      MONTH,
+      WEEK,
+      WEEK_YEAR,
+      DAY_OF_WEEK,
+      DAY,
+      HOUR,
+      MINUTE,
+      CALQUARTER,
+      CALMONTH,
+      CALWEEK
+    )
+    SELECT
+      DATETIMESTAMP,
+      DATE_SQL,
+      DATETIME_SAP,
+      DATE_SAP,
+      YEAR,
+      QUARTER,
+      MONTH,
+      WEEK,
+      WEEK_YEAR,
+      DAY_OF_WEEK,
+      DAY,
+      HOUR,
+      MINUTE,
+      CALQUARTER,
+      CALMONTH,
+      CALWEEK
+    FROM #RM_GT_TIME_DIMENSION;
+    
+   DROP TABLE #RM_GT_TIME_DIMENSION;
+   
+END
+
+/*
+-- Example data generation for current UTC year
+CALL RM_FILL_TIME_DIMENSION(
+	iv_time_bucket_type_code => '06', -- 1 HOUR
+	iv_start_time            => TO_TIMESTAMP( TO_VARCHAR(current_timestamp, 'YYYY') || '-01-01 00:00:00.0000000', 'YYYY-MM-DD HH24:MI:SS.FF7'),
+	iv_end_time              => TO_TIMESTAMP( TO_VARCHAR(current_timestamp, 'YYYY') || '-12-31 23:59:59.9999999', 'YYYY-MM-DD HH24:MI:SS.FF7'),
+	ev_number_of_records     => ?
+);
+
+-- ev_number_of_records = 35040; runtime 12580 ms
+*/

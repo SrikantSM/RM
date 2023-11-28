@@ -1,0 +1,6 @@
+{
+    "printWidth": 150,
+    "useTabs": true,
+    "trailingComma": "none",
+    "quotes": ["error", "double", { "avoidEscape": false }]
+}

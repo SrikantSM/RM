@@ -1,0 +1,21 @@
+{
+    "ENV_LANDSCAPE": "sap",
+    "ENV_SPACE_GUID": "",
+    "ENV_SRV_APP_NAME": "assignment-srv",
+    "ENV_APPROUTER_URL": "https://rm-excelsior-tenant-dev-X-excelsior.internal.cfapps.sap.hana.ondemand.com/cp.portal/site#Shell-home",
+    "ENV_CF_USER": "",
+    "ENV_CF_PASSWORD": "",
+    "ENV_APP_USER_CONFIGURATIONEXPERT": "",
+    "ENV_APP_PASSWORD_CONFIGURATIONEXPERT": "",
+    "ENV_APP_USER_CONSULTANT": "",
+    "ENV_APP_PASSWORD_CONSULTANT": "",
+    "ENV_APP_USER_NOTINDB": "",
+    "ENV_APP_PASSWORD_NOTINDB": "",
+    "ENV_APP_USER_RESOURCEMANAGERUI": "",
+    "ENV_APP_PASSWORD_RESOURCEMANAGERUI": "",
+    "ENV_BROWSER_NAME": "chrome",
+    "ENV_PLATFORM_NAME": "windows",
+    "ENV_SELENIUM_ADDRESS": "http://c4p-rm-excelsior:gRJzX7ZPZjCnxvqP@testhub.wdf.sap.corp:4444/wd/hub",
+    "ENV_SELENIUM_TEST_NAME": "End2End_Test_Chrome_Windows",
+    "ENV_IDP_HOST": "axtubdeog.accounts400.ondemand.com"
+}

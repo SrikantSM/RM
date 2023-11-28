@@ -1,0 +1,49 @@
+import { StaffingStatus } from 'test-commons';
+
+export const expectedResult: StaffingStatus[] = [
+  {
+    ID: 'eba6ebe8-2789-4e17-82f4-d5c71a44f8bb',
+    REQUESTEDCAPACITY: '100.00',
+    REQUESTEDUNIT:'duration-hour',
+    BOOKEDCAPACITY: '100.00',
+    BOOKEDCAPACITYSOFT: '0.00',
+    BOOKEDCAPACITYHARD: '100.00',
+    REMAININGCAPACITY: '0.00',
+    STAFFINGCODE: 2,
+    DESCRIPTION: "Fully Staffed"
+
+  },
+  {
+    ID: 'bfafb493-28f9-4933-bfbd-3d6e7465658d',
+    REQUESTEDCAPACITY: '100.00',
+    REQUESTEDUNIT:'duration-hour',
+    BOOKEDCAPACITY: '150.00',
+    BOOKEDCAPACITYSOFT: '0.00',
+    BOOKEDCAPACITYHARD: '150.00',
+    REMAININGCAPACITY: '0.00',
+    STAFFINGCODE: 3,
+    DESCRIPTION: "Overstaffed"
+  },
+  {
+    ID: '727d8074-851d-46f2-8dd5-5a3a28583ec6',
+    REQUESTEDCAPACITY: '100.00',
+    REQUESTEDUNIT:'duration-hour',
+    BOOKEDCAPACITY: '50.00',
+    BOOKEDCAPACITYSOFT: '0.00',
+    BOOKEDCAPACITYHARD: '50.00',
+    REMAININGCAPACITY: '50.00',
+    STAFFINGCODE: 1,
+    DESCRIPTION: "Partially Staffed"
+  },
+  {
+    ID: '17637711-869b-4cef-9af9-1949aa2be840',
+    REQUESTEDCAPACITY: '100.00',
+    REQUESTEDUNIT:'duration-hour',
+    BOOKEDCAPACITY: '0.00',
+    BOOKEDCAPACITYSOFT: '0.00',
+    BOOKEDCAPACITYHARD: '0.00',
+    REMAININGCAPACITY: '100.00',
+    STAFFINGCODE: 0,
+    DESCRIPTION: "Not Staffed"
+  },
+];

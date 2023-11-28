@@ -1,0 +1,6 @@
+ID,workpackage_ID,demand_ID,startDate,endDate,startTime,endTime,requestStatus_code,releaseStatus_code,displayId,name,isS4Cloud
+b2bd4ab7-dbd3-45ed-a5d3-90b1d33a285b,RSH_WP,92bd4ab7-dbd3-45ed-a5d3-90b1d33a2859,2019-10-01,2020-01-01,2019-10-01 00:00:00.000,2020-01-01 00:00:00.000,0,1,0000000001,Resource Request Name 1,true
+4cc7b653-67f2-449a-9852-7f37d64c5931,RSH_WP,92bd4ab7-dbd3-45ed-a5d3-90b1d33a2859,2019-10-01,2020-01-01,2019-10-01 00:00:00.000,2020-01-01 00:00:00.000,0,1,0000000002,Resource Request Name 2,true
+d2db4ad7-dbd3-45ed-67f2-90b1d33a852c,mockServerStrictMode,92bd4ab7-dbd3-45ed-a5d3-90b1d33a2859,2019-10-01,2020-01-01,2019-10-01 00:00:00.000,2020-01-01 00:00:00.000,0,1,0000000003,Resource Request Name 3,true
+a2ad4ab7-a5d3-45ed-dbd3-90b1d33a395d,TimeOutWP,92bd4ab7-dbd3-45ed-a5d3-90b1d33a2859,2019-10-01,2020-01-01,2019-10-01 00:00:00.000,2020-01-01 00:00:00.000,0,1,0000000004,Resource Request Name 4,true
+b2bd4ab7-dbd3-45ed-a5d3-90b1d3309707,,,2019-10-01,2020-01-01,2019-10-01 00:00:00.000,2020-01-01 00:00:00.000,0,1,0000309707,Non S4 request,false

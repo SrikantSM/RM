@@ -1,0 +1,5 @@
+ID,resourceRequest_ID,resource_ID,bookedCapacityInMinutes,MODIFIEDAT,CREATEDAT,CREATEDBY,MODIFIEDBY,assignmentstatus_code
+1ae9a422-4bcb-5326-ac90-245f5a09c6cf,1qb710b9-ede1-5dcc-8d78-a86d162e4f81,1raac53c-7524-5ea8-95ae-7748466cff65,12000,,,,,0
+2a6f9b04-4837-536f-bd93-b4a7dde5a83c,2qa3bcb9-108f-5cd9-9b11-578f0dc0f957,2rf597b9-03d0-57ca-beca-ac6b071fb7f7,25440,,,,,0
+3ace1eaf-ac18-50b7-b6a3-2ecc2691e2f7,2qa3bcb9-108f-5cd9-9b11-578f0dc0f957,3r6695cf-db29-5c4e-a9b2-281421b2faa9,25440,,,,,0
+4a6a63cd-005a-550d-ae8e-f3bab52a6c55,3qd4d846-775f-5dcc-b190-a6c46db3ca9c,3r6695cf-db29-5c4e-a9b2-281421b2faa9,25440,,,,,0

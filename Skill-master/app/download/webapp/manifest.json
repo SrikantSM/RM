@@ -1,0 +1,102 @@
+{
+  "_version": "1.29.0",
+  "sap.app": {
+    "id": "skill-download",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "dataSources": {
+      "fileDownloadService": {
+        "uri": "/api/internal/download/skills/csv",
+        "type": "JSON"
+      },
+      "mainService": {
+        "uri": "/odata/v4/FileDownloadService/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0",
+          "localUri": "localService/metadata.xml"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "SkillDownload": {
+          "semanticObject": "Skill",
+          "action": "Download",
+          "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+          },
+          "hideLauncher": true,
+          "icon": "sap-icon://download",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          },
+          "title": "{{appTitle}}"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "fullWidth": true,
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "skill-download.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.87",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "skill-download.i18n.i18n"
+        }
+      },
+      "skill": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "earlyRequests": true,
+          "synchronizationMode": "None"
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [
+      "F4704"
+    ],
+    "archeType": "transactional"
+  },
+  "sap.platform.cf": {
+    "oAuthScopes": [
+      "$XSAPPNAME.Skills.Download"
+    ]
+  }
+}

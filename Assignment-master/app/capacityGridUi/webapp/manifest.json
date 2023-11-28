@@ -1,0 +1,178 @@
+{
+	"_version": "1.28.0",
+	"sap.app": {
+		"id": "capacityGridUi",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/odata/v4/CapacityService/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0",
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"secondService": {
+				"uri": "/odata/v4/CapacityService/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0"
+				}
+			}
+		},
+
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"resources": "resources.json",
+		"ach": "PPM-CLD-RES",
+		"sourceTemplate": {
+			"id": "html5moduletemplates.basicSAPUI5ApplicationProjectModule",
+			"version": "1.40.12"
+		},
+		"crossNavigation": {
+			"inbounds": {
+				"configApplicationDisplay": {
+					"semanticObject": "capacity",
+					"action": "Display",
+					"deviceTypes": {
+						"desktop": true,
+						"tablet": true,
+						"phone": false
+					},
+					"icon": "sap-icon://collaborate",
+
+					"signature": {
+						"parameters": {
+
+						},
+						"additionalParameters": "allowed"
+					},
+					"title": "{{appTitle}}",
+					"subTitle": " ",
+					"info": "{{info}}",
+					"indicatorDataSource": {
+						"dataSource": "secondService",
+						"path": "averageResourceUtilizationFor12WeeksTileResponse(004808d7-9643-4f8d-8bc5-a9b49bbb0a7b)"
+					}
+				}
+			},
+			"outbounds": {}
+		}
+	},
+
+	"sap.ui": {
+		"technology": "UI5",
+		"fullWidth": true,
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": false
+		}
+	},
+
+	"sap.fiori": {
+		"registrationIds": ["F4724"],
+		"archeType": "transactional"
+	},
+
+	"sap.platform.cf": {
+		"oAuthScopes": [
+			"$XSAPPNAME.UtilOvw.Read"
+		]
+	},
+
+	"sap.ui5": {
+
+		"rootView": {
+			"viewName": "capacityGridUi.view.Page",
+			"type": "XML",
+			"async": true,
+			"id": "idPage"
+		},
+		"dependencies": {
+			"minUI5Version": "1.115.0",
+			"libs": {
+				"sap.f": {},
+				"sap.m": {},
+				"sap.uxap": {},
+				"sap.ui.comp": {},
+				"sap.ui.layout": {},
+				"sap.ui.table": {},
+				"sap.ui.unified": {},
+				"sap.ui.export": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "capacityGridUi.i18n.i18n"
+				}
+			},
+			"oDataV4": {
+				"dataSource": "mainService",
+				"preload": true,
+				"settings": {
+					"synchronizationMode": "None",
+					"operationMode": "Server",
+					"autoExpandSelect": true,
+					"earlyRequests": true,
+					"groupProperties": {
+						"default": {
+							"submit": "Auto"
+						},
+						"collection": {
+							"submit": "Auto"
+						}
+					}
+				}
+			}
+		},
+		"resources": {
+			"css": [{
+				"uri": "css/style.css"
+			}]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "capacityGridUi.view",
+				"controlAggregation": "pages",
+				"controlId": "app",
+				"clearControlAggregation": false
+			},
+			"routes": [{
+				"name": "RouteResourceUtilization",
+				"pattern": "RouteResourceUtilization",
+				"target": ["TargetResourceUtilization"]
+			}],
+			"targets": {
+				"TargetResourceUtilization": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "ResourceUtilization",
+					"viewName": "ResourceUtilization"
+				}
+			}
+		}
+	}
+}

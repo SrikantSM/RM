@@ -1,0 +1,5 @@
+ID,address,isDefault,parent,createdAt,modifiedAt,CREATEDBY,MODIFIEDBY,DESCRIPTION,USAGE_CODE
+f9c5803e-834e-43eb-bead-301796d6c5de,santa.claus@sap.com,TRUE,5e04af13-bf05-4745-a320-42523752ea1c,2020-11-11 00:00:00.000,2020-11-11 00:00:00.000,,,santa.claus@sap.com,office
+f3a6bd30-0941-46e6-a3c7-8ef4f09b79b4,mister.smith@sap.com,TRUE,7fa2fd3f-d13e-4788-a57c-d7040adf7751,2020-11-11 00:00:00.000,2020-11-11 00:00:00.000,,,mister.smith@sap.com,office
+61eea55b-6158-46ea-a288-1a9f6a86b603,luke.skywalker@sap.com,TRUE,831bdc1a-3c89-4df7-b1af-505ee0444c54,2020-11-11 00:00:00.000,2020-11-11 00:00:00.000,,,luke.skywalker@sap.com,office
+ceb39a9b-7dfe-4fa5-87f8-631daf8caac2,darth.vader@sap.com,TRUE,ce5535fb-83ea-474b-8567-6a110697173c,2020-11-11 00:00:00.000,2020-11-11 00:00:00.000,,,darth.vader@sap.com,office

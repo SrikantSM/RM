@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.sap.c4p.rm</groupId>
+        <artifactId>cap-parent</artifactId>
+        <version>15.2.0</version>
+    </parent>
+
+    <artifactId>consultantProfile-integration-srv</artifactId>
+    <name>consultantProfile-integration-srv</name>
+    <packaging>jar</packaging>
+
+    <properties>
+        <perfx.version>2.0.0</perfx.version>
+        <resilience4j.version>2.1.0</resilience4j.version>
+        <com.squareup.okhttp3.version>4.10.0</com.squareup.okhttp3.version>
+        <otel-agent-version>1.26.0</otel-agent-version>
+        <otel-agent-ext-java.version>1.5.1</otel-agent-ext-java.version>
+        <crun-client-api.version>1.4.0</crun-client-api.version>
+	</properties>
+
+    <dependencies>
+
+		<!-- For CALM integration-->
+		<dependency>
+            <groupId>io.opentelemetry.javaagent</groupId>
+            <artifactId>opentelemetry-javaagent</artifactId>
+            <version>${otel-agent-version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.xdsr</groupId>
+            <artifactId>otel-agent-ext-java</artifactId>
+            <version>${otel-agent-ext-java.version}</version>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.xdsr</groupId>
+            <artifactId>calm-crun-client-api-java</artifactId>
+            <version>${crun-client-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.hcp.cf.logging</groupId>
+            <artifactId>cf-java-logging-support-servlet-jakarta</artifactId>
+            <version>${cf.logging.version}</version>
+        </dependency>
+        <!-- To auto generate POJO methods of dto variables -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!-- For Resiliency -->
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-spring-boot2</artifactId>
+            <version>${resilience4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-retry</artifactId>
+            <version>${resilience4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-timelimiter</artifactId>
+            <version>${resilience4j.version}</version>
+        </dependency>
+        <!-- For Integration Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.vaadin.external.google</groupId>
+                    <artifactId>android-json</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- junit 5 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Web Client -->
+        <dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+		<!-- For web client integration test -->
+		<dependency>
+    		<groupId>com.squareup.okhttp3</groupId>
+    		<artifactId>okhttp</artifactId>
+            <version>${com.squareup.okhttp3.version}</version>
+    		<scope>test</scope>
+		</dependency>
+		<dependency>
+    		<groupId>com.squareup.okhttp3</groupId>
+    		<artifactId>mockwebserver</artifactId>
+            <version>${com.squareup.okhttp3.version}</version>
+    		<scope>test</scope>
+		</dependency>
+		<!--Library for free text input validation -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+        	<!-- Overwrite spring boot maven plugin configuration -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.version}</version>
+                <configuration>
+                    <skip>false</skip>
+                    <!-- explicitly set main class since we now have two main classes -->
+                    <mainClass>com.sap.c4p.rm.Application</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- GENERATE POJO INTERFACES -->
+            <plugin>
+                <groupId>com.sap.cds</groupId>
+                <artifactId>cds-maven-plugin</artifactId>
+            </plugin>
+            
+            <!-- configure additional source directory for integration-test -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>add-test-source</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/integration-test/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- PRECOMPILE PRECOMPILATION CLASSES -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>17</release>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>precompile-tools-compile</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>com/sap/c4p/rm/precompilation/MessageKeyPrecompiler.java</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- PRECOMPILE MESSAGE KEYS -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.sap.c4p.rm.precompilation.MessageKeyPrecompiler</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- EXCLUDE PRECOMPILE MESSAGE KEYS FROM FINAL JAR -->
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/com/sap/c4p/rm/precompilation/** </exclude>
+                        <exclude>**/com/sap/c4p/rm/auditlog/LocalAuditLogUtil.*</exclude>
+                        <exclude>**/com/sap/c4p/rm/cloudfoundry/service/jobscheduler/service/JobSchedulerServiceLocalImpl.*</exclude>
+                        <exclude>**/com/sap/c4p/rm/config/LocalCfEnv.*</exclude>
+                        <exclude>**/com/sap/c4p/rm/config/LocalXsuaaUserInfo.*</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <!-- Jacoco Code coverage Exclusions-->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.8</version>
+                <configuration>
+                    <excludes>
+                        <!-- Generated classes -->
+                        <exclude>sap/common/**</exclude>
+                        <exclude>draft/**</exclude>
+                        <exclude>model/**</exclude>
+                        <exclude>replicationscheduleservice/**</exclude>
+                        <exclude>com/sap/resourcemanagement/**</exclude>
+                        <exclude>com/sap/c4p/rm/gen/**</exclude>
+                        <!-- exclusions in integration-srv module -->
+                        <exclude>**/com/sap/c4p/rm/config/CostCenterConverterWebConfig.*</exclude>
+                        <exclude>**/com/sap/c4p/rm/config/GeneralConfiguration.*</exclude>
+                        <exclude>**/com/sap/c4p/rm/config/HealthSecurityConfig.*</exclude>
+                        <exclude>**/com/sap/c4p/rm/config/StartupApplicationListener.*</exclude>
+                        <exclude>**/com/sap/c4p/rm/config/WorkforceConverterWebConfig.*</exclude>
+                        <exclude>**/com/sap/c4p/rm/processor/workforce/dto/**/*.*</exclude>
+                        <exclude>**/com/sap/c4p/rm/processor/costcenter/dto/**/*.*</exclude>
+                        <exclude>**/com/sap/c4p/rm/Application.*</exclude>
+                        <!-- exlusions of classess used only for local testing -->
+                        <exclude>**/com/sap/c4p/rm/auditlog/LocalAuditLogUtil.*</exclude>
+                        <exclude>**/com/sap/c4p/rm/cloudfoundry/service/jobscheduler/service/JobSchedulerServiceLocalImpl.*</exclude>
+                        <exclude>**/com/sap/c4p/rm/config/LocalCfEnv.*</exclude>
+                        <exclude>**/com/sap/c4p/rm/config/LocalXsuaaUserInfo.*</exclude>                        
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <!-- Verify Java formatting -->
+        <profile>
+            <id>spotless-profile</id>
+            <activation>
+                <property>
+                    <name>ghprbPullId</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.diffplug.spotless</groupId>
+                        <artifactId>spotless-maven-plugin</artifactId>
+                        <version>2.8.0</version>
+                        <configuration>
+                            <java>
+                                <includes>
+                                    <include>src/integration-test/java/**</include>
+                                    <include>src/main/java/**</include>
+                                    <include>src/test/java/**</include>
+                                </includes>
+                                <importOrder>
+                                    <file>${basedir}/../eclipse.importorder</file>
+                                </importOrder>
+                                <endWithNewline />
+                                <removeUnusedImports />
+                                <trimTrailingWhitespace />
+                                <eclipse>
+                                    <file>${basedir}/../eclipse-formatter-profile.xml</file>
+                                </eclipse>
+                            </java>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+<repositories>
+  <repository>
+    <id>artifactory.build.releases</id>
+    <name>Artifactory Build Releases</name>
+    <url>https://common.repositories.cloud.sap/build.releases/</url>
+  </repository>
+  <repository>
+    <id>artifactory.build.snapshots</id>
+    <name>Artifactory Build Snapshots</name>
+    <url>https://common.repositories.cloud.sap:443/artifactory/build.snapshots/</url>
+  </repository>
+ <repository>
+    <id>artifactory.build.milestones</id>
+    <name>Artifactory Build Milestones</name>
+    <url>https://common.repositories.cloud.sap:443/artifactory/build.milestones/</url>
+  </repository>
+</repositories>
+</project>

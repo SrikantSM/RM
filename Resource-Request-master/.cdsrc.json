@@ -1,0 +1,63 @@
+{
+    "build": {
+        "target": ".",
+        "tasks": [
+            {
+                "src": "db",
+                "for": "hana",
+                "options": {
+                    "model": [
+                        "db",
+                        "srv"
+                    ]
+                }
+            },
+            {
+                "src": "srv",
+                "for": "java-cf",
+                "options": {
+                    "model": [
+                        "srv",
+                        "db"
+                    ]
+                }
+            },
+            {
+                "src": "project-integration-adapter",
+                "for": "java-cf",
+                "options": {
+                    "model": [
+                        "db"
+                    ]
+                }
+            },
+            {
+                "src": "app/manageResourceRequest",
+                "for": "fiori",
+                "options": {
+                    "model": [
+                        "srv"
+                    ]
+                }
+            },
+            {
+                "src": "app/staffResourceRequest",
+                "for": "fiori",
+                "options": {
+                    "model": [
+                        "srv"
+                    ]
+                }
+            },
+            {
+                "src": "app/resourceRequestLibrary",
+                "for": "fiori",
+                "options": {
+                    "model": [
+                        "srv"
+                    ]
+                }
+            }
+        ]
+    }
+}

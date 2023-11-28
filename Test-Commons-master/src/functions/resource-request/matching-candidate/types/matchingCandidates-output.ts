@@ -1,0 +1,9 @@
+export interface MatchingCandidatesOutput {
+  RESOURCEREQUEST_ID: string;
+  RESOURCE_ID: string;
+  PROJECTROLE_ID: string;
+  AVAILABILITYMATCHPERCENTAGE: string;
+  SKILLMATCHPERCENTAGE: string;
+  UTILIZATIONPERCENTAGE: string;
+  TOTALMATCHPERCENTAGE: string;
+}

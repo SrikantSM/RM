@@ -1,0 +1,181 @@
+PROCEDURE "COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_SKILL_MATCH" (
+    IN resourceRequests COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_UUID,
+    IN resources COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_UUID,
+    OUT skillMatchResult COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_SKILL_RESULT
+) LANGUAGE SQLSCRIPT SQL SECURITY INVOKER --DEFAULT SCHEMA <default_schema_name>
+READS SQL DATA AS BEGIN
+
+
+/*The below logic is used to fetch  Resources, their corresponding Skills, proficiencyLevel_ID, proficiency level rank and the max Profieciency Level Rank of the proficieny set
+COM_SAP_RESOURCEMANAGEMENT_EMPLOYEE_QUALIFICATIONS_CONSULTANTSKILLS is used to fetch the employees, corresponding Skills(skill_ID) and proficiencyLevel_ID.
+COM_SAP_RESOURCEMANAGEMENT_WORKFORCE_WORKASSIGNMENT_WORKASSIGNMENTS is used to fetch employees and corresponding workAssignmentID.
+COM_SAP_RESOURCEMANAGEMENT_SKILL_PROFICIENCYLEVELSCONSUMPTION is used to get the maximum Proficiency Level Rank
+of the proficieny set from which resource has the proficiencyLevel_ID selected.
+COM_SAP_RESOURCEMANAGEMENT_SKILL_PROFICIENCYLEVELSCONSUMPTION is used twice: once to get the proficiencySet_ID based
+on the consultant's proficiencyLevel_ID and the other is used get the maximum proficiency level rank in that proficiency Set.
+INNER JOIN with RESOURCES is done to fetch only list of resources which are passed to the paramater of this procedure
+*/
+
+resourceSkills =
+SELECT
+    workAssignment.ID as resource_ID,
+    consultantSkills.skill_ID,
+    consultantSkills.proficiencyLevel_ID,
+    proficiencyLevel.rank,
+    MAX(proficiencyLevels.rank) as maxRank
+FROM
+    COM_SAP_RESOURCEMANAGEMENT_EMPLOYEE_QUALIFICATIONS_CONSULTANTSKILLS AS consultantSkills
+    INNER JOIN COM_SAP_RESOURCEMANAGEMENT_WORKFORCE_WORKASSIGNMENT_WORKASSIGNMENTS as workAssignment ON consultantSkills.employee_ID = workAssignment.parent
+    INNER JOIN :RESOURCES as resourceHeader ON workAssignment.ID = resourceHeader.ID
+    INNER JOIN COM_SAP_RESOURCEMANAGEMENT_SKILL_PROFICIENCYLEVELSCONSUMPTION as proficiencyLevel ON  consultantSkills.proficiencyLevel_ID = proficiencyLevel.ID
+    INNER JOIN COM_SAP_RESOURCEMANAGEMENT_SKILL_PROFICIENCYLEVELSCONSUMPTION as proficiencyLevels ON  proficiencyLevel.proficiencySet_ID = proficiencyLevels.proficiencySet_ID
+    GROUP BY workAssignment.ID, consultantSkills.skill_ID, proficiencyLevel_ID, proficiencyLevel.rank;
+
+/*The below logic is used to fetch  Resource Requests, requested Skills, proficiencyLevel_ID, proficiency level rank and the max Proficiency Level Rank of the proficieny set.
+RESOURCEREQUESTS is used to get resourceRequest_ID.
+COM_SAP_RESOURCEMANAGEMENT_RESOURCEREQUEST_SKILLREQUIREMENTS is used to resourceRequest_ID, skill_ID and proficiencyLevel_ID.
+COM_SAP_RESOURCEMANAGEMENT_SKILL_PROFICIENCYLEVELSCONSUMPTION is used to get the maximum Proficiency Level Rank.
+COM_SAP_RESOURCEMANAGEMENT_SKILL_PROFICIENCYLEVELSCONSUMPTION is used twice: once to get the proficiencySet_ID based
+on the requested skill's proficiencyLevel_ID and the other is used get the maximum proficiency level rank in that proficiency Set.
+*/
+
+requestedSkills =
+SELECT
+    resourceRequest.ID as resourceRequest_ID,
+    requestedSkill.skill_ID,
+    requestedSkill.proficiencyLevel_ID,
+    proficiencyLevel.rank,
+    MAX(proficiencyLevels.rank) as maxRank
+FROM
+    :RESOURCEREQUESTS as resourceRequest
+    LEFT OUTER JOIN COM_SAP_RESOURCEMANAGEMENT_RESOURCEREQUEST_SKILLREQUIREMENTS AS requestedSkill ON requestedSkill.resourceRequest_ID = resourceRequest.ID
+	INNER JOIN COM_SAP_RESOURCEMANAGEMENT_SKILL_PROFICIENCYLEVELSCONSUMPTION as proficiencyLevel ON  requestedSkill.proficiencyLevel_ID = proficiencyLevel.ID
+    INNER JOIN COM_SAP_RESOURCEMANAGEMENT_SKILL_PROFICIENCYLEVELSCONSUMPTION as proficiencyLevels ON  proficiencyLevel.proficiencySet_ID = proficiencyLevels.proficiencySet_ID
+    WHERE requestedSkill.importance_CODE = 1
+GROUP BY resourceRequest.ID, requestedSkill.skill_ID,requestedSkill.proficiencyLevel_ID, proficiencyLevel.rank;
+
+/*
+the below logic is to calculate the number of skills requested by a resource request (skill count)
+*/
+
+resourceRequestSkillCount =
+SELECT
+    resourceRequest.ID as resourceRequest_ID,
+    SUM(CASE
+            WHEN requestedSkills.skill_ID  IS NULL THEN 0
+            ELSE 1
+        END ) AS requestedSkillCount
+    FROM :RESOURCEREQUESTS as resourceRequest
+    LEFT OUTER JOIN COM_SAP_RESOURCEMANAGEMENT_RESOURCEREQUEST_SKILLREQUIREMENTS as requestedSkills
+                        ON resourceRequest.ID = requestedSkills.resourceRequest_ID
+                        AND requestedSkills.importance_CODE = 1
+GROUP BY
+    resourceRequest.ID;
+
+/*
+
+The below logic is used to fetch the resourceRequest_ID, resource_ID, requestedSkills,
+resourceSkillProficiencyLevel_normalizedRank and requestedSkillProficiencyLevel_normalizedRank.
+
+If the resource skill_ID is NULL then 0 is considered, if resource proficiencyLevel_ID is null then 1 is considered,
+if the default proficiency level(hardcoded to '8e88cf20-f5f2-40dc-8b8e-e63d8bc868ee') is used,
+normalize by the requested proficiency set (i.e. NDIV0( 1, requestedSkills.maxRank )).
+else the normalization is done with resourceSkills.maxRank (NDIV0( resourceSkills.rank, resourceSkills.maxRank ))
+
+If the requested skill_ID is NULL then 0 is considered, if requested proficiencyLevel_ID is null then 1 is considered,
+if the default proficiency level(hardcoded to '8e88cf20-f5f2-40dc-8b8e-e63d8bc868ee') is used,
+normalize by the resource proficiency set (i.e. NDIV0( 1, resourceSkills.maxRank )).
+else the normalization is done with requestedSkills.maxRank (NDIV0( requestedSkills.rank, requestedSkills.maxRank ))
+
+*/
+
+skillProficiencyLevel =
+SELECT
+    resourceRequest.ID as resourceRequest_ID,
+    resourceHeader.ID as resource_ID,
+    requestedSkills.skill_ID,
+
+    (
+        CASE
+        WHEN resourceSkills.skill_ID IS NULL THEN 0
+        WHEN resourceSkills.proficiencyLevel_ID IS NULL THEN 1
+        WHEN resourceSkills.proficiencyLevel_ID = '8e88cf20-f5f2-40dc-8b8e-e63d8bc868ee' THEN NDIV0(1, requestedSkills.maxRank) -- If the default proficiency level is used, normalize by the requested proficiency set
+        ELSE NDIV0(resourceSkills.rank, resourceSkills.maxRank)
+        END
+    ) AS resourceSkillProficiencyLevel_normalizedRank,
+
+    (
+        CASE
+        WHEN requestedSkills.skill_ID IS NULL THEN 0
+        WHEN requestedSkills.proficiencyLevel_ID IS NULL THEN 1
+        WHEN requestedSkills.proficiencyLevel_ID = '8e88cf20-f5f2-40dc-8b8e-e63d8bc868ee' THEN NDIV0(1, coalesce( resourceSkills.maxRank, 0 )) -- If the default proficiency level is used, normalize by the resource proficiency set
+        ELSE NDIV0(requestedSkills.rank, requestedSkills.maxRank)
+        END
+    ) AS requestedSkillProficiencyLevel_normalizedRank
+
+    FROM :RESOURCEREQUESTS as resourceRequest
+    INNER JOIN :RESOURCES as resourceHeader
+                ON resourceHeader.ID IS NOT NULL
+
+    LEFT OUTER JOIN :requestedSkills as requestedSkills
+                        ON resourceRequest.ID = requestedSkills.resourceRequest_ID
+
+    LEFT OUTER JOIN :resourceSkills as resourceSkills
+                    ON resourceHeader.ID = resourceSkills.resource_ID
+                    AND requestedSkills.skill_ID = resourceSkills.skill_ID;
+
+/*
+Skill Proficiency match for each skill is calculated as below.
+normalized rank of resources and resource requests is considered for the calculation.
+If the calculation fetches more than 1, we consider 1 as the percentage wouldn't be more than 100 %.
+*/
+skillProfMatch =
+SELECT
+    resourceRequest_ID,
+    resource_ID,
+    skill_ID,
+    CASE
+        WHEN NDIV0(resourceSkillProficiencyLevel_normalizedRank, requestedSkillProficiencyLevel_normalizedRank) > 1 THEN 1
+        ELSE NDIV0(resourceSkillProficiencyLevel_normalizedRank, requestedSkillProficiencyLevel_normalizedRank)
+    END as proficiencyLevelMatch
+FROM
+    :skillProficiencyLevel;
+/*
+
+/*
+Aggregation of the Skill Proficiency match is calculated as below.
+
+*/
+aggSkillProfMatch =
+SELECT
+    resourceRequest_ID,
+    resource_ID,
+    SUM(proficiencyLevelMatch) as aggProficiencyLevelMatch
+FROM
+    :skillProfMatch
+    group by
+    resourceRequest_ID,
+    resource_ID;
+
+/*
+The below logic calculates the skillMatchPercentage
+by dividing the aggProficiencyLevelMatch with resource request skillCount.
+
+If there is no Skill requested by a Resource Request which makes the requestedSkillCount 0
+then skillMatchPercentage is 100 % (Fix of the internal incident #2080136591).
+*/
+skillMatchResult =
+SELECT
+    rrSkill.resourceRequest_ID,
+    profSkill.resource_ID,
+    CASE
+        WHEN requestedSkillCount = 0 THEN 100.00
+        ELSE TO_DECIMAL(((aggProficiencyLevelMatch / requestedSkillCount) * 100),6,2)
+        END AS skillMatchPercentage
+FROM
+    :resourceRequestSkillCount AS rrSkill
+    INNER JOIN
+    :aggSkillProfMatch as profSkill
+    on rrSkill.resourceRequest_ID = profSkill.resourceRequest_ID;
+
+END

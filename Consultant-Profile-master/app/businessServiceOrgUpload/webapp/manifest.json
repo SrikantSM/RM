@@ -1,0 +1,101 @@
+{
+    "_version": "1.12.0",
+    "sap.app": {
+        "id": "businessServiceOrgUpload",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "ach": "PPM-CLD-RES",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "dataSources": {
+            "fileUploadService": {
+                "uri": "/ServiceOrgUploadService",
+                "type": "JSON"
+            },
+            "fileDownloadService": {
+                "uri": "/ServiceOrgDownloadService",
+                "type": "JSON"
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "Upload": {
+                    "semanticObject": "businessServiceOrgUi",
+                    "action": "upload",
+                    "deviceTypes": {
+                        "desktop": true,
+                        "tablet": false,
+                        "phone": false
+                    },
+                    "hideLauncher": true,
+                    "icon": "sap-icon://upload",
+                    "size": "1x1",
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "title": "{{appTitle}}"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "fullWidth": true,
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "rootView": {
+            "viewName": "businessServiceOrgUpload.App",
+            "type": "XML",
+            "async": true,
+            "id": "app"
+        },
+        "dependencies": {
+            "minUI5Version": "1.68",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {}
+            }
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "businessServiceOrgUpload.i18n.i18n"
+                }
+            }
+        },
+        "commands": {
+            "Upload": {
+                "name": "Upload",
+                "shortcut": "Ctrl+U"
+            },
+            "Download": {
+                "name": "Download",
+                "shortcut": "Shift+Ctrl+D"
+            }
+        }
+    },
+
+    "sap.fiori": {
+        "registrationIds": [
+            "F5071"
+        ],
+        "archeType": "transactional"
+    },
+
+    "sap.platform.cf": {
+       "oAuthScopes": [
+            "$XSAPPNAME.BusinessServiceOrg.Upload",
+            "$XSAPPNAME.BusinessServiceOrg.Download"
+        ]
+    }
+}

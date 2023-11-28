@@ -1,0 +1,44 @@
+const uuid = require('uuid').v4;
+const { employeeHeaders } = require('./employeeHeaders');
+const environment = require('../../../utils').getEnvironment();
+const { testRunId } = require('../testRunID.js');
+
+const { seleniumTestName } = environment;
+
+const employeeHeader1ID = employeeHeaders[0].ID;
+const employeeHeader2ID = employeeHeaders[1].ID;
+
+const workAssignment1 = {
+    ID: uuid(),
+    workAssignmentID: uuid(),
+    parent: employeeHeader1ID,
+    externalID: `${testRunId}${seleniumTestName}.Employee`,
+    startDate: '2017-12-31',
+    endDate: '2018-05-31',
+};
+
+const workAssignment2 = {
+    ID: uuid(),
+    workAssignmentID: uuid(),
+    parent: employeeHeader1ID,
+    externalID: `${testRunId}${seleniumTestName}.Employee`,
+    startDate: '2018-06-01',
+    endDate: '2099-12-31',
+};
+
+const workAssignment3 = {
+    ID: uuid(),
+    workAssignmentID: uuid(),
+    parent: employeeHeader2ID,
+    externalID: `${testRunId}${seleniumTestName}.Manager`,
+    startDate: '2017-01-01',
+    endDate: '9999-12-31',
+};
+
+const workAssignments = [
+    workAssignment1,
+    workAssignment2,
+    workAssignment3,
+];
+
+module.exports = { workAssignments };

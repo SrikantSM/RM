@@ -1,0 +1,13 @@
+VIEW COM_SAP_RESOURCEMANAGEMENT_RESOURCEREQUEST_MATCHINGCANDIDATES1 AS 
+SELECT
+	resourceRequest_ID, 
+    resource_ID,
+    resourceRequestStartDate,
+    resourceRequestEndDate,
+    resourceName,
+    remainingCapacity,
+    availabilityMatchPercentage,
+    skillMatchPercentage,
+    utilizationPercentage,
+    totalMatchPercentage 
+FROM COM_SAP_RESOURCEMANAGEMENT_RESOURCEREQUEST_MATCHINGCANDIDATES();

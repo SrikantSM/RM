@@ -1,0 +1,535 @@
+---
+_schema-version: 3.2
+ID: skill
+version: 1.38.0
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+  keep-existing-routes: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm --prefix .. ci .. --only=production
+    - npm ci --only=production
+    - npm run build
+modules:
+- name: skill-approuter
+  deployed-after:
+  - skill-flp-content
+  type: approuter.nodejs
+  path: approuter
+  build-parameters:
+    builder: custom
+    commands:
+    - npm ci --only=production
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+    idle-routes:
+    - idle-route: rm-stargazer-tenant-${org}-${space}-ar-idle.cfapps.sap.hana.ondemand.com
+    routes:
+    - route: rm-stargazer-tenant-${org}-${space}-skill-approuter.cfapps.sap.hana.ondemand.com
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  requires:
+  - name: skill-html5-repo-runtime
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: skill-logs
+  - name: rm-cloud-logs
+  - name: skill-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: skill-portal
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: skill-onboarding
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: skill-audit-logs-oauth
+  - name: skill-srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: skill-srv-api
+      url: "~{url}"
+  - name: skill-approuter-url
+    properties:
+      TENANT_HOST_PATTERN: "^(.*)~{ui-tenant-delimiter}.*"
+  - name: skill-xray
+    group: destinations
+    properties:
+      name: skill-xray
+      url: "~{xrayurl}"
+  - name: skill-xray-data
+    group: destinations
+    properties:
+      name: skill-xray-data
+      url: "~{xraydataurl}"
+  provides:
+  - name: skill-approuter-url
+    properties:
+      ui-tenant-delimiter: "-tenant-"
+      ui-url-suffix: "${org}-${space}-skill-approuter.cfapps.sap.hana.ondemand.com"
+      url: "${protocol}://${routes/0/route}"
+- name: skill-ui-deployer
+  type: com.sap.application.content
+  path: ui-content
+  requires:
+  - name: skill-html5-repo-host
+    parameters:
+      content-target: true
+      service-key:
+        name: html5-content-deployment-key-${timestamp}
+        config:
+          xsuaa:
+            credential-type: x509
+            x509:
+              key-length: 2048
+              validity: 100
+              validity-type: DAYS
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  build-parameters:
+    ignore:
+    - ".gitkeep"
+    requires:
+    - name: skill-ui
+      artifacts:
+      - "./deploy-*.zip"
+    - name: skill-upload-ui
+      artifacts:
+      - "./deploy-*.zip"
+    - name: skill-download-ui
+      artifacts:
+      - "./deploy-*.zip"
+    - name: skill-catalog-ui
+      artifacts:
+      - "./deploy-*.zip"
+    - name: skill-proficiency-ui
+      artifacts:
+      - "./deploy-*.zip"
+- name: skill-db
+  type: nodejs
+  path: "../db"
+  parameters:
+    memory: 256M
+    disk-quota: 512M
+    idle-domain: cfapps.sap.hana.ondemand.com
+    idle-routes:
+    - idle-route: "${org}-${space}-skill-db-idle.cfapps.sap.hana.ondemand.com"
+    routes:
+    - route: "${org}-${space}-skill-db.cfapps.sap.hana.ondemand.com"
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  requires:
+  - name: skill-logs
+  - name: rm-cloud-logs
+  - name: skill-audit-logs-oauth
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: skill-hdi-credentials
+    properties:
+      hdi_dynamic_deploy_user: "~{user}"
+      hdi_dynamic_deploy_password: "~{password}"
+  provides:
+  - name: dynamic-db-deployment
+    properties:
+      url: "${protocol}://${routes/0/route}"
+- name: skill-srv
+  deployed-after:
+  - skill-db
+  type: java
+  path: srv
+  properties:
+    SPRING_PROFILES_ACTIVE: cloud
+    JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jre.SAPMachineJRE']"
+    JBP_CONFIG_SAP_MACHINE_JRE: '{ use_offline_repository: false, version: 17.+ }'
+    CDS_SECURITY_AUTHENTICATION_NORMALIZEPROVIDERTENANT: false
+    MDI_SERVICE_TIMEOUT: 120000
+    MDI_SERVICE_RETRY_ATTEMPT: 2
+    APPLICATION_URL: "${space}-skill-srv.cfapps.sap.hana.ondemand.com"
+  build-parameters:
+    builder: custom
+    commands:
+    - mvn -B clean package
+    build-result: target/*.jar
+  parameters:
+    memory: 1024M
+    disk-quota: 512M
+    idle-routes:
+    - idle-route: "${org}-${space}-skill-skill-idle.cfapps.sap.hana.ondemand.com"
+    routes:
+    - route: "${org}-${space}-skill-srv.cfapps.sap.hana.ondemand.com"
+  hooks:
+  - name: before-skill-srv-start-db-deploy
+    type: task
+    phases:
+    - deploy.application.before-start
+    - blue-green.application.before-start.idle
+    parameters:
+      name: db-schema-update
+      command: sed -i 's/org.springframework.boot.loader.JarLauncher/org.springframework.boot.loader.PropertiesLauncher/g' /home/vcap/staging_info.yml && sed -i 's/-Dsun.net.inetaddr.negative.ttl=0/-Dsun.net.inetaddr.negative.ttl=0 -Dloader.main=com.sap.cds.framework.spring.utils.Deploy/g' /home/vcap/staging_info.yml && jq -r .start_command /home/vcap/staging_info.yml | bash
+      memory: 1024M
+      disk-quota: 512M
+      buildpack: sap_java_buildpack
+  provides:
+  - name: skill-srv-api
+    properties:
+      url: "${protocol}://${routes/0/route}"
+  requires:
+  - name: skill-service-manager
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: skill-uaa
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: skill-mdi
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: skill-logs
+  - name: rm-cloud-logs
+  - name: skill-destination
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: skill-jobscheduler
+    parameters:
+      config:
+        credential-type: x509
+        x509:
+          key-length: 2048
+          validity: 100
+          validity-type: DAYS
+  - name: skill-audit-logs-oauth
+    parameters:
+      config:
+        xsuaa:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+  - name: skill-hdi-credentials
+    properties:
+      CDS_MULTITENANCY_DEPLOYER_USER: "~{user}"
+      CDS_MULTITENANCY_DEPLOYER_PASSWORD: "~{password}"
+  - name: dynamic-db-deployment
+    properties:
+      CDS_MULTITENANCY_DEPLOYER_URL: "~{url}"
+  - name: skill-approuter-url
+    properties:
+      CDS_MULTITENANCY_APPUI_URL: "~{ui-url-suffix}"
+      CDS_MULTITENANCY_APPUI_TENANTSEPARATOR: "~{ui-tenant-delimiter}"
+- name: skill-ui
+  type: html5
+  path: app/skill
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+- name: skill-upload-ui
+  type: html5
+  path: app/upload
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+- name: skill-catalog-ui
+  type: html5
+  path: app/catalog
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+- name: skill-proficiency-ui
+  type: html5
+  path: app/proficiency
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+- name: skill-download-ui
+  type: html5
+  path: app/download
+  build-parameters:
+    supported-platforms: []
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci --only=production
+    - grunt
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+- name: skill-flp-content
+  deployed-after:
+  - skill-ui-deployer
+  type: com.sap.application.content
+  build-parameters:
+    build-artifact-name: content
+  path: flp-content
+  properties:
+    ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+  requires:
+  - name: skill-portal
+    parameters:
+      content-target: true
+      service-key:
+        name: portal-content-deploy-key
+        config:
+          content-endpoint: developer
+  - name: skill-html5-repo-host
+    properties:
+      ENV_ARTIFACTORY_AUTH_TOKEN: artifactoryAuthToken
+    parameters:
+      service-key:
+        name: flp-content-deployment-key-${timestamp}
+        config:
+          xsuaa:
+            credential-type: x509
+            x509:
+              key-length: 2048
+              validity: 100
+              validity-type: DAYS
+  - name: skill-uaa
+    parameters:
+      service-key:
+        name: rm-flp-content-skill-uaa-credentials-${timestamp}
+        config:
+          credential-type: x509
+          x509:
+            key-length: 2048
+            validity: 100
+            validity-type: DAYS
+resources:
+- name: skill-html5-repo-runtime
+  parameters:
+    service-plan: app-runtime
+    service: html5-apps-repo
+  type: org.cloudfoundry.managed-service
+- name: skill-html5-repo-host
+  parameters:
+    service-plan: app-host
+    service: html5-apps-repo
+  type: org.cloudfoundry.managed-service
+- name: skill-uaa
+  type: com.sap.xs.uaa
+  parameters:
+    service-plan: broker
+    service: xsuaa
+    config:
+      xsappname: skill-${space}
+      oauth2-configuration:
+       credential-types: [x509, binding-secret, instance-secret]
+      tenant-mode: shared
+      scopes:
+      - name: "$XSAPPNAME.JobScheduler"
+        description: scope for job scheduler
+        grant-as-authority-to-apps:
+        - "$XSSERVICENAME(skill-jobscheduler)"
+      - name: uaa.user
+        description: UAA
+      - name: "$XSAPPNAME.Skills.Edit"
+        description: Authorization to edit skills
+      - name: "$XSAPPNAME.Skills.Delete"
+        description: Authorization to delete skills
+      - name: "$XSAPPNAME.Skills.Upload"
+        description: Authorization to upload skills
+      - name: "$XSAPPNAME.Skills.Download"
+        description: Authorization to download skills
+      - name: "$XSAPPNAME.SkillCatalogs.Edit"
+        description: Authorization to edit skill catalogs
+      - name: "$XSAPPNAME.SkillCatalogs.Delete"
+        description: Authorization to delete skill catalogs
+      - name: "$XSAPPNAME.Proficiencies.Edit"
+        description: Authorization to edit proficiency sets
+      - name: "$XSAPPNAME.Proficiencies.Delete"
+        description: Authorization to delete proficiency sets
+      - name: "$XSAPPNAME.DefaultLanguage.Edit"
+        description: Authorization to edit the default language
+      - name: "$XSAPPNAME.Callback"
+        description: Onboarding Callback Access
+        grant-as-authority-to-apps:
+        - "$XSAPPNAME(application,sap-provisioning,tenant-onboarding)"
+      - name: "$XSAPPNAME.InitDb"
+        description: Update the database artifacts after deployment of a new version
+        granted-apps:
+        - "$XSAPPNAME(broker,skill-admin-${space})"
+      role-templates:
+      - name: Token_Exchange
+        description: UAA
+        scope-references:
+        - uaa.user
+      - name: ConfigurationExpert
+        description: Users have access to the configuration applications.
+        scope-references:
+        - "$XSAPPNAME.Skills.Edit"
+        - "$XSAPPNAME.Skills.Delete"
+        - "$XSAPPNAME.Skills.Upload"
+        - "$XSAPPNAME.Skills.Download"
+        - "$XSAPPNAME.SkillCatalogs.Edit"
+        - "$XSAPPNAME.SkillCatalogs.Delete"
+        - "$XSAPPNAME.Proficiencies.Edit"
+        - "$XSAPPNAME.Proficiencies.Delete"
+      - name: ResourceManagementAdministrator
+        description: Users can set the default language for language dependent master
+          data.
+        scope-references:
+        - "$XSAPPNAME.DefaultLanguage.Edit"
+- name: skill-jobscheduler
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: jobscheduler
+    service-plan: standard
+    config:
+      enable-xsuaa-support: true
+  requires:
+  - name: skill-uaa
+- name: skill-uaa-admin
+  type: com.sap.xs.uaa
+  parameters:
+    service-plan: broker
+    service: xsuaa
+    config:
+      xsappname: skill-admin-${space}
+      tenant-mode: dedicated
+      foreign-scope-references:
+      - "$XSAPPNAME(broker,skill-${space}).InitDb"
+      role-templates:
+      - name: ResourceManagementOperator
+        description: Perform administrative actions on the deployed RM application
+        scope-references:
+        - "$XSAPPNAME(broker,skill-${space}).InitDb"
+- name: skill-portal
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service-plan: standard
+    service: portal
+- name: skill-logs
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: application-logs
+    service-plan: lite
+- name: skill-xray
+  properties:
+    xrayurl: https://xraycontrolstebofwk.int.sap.eu2.hana.ondemand.com/xRayControls/resources/sap/dfa/help
+- name: skill-xray-data
+  properties:
+    xraydataurl: https://cp1canary.int.sap.eu2.hana.ondemand.com/dps
+- name: skill-mdi
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: one-mds
+    service-plan: default
+    config:
+      businessSystemId: RM-${org}-${space}
+- name: skill-onboarding
+  type: org.cloudfoundry.managed-service
+  requires:
+  - name: skill-srv-api
+  - name: skill-approuter-url
+  parameters:
+    service: saas-registry
+    service-plan: application
+    config:
+      appId: skill-${space}!b7214
+      appName: skill-${space}
+      appUrls:
+        onSubscription: "~{skill-srv-api/url}/mt/v1.0/subscriptions/tenants/{tenantId}"
+        getDependencies: "~{skill-approuter-url/url}/callback/v1.0/dependencies"
+- name: skill-hdi-credentials
+  properties:
+    user: "${generated-user}"
+    password: "${generated-password}"
+- name: skill-audit-logs-oauth
+  optional: true
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: auditlog
+    service-plan: oauth2
+- name: skill-destination
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: destination
+    service-plan: lite
+- name: skill-service-manager
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: service-manager
+    service-plan: container
+- name: rm-cloud-logs
+  type: org.cloudfoundry.managed-service
+  optional: true
+  parameters:
+    service: cloud-logging
+    service-plan: standard

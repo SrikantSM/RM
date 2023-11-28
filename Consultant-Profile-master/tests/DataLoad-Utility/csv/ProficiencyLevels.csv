@@ -1,0 +1,9 @@
+ID,rank,name,description,proficiencySet_ID
+8e88cf20-f5f2-40dc-8b8e-e63d8bc868ee,1,Not Set,Proficiency not set,8a2cc2c3-4a46-47f0-ae67-2ac67c673aae
+e27c7b52-0560-4eec-9f1d-9b5faf31e509,1,Beginner,Beginner,916b0291-1c5c-4af9-9085-0e9977fc35f3
+7d4c44a1-b262-4c51-b0ca-de845e96e643,2,Intermediate,Intermediate,916b0291-1c5c-4af9-9085-0e9977fc35f3
+901f3446-e127-4787-9ed0-821ef0ff0be4,3,Expert,Expert,916b0291-1c5c-4af9-9085-0e9977fc35f3
+e3412dd8-0756-4405-9ef7-627d4a212647,1,Bad,Bad,304ce6c8-c71a-426c-b85b-951c661acc92
+8e70d23d-b3be-4945-9323-22fff380bfa7,2,Middle,Middle,304ce6c8-c71a-426c-b85b-951c661acc92
+1a0722d0-1953-4ea7-b3a2-fec0966d513c,3,Good,Good,304ce6c8-c71a-426c-b85b-951c661acc92
+2519abde-a675-40e3-be17-0c542dcc0397,4,Excellent,Excellent,304ce6c8-c71a-426c-b85b-951c661acc92

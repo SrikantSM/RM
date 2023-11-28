@@ -1,0 +1,84 @@
+{
+	"collections": [
+		{
+			"collectionName": "C4P_RM_ResourceRequest_UI",
+			"folders": [
+				{
+					"startingFolderPath": "app/manageResourceRequest/webapp/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/manageResourceRequest/webapp/i18n/ListReport/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/staffResourceRequest/webapp/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/staffResourceRequest/webapp/i18n/ListReport/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "app/resourceRequestLibrary/webapp/resourceRequestLibrary/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				},
+				{
+					"startingFolderPath": "srv/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				}
+			]
+		},
+		{
+			"collectionName": "C4P_RM_ResourceRequest_JavaOdata",
+			"folders": [
+				{
+					"startingFolderPath": "srv/src/main/resources/i18n/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				}
+			]
+		},
+		{
+			"collectionName": "C4P_RM_ResourceRequest_DB",
+			"folders": [
+				{
+					"startingFolderPath": "db/src/translation/resourceRequest/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				}
+			]
+		},
+        {
+			"collectionName": "C4P_RM_ResourceRequest_DB",
+			"folders": [
+				{
+					"startingFolderPath": "db/src/translation/integration/**",
+					"sourceFilters": [
+						"*.properties"
+					]
+				}
+			]
+		}
+	],
+	"defaultConfiguration": {
+		"targetFolderPath": ".",
+		"pseudoLocFolderPath": ".",
+		"oneQFolderPath": ".",
+		"targetFileNamingConvention": "[filename]_[langCode].[extension]"
+	}
+}

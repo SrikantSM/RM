@@ -1,0 +1,29 @@
+{
+    "name": "dataload-utility",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "postinstall": "npm run build",
+        "build": "tsc",
+        "lint": "tslint -p tsconfig.json",
+        "load-data": "node target/dist/src/loadData.js",
+        "unload-data": "node target/dist/src/unloadData.js"
+    },
+    "license": "ISC",
+    "dependencies": {
+        "tslint": "^6.0.0",
+        "tslint-config-prettier": "^1.18.0",
+        "typescript": "^3.9.2",
+        "test-commons": "git+https://github.tools.sap/Cloud4RM/Test-Commons#592e053d216af8140a5292be311615f9f14a88dc"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^2.33.0",
+        "eslint": "^7.0.0",
+        "eslint-config-airbnb-typescript": "^7.2.1",
+        "eslint-plugin-import": "^2.20.2",
+        "eslint-plugin-jsx-a11y": "^6.2.3",
+        "eslint-plugin-react": "^7.16.0",
+        "eslint-plugin-react-hooks": "^1.7.0"
+    }
+}

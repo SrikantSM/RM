@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns="sap.m" 
+	xmlns:core="sap.ui.core">
+	<ResponsivePopover class="sapUiContentPadding" contentHeight="20%" placement="Bottom" title="Select Quarter" core:require="{handler: 'resourceRequestLibrary/controller/WeekWiseCalendar'}">
+		<VBox items="{path:'currentQuarterModel>/currDetails'}">
+			<VBox>
+				<Text text="{currentQuarterModel>year}"/>
+				<SegmentedButton selectedKey="{currentQuarterModel>selectedKey}">
+					<items>
+						<SegmentedButtonItem text="{i18ned>Q1}" enabled="{currentQuarterModel>Q1enabled}" press="handler.onQuarterSelect" key="{currentQuarterModel>Q1Key}" />
+						<SegmentedButtonItem text="{i18ned>Q2}" enabled="{currentQuarterModel>Q2enabled}" press="handler.onQuarterSelect" key="{currentQuarterModel>Q2Key}" />
+						<SegmentedButtonItem text="{i18ned>Q3}" enabled="{currentQuarterModel>Q3enabled}" press="handler.onQuarterSelect" key="{currentQuarterModel>Q3Key}" />
+						<SegmentedButtonItem text="{i18ned>Q4}" enabled="{currentQuarterModel>Q4enabled}" press="handler.onQuarterSelect" key="{currentQuarterModel>Q4Key}" />
+						<SegmentedButtonItem visible="false" key="invisibleButton" />
+					</items>
+				</SegmentedButton>
+			</VBox>
+		</VBox>
+	</ResponsivePopover>
+</core:FragmentDefinition>

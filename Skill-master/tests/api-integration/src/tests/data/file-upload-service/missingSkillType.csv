@@ -1,0 +1,7 @@
+conceptType,conceptUri,skillType,preferredLabel,altLabels,description,usage
+KnowledgeSkillCompetence,{uuid()},,values,"scruples
+beliefs
+morals","Skill is now active",unrestricted
+KnowledgeSkillCompetence,{uuid()},,values2,"scruples
+beliefs
+morals","Skill is now active",unrestricted

@@ -1,0 +1,6 @@
+ID,startDate,costCenter,costCenterID,costCenterName,emailAddress,mobileNumber,country,resourceName,firstName,lastName,jobTitle,managerName,avgUtilization,assignmentExistsForTheResource
+bc6a4f22-4281-40ec-bd79-8756275e0672,2014-07-30,CCDE (CCDE),CCDE,CCDE,simon.alexander11@sap.com,+91-81419-41008,Germany,Simon Alexander,Simon,Alexander,Junior Consultant,darth.vader (Darth Vader),0,false
+6806862a-3788-441c-9b00-bd52013711b3,2015-10-31,CCDE (CCDE),CCDE,CCDE,santa.claus@sap.com,+49-6227-31002,Germany,Santa Claus,Santa,Claus,Resource Manager,darth.vader (Darth Vader),0,false
+cc6a4f22-4281-40ec-bd79-8756275e0672,2014-07-30,CCDE (CCDE),CCDE,CCDE,katie.lerhihan11@sap.com,+91-81419-41009,Germany,Katie Lerhihan,Katie,Lerhihan,Senior Consultant,darth.vader (Darth Vader),0,false
+f09e2fa7-bd0e-4064-acd8-3c9d42baf0e7,2019-11-12,CCDE (CCDE),CCDE,CCDE,darth.vader@sap.com,+91-81419-41006,Germany,Darth Vader,Darth,Vader,Senior Consultant,darth.vader (Darth Vader),0,false
+11942b97-d7ce-4cb0-90db-6430288a32bc,2017-03-21,CCUS (CCUS),CCUS,CCUS,mister.smith@sap.com,+1-419-6100003,Germany,Mister Smith,Mister,Smith,Senior Consultant,darth.vader (Darth Vader),0,false

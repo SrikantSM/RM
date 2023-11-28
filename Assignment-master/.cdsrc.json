@@ -1,0 +1,36 @@
+{
+    "build": {
+        "target": ".",
+        "tasks": [
+            {
+                "src": "db",
+                "for": "hana",
+                "options": {
+                    "model": [
+                        "db",
+                        "srv"
+                    ]
+                }
+            },
+            {
+                "src": "srv",
+                "for": "java-cf",
+                "options": {
+                    "model": [
+                        "srv",
+                        "db"
+                    ]
+                }
+            },
+            {
+                "src": "app/capacityGridUi",
+                "for": "fiori",
+                "options": {
+                    "model": [
+                        "srv"
+                    ]
+                }
+            }
+        ]
+    }
+}

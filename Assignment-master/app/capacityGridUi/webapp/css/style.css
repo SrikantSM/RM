@@ -1,0 +1,17 @@
+/* Enter your custom styles here */
+
+.capacityGridUi .sapMObjStatus.capacityGridUiHeaderStatus span {
+    font-size: 1.5rem;
+    padding: 0.4rem;
+}
+.capacityGridUi .sapMText.capacityGridUiDraftIndicator{
+    font-style: italic;
+}
+.capacityGridUi .capacityGridUiDeleted {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+}
+
+.capacityGridUi .capacityGridUiCopied {
+    margin-left: 1rem;
+}

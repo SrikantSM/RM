@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.sap.c4p.rm</groupId>
+    <artifactId>cap-parent</artifactId>
+    <version>15.2.0</version>
+  </parent>
+
+  <artifactId>resourceRequest-srv</artifactId>
+  <packaging>jar</packaging>
+
+  <name>resourceRequest-srv</name>
+
+  <!-- ACTUAL DEPENDENCIES -->
+  <dependencies>
+    <!-- ACTUATOR TO ENABLE HEALTH CHECKS -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<!-- ENABLE POJOS TO ACCESS CONFIGURATION PROPERTIES -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+    <!-- -->
+    <!--Dependency for Jsoup library for free text validation  -->
+    <dependency>
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.sap.hcp.cf.logging</groupId>
+      <artifactId>cf-java-logging-support-servlet-jakarta</artifactId>
+      <version>${cf.logging.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+
+  <plugins>
+
+    <!-- Jacoco Code coverage Exclusions-->
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.8</version>
+              <configuration>
+                <excludes>
+                  <exclude>**/resourcemanagement/**</exclude>
+                  <exclude>**/common/**</exclude>
+                  <exclude>model/*</exclude>
+                  <exclude>processresourcerequestservice/*</exclude>
+                  <exclude>resourcerequestservice/*</exclude>
+                  <exclude>manageresourcerequestservice/*</exclude>
+                  <exclude>enterpriseprojectservice/*</exclude>
+                  <exclude>draft/*</exclude>
+                  <!--exclusions in resourceRequest-srv module-->
+                  <exclude>**/sap/c4p/rm/resourcerequest/gen/**</exclude>
+                  <exclude>**/sap/c4p/rm/resourcerequest/config/AuditLogConfig.*</exclude>
+                  <exclude>**/sap/c4p/rm/resourcerequest/config/LoggingConfig.*</exclude>
+                  <exclude>**/sap/c4p/rm/resourcerequest/config/LoggingMarker.*</exclude>
+                  <exclude>**/sap/c4p/rm/resourcerequest/Application.*</exclude>
+                  <exclude>**/sap/c4p/rm/resourcerequest/utils/Constants.*</exclude>
+                  <exclude>**/sap/c4p/rm/resourcerequest/handlers/SubscriptionHandler.*</exclude>
+                  <exclude>**/sap/c4p/rm/resourcerequestutils/HttpStatus.*</exclude>
+                  <exclude>**/sap/c4p/rm/resourcerequest/HttpStatus.*</exclude>
+                  <exclude>**/sap/c4p/rm/resourcerequest/exceptions/HealthCheckException.*</exclude>
+                  <exclude>**/sap/c4p/rm/resourcerequest/config/HealthSecurityConfig.*</exclude>
+                </excludes>
+              </configuration>
+          </plugin>
+
+      <!-- PRECOMPILE PRECOMPILATION CLASSES -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <release>${jdk.version}</release>
+          <source>${jdk.version}</source>
+          <target>${jdk.version}</target>
+        </configuration>
+        <executions>
+          <execution>
+            <id>precompile-tools-compile</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>com/sap/c4p/rm/resourcerequest/utils/MessageKeyPrecompiler.java</include>
+              </includes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- PRECOMPILE MESSAGE KEYS -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <mainClass>com.sap.c4p.rm.resourcerequest.utils.MessageKeyPrecompiler</mainClass>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- GENERATE POJO INTERFACES -->
+      <plugin>
+        <groupId>com.sap.cds</groupId>
+          <artifactId>cds-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+</build>
+<profiles>
+  <!-- Verify Java formatting -->
+  <profile>
+    <id>spotless-profile</id>
+    <activation>
+      <property>
+        <name>ghprbPullId</name>
+      </property>
+    </activation>
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>com.diffplug.spotless</groupId>
+          <artifactId>spotless-maven-plugin</artifactId>
+          <version>2.34.0</version>
+          <configuration>
+            <trimTrailingWhitespace />
+            <endWithNewline />
+            <java>
+              <importOrder>
+                <file>${basedir}/../eclipse.importorder</file>
+              </importOrder>
+              <removeUnusedImports />
+              <eclipse>
+                <file>${basedir}/../eclipse-formatter-profile.xml</file>
+              </eclipse>
+            </java>
+          </configuration>
+          <executions>
+            <execution>
+              <phase>verify</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </build>
+  </profile>
+</profiles>
+<repositories>
+  <repository>
+    <id>artifactory.build.releases</id>
+    <name>Artifactory Build Releases</name>
+    <url>https://common.repositories.cloud.sap/build.releases/</url>
+  </repository>
+  <repository>
+    <id>artifactory.build.snapshots</id>
+    <name>Artifactory Build Snapshots</name>
+    <url>https://common.repositories.cloud.sap:443/artifactory/build.snapshots/</url>
+  </repository>
+ <repository>
+    <id>artifactory.build.milestones</id>
+    <name>Artifactory Build Milestones</name>
+    <url>https://common.repositories.cloud.sap:443/artifactory/build.milestones/</url>
+  </repository>
+</repositories>
+  <pluginRepositories>
+        <pluginRepository>
+            <id>artifactory.build.milestones</id>
+            <name>Artifactory Build Milestones</name>
+            <url>https://common.repositories.cloud.sap:443/artifactory/build.milestones/</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>

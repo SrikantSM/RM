@@ -1,0 +1,38 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout"
+>
+	<Dialog
+		id="idExportProgressDialog"
+		title="{i18n>EXPORT_DOCUMENT}"
+		contentWidth="31rem"
+		escapeHandler=".handleEscape"
+	>
+		<l:VerticalLayout
+			class="sapUiSmallMarginBegin"
+			width="90%"
+		>
+			<Text
+				id="idFetchDataText"
+				text="{i18n>FETCHING_DATA_MSG}"
+				class="sapUiSmallMarginTopBottom"
+			/>
+			<ProgressIndicator
+				id="idExportProgressInd"
+				class="sapUiSmallMarginTopBottom"
+				state="Information"
+				percentValue="{dialogProgress>/PercentValue}"
+				displayValue="{dialogProgress>/CurrentCount}/{dialogProgress>/TotalCount}"
+				displayAnimation="{dialogProgress>/DisplayAnimation}"
+				ariaLabelledBy="idFetchDataText"
+			/>
+		</l:VerticalLayout>
+		<buttons>
+			<Button
+				text="{i18n>CANCEL_BUTTON}"
+				press="onClose"
+			/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,41 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" >
+
+ <l:Grid defaultSpan="XL3 L4 M6 S12">
+
+  <VBox core:require="{dateHandler: 'manageResourceRequest/ext/controller/EffortDistributionDateConfirmPopup'}">
+      <Label text="{i18n>requestedTimePeriod}:" labelFor="datePicker12" required="{= %{ui>/editMode} === 'Editable' ? true : false }"/>
+      <DateRangeSelection
+						id="datePicker12"
+            required="{= %{ui>/editMode} === 'Editable' ? true : false }"
+            dateValue = "{startDate}"
+            secondDateValue="{endDate}"
+            visible="{= ${ui>/editMode} === 'Editable'}"
+            navigate="dateHandler.onBeforeOpenDateSelection"
+            change="dateHandler.onDateChange"
+      />
+      <Text text="{startDate} - {endDate}" visible="{= ${ui>/editMode} === 'Display'}" />
+  </VBox>
+
+  <VBox core:require="{effortTypeHandler: 'manageResourceRequest/ext/controller/EffortDistributionTypes'}">
+        <Label id="effortDistributionTypes" text="{i18n>distributionTypeTitle}:" labelFor="bEffortDistributionType"/>
+        <HBox alignItems="Center">
+          <Button id="bEffortDistributionType" visible="{= ${ui>/editMode} === 'Editable'}" press="effortTypeHandler.onOpenChangeEffortTypePopup" icon="sap-icon://edit" class="sapUiTinyMarginEnd" tooltip="{i18n>EDIT}"/>
+          <Text text="{i18n>effortTypeTotalEffort}" visible="{= %{effortDistributionType_code} === 0 }"/>
+          <Text text="{i18n>effortTypeDailyEffort}" visible="{= %{effortDistributionType_code} === 1 }"/>
+          <Text text="{i18n>effortTypeWeeklyEffort}" visible="{= %{effortDistributionType_code} === 2 }"/>
+        </HBox>
+  </VBox>
+
+  <VBox core:require="{calendarViewHandler: 'manageResourceRequest/ext/controller/EffortDistribution'}">
+        <Label id="requiredEffort" text="{i18n>requiredEffort}:" required="{= %{ui>/editMode} === 'Editable' ? true : false }" labelFor="inputId" />
+        <HBox alignItems="Center">
+            <Button id="bCalendarEdit" visible="{= %{effortDistributionType_code} !== 0 &amp;&amp; ${ui>/editMode} === 'Editable'}" press="calendarViewHandler.onOpenCalendarView" icon="sap-icon://edit" class="sapUiTinyMarginEnd" tooltip="{i18n>EDIT}" ariaLabelledBy="requiredEffort"/>
+            <Input id="inputId" value="{requestedCapacity}" description="{i18n>unitHours}" visible="{= %{effortDistributionType_code} === 0 &amp;&amp; ${ui>/editMode} === 'Editable'}" textAlign="End" width="8rem" required="{= %{ui>/editMode} === 'Editable' ? true : false }" />
+            <Text text="{requestedCapacity} {i18n>unitHours}" visible="{= (%{effortDistributionType_code} !== 0 &amp;&amp; ${ui>/editMode} === 'Editable') || (%{effortDistributionType_code} === 0 &amp;&amp; ${ui>/editMode} === 'Display')}"/>
+            <Link id="bCalendarDisplay" text="{requestedCapacity} {i18n>unitHours}" visible="{= %{effortDistributionType_code} !== 0 &amp;&amp; ${ui>/editMode} === 'Display'}" press="calendarViewHandler.onOpenCalendarView" ariaLabelledBy="requiredEffort"/>
+        </HBox>
+  </VBox>
+ </l:Grid>
+
+
+</core:FragmentDefinition>

@@ -1,0 +1,198 @@
+# Using Piper general purpose pipeline for Azure
+
+trigger:
+  - release
+  - master
+  - hotfix
+
+parameters:
+  - name: cfApiEndPoint
+    type: string
+    default: 'https://api.cf.sap.hana.ondemand.com'
+  - name: testOrgName
+    type: string
+    default: 'c4p-rm-bradbury'
+  - name: testSpaceName
+    type: string
+    default: 'dev-test'
+  - name: testSpaceNameRelease
+    type: string
+    default: 'rel-test'
+  - name: testSpaceGuid
+    type: string
+    default: '7a87b36e-4b9e-430d-a06d-c25526099a06'
+  - name: testSpaceGuidRelease
+    type: string
+    default: 'fa359bd1-e61a-4b4f-b8c0-0c8391e910b8'
+  - name: landscape
+    type: string
+    default: sap
+  - name: appName
+    type: string
+    default: 'resourceRequest-srv'
+  - name: secondSrv
+    type: string
+    default: 'project-integration-adapter'
+
+resources:
+  repositories:
+  - repository: piper-pipeline-azure
+    endpoint: github.tools.sap
+    type: githubenterprise
+    name: Cloud4RM/RM-Piper-ADO
+  - repository: Umbrella
+    endpoint: github.tools.sap
+    type: githubenterprise
+    name: Cloud4RM/Resource-Management
+
+extends:
+  template: piper-ado-templates/rm-domain-pipeline.yml@piper-pipeline-azure
+  parameters:
+    # General Purpose
+    umbrellaClone:
+    - checkout: Umbrella
+      submodules: true
+    domainName: 'Resource-Request'
+
+    # Build
+    buildPostSteps:
+    - publish: 'Resource-Request/srv/target'
+      artifact: 'Sonar1Artifact'
+    - publish: 'Resource-Request/project-integration-adapter/target'
+      artifact: 'Sonar2Artifact'
+    buildNotifyUsersKey: 'ResourceRequestDevOps'
+
+    # First OPA
+    uIIntegration1StageName: 'OPA Main'
+
+    # Second OPA
+    uIIntegration2StageName: 'OPA Effort Distribution'
+    uIIntegration2PostSteps:
+      - task: piper@1
+        displayName: UI Integration 2
+        inputs:
+          stepName: 'shellExecute'
+          dockerImage: 'dockerimageforopa'
+          flags: '--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/runTests2.sh'
+          dockerOptions: '--env DOMAIN="Resource-Request"
+                          --env TEST_PATH="tests/ui-integration"'
+      - task: PublishTestResults@2
+        condition: succeededOrFailed()
+        displayName: Publish Resource-Request UI Integration 2 Test Results(XML)
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '**/target/report/*.xml'
+      - task: PublishPipelineArtifact@1
+        condition: succeededOrFailed()
+        inputs:
+          targetPath: 'Resource-Request/tests/ui-integration/target/report/'
+          artifact: 'UIIntegration_2_Attempt_$(System.JobAttempt)'
+          publishLocation: 'pipeline'
+    uIIntegrationNotifyUsersKey: 'ResourceRequestUIIntegrationTest'
+
+    # Lint
+    lintNotifyUsersKey: 'ResourceRequestDevOps'
+
+    # Deploy
+    deploycfAPIEndPoint: ${{ parameters.cfApiEndPoint }}
+    deploycfOrg: ${{ parameters.testOrgName }}
+    deploycfSpace: ${{ parameters.testSpaceName }}
+    deploycfSpaceRelease: ${{ parameters.testSpaceNameRelease }}
+    deployMtarFileName: 'resourceRequest.mtar'
+    deployNotifyUsersKey: 'ResourceRequestDevOps'
+
+    # Sonar 1
+    sonar1SrvSonarProjectKey: 'com.sap.c4p.rm:resourceRequest-srv'
+    sonar1SrvSonarProjectBaseDir: 'srv'
+    sonar1AdditionalSonarProperties: 'sonar.coverage.exclusions=src/main/java/com/sap/c4p/rm/resourcerequest/utils/SqlFunctionsDialect.java,
+    src/main/java/com/sap/c4p/rm/resourcerequest/Migration.java,
+    src/main/java/com/sap/c4p/rm/resourcerequest/exceptions/HealthCheckException.java,
+    src/main/java/com/sap/c4p/rm/resourcerequest/handlers/recommendation/MatchingCandidatesHandlerLocal.java,
+    src/main/java/com/sap/c4p/rm/resourcerequest/config/HealthSecurityConfig.java,
+    src/main/java/com/sap/c4p/rm/projectintegrationadapter/exceptions/HealthCheckException.java,
+    src/main/java/com/sap/c4p/rm/projectintegrationadapter/config/HealthSecurityConfig.java,
+    src/main/java/com/sap/c4p/rm/projectintegrationadapter/config/SecurityConfiguration.java'
+    sonar1PreSteps:
+    - download: current
+      artifact: 'Sonar1Artifact'
+    - bash: 'mv ../Sonar1Artifact srv/target'
+    sonar1NotifyUsersKey: 'ResourceRequestSonar'
+
+    # Sonar 2
+    sonar2SecondModuleSonarProjectKey: 'com.sap.c4p.rm:project-integration-adapter'
+    sonar2SecondModuleSonarProjectBaseDir: 'project-integration-adapter'
+    sonar2AdditionalSonarProperties: 'sonar.coverage.exclusions=src/main/java/com/sap/c4p/rm/projectintegrationadapter/exceptions/HealthCheckException.java,
+    src/main/java/com/sap/c4p/rm/projectintegrationadapter/config/HealthSecurityConfig.java,
+    src/main/java/com/sap/c4p/rm/projectintegrationadapter/config/SecurityConfiguration.java,
+    src/main/java/com/sap/c4p/rm/projectintegrationadapter/config/JobSchedulerWebClientConfigurationLocal.java,
+    src/main/java/com/sap/c4p/rm/projectintegrationadapter/cf/jobscheduler/service/JobSchedulerServiceLocal.java'
+    sonar2PreSteps:
+    - download: current
+      artifact: 'Sonar2Artifact'
+    - bash: 'mv ../Sonar2Artifact project-integration-adapter/target'
+    sonar2NotifyUsersKey: 'ResourceRequestSonar'
+
+    # API Test
+    acceptance1StageName: 'API Tests'
+    acceptance1PostSteps:
+    - task: piper@1
+      displayName: API Test
+      inputs:
+        stepName: 'shellExecute'
+        flags: '--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/runTests.sh'
+        dockerOptions: '--env DOMAIN="."
+                        --env TEST_PATH="tests/api-integration"
+                        --env ENV_LANDSCAPE=${{ parameters.landscape }}
+                        --env CF_SPACE_GUID_MASTER=${{ parameters.testSpaceGuid }}
+                        --env CF_SPACE_GUID_RELEASE=${{ parameters.testSpaceGuidRelease }}
+                        --env ENV_SRV_APP_NAME=${{ parameters.appName }}
+                        --env ENV_PROJECT_INTEGRATION_APP_NAME=${{ parameters.secondSrv }}'
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      displayName: Publish Resource-Request API Test Results(XML)
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'tests/api-integration/target/report/*.xml'
+    - task: PublishPipelineArtifact@1
+      condition: succeededOrFailed()
+      inputs:
+        targetPath: 'tests/api-integration/target/report/'
+        artifact: 'API_Attempt_$(System.JobAttempt)'
+        publishLocation: 'pipeline'
+    acceptance1NotifyUsersKey: 'ResourceRequestAPIIntegrationTest'
+
+    # DB Test
+    acceptance2StageName: 'DB Tests'
+    acceptance2PostSteps:
+    - task: piper@1
+      displayName: DB Test
+      inputs:
+        stepName: 'shellExecute'
+        flags: '--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/runTests.sh'
+        dockerOptions: '--env DOMAIN="."
+                        --env TEST_PATH="tests/db-integration"
+                        --env ENV_LANDSCAPE=${{ parameters.landscape }}
+                        --env CF_SPACE_GUID_MASTER=${{ parameters.testSpaceGuid }}
+                        --env CF_SPACE_GUID_RELEASE=${{ parameters.testSpaceGuidRelease }}
+                        --env ENV_SRV_APP_NAME=${{ parameters.appName }}'
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      displayName: Publish Resource-Request DB Test Results(XML)
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'tests/db-integration/target/report/*.xml'
+    - task: PublishPipelineArtifact@1
+      condition: succeededOrFailed()
+      inputs:
+        targetPath: 'tests/db-integration/target/report/'
+        artifact: 'DB_Attempt_$(System.JobAttempt)'
+        publishLocation: 'pipeline'
+    acceptance2NotifyUsersKey: 'ResourceRequestDBIntegrationTest'
+
+    acceptance3StageName: 'N/A'
+    acceptance4StageName: 'N/A'
+
+    updateSaaSApprouterName: 'resourceRequest-approuter'
+    updateSaaSSpaceGuidMaster: ${{ parameters.testSpaceGuid }}
+    updateSaaSSpaceGuidRelease: ${{ parameters.testSpaceGuidRelease }}
+    saasNotifyUsersKey: 'ResourceRequestDevOps'

@@ -1,0 +1,35 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:core="sap.ui.core">
+  <Dialog title="{AssignModel>/title}" id="dialog" contentWidth="350px" busyIndicatorDelay="0">
+    <f:SimpleForm id="form" editable="false" layout="ResponsiveGridLayout" singleContainerFullSize="false">
+      <f:content>
+        <Label text="{i18n>NAME}" />
+        <Text id="nameText" text="{AssignModel>/name}" />
+        <Label text="{i18n>ASSGN_DATE_RANGE}" required="true" />
+        <DateRangeSelection id="dateRange" delimiter="" dateValue="{AssignModel>/resourceRequestStartDate}" secondDateValue="{AssignModel>/resourceRequestEndDate}" displayFormat="" change="onDateRangeChange" editable="{AssignModel>/isEnabledDateRange}" />
+        <Label text="{i18n>BOOKHOURS}" required="true" />
+        <Input id="hoursInput" value="{AssignModel>/bookedHours}" change="onHoursChange" editable="{AssignModel>/isEnabledHoursInput}"/>
+        <Label text="{i18n>REMAININGHOURS}" />
+        <Text id="remainingText" text="{AssignModel>/remainingCapacity}" />
+        <Label text="{i18n>ASSIGN_STATUS}" />
+        <HBox alignItems="Center">
+          <Select id="idAssignmentStatus"
+            forceSelection="true"
+            selectedKey="{path: 'AssignModel>/assignmentStatus', type: 'sap.ui.model.type.Integer'}"
+            items="{
+              path: 'AssignModel>/AssignmentStatusSet',
+              filters: [ { path: 'visible', operator: 'EQ', value1: 'true'} ]
+            }"
+            editable="{AssignModel>/isEnabled}">
+            <core:ListItem key="{AssignModel>assignmentStatus}" text="{AssignModel>assignmentStatusText}" />
+          </Select>
+        </HBox>
+      </f:content>
+    </f:SimpleForm>
+    <buttons>
+      <Button id="assignButton" type="Emphasized" text="{AssignModel>/actionButton}" press="onOk" enabled="{AssignModel>/isButtonEnabled}"/>
+      <Button id="cancelButton" text="{i18n>CANCEL}" press="onCancel" />
+    </buttons>
+  </Dialog>
+</core:FragmentDefinition>

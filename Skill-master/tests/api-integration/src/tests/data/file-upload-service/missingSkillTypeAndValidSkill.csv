@@ -1,0 +1,3 @@
+conceptType,conceptUri,skillType,preferredLabel,altLabels,description,usage
+KnowledgeSkillCompetence,{uuid()},skill/competence,values,,"VALID DESCRIPTION 1"
+KnowledgeSkillCompetence,{uuid()},,ICT safety,,"VALID DESCRIPTION 2"

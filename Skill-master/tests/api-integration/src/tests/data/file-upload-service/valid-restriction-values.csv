@@ -1,0 +1,10 @@
+conceptType,conceptUri,preferredLabel,altLabels,description,usage,skillType
+KnowledgeSkillCompetence,{uuid()},values,"scruples
+beliefs
+morals","Skill is restricted",restricted,skill/competence
+KnowledgeSkillCompetence,{uuid()},ICT safety,"ICT protection
+information and communication #technology safety
+information and communication technologies safety
+ICT welfare maintenance
+ICT security
+ICT well-being  maintenance","Unrestricted Skill",unrestricted,skill/competence

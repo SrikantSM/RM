@@ -1,0 +1,7 @@
+conceptType,conceptUri,skillType,preferredLabel,altLabels,description
+KnowledgeSkillCompetence,{uuid()},skill/competence,values,"scruples
+beliefs
+morals",
+KnowledgeSkillCompetence,{uuid()},skill/competence,values2,"scruples
+beliefs
+morals",

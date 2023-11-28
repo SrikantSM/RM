@@ -1,0 +1,194 @@
+{
+    "log": [
+        {
+            "instance": {
+                "id": "25ed3717-b1be-4b50-b41a-57898854d9ac",
+                "displayName": "1010/TEST0002/0LOJBAQ",
+                "localIdS4": {
+                    "logicalSystem": "0LOJBAQ",
+                    "companyCode": "1010",
+                    "costCenterId": "TEST0002",
+                    "controllingArea": "A000"
+                },
+                "isValid": [
+                    {
+                        "valid_from": "2012-01-01",
+                        "valid_to": "2012-12-31",
+                        "content": true
+                    },
+                    {
+                        "valid_from": "2015-02-01",
+                        "valid_to": "9999-12-31",
+                        "content": true
+                    }
+                ],
+                "attributes": [
+                    {
+                        "valid_from": "2012-01-01",
+                        "valid_to": "9999-12-31",
+                        "content": {
+                            "isBlockedForPrimaryPosting": false,
+                            "isBlockedForSecondaryPosting": false,
+                            "name": [
+                                {
+                                    "lang": "DE",
+                                    "content": "Finanzen (DE)"
+                                },
+                                {
+                                    "lang": "EN",
+                                    "content": "Financials (DE)"
+                                }
+                            ],
+                            "description": [
+                                {
+                                    "lang": "DE",
+                                    "content": "Finanzen (DE)"
+                                },
+                                {
+                                    "lang": "EN",
+                                    "content": "Financials(DE)"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "event": "updated",
+            "versionId": "46cbb771-81d0-460b-a785-731d852a77cb"
+        },
+        {
+            "instance": {
+                "id": "35ed3717-b1be-4b50-b41a-57898854d9ac",
+                "displayName": "1710/RM-IP-US01/0LOJBAQ",
+                "localIdS4": {
+                    "logicalSystem": "0LOJBAQ",
+                    "companyCode": "1710",
+                    "costCenterId": "RM-IP-US01",
+                    "controllingArea": "A000"
+                },
+                "isValid": [
+                    {
+                        "valid_from": "2020-01-01",
+                        "valid_to": "9999-12-31",
+                        "content": true
+                    }
+                ],
+                "attributes": [
+                    {
+                        "valid_from": "2020-01-01",
+                        "valid_to": "2020-01-31",
+                        "content": {
+                            "isBlockedForPrimaryPosting": false,
+                            "isBlockedForSecondaryPosting": false,
+                            "name": [
+                                {
+                                    "lang": "EN",
+                                    "content": "RM internal producti"
+                                }
+                            ],
+                            "description": [
+                                {
+                                    "lang": "EN",
+                                    "content": "RM internal production US01"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "valid_from": "2020-02-01",
+                        "valid_to": "9999-12-31",
+                        "content": {
+                            "isBlockedForPrimaryPosting": false,
+                            "isBlockedForSecondaryPosting": false,
+                            "name": [
+                                {
+                                    "lang": "EN",
+                                    "content": "RM internal producti"
+                                },
+                                {
+                                    "lang": "DE",
+                                    "content": "RM internes Produkt"
+                                }
+                            ],
+                            "description": [
+                                {
+                                    "lang": "EN",
+                                    "content": "RM internal production US01"
+                                },
+                                {
+                                    "lang": "DE",
+                                    "content": "RM interne Produktion US01"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "event": "updated",
+            "versionId": "b73b79ac-3abc-4281-9847-8ce7f6b83135"
+        },
+        {
+            "instanceId": "55ed3717-b1be-4b50-b41a-57898854d9ac",
+            "event": "excluded",
+            "versionId": "4f058b56-abdd-4c55-a846-9886bb14fad9"
+        },
+        {
+            "instance": {
+                "id": "65ed3717-b1be-4b50-b41a-57898854d9ac",
+                "displayName": "1020/TEST0010/0MOJBAQ",
+                "localIdS4": {
+                    "logicalSystem": "0MOJBAQ",
+                    "companyCode": "1020",
+                    "costCenterId": "TEST0010",
+                    "controllingArea": "B000"
+                },
+                "isValid": [
+                    {
+                        "valid_from": "2012-01-01",
+                        "valid_to": "9999-12-31",
+                        "content": true
+                    }
+                ],
+                "attributes": [
+                    {
+                        "valid_from": "2012-01-01",
+                        "valid_to": "9999-12-31",
+                        "content": {
+                            "isBlockedForPrimaryPosting": false,
+                            "isBlockedForSecondaryPosting": false,
+                            "name": [
+                                {
+                                    "lang": "DE",
+                                    "content": "Konten"
+                                },
+                                {
+                                    "lang": "EN",
+                                    "content": "Accounts"
+                                }
+                            ],
+                            "description": [
+                                {
+                                    "lang": "DE",
+                                    "content": "Konten"
+                                },
+                                {
+                                    "lang": "EN",
+                                    "content": "Accounts"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "event": "created",
+            "versionId": "c859e9c4-c8a2-4d16-a33c-db39f0036221"
+        },
+        {
+            "instanceId": "75ed3717-b1be-4b50-b41a-57898854d9ac",
+            "event": "deleted",
+            "versionId": "9f9d7e54-2729-4dd9-91ae-00a73f49cc89"
+        }
+    ],
+    "nextDeltaToken": "deltaLoadResponseDeltaToken",
+    "hasMoreEvents": false
+}

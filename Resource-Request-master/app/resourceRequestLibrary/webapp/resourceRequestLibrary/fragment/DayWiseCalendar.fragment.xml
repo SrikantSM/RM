@@ -1,0 +1,265 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+
+<Dialog title="{i18ned>dialogTitle}" titleAlignment="Center" showHeader="true" class="sapUiPopupWithPadding"
+		contentWidth="auto" contentHeight="auto" draggable="true" resizable="true"
+    core:require="{handler: 'resourceRequestLibrary/controller/DayWiseCalendar'}" afterOpen="handler.afterOpenDialog" >
+        <content>
+            <VBox>
+            	<ScrollContainer horizontal="false" vertical="false">
+                <Panel>
+                    <HBox justifyContent="SpaceBetween" alignContent="SpaceBetween" alignItems="Start" >
+                        <VBox>
+                            <Text text="{i18ned>requestedTimePeriod}"/>
+                            <Text text="{startDate} - {endDate}"/>
+                        </VBox>
+                    </HBox>
+                </Panel>
+                <HBox alignItems="Center" justifyContent="Center" alignContent="Center">
+                  <Button tooltip="{i18ned>previousMonth}" icon="sap-icon://nav-back" class="sapUiTinyMarginEnd" press="handler.onPreviousMonth" enabled="{currMonth>/navBackVisi}"/>
+                  <DatePicker id="MonthDatePicker" displayFormat="MM-y" change="handler.onMonthChange" editable="{currMonth>/visible}"/>
+                  <Button tooltip="{i18ned>nextMonth}" icon="sap-icon://feeder-arrow" class="sapUiTinyMarginBegin" press="handler.onNextMonth" enabled="{currMonth>/navForVisi}"/>
+                </HBox>
+                </ScrollContainer>
+                <ScrollContainer>
+                <Table id="calendarTable" items="{path:'currMonth>/currMonthData/weeks', templateShareable:false}" fixedLayout="false">
+
+                    <columns>
+                        <Column width="6rem" hAlign="Center">
+                            <Text text="{i18ned>calendarWeek}"/>
+                        </Column >
+
+                        <Column width="5rem" hAlign="Begin">
+                            <Text text="{i18ned>monday}" tooltip="{i18ned>MONDAY_FULL}"/>
+                        </Column>
+
+                        <Column width="5rem" hAlign="Begin">
+                            <Text text="{i18ned>tuesday}" tooltip="{i18ned>TUESDAY_FULL}" />
+                        </Column>
+
+                        <Column width="5rem" hAlign="Begin">
+                            <Text text="{i18ned>wednesday}" tooltip="{i18ned>WEDNESDAY_FULL}"/>
+                        </Column>
+
+                        <Column width="5rem" hAlign="Begin">
+                            <Text text="{i18ned>thursday}" tooltip="{i18ned>THURSDAY_FULL}"/>
+                        </Column>
+
+                        <Column width="5rem" hAlign="Begin">
+                            <Text text="{i18ned>friday}" tooltip="{i18ned>FRIDAY_FULL}"/>
+                        </Column>
+
+                        <Column width="5rem" hAlign="Begin">
+                            <Text text="{i18ned>saturday}" tooltip="{i18ned>SATURDAY_FULL}" />
+                        </Column>
+
+                        <Column width="5rem" hAlign="Begin">
+                            <Text text="{i18ned>sunday}" tooltip="{i18ned>SUNDAY_FULL}"/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <VBox>
+                                    <Label text="{currMonth>weekNumber}" design="Bold" vAlign="Middle"/>
+                                </VBox>
+
+                                <VBox>
+                                  <Label 
+                                      text="{currMonth>mon/day}"
+                                      labelFor="mon"/> 
+                                  <Input
+                                      change="handler.onDayEffortChange"
+                                      description="{i18ned>unitHours}"
+                                      enabled="{currMonth>mon/visibility}"
+                                      id="mon"
+                                      submit="handler.onsapenter"
+                                      textAlign="End" 
+                                      type = "Number"
+                                      value="{path: 'currMonth>mon/value', type:'sap.ui.model.type.Integer' , constraints:{minimum:0,maximum:999}, templateShareable:false}"
+                                      visible="{= ${ui>/editMode} === 'Editable'}" >
+                                          <customData>
+                                              <core:CustomData
+                                                  key="{currMonth>mon/date}"
+                                                  value="{path: 'currMonth>mon/value', type:'sap.ui.model.type.Integer'}"/>
+                                          </customData>
+                                  </Input>
+                                  <Text 
+                                      text="{currMonth>mon/value} {i18ned>unitHours}"
+                                      visible="{= ${ui>/editMode} === 'Display'}" />
+                                </VBox>
+
+                                <VBox>
+                                  <Label 
+                                      text="{currMonth>tue/day}"
+                                      labelFor="tue"/> 
+                                  <Input
+                                      change="handler.onDayEffortChange"
+                                      description="{i18ned>unitHours}"
+                                      enabled="{currMonth>tue/visibility}"
+                                      id="tue"
+                                      submit="handler.onsapenter"
+                                      textAlign="End" 
+                                      type = "Number"
+                                      value="{path: 'currMonth>tue/value', type:'sap.ui.model.type.Integer' , constraints:{minimum:0,maximum:999}, templateShareable:false}"
+                                      visible="{= ${ui>/editMode} === 'Editable'}" >
+                                          <customData>
+                                              <core:CustomData
+                                                  key="{currMonth>tue/date}"
+                                                  value="{path: 'currMonth>tue/value', type:'sap.ui.model.type.Integer'}"/>
+                                          </customData>
+                                  </Input>
+                                  <Text 
+                                      text="{currMonth>tue/value} {i18ned>unitHours}"
+                                      visible="{= ${ui>/editMode} === 'Display'}" />
+                                </VBox>
+
+                                <VBox>
+                                  <Label 
+                                      text="{currMonth>wed/day}"
+                                      labelFor="wed"/> 
+                                  <Input
+                                      change="handler.onDayEffortChange"
+                                      description="{i18ned>unitHours}"
+                                      enabled="{currMonth>wed/visibility}"
+                                      id="wed"
+                                      submit="handler.onsapenter"
+                                      textAlign="End" 
+                                      type = "Number"
+                                      value="{path: 'currMonth>wed/value', type:'sap.ui.model.type.Integer' , constraints:{minimum:0,maximum:999}, templateShareable:false}"
+                                      visible="{= ${ui>/editMode} === 'Editable'}" >
+                                          <customData>
+                                              <core:CustomData
+                                                  key="{currMonth>wed/date}"
+                                                  value="{path: 'currMonth>wed/value', type:'sap.ui.model.type.Integer'}"/>
+                                          </customData>
+                                  </Input>
+                                  <Text 
+                                      text="{currMonth>wed/value} {i18ned>unitHours}"
+                                      visible="{= ${ui>/editMode} === 'Display'}" />
+                                </VBox>
+
+                                <VBox>
+                                  <Label 
+                                      text="{currMonth>thu/day}"
+                                      labelFor="thu"/> 
+                                  <Input
+                                      change="handler.onDayEffortChange"
+                                      description="{i18ned>unitHours}"
+                                      enabled="{currMonth>thu/visibility}"
+                                      id="thu"
+                                      submit="handler.onsapenter"
+                                      textAlign="End" 
+                                      type = "Number"
+                                      value="{path: 'currMonth>thu/value', type:'sap.ui.model.type.Integer' , constraints:{minimum:0,maximum:999}, templateShareable:false}"
+                                      visible="{= ${ui>/editMode} === 'Editable'}" >
+                                          <customData>
+                                              <core:CustomData
+                                                  key="{currMonth>thu/date}"
+                                                  value="{path: 'currMonth>thu/value', type:'sap.ui.model.type.Integer'}"/>
+                                          </customData>
+                                  </Input>
+                                  <Text 
+                                      text="{currMonth>thu/value} {i18ned>unitHours}"
+                                      visible="{= ${ui>/editMode} === 'Display'}" />
+                                </VBox>
+
+                                <VBox>
+                                  <Label 
+                                      text="{currMonth>fri/day}"
+                                      labelFor="fri"/> 
+                                  <Input
+                                      change="handler.onDayEffortChange"
+                                      description="{i18ned>unitHours}"
+                                      enabled="{currMonth>fri/visibility}"
+                                      id="fri"
+                                      submit="handler.onsapenter"
+                                      textAlign="End" 
+                                      type = "Number"
+                                      value="{path: 'currMonth>fri/value', type:'sap.ui.model.type.Integer' , constraints:{minimum:0,maximum:999}, templateShareable:false}"
+                                      visible="{= ${ui>/editMode} === 'Editable'}" >
+                                          <customData>
+                                              <core:CustomData
+                                                  key="{currMonth>fri/date}"
+                                                  value="{path: 'currMonth>fri/value', type:'sap.ui.model.type.Integer'}"/>
+                                          </customData>
+                                  </Input>
+                                  <Text 
+                                      text="{currMonth>fri/value} {i18ned>unitHours}"
+                                      visible="{= ${ui>/editMode} === 'Display'}" />
+                                </VBox>
+
+                                <VBox>
+                                  <Label 
+                                      text="{currMonth>sat/day}"
+                                      labelFor="sat"/> 
+                                  <Input
+                                      change="handler.onDayEffortChange"
+                                      description="{i18ned>unitHours}"
+                                      enabled="{currMonth>sat/visibility}"
+                                      id="sat"
+                                      submit="handler.onsapenter"
+                                      textAlign="End" 
+                                      type = "Number"
+                                      value="{path: 'currMonth>sat/value', type:'sap.ui.model.type.Integer' , constraints:{minimum:0,maximum:999}, templateShareable:false}"
+                                      visible="{= ${ui>/editMode} === 'Editable'}" >
+                                          <customData>
+                                              <core:CustomData
+                                                  key="{currMonth>sat/date}"
+                                                  value="{path: 'currMonth>sat/value', type:'sap.ui.model.type.Integer'}"/>
+                                          </customData>
+                                  </Input>
+                                  <Text 
+                                      text="{currMonth>sat/value} {i18ned>unitHours}"
+                                      visible="{= ${ui>/editMode} === 'Display'}" />
+                                </VBox>
+
+                                <VBox>
+                                  <Label 
+                                      text="{currMonth>sun/day}"
+                                      labelFor="sun"/> 
+                                  <Input
+                                      change="handler.onDayEffortChange"
+                                      description="{i18ned>unitHours}"
+                                      enabled="{currMonth>sun/visibility}"
+                                      id="sun"
+                                      submit="handler.onsapenter"
+                                      textAlign="End" 
+                                      type = "Number"
+                                      value="{path: 'currMonth>sun/value', type:'sap.ui.model.type.Integer' , constraints:{minimum:0,maximum:999}, templateShareable:false}"
+                                      visible="{= ${ui>/editMode} === 'Editable'}" >
+                                          <customData>
+                                              <core:CustomData
+                                                  key="{currMonth>sun/date}"
+                                                  value="{path: 'currMonth>sun/value', type:'sap.ui.model.type.Integer'}"/>
+                                          </customData>
+                                  </Input>
+                                  <Text 
+                                      text="{currMonth>sun/value} {i18ned>unitHours}"
+                                      visible="{= ${ui>/editMode} === 'Display'}" />
+                                </VBox>
+
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+                </ScrollContainer>
+
+                <Panel backgroundDesign="Transparent">
+                <ScrollContainer horizontal="false" vertical="false">
+                    <HBox justifyContent="End" alignContent="SpaceBetween" alignItems="End" >
+                        <VBox>
+                            <ObjectAttribute title="{i18ned>requiredEffort}" text="" />
+                            <ObjectNumber class="sapMObjectNumberLarge" number="{currMonth>/totalEffort}" unit="{i18ned>hours}" />
+                        </VBox>
+                    </HBox>
+                     </ScrollContainer>
+                </Panel>
+
+            </VBox>
+        </content>
+        <beginButton>
+            <Button text="{i18ned>ok}" press="handler.onConfirmCalendarView" enabled="{currMonth>/visible}" type="Emphasized"/>
+        </beginButton>
+    </Dialog>
+
+</core:FragmentDefinition>

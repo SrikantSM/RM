@@ -1,0 +1,23 @@
+{
+  "name": "end-to-end",
+  "private": true,
+  "scripts": {
+    "debug": "node --no-lazy --inspect-brk=9229 node_modules/@ui5/uiveri5/src/cli.js uiveri5-config.js",
+    "start": "uiveri5 uiveri5-config.js",
+    "start-local": "uiveri5 uiveri5-config.js --params.local",
+    "generate-test-cases": "uiveri5 uiveri5-config.js --params.skipTests --params.local",
+    "push-test-cases": "node src/utils/pushTestCases.js",
+    "test": "npm start",
+    "lint": "eslint \"**/*.js\""
+  },
+  "dependencies": {
+    "@ui5/uiveri5": "^1.45.1",
+    "test-commons": "git+https://github.tools.sap/Cloud4RM/Test-Commons#a845854471e1f87e1c3782270a8845b9f163ad33",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "eslint": "7.20.0",
+    "eslint-config-airbnb-base": "14.2.1",
+    "eslint-plugin-import": "2.22.1"
+  }
+}

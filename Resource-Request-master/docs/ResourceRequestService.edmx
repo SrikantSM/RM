@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+    <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+    <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="ResourceRequestService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="ResourceRequests" EntityType="ResourceRequestService.ResourceRequests"/>
+        <EntitySet Name="ReferenceObjects" EntityType="ResourceRequestService.ReferenceObjects"/>
+      </EntityContainer>
+      <EntityType Name="ResourceRequests">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="displayId" Type="Edm.String" MaxLength="10"/>
+        <Property Name="name" Type="Edm.String" MaxLength="256"/>
+        <Property Name="referenceObjectId" Type="Edm.Guid"/>
+        <Property Name="startDate" Type="Edm.Date"/>
+        <Property Name="endDate" Type="Edm.Date"/>
+        <Property Name="requiredEffort" Type="Edm.Decimal" Scale="2" Precision="10"/>
+        <Property Name="description" Type="Edm.String" MaxLength="1024"/>
+      </EntityType>
+      <EntityType Name="ReferenceObjects">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="displayId" Type="Edm.String" MaxLength="40"/>
+        <Property Name="name" Type="Edm.String" MaxLength="256"/>
+        <Property Name="typeCode" Type="Edm.Int32" DefaultValue="0"/>
+        <Property Name="startDate" Type="Edm.Date"/>
+        <Property Name="endDate" Type="Edm.Date"/>
+      </EntityType>
+      <Annotations Target="ResourceRequestService.EntityContainer">
+        <Annotation Term="Core.Description" String="Resource Request"/>
+        <Annotation Term="Core.LongDescription" String="This API enables you to create resource requests in SAP S/4HANA Cloud for projects, resource management to find suitable resource and staff them to projects or other activities. You can also update and delete resource requests and manage the reference objects using this API."/>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.ResourceRequests">
+        <Annotation Term="Core.LongDescription" String="Resource requests"/>
+        <Annotation Term="Core.Description" String="Resource requests"/>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.EntityContainer/ResourceRequests">
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Description" String="Create a new resource request."/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.ReadRestrictions">
+          <Record Type="Capabilities.ReadRestrictionsType">
+            <PropertyValue Property="Description" String="Read resource requests."/>
+            <PropertyValue Property="ReadByKeyRestrictions">
+              <Record Type="Capabilities.ReadByKeyRestrictionsType">
+                <PropertyValue Property="Description" String="Read a single resource request."/>
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Description" String="Update a resource request."/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Description" String="Delete a resource request."/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.ResourceRequests/ID">
+        <Annotation Term="Core.Description" String="The identifier for the resource request."/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.ResourceRequests/displayId">
+        <Annotation Term="Core.Description" String="A human-readable resource request ID."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="0000000018"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.ResourceRequests/name">
+        <Annotation Term="Core.Description" String="The name of the resource request."/>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.ResourceRequests/referenceObjectId">
+        <Annotation Term="Core.Description" String="The identifier of the reference object."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="4837baca-b9ca-42e4-8199-b2d78ee36a52"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.ResourceRequests/startDate">
+        <Annotation Term="Core.Description" String="The start date of the resource request."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="2022-01-13"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.ResourceRequests/endDate">
+        <Annotation Term="Core.Description" String="The end date of the resource request."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="2022-12-25"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.ResourceRequests/requiredEffort">
+        <Annotation Term="Core.Description" String="The number of hours requested in the resource request."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="250"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.ResourceRequests/description">
+        <Annotation Term="Core.Description" String="The description of the resource request."/>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.ReferenceObjects">
+        <Annotation Term="Core.LongDescription" String="Reference Objects"/>
+        <Annotation Term="Core.Description" String="Reference Objects"/>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.EntityContainer/ReferenceObjects">
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="true"/>
+            <PropertyValue Property="Description" String="Create a new reference object."/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="true"/>
+            <PropertyValue Property="Description" String="Update a reference object."/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="true"/>
+            <PropertyValue Property="Description" String="Delete a reference object."/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.ReadRestrictions">
+          <Record Type="Capabilities.ReadRestrictionsType">
+            <PropertyValue Property="Description" String="Read reference objects."/>
+            <PropertyValue Property="ReadByKeyRestrictions">
+              <Record Type="Capabilities.ReadByKeyRestrictionsType">
+                <PropertyValue Property="Description" String="Read a single reference object."/>
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.ReferenceObjects/ID">
+        <Annotation Term="Core.Description" String="The identifier for the reference object."/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.ReferenceObjects/displayId">
+        <Annotation Term="Core.Description" String="A human-readable reference object ID."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="TestProject"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.ReferenceObjects/name">
+        <Annotation Term="Core.Description" String="The name of the reference object."/>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.ReferenceObjects/typeCode">
+        <Annotation Term="Core.Description" String="The type of the reference object [0 - None, 1 - Project]."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="1"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="None"/>
+              <PropertyValue Property="Value" Int="0"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Project"/>
+              <PropertyValue Property="Value" Int="1"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.ReferenceObjects/startDate">
+        <Annotation Term="Core.Description" String="The start date of the reference object."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="2023-01-13"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ResourceRequestService.ReferenceObjects/endDate">
+        <Annotation Term="Core.Description" String="The end date of the reference object."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="2023-12-25"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,103 @@
+# miscellameous
+target
+default-env.json
+local-test-journey.spec.js
+*.db
+debug.log
+.DS_Store
+_out
+.che/
+.cds_gen.log
+*.orig
+javaw_*.log
+hs_err_pid*.log
+report.*
+manifest.yml
+.classpath
+.factorypath
+.history
+*.iml
+.settings
+.project
+.idea
+.vscode
+*.jar
+# npm
+node_modules/
+tests/**/package-lock.json
+# complile and build time
+#  - db
+db/src/gen
+gen/
+.gen/
+node/
+#  - srv
+/srv/.iml
+/integration-srv/.iml
+.settings
+/srv/.settings
+/integration-srv/.settings
+.project
+/srv/.project
+/integration-srv/.project
+.idea
+/srv/.idea
+/integration-srv/.idea
+.vscode
+/srv/.vscode
+/srv/.sts4-cache/classpath-data.json
+/integration-srv/.vscode
+/integration-srv/.sts4-cache/classpath-data.json
+*.jar
+/srv/src/main/resources/logback.xml
+/srv/src/main/resources/schema.sql
+/srv/src/main/resources/edmx
+/srv/src/main/resources/connection.properties
+/srv/*.db
+/srv/*.db-journal
+/srv/bin/
+# - integration-srv
+/integration-srv/.iml
+/integration-srv/.settings
+/integration-srv/.project
+/integration-srv/.idea
+/integration-srv/.vscode
+/integration-srv/.sts4-cache/classpath-data.json
+/integration-srv/src/main/resources/logback.xml
+/integration-srv/src/main/resources/schema.sql
+/integration-srv/src/main/resources/edmx
+/integration-srv/src/main/resources/connection.properties
+/integration-srv/*.db
+/integration-srv/*.db-journal
+/integration-srv/bin/
+#  - app/
+app/**/dist/
+app/**/webapp/localService/
+#  - app/projectRoleUi
+#  - app/myProjectExperienceUi
+#  - flp-content
+#  - ui-deployer
+/ui-deployer/resources
+#  - ui-content
+/ui-content/*.zip
+# - utils
+/utils/localLaunchpad/webapp/ui
+/utils/localLaunchpad/java_backend/webapp
+!/utils/localLaunchpad/default-env.json
+#  - tests
+*/end-to-end/debug.log
+*/end-to-end/src/tests/data/*/generated-*.csv
+*/ui-integration/debug.log
+*/ui-integration/data.sql
+*/api-integration/test-results.xml
+*/api-integration/npm-debug.log
+*/db-integration/test-results.xml
+# mbt build artifact
+.mta
+*.mta
+*.mtaext
+*.mtar
+.Consultant-Profile_mta_build_tmp/
+mta-op*
+tests/end-to-end/debug.log
+tests/Test-Commons

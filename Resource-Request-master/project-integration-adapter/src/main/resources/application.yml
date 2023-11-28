@@ -1,0 +1,66 @@
+# enable health checks
+management:
+  endpoints:
+    web:
+      exposure:
+        exclude: info # disable info endpoint
+        include: health
+    jmx:
+      exposure:
+        exclude: '*' # disable all jmx endpoints
+    enabled-by-default: false
+  endpoint:
+    health:
+      enabled: true
+      show-details: never
+    info:
+      enabled: false
+  health:
+    db:
+      enabled: true
+
+cds.multiTenancy.security.subscriptionScope: Callback
+cds.multiTenancy.security.deploymentScope: InitDb
+cds.multitenancy.datasource.hikari:
+  registerMbeans: true # Required for JMX/Dyntrace monitoring.
+  leakDetectionThreshold: 2000
+  connectionTimeout: 20000 # Needs to be lower than the health check timeout at AvS. Compare https://github.wdf.sap.corp/cap/issues/issues/8103#issuecomment-3098670
+  maxLifetime: 900000 # (15 minutes) Has to be smaller than timeout on HANA Cloud (which defaults to 24h). Recommended to be configured explicitly as per https://github.com/brettwooldridge/HikariCP.
+  minimumIdle: 1 # Each Tenant has its own connection pool with at max maximumPoolSize (default 10) connections. If minimumIdle is unspecified, it will be exactly 10 connections per tenant, which wastes resources.
+  idleTimeout: 300000 # (5 minutes) Time for idle connections to stay alive if unused. If exceeded, the connection will be closed, reducing the pool size down to minimumIdle. Has to be configured if minimumIdle != maximumPoolSize.
+
+---
+spring:
+  config:
+    activate:
+      on-profile: default
+  sql:
+    init:
+      mode: always
+  datasource:
+    url: 'jdbc:sqlite:file::memory:?cache=shared'
+    driver-class-name: org.sqlite.JDBC
+    schema:
+      - classpath:schema.sql
+    hikari:
+      maximum-pool-size: 1
+
+project-integration-adapter:
+  logging:
+    rootlevel: INFO
+    appender: STDOUT
+
+cds:
+  datasource:
+    csvPaths:
+      - ../../db/csv/**
+      - data/**
+---
+spring:
+  config:
+    activate:
+      on-profile: cloud
+
+project-integration-adapter:
+  logging:
+    rootlevel: INFO

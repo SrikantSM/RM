@@ -1,0 +1,16 @@
+{
+    "SUPA_AUTOMATES_LANDSCAPE": "sap",
+    "SUPA_AUTOMATES_SPACE_GUID": "",
+    "SUPA_AUTOMATES_APP_NAME": "consultantProfile-srv",
+    "ENV_CF_USER": "sapc4ppipeline@sap.com",
+    "ENV_CF_PASSWORD": "",
+    "SUPA_AUTOMATES_APP_URL": "https://org-tenant-space-rm-approuter.internal.cfapps.sap.hana.ondemand.com/cp.portal/site",
+    "ENV_USER_CONFIGURATIONEXPERT_SUPA": "sapc4pauthorizationpipelinebusinessconfigexpert@global.corp.sap",
+    "ENV_PASSWORD_CONFIGURATIONEXPERT_SUPA": "",
+    "ENV_USER_CONSULTANT1_SUPA": "sapc4pauthconsultant1@global.corp.sap",
+    "ENV_PASSWORD_CONSULTANT1_SUPA": "",
+    "SUPA_AUTOMATES_WARMUP_CYCLES": 1,
+    "SUPA_AUTOMATES_MEASUREMENT_CYCLES": 0,
+    "SUPA_SPEC": "group-1/CreateProjectRole",
+    "SUPA_AUTOMATES_APP_IDP_HOST": "sap.custom"
+}

@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "eslint-config-airbnb-base"
+  ],
+  "globals": {
+    "sap": true
+  },
+  "rules": {
+    "func-names": "off",
+    "max-len": "off",
+    "valid-jsdoc": "error"
+  }
+}

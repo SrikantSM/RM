@@ -1,0 +1,43 @@
+{
+  "name": "ui-integration",
+  "private": true,
+  "dependencies": {
+    "grunt": "1.6.1",
+    "grunt-cli": "1.4.3",
+    "grunt-karma": "^4.0.2",
+    "karma": "^6.3.4",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-coverage": "^2.2.1",
+    "karma-html-reporter": "^0.2.7",
+    "karma-junit-reporter": "^2.0.1",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-qunit": "^4.1.2",
+    "karma-ui5": "^2.3.4",
+    "npm-run-all": "^4.1.5",
+    "qunit": "^2.17.2"
+  },
+  "devDependencies": {
+    "eslint": "7.32.0",
+    "eslint-config-airbnb-base": "14.2.1",
+    "eslint-plugin-import": "2.24.2"
+  },
+  "scripts": {
+    "start": "npm run prepare-umbrella && npm run prepare-server && run-p -r -l server all",
+    "prepare-umbrella": "cd ../../../ && npm ci",
+    "prepare-server": "cd ../../ && npm ci && npm run build",
+    "server": "cd ../../srv && mvn -s ../../settings.xml clean spring-boot:run -Dspring-boot.run.arguments=\"--skill.logging.appender=STDOUT-OPA\"",
+    "test": "npm start",
+    "all": "run-s -n -c test:*",
+    "test:skill": "grunt ci --appName=skill",
+    "debug:skill": "grunt debug --appName=skill",
+    "test:upload": "grunt ci --appName=skill-upload --appFolder=upload",
+    "debug:upload": "grunt debug --appName=skill-upload --appFolder=upload",
+    "test:download": "grunt ci --appName=skill-download --appFolder=download",
+    "debug:download": "grunt debug --appName=skill-download --appFolder=download",
+    "test:catalog": "grunt ci --appName=skill-catalog --appFolder=catalog",
+    "debug:catalog": "grunt debug --appName=skill-catalog --appFolder=catalog",
+    "test:proficiency": "grunt ci --appName=skill-proficiency --appFolder=proficiency",
+    "debug:proficiency": "grunt debug --appName=skill-proficiency --appFolder=proficiency",
+    "lint": "eslint \"**/*.js\""
+  }
+}

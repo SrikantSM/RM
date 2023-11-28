@@ -1,0 +1,32 @@
+PROCEDURE RM_COMPUTE_CALENDAR_WEEK (
+  in  iv_time         timestamp,
+  out ev_start_time   timestamp,
+  out ev_end_time     timestamp,
+  out ev_year         varchar(4),
+  out ev_quarter      varchar(7),
+  out ev_year_quarter varchar(7),
+  out ev_month        varchar(2),
+  out ev_year_month   varchar(7),
+  out ev_week         varchar(2),
+  out ev_year_week    varchar(4)
+)
+LANGUAGE SQLSCRIPT READS SQL DATA AS
+BEGIN
+---Procedure RM_COMPUTE_CALENDAR_WEEK is a utility to return different date parameters based on input timestamp---
+/*
+The below logic uses the input timestamp and computes and returns various date and time fields.
+Used in Procedure RM_FILL_TIME_DIMENSION
+*/
+  ev_start_time     := TO_TIMESTAMP(TO_VARCHAR(ADD_DAYS(:iv_time, - WEEKDAY(:IV_TIME)), 'YYYY-MM-DD') || ' 00:00:00.0000000', 'YYYY-MM-DD HH24:MI:SS.FF7');
+  ev_end_time       := TO_TIMESTAMP(TO_VARCHAR(ADD_DAYS(:ev_start_time, 6), 'YYYY-MM-DD') || ' 23:59:59.9999999', 'YYYY-MM-DD HH24:MI:SS.FF7');
+  ev_year           := TO_NVARCHAR(:ev_start_time,'YYYY');
+  ev_quarter        := SUBSTRING(QUARTER(:ev_start_time),6,2);
+  ev_year_quarter   := QUARTER(ev_start_time);
+  ev_month          := TO_NVARCHAR(:ev_start_time,'MM');
+  ev_year_month     := :ev_year || '-' || :ev_month;
+--  ev_week           := LPAD(TO_NVARCHAR(WEEK(:eV_START_TIME)),2,'0');
+--  ev_week           := TO_NVARCHAR(:eV_START_TIME,'WW');
+  ev_year_week      := SUBSTRING(isoweek(:ev_start_time), 1,4);
+  ev_week           := SUBSTRING(isoweek(:ev_start_time), 7,2);
+
+END

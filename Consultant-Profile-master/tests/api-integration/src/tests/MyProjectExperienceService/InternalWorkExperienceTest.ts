@@ -1,0 +1,316 @@
+import { suite, timeout, test } from 'mocha-typescript';
+import { assert, expect } from 'chai';
+import { Email, WorkforcePerson } from 'test-commons';
+import { MyProjectExperienceServiceRepository } from '../../utils/serviceRepository/MyProjectExperienceService-Repository';
+import {
+    allEmail,
+    allSkills,
+    employeeHeaderWithDescription1,
+    assignment1,
+    allEmployeeHeaders,
+    allWorkforcePerson,
+    allResourceHeaders,
+    allWorkAssignment,
+    allWorkAssignmentDetail,
+    allAssignments,
+    allAssignmentBuckets,
+    allOrganizationHeaders,
+    customerData,
+    workpackageData,
+    projectData,
+    resourceRequestData,
+    allSkillRequirements,
+    assignment2,
+    allProjectRoles,
+    projectRoleWithDescription1,
+    workforcePersonWithDescription1,
+    email1,
+    skillWithDescription1,
+    setOneProficiencyLevel1,
+    allProficiencySet,
+    resourceOrganization1,
+    allResourceOrganizations,
+    allResourceOrganizationItems,
+    allProficiencyLevel,
+    demandData,
+
+} from '../../data';
+import { createInternalWorkExperience } from '../../data/service/myProjectExperienceService';
+import { InternalWorkExperience, InternalWorkExperienceSkills } from '../../serviceEntities/myProjectExperienceService/InternalWorkExperience';
+import { TEST_TIMEOUT } from '../../utils/serviceRepository/Service-Repository';
+import { ProfileData } from '../../serviceEntities/myProjectExperienceService/ProfileData';
+import { MyProjectExperienceHeader } from '../../serviceEntities/myProjectExperienceService/MyProjectExperienceHeader';
+
+@suite('MyProjectExperienceService/InternalWorkExperience')
+export class InternalWorkExperienceTest extends MyProjectExperienceServiceRepository {
+    public constructor() { super('InternalWorkExperience'); }
+
+    @timeout(TEST_TIMEOUT)
+    static async before() {
+        await this.prepare();
+        await this.employeeHeaderRepository.insertMany(allEmployeeHeaders);
+        await this.workforcePersonRepository.insertMany(allWorkforcePerson);
+        await this.workAssignmentRepository.insertMany(allWorkAssignment);
+        await this.workAssignmentDetailRepository.insertMany(allWorkAssignmentDetail);
+        await this.emailRepository.insertMany(allEmail);
+        await this.resourceHeaderRepository.insertMany(allResourceHeaders);
+        await this.assignmentsRepository.insertMany(allAssignments);
+        await this.assignmentBucketRepository.insertMany(allAssignmentBuckets);
+        await this.organizationHeaderRepository.insertMany(allOrganizationHeaders);
+        await this.customerRepository.insertMany(customerData);
+        await this.workPackageRepository.insertMany(workpackageData);
+        await this.projectRepository.insertMany(projectData);
+        await this.projectRoleRepository.insertMany(allProjectRoles);
+        await this.proficiencySetRepository.insertMany(allProficiencySet);
+        await this.proficiencyLevelRepository.insertMany(allProficiencyLevel);
+        await this.skillRepository.insertMany(allSkills);
+        await this.resourceRequestRepository.insertMany(resourceRequestData);
+        await this.skillRequirementRepository.insertMany(allSkillRequirements);
+        await this.resourceOrganizationsRepository.insertMany(allResourceOrganizations);
+        await this.resourceOrganizationItemsRepository.insertMany(allResourceOrganizationItems);
+        await this.demandRepository.insertMany(demandData);
+    }
+
+    @timeout(TEST_TIMEOUT)
+    static async after() {
+        await this.employeeHeaderRepository.deleteMany(allEmployeeHeaders);
+        await this.workforcePersonRepository.deleteMany(allWorkforcePerson);
+        await this.workAssignmentRepository.deleteMany(allWorkAssignment);
+        await this.workAssignmentDetailRepository.deleteMany(allWorkAssignmentDetail);
+        await this.emailRepository.deleteMany(allEmail);
+        await this.resourceHeaderRepository.deleteMany(allResourceHeaders);
+        await this.assignmentsRepository.deleteMany(allAssignments);
+        await this.assignmentBucketRepository.deleteMany(allAssignmentBuckets);
+        await this.organizationHeaderRepository.deleteMany(allOrganizationHeaders);
+        await this.customerRepository.deleteMany(customerData);
+        await this.workPackageRepository.deleteMany(workpackageData);
+        await this.projectRepository.deleteMany(projectData);
+        await this.projectRoleRepository.deleteMany(allProjectRoles);
+        await this.skillRepository.deleteMany(allSkills);
+        await this.proficiencySetRepository.deleteMany(allProficiencySet);
+        await this.proficiencyLevelRepository.deleteMany(allProficiencyLevel);
+        await this.resourceRequestRepository.deleteMany(resourceRequestData);
+        await this.skillRequirementRepository.deleteMany(allSkillRequirements);
+        await this.resourceOrganizationsRepository.deleteMany(allResourceOrganizations);
+        await this.resourceOrganizationItemsRepository.deleteMany(allResourceOrganizationItems);
+        await this.demandRepository.deleteMany(demandData);
+    }
+
+    @test(timeout(TEST_TIMEOUT))
+    async 'Get a list of all internal work experiences.'() {
+        const response = await this.get();
+        this.responses.push(response);
+        const internalWorkExperiences = response.data.value as InternalWorkExperience[];
+
+        assert.equal(response.status, 200, 'Expected status code should be 200 (Ok).');
+        assert.isDefined(internalWorkExperiences, 'Expected a list of all internal work experiences.');
+        const expectedInternalWorkExperiences: InternalWorkExperience[] = [];
+        expectedInternalWorkExperiences.push(this.prepareInternalWorkExperience());
+        expect(internalWorkExperiences).to.deep.include.any.members(expectedInternalWorkExperiences);
+    }
+
+    @test(timeout(TEST_TIMEOUT))
+    async 'Get a list of all internal work experience for a user not in the DB.'() {
+        const response = await this.getWithNoConsultantInDB();
+        this.responses.push(response);
+        const internalWorkExperience = response.data.value as InternalWorkExperience[];
+
+        assert.equal(response.status, 200, 'Expected status code should be 200 (Ok).');
+        assert.isEmpty(internalWorkExperience, 'Expected an empty list of skills used in internal work experience.');
+    }
+
+    @test(timeout(TEST_TIMEOUT))
+    async 'Get a list of all internal work experiences without authorization.'() {
+        const response = await this.getWithoutAuthorization();
+        this.responses.push(response);
+
+        assert.equal(response.status, 403, 'Expected status code should be 403 (Forbidden).');
+    }
+
+    @test(timeout(TEST_TIMEOUT))
+    async 'Get a list of all internal work experience with skill and consultant details.'() {
+        const response = await this.get('?$expand=internalWorkExperienceSkills,employee,profile');
+        this.responses.push(response);
+        const internalWorkExperiences = response.data.value as InternalWorkExperience[];
+
+        assert.equal(response.status, 200, 'Expected status code should be 200 (Ok).');
+        assert.isDefined(internalWorkExperiences, 'Expected a list of all internal work experience with skill and consultant details.');
+        const expectedInternalWorkExperiences: InternalWorkExperience[] = [];
+        expectedInternalWorkExperiences.push(this.prepareExpected({ workforcePerson: workforcePersonWithDescription1, email: email1 }));
+        expect(internalWorkExperiences).to.deep.include.any.members(expectedInternalWorkExperiences);
+    }
+
+    @test(timeout(TEST_TIMEOUT))
+    async 'Get a list of all internal work experience with skill and consultant details without authorization.'() {
+        const response = await this.getWithoutAuthorization('?$expand=internalWorkExperienceSkills,employee,profile');
+        this.responses.push(response);
+
+        assert.equal(response.status, 403, 'Expected status code should be 403 (Forbidden).');
+    }
+
+    @test(timeout(TEST_TIMEOUT))
+    async 'Get one internal work experience.'() {
+        const response = await this.get(`(assignment_ID=${assignment1.ID})`);
+        this.responses.push(response);
+        const internalWorkExperience = response.data;
+        delete internalWorkExperience['@context'];
+        delete internalWorkExperience['@metadataEtag'];
+
+        assert.equal(response.status, 200, 'Expected status code should be 200 (Ok).');
+        const expectedInternalWorkExperience = this.prepareInternalWorkExperience();
+        expect(internalWorkExperience).to.eql(expectedInternalWorkExperience);
+    }
+
+    @test(timeout(TEST_TIMEOUT))
+    async 'Get internal work experience of another employee.'() {
+        const response = await this.get(`(assignment_ID=${assignment2.ID})`);
+        this.responses.push(response);
+        const internalWorkExperience = response.data as InternalWorkExperience;
+
+        assert.equal(response.status, 404, 'Expected status code should be 404 (Not Found).');
+        assert.isUndefined(
+            internalWorkExperience.assignment_ID,
+            'Expected no internal work experience from another employee.',
+        );
+    }
+
+    @test(timeout(TEST_TIMEOUT))
+    async 'Get one internal work experience without authorization.'() {
+        const response = await this.getWithoutAuthorization(`(assignment_ID=${assignment1.ID})`);
+        this.responses.push(response);
+
+        assert.equal(response.status, 403, 'Expected status code should be 403 (Forbidden).');
+    }
+
+    @test(timeout(TEST_TIMEOUT))
+    async 'Get one internal work experience with skill and consultant details.'() {
+        const response = await this.get(`(assignment_ID=${assignment1.ID})?$expand=internalWorkExperienceSkills,employee,profile`);
+        this.responses.push(response);
+        const internalWorkExperience = response.data;
+        delete internalWorkExperience['@context'];
+        delete internalWorkExperience['@metadataEtag'];
+
+        const expectedInternalAssignment = this.prepareExpected({ workforcePerson: workforcePersonWithDescription1, email: email1 });
+        assert.equal(response.status, 200, 'Expected status code should be 200 (Ok).');
+        expect(internalWorkExperience).to.eql(expectedInternalAssignment);
+    }
+
+    @test(timeout(TEST_TIMEOUT))
+    async 'Get internal work experience of another employee with skill and consultant details.'() {
+        const response = await this.get(`(assignment_ID=${assignment2.ID})?$expand=internalWorkExperienceSkills,employee,profile`);
+        this.responses.push(response);
+        const internalWorkExperience = response.data as InternalWorkExperience;
+
+        assert.equal(response.status, 404, 'Expected status code should be 404 (Not Found).');
+        assert.isUndefined(
+            internalWorkExperience.assignment_ID,
+            'Expected no internal work experience from another employee.',
+        );
+    }
+
+    @test(timeout(TEST_TIMEOUT))
+    async 'Get one internal work experience with skill and consultant details without authorization.'() {
+        const response = await this.getWithoutAuthorization(`(assignment_ID=${assignment1.ID})?$expand=internalWorkExperienceSkills,employee,profile`);
+        this.responses.push(response);
+
+        assert.equal(response.status, 403, 'Expected status code should be 403 (Forbidden).');
+    }
+
+    @test(timeout(TEST_TIMEOUT))
+    async 'Creating a internal work experience.'() {
+        const responseInternalWorkExperienceCreate = await this.create(createInternalWorkExperience);
+        this.responses.push(responseInternalWorkExperienceCreate);
+
+        assert.equal(responseInternalWorkExperienceCreate.status, 403, 'Creating a internal work experience should not be allowed, expected status code should be 403(Forbidden).');
+    }
+
+    private prepareExpected(profile?: { workforcePerson: WorkforcePerson, email: Email }) {
+        const expectedSkills: InternalWorkExperienceSkills[] = [];
+        const expectedInternalWorkExperience = this.prepareInternalWorkExperience();
+        if (profile !== undefined) {
+            expectedInternalWorkExperience.profile = this.prepareProfile(profile);
+            expectedInternalWorkExperience.employee = this.prepareEmployee(employeeHeaderWithDescription1.ID);
+            const expectedSkill = this.prepareInternalWorkExperienceSkills();
+            expectedSkills.push(expectedSkill);
+            expectedInternalWorkExperience.internalWorkExperienceSkills = expectedSkills;
+        }
+
+        return expectedInternalWorkExperience;
+    }
+
+    private prepareInternalWorkExperience() {
+        const now = new Date(Date.now());
+        const currentMonthStart = new Date(Date.UTC(now.getFullYear(), now.getMonth(), 1));
+        const nowPlusFiveMonthsStart = new Date(Date.UTC(now.getFullYear(), now.getMonth() + 5, 1));
+        const start = currentMonthStart.toISOString().slice(0, 10);
+        const end = nowPlusFiveMonthsStart.toISOString().slice(0, 10);
+        const prepareInternalWorkExperience: InternalWorkExperience = {
+            assignment_ID: assignment1.ID,
+            resourceRequest_ID: resourceRequestData[0].ID,
+            assignmentStatus: 'Soft-Booked',
+            requestName: resourceRequestData[0].name,
+            requestDisplayId: resourceRequestData[0].displayId,
+            companyName: resourceOrganization1.name,
+            customerName: customerData[0].name,
+            rolePlayed: projectRoleWithDescription1.name,
+            assignedCapacity: 2160,
+            convertedAssignedCapacity: '36.00 hr',
+            startDate: start,
+            endDate: end,
+            employee_ID: employeeHeaderWithDescription1.ID,
+            workItemName: 'Work Item Name 1',
+        };
+        return prepareInternalWorkExperience;
+    }
+
+    private prepareProfile(profile: { workforcePerson: WorkforcePerson, email: Email }) {
+        const preparedProfile: ProfileData = {
+            ID: profile.workforcePerson.ID,
+            dataSubjectRole: 'Project Team Member',
+            workerExternalID: profile.workforcePerson.externalID,
+            emailAddress: profile.email.address,
+            firstName: null!,
+            lastName: null!,
+            initials: null!,
+            mobilePhoneNumber: null!,
+            name: null!,
+            role: null!,
+            profilePhotoURL: null!,
+            managerExternalID: null!,
+            officeLocation: null!,
+            costCenterDescription: null!,
+            costCenter: null!,
+            resourceOrg: null!,
+            resourceOrgId: null!,
+            isContingentWorker: false,
+            fullName: null!,
+        };
+        return preparedProfile;
+    }
+
+    private prepareInternalWorkExperienceSkills() {
+        const preparedSkills: InternalWorkExperienceSkills = {
+            assignment_ID: assignment1.ID,
+            skillId: skillWithDescription1.ID,
+            proficiencyLevelId: setOneProficiencyLevel1.ID,
+            employee_ID: employeeHeaderWithDescription1.ID,
+        };
+        return preparedSkills;
+    }
+
+    private prepareEmployee(employeeID: string) {
+        const employee: MyProjectExperienceHeader = {
+            ID: employeeID,
+            commaSeparatedSkills: null!,
+            commaSeparatedRoles: null!,
+            HasActiveEntity: false,
+            HasDraftEntity: false,
+            IsActiveEntity: true,
+            createdAt: null!,
+            createdBy: null!,
+            modifiedAt: null!,
+            modifiedBy: null!,
+        };
+        return employee;
+    }
+}

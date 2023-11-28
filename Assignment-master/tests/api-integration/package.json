@@ -1,0 +1,30 @@
+{
+    "name": "api-integration",
+    "private": true,
+    "scripts": {
+        "postinstall": "npm run build",
+        "build": "tsc",
+        "mocha-test": "mocha --require source-map-support/register --reporter mocha-multi-reporters --reporter-options configFile=reporter-config.json",
+        "start": "npm run mocha-test target/dist/**/*.js",
+        "all-test": "npm start",
+        "test": "npm start"
+    },
+    "dependencies": {
+        "@types/chai": "^4.1.7",
+        "@types/mocha": "^7.0.2",
+        "@types/node": "^14.14.28",
+        "@types/uuid": "^7.0.3",
+        "axios": "^0.19.2",
+        "chai": "^4.2.0",
+        "form-data": "^3.0.0",
+        "mocha": "^7.2.0",
+        "mocha-junit-reporter": "^1.23.1",
+        "mocha-multi-reporters": "^1.1.7",
+        "mocha-typescript": "^1.1.17",
+        "mochawesome": "^4.0.1",
+        "source-map-support": "^0.5.12",
+        "test-commons": "git+https://github.tools.sap/Cloud4RM/Test-Commons#1c754918988b87465f4c6ed570ca5bf6510b502f",
+        "typescript": "^3.9.2",
+        "uuid": "^8.0.0"
+    }
+}

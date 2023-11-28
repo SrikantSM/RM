@@ -1,0 +1,28 @@
+# https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+# Code owners are automatically requested for review when someone opens a pull request that modifies code that they own.
+# Code owners are not automatically requested to review draft pull requests.
+
+.github/** @I077919 @I072823 @I348336
+CODEOWNERS @I077919 @I072823 @I348336
+README.md @I077919 @I072823 @I348336
+
+# i18n-Properties Files are owned by Swarup
+**/i18n/**/*.properties @I076189
+db/**/*.properties @I076189
+
+# Changes to the TWB config should also notify Swarup/Nicole, so translated files that are properties files can be added individually here
+translation_v2.json @I076189 @i046918 @D044894
+
+# Test Files by default are owned by Saloni along with others
+app/**/test/ @I524736
+srv/**/test/ @I524736
+integration-srv/**/test/ @I524736
+tests/api-integration/ @I524736
+tests/ui-integration/ @I524736
+tests/cross-domain-e2e/ @I524736
+tests/db-integration/ @I524736
+tests/end-to-end/ @I524736
+
+# Pipeline changes
+.pipeline/config.yml @i076118
+azure-pipelines.yml @i076118

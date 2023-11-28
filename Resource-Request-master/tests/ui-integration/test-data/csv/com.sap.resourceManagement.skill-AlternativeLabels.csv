@@ -1,0 +1,16 @@
+ID,name,skill_ID,language_code
+f517acce-c8a2-11e9-a32f-2a2ae2dbcce4,Core Data Service,e08cce86-c8a2-11e9-a32f-2a2ae2dbcce4,en
+f517af26-c8a2-11e9-a32f-2a2ae2dbcce4,NodeJavaScript,e08cd0fc-c8a2-11e9-a32f-2a2ae2dbcce4,en
+f517b070-c8a2-11e9-a32f-2a2ae2dbcce4,UI5,e08cd250-c8a2-11e9-a32f-2a2ae2dbcce4,en
+f517b19c-c8a2-11e9-a32f-2a2ae2dbcce4,PM,e08cd5b6-c8a2-11e9-a32f-2a2ae2dbcce4,en
+f517b4da-c8a2-11e9-a32f-2a2ae2dbcce4,Fiori,e08cd728-c8a2-11e9-a32f-2a2ae2dbcce4,en
+f517b624-c8a2-11e9-a32f-2a2ae2dbcce4,UI Developer,e08cd854-c8a2-11e9-a32f-2a2ae2dbcce4,en
+f517b750-c8a2-11e9-a32f-2a2ae2dbcce4,Java8,e08cd976-c8a2-11e9-a32f-2a2ae2dbcce4,en
+f517b87c-c8a2-11e9-a32f-2a2ae2dbcce4,UI-integration,e08cdaa2-c8a2-11e9-a32f-2a2ae2dbcce4,en
+f517b99e-c8a2-11e9-a32f-2a2ae2dbcce4,Junits testing,e08cdbc4-c8a2-11e9-a32f-2a2ae2dbcce4,en
+f517bac0-c8a2-11e9-a32f-2a2ae2dbcce4,JS,e08cde94-c8a2-11e9-a32f-2a2ae2dbcce4,en
+f517bbe2-c8a2-11e9-a32f-2a2ae2dbcce4,UI Veri5,e08cdff2-c8a2-11e9-a32f-2a2ae2dbcce4,en
+f517bf0c-c8a2-11e9-a32f-2a2ae2dbcce4,ABAP,e08ce114-c8a2-11e9-a32f-2a2ae2dbcce4,en
+f517c042-c8a2-11e9-a32f-2a2ae2dbcce4,Fiori Elements,e08ce236-c8a2-11e9-a32f-2a2ae2dbcce4,en
+f517c178-c8a2-11e9-a32f-2a2ae2dbcce4,CAP,e08ce358-c8a2-11e9-a32f-2a2ae2dbcce4,en
+f517c434-c8a2-11e9-a32f-2a2ae2dbcce4,CF,e08ce47a-c8a2-11e9-a32f-2a2ae2dbcce4,en

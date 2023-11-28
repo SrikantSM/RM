@@ -1,0 +1,73 @@
+<mvc:XMLView
+  controllerName="skill-proficiency.controller.ProficiencyLevelsTable"
+  xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:dnd="sap.ui.core.dnd"
+  xmlns:core="sap.ui.core">
+  <VBox>
+    <Table
+      id="proficiencyLevelsTable"
+      mode="{= ${ui>/editMode} === 'Editable' ? 'SingleSelectLeft' : 'None'}"
+      selectionChange="onSelectionChange"
+      updateFinished="onUpdateFinished"
+      contextualWidth="Auto"
+      fixedLayout="Strict"
+      autoPopinMode="true"
+      sticky="HeaderToolbar,ColumnHeaders"
+      items="{
+        path: 'proficiencyLevels',
+        parameters: {
+          expand:'ProficiencyLevels',
+          '$orderby' : 'rank desc'
+        }
+      }"
+    >
+     	<headerToolbar>
+        <OverflowToolbar>
+          <Title id="proficiencyLevelTableTitle" text="{i18n>tableTitleProficiencyLevels}" level="H2"/>
+          <ToolbarSpacer />
+          <Button id="moveUpButton" text="{i18n>buttonMoveUp}" press="onMoveUp" visible="{= ${ui>/editMode} === 'Editable'}" />
+          <Button id="moveDownButton" text="{i18n>buttonMoveDown}" press="onMoveDown" visible="{= ${ui>/editMode} === 'Editable'}" />
+          <Button id="proficiencyLevelCreateButton" text="{i18n>buttonCreate}" press="onCreateProficiencyLevel" visible="{= ${ui>/editMode} === 'Editable'}" />
+        </OverflowToolbar>
+      </headerToolbar>
+      <columns>
+          <Column id="proficiencyLevelNameColumn" width="20rem" popinDisplay="inline">
+            <Text id="proficiencyLevelNameColumnLabel" text="{i18n>labelProficiencyLevelName}" />
+          </Column>
+          <Column id="proficiencyLevelDescriptionColumn" width="20rem" demandPopin="true" popinDisplay="inline">
+            <Text id="proficiencyLevelDescriptionColumnLabel" text="{i18n>labelProficiencyLevelDescription}" />
+          </Column>
+          <Column id="proficiencyLevelRankColumn" width="6rem" demandPopin="true" popinDisplay="inline" hAlign="End">
+            <Text id="proficiencyLevelRankColumnLabel" text="{i18n>labelProficiencyLevelRank}" />
+          </Column>
+          <Column id="proficiencyLevelLanguagesColumn" width="20rem" demandPopin="true" popinDisplay="inline">
+            <Text id="proficiencyLevelLanguagesColumnLabel" text="{i18n>labelProficiencyLevelLanguages}" />
+          </Column>
+      </columns>
+      <dragDropConfig>
+        <dnd:DragDropInfo
+          sourceAggregation="items"
+          targetAggregation="items"
+          dropPosition="Between"
+          drop="onDrop"
+          enabled="{= ${ui>/editMode} === 'Editable'}"
+          />
+      </dragDropConfig>
+      <items>
+        <ColumnListItem type="Navigation" press="navigateToProficiencyLevelText">
+          <cells>
+            <ObjectIdentifier
+              title="{name}" />
+            <Text
+              text="{description}" />
+            <Text
+              text="{rank}" />
+            <Text
+              text="{commaSeparatedLanguages}" />
+          </cells>
+        </ColumnListItem>
+      </items>
+    </Table>
+  </VBox>
+</mvc:XMLView>

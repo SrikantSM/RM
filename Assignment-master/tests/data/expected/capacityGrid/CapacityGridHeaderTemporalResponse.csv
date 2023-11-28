@@ -1,0 +1,9 @@
+ID,startDate,costCenter,costCenterID,costCenterName,emailAddress,mobileNumber,country,resourceName,firstName,lastName,role,managerName,avgUtilization,bookedHours,availableHours
+fc6a4f22-4281-40ec-bd79-8756275e0672,2014-06-30,null,null,null,null,null,null,null,null,null,null,null,79,120,152
+11942b97-d7ce-4cb0-90db-6430288a32bc,2017-03-21,null,null,null,null,null,null,null,null,null,null,null,0,0,200
+6806862a-3788-441c-9b00-bd52013711b3,2015-10-31,null,null,null,null,null,null,null,null,null,null,null,60,120,200
+d771ad92-26e5-4aed-9173-49406112b5b2,2012-09-14,null,null,null,null,null,null,null,null,null,null,null,68,120,176
+cc6a4f22-4281-40ec-bd79-8756275e0672,2014-07-30,null,null,null,null,null,null,null,null,null,null,null,0,0,200
+e8dd2db2-501f-4f46-8af0-4613a3a3549f,2015-08-15,null,null,null,null,null,null,null,null,null,null,null,0,0,-44
+dc6a4f22-4281-40ec-bd79-8756275e0672,2021-07-30,null,null,null,null,null,null,null,null,null,null,null,0,0,200
+ac6a4f22-4281-40ec-bd79-8756275e0672,2021-07-30,null,null,null,null,null,null,null,null,null,null,null,0,0,200

@@ -1,0 +1,29 @@
+{
+    "owner": {
+        "SubaccountId": "51c2cff2-7e94-4d4d-8e98-3284727b8493",
+        "InstanceId": null
+    },
+    "destinationConfiguration": {
+        "Name": "destination_test",
+        "Type": "HTTP",
+        "URL": "http://localhost:8090",
+        "Authentication": "OAuth2ClientCredentials",
+        "ProxyType": "Internet",
+        "tokenServiceURLType": "Dedicated",
+        "clientId": "sb-31adc925-5733-486f-951d-982d319143e5!b7297|one-mds-master!b9046",
+        "clientSecret": "66c689e6-fd3c-4afd-9b65-56af92d0b948$_dy_trBqMmOUrgvwZ-xtZPBDUpF1Wg_uvW9tTIHss_A=",
+        "tokenServiceURL": "https://rm-valiant.authentication.sap.hana.ondemand.com/oauth/token"
+    },
+    "authTokens": [
+        {
+            "type": "bearer",
+            "value": "Bearer_token",
+            "http_header": {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vcm0tdmFsaWFudC5hdXRoZW50aWNhdGlvbi5zYXAuaGFuYS5vbmRlbWFuZC5jb20vdG9rZW5fa2V5cyIsImtpZCI6ImtleS1pZC0xIiwidHlwIjoiSldUIn0.eyJqdGkiOiJkYzU0MzQ0N2Q5MzI0ODU3YmNkMzg3NmNlNjYxYzIwOCIsImV4dF9hdHRyIjp7ImVuaGFuY2VyIjoiWFNVQUEiLCJzdWJhY2NvdW50aWQiOiI1MWMyY2ZmMi03ZTk0LTRkNGQtOGU5OC0zMjg0NzI3Yjg0OTMiLCJ6ZG4iOiJybS12YWxpYW50Iiwic2VydmljZWluc3RhbmNlaWQiOiIzMWFkYzkyNS01NzMzLTQ4NmYtOTUxZC05ODJkMzE5MTQzZTUifSwic3ViIjoic2ItMzFhZGM5MjUtNTczMy00ODZmLTk1MWQtOTgyZDMxOTE0M2U1IWI3Mjk3fG9uZS1tZHMtbWFzdGVyIWI5MDQ2IiwiYXV0aG9yaXRpZXMiOlsidWFhLnJlc291cmNlIl0sInNjb3BlIjpbInVhYS5yZXNvdXJjZSJdLCJjbGllbnRfaWQiOiJzYi0zMWFkYzkyNS01NzMzLTQ4NmYtOTUxZC05ODJkMzE5MTQzZTUhYjcyOTd8b25lLW1kcy1tYXN0ZXIhYjkwNDYiLCJjaWQiOiJzYi0zMWFkYzkyNS01NzMzLTQ4NmYtOTUxZC05ODJkMzE5MTQzZTUhYjcyOTd8b25lLW1kcy1tYXN0ZXIhYjkwNDYiLCJhenAiOiJzYi0zMWFkYzkyNS01NzMzLTQ4NmYtOTUxZC05ODJkMzE5MTQzZTUhYjcyOTd8b25lLW1kcy1tYXN0ZXIhYjkwNDYiLCJncmFudF90eXBlIjoiY2xpZW50X2NyZWRlbnRpYWxzIiwicmV2X3NpZyI6IjNmN2ZmZTQiLCJpYXQiOjE2Njc5ODE0MDYsImV4cCI6MTY2ODAyNDYwNiwiaXNzIjoiaHR0cDovL3JtLXZhbGlhbnQubG9jYWxob3N0OjgwODAvdWFhL29hdXRoL3Rva2VuIiwiemlkIjoiNTFjMmNmZjItN2U5NC00ZDRkLThlOTgtMzI4NDcyN2I4NDkzIiwiYXVkIjpbInVhYSIsInNiLTMxYWRjOTI1LTU3MzMtNDg2Zi05NTFkLTk4MmQzMTkxNDNlNSFiNzI5N3xvbmUtbWRzLW1hc3RlciFiOTA0NiJdfQ.wKQbpgODSs0gg-z7pHVRLVW0lCIP2hCIBakcORDXs2c-EcFnSB5XSNwiu8DZPq5nxrmuAkJ7Zy9VGq8zDZNT3kCUs2lCXGjAZHHEnL_S5poJ1Y2dNcZEUWDJTvIwRtIhc0tLG6HwBe2xErhwVd-7qru6_OnBoGt_qV30KMXxb-PEJPcvDpVx0_dvKVtji5znsYj5PE3LyVk5RCA4vXWvWCH75mdyz8LHUVaucmeQvRvRkz6Kz1pJh3rzzeQJzDejpN1RzBmWeIKcEitNHQiUYzTRKstxDYxQDXa2rFZmm-kWo98ELfGVSJIRKxbWC0GXzb-QalvuUZH92dFYsRhqOg"
+            },
+            "expires_in": "43199",
+            "scope": "uaa.resource"
+        }
+    ]
+}

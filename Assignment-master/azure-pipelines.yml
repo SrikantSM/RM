@@ -1,0 +1,228 @@
+# Using Piper general purpose pipeline for Azure
+
+trigger:
+  - release
+  - master
+  - hotfix
+
+parameters:
+  - name: cfApiEndPoint
+    type: string
+    default: 'https://api.cf.sap.hana.ondemand.com'
+  - name: testOrgName
+    type: string
+    default: 'c4p-rm-excelsior'
+  - name: testSpaceName
+    type: string
+    default: 'dev-test'
+  - name: testSpaceNameRelease
+    type: string
+    default: 'rel-test'
+  - name: testSpaceGuid
+    type: string
+    default: 'c3bc9249-6208-447c-9e93-8cc559781241'
+  - name: testSpaceGuidRelease
+    type: string
+    default: 'bb54c8c5-3236-42f6-a7d5-5c02f032ccb3'
+  - name: landscape
+    type: string
+    default: sap
+  - name: appName
+    type: string
+    default: 'assignment-srv'
+  - name: secondSrv
+    type: string
+    default: 'assignment-adapter'
+  - name: AppRouterURL
+    type: string
+    default: 'https://rm-excelsior-tenant-c4p-rm-excelsior-dev-test-assignmentd000060.cfapps.sap.hana.ondemand.com'
+  - name: AppRouterURLRelease
+    type: string
+    default: 'https://rm-excelsior-tenant-c4p-rm-excelsior-rel-test-assignment7cc28dc.cfapps.sap.hana.ondemand.com' 
+
+resources:
+  repositories:
+  - repository: piper-pipeline-azure
+    endpoint: github.tools.sap
+    type: githubenterprise
+    name: Cloud4RM/RM-Piper-ADO     
+  - repository: Umbrella
+    endpoint: github.tools.sap
+    type: githubenterprise
+    name: Cloud4RM/Resource-Management      
+    
+    
+extends:
+  template: piper-ado-templates/rm-domain-pipeline.yml@piper-pipeline-azure
+  parameters:
+    # General Purpose
+    umbrellaClone:
+    - checkout: Umbrella
+      submodules: true
+    domainName: 'Assignment'
+
+    # Build
+    buildPostSteps:
+    - publish: 'Assignment/srv/target'
+      artifact: 'Sonar1Artifact'
+    buildNotifyUsersKey: 'AssignmentDevOps'  
+    
+    # Sonar 1
+    sonar1SrvSonarProjectKey: 'com.sap.c4p.rm:assignment-srv'
+    sonar1SrvSonarProjectBaseDir: 'srv'
+    sonar1AdditionalSonarProperties: 'sonar.coverage.exclusions=src/main/java/com/sap/c4p/rm/assignment/config/HealthSecurityConfig.java,
+    src/main/java/com/sap/c4p/rm/assignment/exception/HealthCheckException.java'
+    sonar1PreSteps:
+    - download: current
+      artifact: 'Sonar1Artifact'
+    - bash: 'mv ../Sonar1Artifact srv/target'
+    sonar1NotifyUsersKey: 'AssignmentSonar'
+
+    # UI Integration 1
+    uIIntegration1StageName: 'UI Integration Tests - 1'
+    uIIntegration1overwriteSteps:
+    - task: Bash@3
+      displayName: Build Docker Image
+      inputs:
+        targetType: 'inline'
+        script: '/usr/bin/docker build -t dockerimageforopa .'
+    - task: piper@1      
+      displayName: UI Integration Tests - 1
+      inputs:
+          stepName: 'shellExecute'
+          dockerImage: 'dockerimageforopa'
+          flags: '--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/runTests.sh'
+          dockerOptions: '--env DOMAIN="Assignment"
+                          --env TEST_PATH="tests/ui-integration"'
+    - task: PublishPipelineArtifact@1
+      condition: succeededOrFailed()
+      inputs:
+        targetPath: "Assignment/app/capacityGridUi/report"
+        artifact: "Assignment_OPA1_Attempt_$(System.JobAttempt)"
+        publishLocation: "pipeline"
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      displayName: Assignment Test Results(XML)
+      inputs:
+        testResultsFormat: "JUnit"
+        testResultsFiles: "Assignment/app/capacityGridUi/report/karma1/*.xml"
+
+    
+    # Second UI Integration
+    uIIntegration2StageName: 'UI Integration Tests - 2'
+    uIIntegration2ResultPath: 'Assignment/app/capacityGridUi/report/karma2/*.xml'
+    uIIntegration2PostSteps:
+    - task: piper@1
+      displayName: UI Integration Tests - 2
+      inputs:
+        stepName: 'shellExecute'
+        dockerImage: 'dockerimageforopa'
+        flags: '--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/runTests2.sh'
+        dockerOptions: '--env DOMAIN="Assignment"
+                        --env TEST_PATH="tests/ui-integration"'
+    - task: PublishPipelineArtifact@1
+      condition: succeededOrFailed()
+      inputs:
+        targetPath: 'Assignment/app/capacityGridUi/report'
+        artifact: 'Assignment_OPA2_Attempt_$(System.JobAttempt)'
+        publishLocation: 'pipeline'
+
+    # Third UI Integration stage
+    uIIntegration3StageName: 'UI Integration Tests - 3'
+    uIIntegration3ResultPath: 'Assignment/app/capacityGridUi/report/karma3/*.xml'
+    uIIntegration3PostSteps:
+    - task: piper@1
+      displayName: UI Integration Tests - 3
+      inputs:
+        stepName: 'shellExecute'
+        dockerImage: 'dockerimageforopa'
+        flags: '--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/runTests3.sh'
+        dockerOptions: '--env DOMAIN="Assignment"
+                        --env TEST_PATH="tests/ui-integration"'
+    - task: PublishPipelineArtifact@1
+      condition: succeededOrFailed()
+      inputs:
+        targetPath: 'Assignment/app/capacityGridUi/report'
+        artifact: 'Assignment_OPA3_Attempt_$(System.JobAttempt)'
+        publishLocation: 'pipeline'
+
+    uIIntegrationNotifyUsersKey: 'AssignmentUIIntegrationTest'    
+
+
+    # Deploy
+    deploycfAPIEndPoint: ${{ parameters.cfApiEndPoint }}
+    deploycfOrg: ${{ parameters.testOrgName }}
+    deploycfSpace: ${{ parameters.testSpaceName }}
+    deploycfSpaceRelease: ${{ parameters.testSpaceNameRelease }}
+    deployMtarFileName: 'assignment.mtar'
+    deployNotifyUsersKey: 'AssignmentDevOps'
+
+    
+    # API Test
+    acceptance1StageName: 'API Integration Tests'
+    acceptance1PostSteps:
+    - task: piper@1
+      displayName: API Test
+      inputs:
+        stepName: shellExecute
+        flags: "--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/runTests.sh"
+        dockerImage: ppiper/node-browsers:v14-16-buster
+        dockerOptions: '--env DOMAIN="."
+                        --env TEST_PATH="tests/api-integration"
+                        --env ENV_LANDSCAPE="sap" 
+                        --env CF_SPACE_GUID_MASTER=${{ parameters.testSpaceGuid }} 
+                        --env CF_SPACE_GUID_RELEASE=${{ parameters.testSpaceGuidRelease }} 
+                        --env ENV_SRV_APP_NAME="assignment-srv" '
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      displayName: Publish Assignment API Test Results(XML)
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'tests/api-integration/target/report/*.xml'
+    - task: PublishPipelineArtifact@1
+      condition: failed()
+      inputs:
+        targetPath: 'tests/api-integration/target/report/'
+        artifact: 'Assignment_API_Attempt_$(System.JobAttempt)'
+        publishLocation: 'pipeline'
+    acceptance1NotifyUsersKey: 'AssignmentAPIIntegrationTest'    
+
+    # Assignment E2E Test
+    acceptance2StageName: 'Assignment E2E Test'
+    acceptance2PostSteps:
+    - task: piper@1
+      displayName: Run Assignment E2E
+      inputs:
+        stepName: shellExecute
+        flags: "--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/runTests.sh"
+        dockerImage: ppiper/node-browsers:v25
+        dockerOptions: '--env DOMAIN="." 
+                        --env TEST_PATH="tests/end-to-end"
+                        --env ADDITIONAL_FLAGS_FOR_START_COMMAND="-- --config.connectionConfigs.direct.binaries.chromedriver.version=111.0.5563.19"
+                        --env ENV_LANDSCAPE="sap" 
+                        --env ENV_SRV_APP_NAME="assignment-srv" 
+                        --env CF_SPACE_GUID_MASTER=${{ parameters.testSpaceGuid }} 
+                        --env CF_SPACE_GUID_RELEASE=${{ parameters.testSpaceGuidRelease }} 
+                        --env ENV_APPROUTER_URL_MASTER=${{parameters.AppRouterURL}} 
+                        --env ENV_APPROUTER_URL_RELEASE=${{parameters.AppRouterURLRelease}} 
+                        --env ENV_IDP_HOST="axtubdeog.accounts400.ondemand.com"
+                        --env ENV_BROWSER_NAME="chrome"
+                        --env ENV_REPORT_NAME="target/report/ASGE2EAllJUnit.xml"
+                        --env ENV_PLATFORM_NAME="linux"'
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      displayName: Publish Assignment E2E Results(XML)
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'tests/end-to-end/target/**/*.xml'
+    - task: PublishPipelineArtifact@1
+      condition: failed()
+      inputs:
+        targetPath: 'tests/end-to-end/target/report/screenshots/'
+        artifact: 'Assignemnt_E2E_Attempt_$(System.JobAttempt)'
+        publishLocation: 'pipeline'
+    acceptance2NotifyUsersKey: 'AssignmentEndtoEndTest'    
+        
+    updateSaaSApprouterName: 'assignment-approuter'
+    updateSaaSSpaceGuidMaster: ${{ parameters.testSpaceGuid }}
+    updateSaaSSpaceGuidRelease: ${{ parameters.testSpaceGuidRelease }}

@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:core="sap.ui.core" core:require="{ formatMessage: 'sap/base/strings/formatMessage' }">
+  <Dialog verticalScrolling="false" contentHeight="50%" contentWidth="50%" title="{i18n>errorDialogTitle}">
+    <content>
+      <MessageView items="{path: 'skill>/UploadJob/uploadErrors', parameters: {$orderby : 'type'}}" groupItems="true">
+        <items>
+          <MessageItem title="{skill>errorMessage}"
+            groupName="{path: 'skill>type', formatter: '.formatter.uploadErrorTypeGroupName'}"
+            type="{path: 'skill>type', formatter: '.formatter.uploadErrorTypeType'}"
+            subtitle="{parts: [{path: 'skill>count', targetType: 'any'}, {path: 'skill>affectedEntity', targetType: 'any'}], formatter: '.formatter.uploadErrorMessageSubTitle'}"
+            description="{parts: [{path: 'skill>count', targetType: 'any'}, {path: 'skill>affectedEntity', targetType: 'any'}], formatter: '.formatter.uploadErrorMessageSubTitle'}">
+          </MessageItem>
+        </items>
+      </MessageView>
+    </content>
+    <endButton>
+      <Button id="buttonClose" text="{i18n>errorDialogClose}" press="handleCloseErrorDialog" />
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

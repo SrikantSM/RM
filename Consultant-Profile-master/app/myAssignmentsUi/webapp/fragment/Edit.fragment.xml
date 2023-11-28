@@ -1,0 +1,142 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:calendar="sap.ui.unified.calendar">
+
+    <Dialog title="{i18n>dialogTitle}" titleAlignment="Center" showHeader="true" class="sapUiPopupWithPadding" contentWidth="auto" contentHeight="auto" draggable="true" resizable="true" core:require="{handler: 'myAssignmentsUi/controller/WeekWiseCalendar'}">
+        <content>
+            <VBox>
+                <ScrollContainer horizontal="false" vertical="false">
+                    <Panel>
+                        <HBox justifyContent="SpaceBetween" alignContent="SpaceBetween" alignItems="Start">
+                            <VBox>
+                                <Label text="{i18n>requestedTimePeriod}"/>
+                                <Text text="{currentQuarterModel>/requestedStartDate} - {currentQuarterModel>/requestedEndDate}"/>
+                            </VBox>
+                        </HBox>
+                    </Panel>
+
+                    <HBox alignItems="Center" justifyContent="Center" alignContent="Center">
+                        <Button class="sapUiTinyMarginEnd" enabled="{currentQuarterModel>/navigateToPreviousQuarterEnabled}" icon="sap-icon://nav-back" press="handler.onPreviousQuarter" tooltip="{i18n>previousQuarter}"/>
+                        <Button id="quarterPicker" press="handler.onQuarterSelector" text=""  enabled="{currentQuarterModel>/quarterSelectorEnabled}"/>
+                        <Button class="sapUiTinyMarginBegin" enabled="{currentQuarterModel>/navigateToNextQuarterEnabled}" icon="sap-icon://feeder-arrow" press="handler.onNextQuarter" tooltip="{i18n>nextQuarter}"/>
+                    </HBox>
+                </ScrollContainer>
+                <ScrollContainer>
+                    <Table id="quarterCalendarTable" items="{path:'currentQuarterModel>/Q1_2020/months', templateShareable:false}" fixedLayout="false">
+                        <columns>
+                            <Column width="6rem" hAlign="Center">
+                                <Text text="{i18n>month}" tooltip="{i18n>month}"/>
+                            </Column>
+
+                            <Column width="5rem" hAlign="Begin">
+                                <Text text="{i18n>WEEKANDEFFORT}" tooltip="{i18n>WEEKANDEFFORT}"/>
+                            </Column>
+
+                            <Column width="5rem" hAlign="Begin">
+                                <Text text="{i18n>WEEKANDEFFORT}" tooltip="{i18n>WEEKANDEFFORT}"/>
+                            </Column>
+
+                            <Column width="5rem" hAlign="Begin">
+                                <Text text="{i18n>WEEKANDEFFORT}" tooltip="{i18n>WEEKANDEFFORT}"/>
+                            </Column>
+
+                            <Column width="5rem" hAlign="Begin">
+                                <Text text="{i18n>WEEKANDEFFORT}" tooltip="{i18n>WEEKANDEFFORT}"/>
+                            </Column>
+
+                            <Column width="5rem" hAlign="Begin">
+                                <Text text="{i18n>WEEKANDEFFORT}" tooltip="{i18n>WEEKANDEFFORT}"/>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <VBox>
+                                        <Label text="{currentQuarterModel>monthText}" design="Bold" vAlign="Middle"/>
+                                    </VBox>
+
+                                    <VBox visible="{= ${currentQuarterModel>weeks/0/visible} === true}">
+                                        <Label text="{i18n>calendarWeekShort}{currentQuarterModel>weeks/0/weekNumber}" tooltip="{currentQuarterModel>weeks/0/toolTipForStartDate} - {currentQuarterModel>weeks/0/toolTipForEndDate}"/>
+                                        <Input change="handler.onWeekEffortChange" description="{i18n>unitHours}" enabled="{currentQuarterModel>weeks/0/enabled}" submit="handler.onsapenter" textAlign="End" 
+                                        type = "Number" value="{path: 'currentQuarterModel>weeks/0/value', type:'sap.ui.model.type.Integer' , constraints:{minimum:0,maximum:999}, templateShareable:false}" visible="{= ${ui>/editMode} === 'Editable'}" valueState="{currentQuarterModel>weeks/0/valueState}" valueStateText="{currentQuarterModel>weeks/0/valueStateText}">
+                                            <customData>
+                                                <core:CustomData key="{currentQuarterModel>weeks/0/weekNumber}" value="{path: 'currentQuarterModel>weeks/0'}"/>
+                                            </customData>
+                                        </Input>
+
+                                    </VBox>
+
+                                    <VBox visible="{= ${currentQuarterModel>weeks/1/visible} === true}">
+                                        <Label text="{i18n>calendarWeekShort}{currentQuarterModel>weeks/1/weekNumber}" tooltip="{currentQuarterModel>weeks/1/toolTipForStartDate} - {currentQuarterModel>weeks/1/toolTipForEndDate}"/>
+                                        <Input change="handler.onWeekEffortChange" description="{i18n>unitHours}" enabled="{currentQuarterModel>weeks/1/enabled}" submit="handler.onsapenter" textAlign="End" 
+                                        type = "Number" value="{path: 'currentQuarterModel>weeks/1/value', type:'sap.ui.model.type.Integer' , constraints:{minimum:0,maximum:999}, templateShareable:false}" visible="{= ${ui>/editMode} === 'Editable'}" valueState="{currentQuarterModel>weeks/1/valueState}" valueStateText="{currentQuarterModel>weeks/1/valueStateText}">
+                                            <customData>
+                                                <core:CustomData key="{currentQuarterModel>weeks/1/weekNumber}" value="{path: 'currentQuarterModel>weeks/1'}"/>
+                                            </customData>
+                                        </Input>
+
+                                    </VBox>
+
+                                    <VBox visible="{= ${currentQuarterModel>weeks/2/visible} === true}">
+                                        <Label text="{i18n>calendarWeekShort}{currentQuarterModel>weeks/2/weekNumber}" tooltip="{currentQuarterModel>weeks/2/toolTipForStartDate} - {currentQuarterModel>weeks/2/toolTipForEndDate}"/>
+                                        <Input change="handler.onWeekEffortChange" description="{i18n>unitHours}" enabled="{currentQuarterModel>weeks/2/enabled}" submit="handler.onsapenter" textAlign="End" 
+                                        type = "Number" value="{path: 'currentQuarterModel>weeks/2/value', type:'sap.ui.model.type.Integer' , constraints:{minimum:0,maximum:999}, templateShareable:false}" visible="{= ${ui>/editMode} === 'Editable'}" valueState="{currentQuarterModel>weeks/2/valueState}" valueStateText="{currentQuarterModel>weeks/2/valueStateText}">
+                                            <customData>
+                                                <core:CustomData key="{currentQuarterModel>weeks/2/weekNumber}" value="{path: 'currentQuarterModel>weeks/2'}"/>
+                                            </customData>
+                                        </Input>
+
+                                    </VBox>
+
+
+                                    <VBox visible="{= ${currentQuarterModel>weeks/3/visible} === true}">
+                                        <Label text="{i18n>calendarWeekShort}{currentQuarterModel>weeks/3/weekNumber}" tooltip="{currentQuarterModel>weeks/3/toolTipForStartDate} - {currentQuarterModel>weeks/3/toolTipForEndDate}"/>
+                                        <Input change="handler.onWeekEffortChange" description="{i18n>unitHours}" enabled="{currentQuarterModel>weeks/3/enabled}" submit="handler.onsapenter" textAlign="End" 
+                                        type = "Number" value="{path: 'currentQuarterModel>weeks/3/value', type:'sap.ui.model.type.Integer' , constraints:{minimum:0,maximum:999}, templateShareable:false}" visible="{= ${ui>/editMode} === 'Editable'}" valueState="{currentQuarterModel>weeks/3/valueState}" valueStateText="{currentQuarterModel>weeks/3/valueStateText}">
+                                            <customData>
+                                                <core:CustomData key="{currentQuarterModel>weeks/3/weekNumber}" value="{path: 'currentQuarterModel>weeks/3'}"/>
+                                            </customData>
+                                        </Input>
+
+                                    </VBox>
+
+                                    <VBox visible="{= ${currentQuarterModel>weeks/4/visible} === true}">
+                                        <Label text="{i18n>calendarWeekShort}{currentQuarterModel>weeks/4/weekNumber}" tooltip="{currentQuarterModel>weeks/4/toolTipForStartDate} - {currentQuarterModel>weeks/4/toolTipForEndDate}"/>
+                                        <Input change="handler.onWeekEffortChange" description="{i18n>unitHours}" enabled="{currentQuarterModel>weeks/4/enabled}" submit="handler.onsapenter" textAlign="End" 
+                                        type = "Number" value="{path: 'currentQuarterModel>weeks/4/value', type:'sap.ui.model.type.Integer' , constraints:{minimum:0,maximum:999}, templateShareable:false}" visible="{= ${ui>/editMode} === 'Editable'}" valueState="{currentQuarterModel>weeks/4/valueState}" valueStateText="{currentQuarterModel>weeks/4/valueStateText}">
+                                            <customData>
+                                                <core:CustomData key="{currentQuarterModel>weeks/4/weekNumber}" value="{path: 'currentQuarterModel>weeks/4'}"/>
+                                            </customData>
+                                        </Input>
+
+                                    </VBox>
+
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+
+                    </Table>
+                </ScrollContainer>
+
+                <Panel backgroundDesign="Transparent">
+                    <ScrollContainer horizontal="false" vertical="false">
+                        <HBox justifyContent="End" alignContent="SpaceBetween" alignItems="End">
+                            <VBox>
+                                <ObjectAttribute title="{i18n>ASSIGNED_EFFORT}" text=""/>
+                                <ObjectNumber class="sapMObjectNumberLarge" number="{currentQuarterModel>/totalEffort}" unit="{i18n>hours}"/>
+                            </VBox>
+                        </HBox>
+                    </ScrollContainer>
+                </Panel>
+            </VBox>
+        </content>
+
+        <beginButton>
+            <Button text="{i18n>save}" press="handler.onSaveCalendarView" enabled="{currentQuarterModel>/saveButtonEnabled}" type="Emphasized"/>
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>cancel}" press="handler.onCloseCalendarView" enabled="{currentQuarterModel>/cancelButtonEnabled}" type="Emphasized"/>
+        </endButton>
+    </Dialog>
+
+</core:FragmentDefinition>

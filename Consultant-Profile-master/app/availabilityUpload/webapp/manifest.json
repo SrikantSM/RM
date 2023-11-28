@@ -1,0 +1,106 @@
+{
+	"_version": "1.12.0",
+	"sap.app": {
+		"id": "availabilityUpload",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"ach": "PPM-CLD-RES",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"fileUploadService": {
+				"uri": "/AvailabilityFileUploadService",
+				"type": "JSON"
+			},
+			"mainService": {
+				"uri": "/odata/v4/AvailabilityFileUploadService/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		},
+		"crossNavigation": {
+			"inbounds": {
+				"AvailabilityUpload": {
+					"semanticObject": "availabilityUpload",
+					"action": "Upload",
+					"deviceTypes": {
+						"desktop": true,
+						"tablet": false,
+						"phone": false
+					},
+					"icon": "sap-icon://upload",
+					"size": "1x1",
+					"signature": {
+						"parameters": {},
+						"additionalParameters": "allowed"
+					},
+					"title": "{{appTitle}}"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"fullWidth": true,
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "availabilityUpload.App",
+			"type": "XML",
+			"async": true,
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.68",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {}
+			}
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "availabilityUpload.i18n.i18n"
+				}
+			},
+			"availability": {
+				"dataSource": "mainService",
+				"preload": true,
+				"settings": {
+					"synchronizationMode": "None",
+					"earlyRequests": true,
+					"operationMode": "Server"
+				}
+			}
+		},
+        "commands": {
+            "Upload": {
+                "name": "Upload",
+                "shortcut": "Ctrl+U"
+            }
+        }
+	},
+	"sap.fiori": {
+		"registrationIds": [
+			"F5072"
+		],
+		"archeType": "transactional"
+	},
+	"sap.platform.cf": {
+		"oAuthScopes": [
+			"$XSAPPNAME.Availability.Upload"
+		]
+	}
+}

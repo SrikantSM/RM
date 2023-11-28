@@ -1,0 +1,36 @@
+<mvc:View
+	controllerName="capacityGridUi.view.variant.Variant"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:m="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:smartvariants="sap.ui.comp.smartvariants"
+	xmlns:variant="capacityGridUi.reuse.variant"
+>
+	<variant:SmartControl
+		id="smartControl"
+		persistencyKey="capacityGridUi.capacityGridUi.view.variant.Variant.smartControl"
+	/>
+	<smartvariants:SmartVariantManagement
+		id="variantManagement"
+		enabled="{app>/IsDisplayMode}"
+		visible="{= ! ${app>/DevMode} }"
+		persistencyKey="capacityGridUi.capacityGridUi.view.variant.Variant.variantManagement"
+		showExecuteOnSelection="false"
+	>
+		<smartvariants:personalizableControls>
+			<smartvariants:PersonalizableInfo
+				dataSource=""
+				control="smartControl"
+				keyName="persistencyKey"
+				type="capacityGridUi"
+			/>
+		</smartvariants:personalizableControls>
+	</smartvariants:SmartVariantManagement>
+	<m:VBox visible="{app>/showTraceMessage}">
+		<m:Text text="{app>/traceMessage}"/>
+	</m:VBox>
+	<core:Fragment
+		type="XML"
+		fragmentName="capacityGridUi.reuse.variant.VariantTestUi"
+	/>
+</mvc:View>

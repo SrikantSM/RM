@@ -1,0 +1,14 @@
+{
+  "name": "skill-app-proficiency",
+  "description": "",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "7.20.0"
+  },
+  "scripts": {
+    "lint": "eslint \"webapp/**/*.js\""
+  },
+  "engines": {
+    "node": "^18.0.0"
+  }
+}

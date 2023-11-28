@@ -1,0 +1,5 @@
+ID,displayId,name,description,serviceOrganization_code,lifeCycleStatus_code
+0ca1896e-3d86-41d5-a449-8329f61ab7bc,DE01,ResourceOrgGermany,Delivery Org (Germany),DE01,3
+7e58e28b-4cec-46b4-9f59-9fb9df05d929,IN01,ResourceOrgIndia,Delivery Org (India),IN01,3
+3d2dc06f-b917-4655-9f61-579ecb45f159,CA01,ResourceOrgCanada,Delivery Org (Canada),CA01,3
+86272e26-9c14-4578-b757-af9e1e23f1a1,US01,ResourceOrgUSA,Delivery Org (USA),US01,3

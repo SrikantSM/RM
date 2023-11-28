@@ -1,0 +1,261 @@
+<mvc:View
+	id="CompareResources"
+	xmlns="sap.m"
+	xmlns:cards="sap.f.cards"
+	xmlns:micro="sap.suite.ui.microchart"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.f"
+	xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	controllerName="staffResourceRequest.ext.controller.CompareResources"
+	height="100%">
+	<f:DynamicPage class="sapUiComparisonContainer">
+		<f:title>
+			<f:DynamicPageTitle
+				id="dynamic-page"
+				stateChange="onStateChange"
+				backgroundDesign="Transparent">
+				<f:heading>
+					<Title text="{i18n>resourceComparisonTitle}" />
+				</f:heading>
+				<f:snappedContent>
+					<Carousel
+						height="auto"
+						id="carousel-snapped"
+						pageIndicatorPlacement="Top"
+						showPageIndicator="{visibility>/pageIndicator}"
+						pageChanged="onPageChanged"
+						pages="{
+                            path: 'resourceModel>/'
+                        }">
+						<customLayout>
+							<CarouselLayout visiblePagesCount="{settings>/pagesCount}" />
+						</customLayout>
+
+						<f:Card>
+							<f:header>
+								<cards:Header
+									title="{resourceModel>resourceName}"
+									subtitle="{resourceModel>resourceRole}"
+									iconBackgroundColor="Accent6"
+									iconInitials="{resourceModel>initials}"
+									iconSrc="/staffResourceRequest/odata/v4/ProcessResourceRequestService/ConsultantProfileHeaders({resourceModel>workforcePersonID})/profilePhoto/profileThumbnail"
+									iconDisplayShape="Circle"/>
+							</f:header>
+						</f:Card>
+					</Carousel>
+				</f:snappedContent>
+				<f:navigationActions>
+					<OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="handleFullScreen" id="enterFullScreenBtn" tooltip="{i18n>enterFullScreen}" visible="{visibility>/enterButton}"/>
+					<OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="handleExitFullScreen" id="exitFullScreenBtn" tooltip="{i18n>exitFullScreen}" visible="{visibility>/exitButton}"/>
+					<OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="handleClose"  tooltip="{i18n>closeEndColumn}" visible="true"/>
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader backgroundDesign="Transparent">
+				<Carousel
+					height="auto"
+					id="carousel-expanded"
+					pageChanged="onPageChanged"
+					pageIndicatorPlacement="Top"
+					showPageIndicator="{visibility>/pageIndicator}"
+					pages="{
+                            path: 'resourceModel>/'
+                        }">
+					<customLayout>
+						<CarouselLayout visiblePagesCount="{settings>/pagesCount}" />
+					</customLayout>
+
+					<f:Card>
+						<f:header>
+							<cards:Header
+								title="{resourceModel>resourceName}"
+								subtitle="{resourceModel>workerTypeName}&#10;{resourceModel>resourceRole}"
+								iconBackgroundColor="Accent6"
+								iconInitials="{resourceModel>initials}"
+								iconSrc="/staffResourceRequest/odata/v4/ProcessResourceRequestService/ConsultantProfileHeaders({resourceModel>workforcePersonID})/profilePhoto/profileThumbnail"
+								iconDisplayShape="Circle"/>
+						</f:header>
+						<f:content>
+							<l:VerticalLayout width="100%">
+							<l:BlockLayout>
+									<l:BlockLayoutRow>
+										<l:BlockLayoutCell>
+											<HBox>
+												<ObjectStatus
+													class="sapMObjectStatusLarge sapUiTinyMarginBegin sapUiTinyMarginEnd"
+													text="{resourceModel>totalMatchPercentage}%"
+													inverted="true"
+													active="false"
+													state="{resourceModel>totalMatchCriticality}" />
+												<FlexBox alignItems="Start" justifyContent="SpaceBetween">
+													<Label text="{i18n>totalMatch}" class="sapUiTinyMarginTop"/>
+												</FlexBox>
+											</HBox>
+											<FlexBox renderType="Bare">
+												<micro:ComparisonMicroChart
+													class="sapUiTinyMarginBegin sapUiSmallMarginTop"
+													size="Responsive" scale="%"
+													maxValue="100" minValue="0">
+													<micro:data>
+														<micro:ComparisonMicroChartData title="{i18n>skillMatch}" value="{resourceModel>skillMatchPercentage}" color="{resourceModel>skillMatchCriticality}" tooltip="{i18n>skillMatch}: {resourceModel>skillMatchPercentage}%"/>
+														<micro:ComparisonMicroChartData title="{i18n>availabilityMatch}" value="{resourceModel>availMatchPercentage}" color="{resourceModel>availMatchCriticality}" tooltip="{i18n>availabilityMatch}: {resourceModel>availMatchPercentage}%"/>
+													</micro:data>
+												</micro:ComparisonMicroChart>
+											</FlexBox>
+										</l:BlockLayoutCell>
+									</l:BlockLayoutRow>
+								</l:BlockLayout>
+							</l:VerticalLayout>
+						</f:content>
+					</f:Card>
+				</Carousel>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<List id="listItems"
+			backgroundDesign="Transparent">
+				<items>
+					<CustomListItem class="sapUiComparisonContent">
+						<Panel
+							id="skillComparePanel"
+							expandable="true"
+							expanded="true"
+							busyIndicatorDelay="0"
+							headerText="{i18n>skillsComparisonTitle}"
+							expand="onSkillComparePanelExpand">
+								<HBox
+									backgroundDesign="Solid"
+									items="{
+										path: 'resourcesToShow>/', templateShareable : false
+									}">
+								<items>
+									<VBox class="sapUiTinyMarginTopBottom sapUiComparisonItem">
+										<layoutData>
+											<FlexItemData growFactor="1" baseSize="0" />
+										</layoutData>
+										<HBox>
+											<ObjectStatus
+												class="sapMObjectStatusLarge"
+												active="false"
+												text="{resourcesToShow>skillMatchPercentage}%"
+												state="{resourcesToShow>skillMatchStatusCriticality}" />
+											<FormattedText htmlText="{i18n>skillMatch}" class="sapUiTinyMarginBegin sapUiTinyMarginTop sapUiSmallMarginBottom"/>
+										</HBox>
+										<VBox>
+											<Table id="skillCompareTable"
+												items="{
+													path:'resourcesToShow>resourceSkills/',
+													sorter: {
+														path: 'resourcesToShow>requestedImportanceCode',
+														descending: false,
+														group: true
+													},
+													groupHeaderFactory: '.getGroupHeader',
+													templateShareable:false}"
+												noDataText="{i18n>noSkillsRequested}">
+												<columns>
+													<Column width="40%">
+														<Text text="{i18n>skill}" wrapping="true"/>
+													</Column>
+													<Column width="60%">
+														<Text text="{i18n>RESOURCE_REQUIRED_PROFICIENCY}" wrapping="true"/>
+													</Column>
+												</columns>
+												<items>
+													<ColumnListItem>
+														<cells>
+															<VBox>
+																<Text text="{resourcesToShow>requestedSkillName}" wrapping="true"/>
+															</VBox>
+															<VBox>
+																<micro:BulletMicroChart
+																	thresholds="{
+																		path: 'resourcesToShow>skillThresholds', templateShareable : false
+																	}"
+																	class="sapUiTinyMarginTop sapUiTinyMarginBottom"
+																	showActualValue="true" showTargetValue="true"
+																	width="inherit"
+																	actualValueLabel="{resourcesToShow>resourceProficiencyRank'}"
+																	targetValueLabel="{resourcesToShow>requestedProficiencyRank}"
+																	tooltip="{i18n>BULLET_CHART}&#10;{i18n>resourceProficiency}: {= ${resourcesToShow>resourceProficiency} ? ${resourcesToShow>resourceProficiency} : ${i18n>noSkillMatch}} ({= ${resourcesToShow>resourceProficiencyRank} ? ${resourcesToShow>resourceProficiencyRank} : '0'}) &#10;{i18n>requiredProficiency}: {resourcesToShow>requestedProficiency} ({resourcesToShow>requestedProficiencyRank})"
+																	minValue="0" maxValue="{resourcesToShow>proficiencySetMaxRank}"
+																	targetValue="{resourcesToShow>requestedProficiencyRank}">
+																	<micro:actual>
+																		<micro:BulletMicroChartData
+																		value="{resourcesToShow>resourceProficiencyRank}"
+																		color="{= %{resourcesToShow>resourceProficiencyRank} &gt;= %{resourcesToShow>requestedProficiencyRank} ? 'Good' : 'Critical' }"
+																		/>
+																	</micro:actual>
+																	<micro:thresholds>
+																		<micro:BulletMicroChartData value="{resourcesToShow>}" tooltip=""/>
+																	</micro:thresholds>
+																</micro:BulletMicroChart>
+															</VBox>
+														</cells>
+													</ColumnListItem>
+												</items>
+											</Table>
+										</VBox>
+									</VBox>
+								</items>
+							</HBox>
+						</Panel>
+					</CustomListItem>
+					<CustomListItem class="sapUiComparisonContent">
+						<Panel
+							id="availabilityComparePanel"
+							expandable="true"
+							busyIndicatorDelay="0"
+							expanded="false"
+							headerText="Availability Comparison"
+							expand="onAvailabilityComparePanelExpand">
+								<HBox
+									alignItems="Start"
+									backgroundDesign="Solid"
+									items="{
+										path: 'resourcesToShow>/', templateShareable : true
+									}">
+								<items>
+									<VBox class="sapUiTinyMarginTopBottom sapUiComparisonItem">
+										<layoutData>
+											<FlexItemData growFactor="1" baseSize="0" />
+										</layoutData>
+										<HBox>
+											<ObjectStatus
+												class="sapMObjectStatusLarge"
+												text="{resourcesToShow>availMatchPercentage}%"
+												state="{resourcesToShow>availMatchStatusCriticality}" />
+											<FormattedText htmlText="{i18n>availabilityMatch}" class="sapUiTinyMarginBegin sapUiTinyMarginTop"/>
+										</HBox>
+										<VBox>
+											<VBox>
+												<micro:BulletMicroChart
+													class="sapUiTinyMarginTop sapUiTinyMarginBottom"
+													showActualValue="true" showTargetValue="true"
+													width="inherit"
+													actualValueLabel="{resourcesToShow>resourceAvailability}"
+													targetValueLabel="{resourcesToShow>requiredCapacity}"
+													tooltip="{i18n>BULLET_CHART}&#10;{i18n>freeCapacity}: {resourcesToShow>resourceAvailability} {i18n>unitHours} &#10;{i18n>RemainingEffort}: {resourcesToShow>requiredCapacity} {i18n>unitHours}"
+													minValue="0"
+													targetValue="{resourcesToShow>requiredCapacity}">
+													<micro:actual>
+														<micro:BulletMicroChartData
+														value="{resourcesToShow>resourceAvailability}"
+														color="{resourcesToShow>availMatchCriticality}"
+														/>
+													</micro:actual>
+												</micro:BulletMicroChart>
+											</VBox>
+										</VBox>
+									</VBox>
+								</items>
+							</HBox>
+						</Panel>
+					</CustomListItem>
+				</items>
+			</List>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

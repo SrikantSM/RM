@@ -1,0 +1,76 @@
+general:
+  buildTool: 'mta'
+  productiveBranch: 'release'
+  repository: 'Skill'
+  vaultBasePath: 'piper/PIPELINE-GROUP-184'
+  owner: 'Cloud4RM'
+  vaultPipelineName: 'PIPELINE-11090'
+  vaultServerUrl: 'https://vault.tools.sap'
+  vaultNamespace: 'ies/hyperspace/pipelines'
+  nativeBuild: true
+  vaultTestCredentialEnvPrefix: ENV_
+  vaultTestCredentialPath: secrets
+  vaultTestCredentialKeys: [
+                            # Artifactory credentials
+                            'ARTIFACTORY_AUTH_TOKEN', 'ARTIFACTORY_PASSWORD', 'ARTIFACTORY_USERNAME',
+                            # Github Token
+                            'GITHUB_TOKEN',
+                            # Hash Values for Service Broker
+                            'CANARY_SERVICE_BROKER_HASH1', 'CANARY_SERVICE_BROKER_HASH2',
+                            'EU10PREPROD_SERVICE_BROKER_HASH1', 'EU10PREPROD_SERVICE_BROKER_HASH2',
+                            'EU10PROD_SERVICE_BROKER_HASH1', 'EU10PROD_SERVICE_BROKER_HASH2',
+                            # Cloud Logging
+                            'EU10PROD_CLOUD_LOGGING_EXCHANGE_KEY',
+                            # ANS slack
+                            'INTPROD_ANS_SLACK_WEBHOOK',
+                            'EU10PROD_ANS_SLACK_WEBHOOK',
+                            # Metering
+                            'INTPROD_METERING_PROVIDER_TOKEN',
+                            'EU10PROD_METERING_PROVIDER_TOKEN',
+                            # Application Users
+                            'CF_USER', 'CF_PASSWORD',
+                            'USER_AUTHATTRTESTUSER01', 'PASSWORD_AUTHATTRTESTUSER01',
+                            'USER_AUTHATTRTESTUSER02', 'PASSWORD_AUTHATTRTESTUSER02',
+                            'USER_CONFIGURATIONEXPERT', 'PASSWORD_CONFIGURATIONEXPERT',
+                            'USER_CONSULTANT','PASSWORD_CONSULTANT',
+                            'USER_PROJECTMANAGER','PASSWORD_PROJECTMANAGER',
+                            'USER_PROJECTMANAGER_AUTHORIZED','PASSWORD_PROJECTMANAGER_AUTHORIZED',
+                            'USER_RESOURCEMANAGEMENTOPERATOR','PASSWORD_RESOURCEMANAGEMENTOPERATOR',
+                            'USER_RESOURCEMANAGER','PASSWORD_RESOURCEMANAGER',
+                            'USER_RESOURCEMANAGEMENTADMINISTRATOR','PASSWORD_RESOURCEMANAGEMENTADMINISTRATOR',
+                            'USER_RESOURCEMANAGER_AUTHORIZED', 'PASSWORD_RESOURCEMANAGER_AUTHORIZED',
+                            'USER_RESOURCEMANAGER_VALIANT', 'PASSWORD_RESOURCEMANAGER_VALIANT',
+                            'USER_NOT_IN_DB_CONSULTANT', 'PASSWORD_NOT_IN_DB_CONSULTANT',
+                            'USER_RESOURCEMANAGERUI', 'PASSWORD_RESOURCEMANAGERUI'
+                            ]
+stages:
+  Build:
+    mtaBuild: true
+    karmaExecuteTests: false
+steps:
+  artifactPrepareVersion:
+    gitHttpsCredentialVaultSecretName: 'github'
+    filePath: 'Skill/mta.yaml'
+  shellExecute:
+    dockerImage: 'node:lts-buster'
+  mtaBuild:
+    mtaBuildTool: cloudMbt
+    mtarGroup: 'com.sap.c4p.rm'
+    projectSettingsFile: settings.xml
+    verbose: true
+    source: 'Skill'
+    target: '../'
+    dockerImage: 'devxci/mbtci-java17-node18'
+  sapCallStagingService:
+    url: 'https://staging.repositories.cloud.sap/stage/api'
+    profile: 'group-184-default'
+  sapCumulusUpload:
+    pipelineId: '26532633-9d2a-4946-a32b-8190057650a8'
+  sonarExecuteScan:
+    serverUrl: 'https://sonar.tools.sap'
+    instance: 'SAP SonarQube Enterprise'
+    verbose: true
+    customTlsCertificateLinks: []
+    inferBranchName: true
+    extraProperties:
+      sonar.cpd.exclusions=src/main/java/com/sap/c4p/rm/skill/mdiintegration/processor/workforcecapability/dto/**/*.java

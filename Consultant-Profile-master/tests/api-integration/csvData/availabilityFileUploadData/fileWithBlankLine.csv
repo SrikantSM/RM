@@ -1,0 +1,4 @@
+resourceId,workForcePersonExternalId,s4costCenterId,workAssignmentExternalId,startDate,plannedWorkingHours,nonWorkingHours
+
+{resourceId},workforcePersonExternalID1,CCDE0001,workforcePersonExternalID1,2018-03-10,8,0
+

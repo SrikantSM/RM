@@ -1,0 +1,85 @@
+{
+  "collections": [
+    {
+      "collectionName": "C4P_RM_Skill_UserInterface",
+      "folders": [
+        {
+          "startingFolderPath": "app/skill/webapp/i18n/**",
+          "sourceFilters": [
+            "*.properties"
+          ]
+        },
+        {
+          "startingFolderPath": "app/skill/webapp/i18n/ListReport/**",
+          "sourceFilters": [
+            "*.properties"
+          ]
+        },
+        {
+          "startingFolderPath": "app/catalog/webapp/i18n/**",
+          "sourceFilters": [
+            "*.properties"
+          ]
+        },
+        {
+          "startingFolderPath": "app/catalog/webapp/i18n/ListReport/**",
+          "sourceFilters": [
+            "*.properties"
+          ]
+        },
+        {
+          "startingFolderPath": "app/proficiency/webapp/i18n/**",
+          "sourceFilters": [
+            "*.properties"
+          ]
+        },
+        {
+          "startingFolderPath": "app/upload/webapp/i18n/**",
+          "sourceFilters": [
+            "*.properties"
+          ]
+        },
+        {
+          "startingFolderPath": "app/download/webapp/i18n/**",
+          "sourceFilters": [
+            "*.properties"
+          ]
+        },
+        {
+          "startingFolderPath": "srv/i18n/**",
+          "sourceFilters": [
+            "*.properties"
+          ]
+        }
+      ]
+    },
+    {
+      "collectionName": "C4P_RM_Skill_JavaOdata",
+      "folders": [
+        {
+          "startingFolderPath": "srv/src/main/resources/i18n/**",
+          "sourceFilters": [
+            "*.properties"
+          ]
+        }
+      ]
+    },
+    {
+      "collectionName": "C4P_RM_Skill_DB",
+      "folders": [
+        {
+          "startingFolderPath": "db/src/translation/skill/**",
+          "sourceFilters": [
+            "*.properties"
+          ]
+        }
+      ]
+    }
+  ],
+  "defaultConfiguration": {
+    "targetFolderPath": ".",
+    "pseudoLocFolderPath": ".",
+    "oneQFolderPath": ".",
+    "targetFileNamingConvention": "[filename]_[langCode].[extension]"
+  }
+}

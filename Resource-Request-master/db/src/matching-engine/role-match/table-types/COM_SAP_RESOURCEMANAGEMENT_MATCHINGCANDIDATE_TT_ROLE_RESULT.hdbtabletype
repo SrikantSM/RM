@@ -1,0 +1,7 @@
+/*
+Table type used as a place holder for matching results
+*/
+TYPE COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_ROLE_RESULT AS TABLE (
+    resource_ID NVARCHAR(36),
+    projectRole_ID NVARCHAR(36)
+)

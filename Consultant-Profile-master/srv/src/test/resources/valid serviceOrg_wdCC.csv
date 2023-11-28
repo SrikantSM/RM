@@ -1,0 +1,5 @@
+code,description,isDelivery,companyCode,costCenterID
+Org_1,Organization ORG_1 Germany,X,1010,0010101301
+Org_1,Organization ORG_2 Germany,X,1010,0010101751
+Org_2,Organization ORG_2 Germany,X,1010,0010101903
+Org_3,Organization ORG_2 India,X,1710,0017101202

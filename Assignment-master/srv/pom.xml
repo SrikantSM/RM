@@ -1,0 +1,240 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- Reference to parent POM, latest version gets fetched from Nexus -->
+	<parent>
+		<groupId>com.sap.c4p.rm</groupId>
+		<artifactId>cap-parent</artifactId>
+   	<version>15.2.0</version>
+	</parent>
+
+	<!-- Child POM definition -->
+	<artifactId>assignment-srv</artifactId>
+	<name>assignment-srv</name>
+	<packaging>jar</packaging>
+
+	<properties>
+  		<cloud-sdk.version>4.20.0</cloud-sdk.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.sap.cloud.sdk</groupId>
+				<artifactId>sdk-bom</artifactId>
+				<version>4.20.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+        <dependency>
+            <groupId>com.sap.cp.auditlog</groupId>
+            <artifactId>audit-java-client-api</artifactId>
+            <version>${auditLog.java.client.version}</version>
+        </dependency>
+	    <dependency>
+      		<groupId>com.sap.hcp.cf.logging</groupId>
+      		<artifactId>cf-java-logging-support-servlet-jakarta</artifactId>
+    	</dependency>
+        <dependency>
+            <groupId>com.sap.cp.auditlog</groupId>
+            <artifactId>audit-java-client-impl</artifactId>
+            <version>${auditLog.java.client.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.security.xsuaa</groupId>
+            <artifactId>xsuaa-spring-boot-starter</artifactId>
+            <version>${security.xsuaa.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>com.sap.cloud.security.xsuaa</groupId>
+            <artifactId>spring-xsuaa</artifactId>
+            <version>${security.xsuaa.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.security.xsuaa</groupId>
+            <artifactId>token-client</artifactId>
+            <version>${security.xsuaa.version}</version>
+        </dependency>
+		<!-- CLOUD SDK DEPENDENCIES -->
+		<dependency>
+			<groupId>com.sap.cloud.sdk.cloudplatform</groupId>
+			<artifactId>scp-cf</artifactId>
+			<version>${cloud-sdk.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>com.sap.cloud.sdk.s4hana</groupId>
+			<artifactId>s4hana-all</artifactId>
+			<version>${cloud-sdk.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sap.cloud.sdk.datamodel</groupId>
+			<artifactId>odata-generator</artifactId>
+			<version>${cloud-sdk.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-properties-migrator</artifactId>
+		    <scope>runtime</scope>
+			<exclusions>
+                <exclusion>
+                    <groupId>com.vaadin.external.google</groupId>
+                    <artifactId>android-json</artifactId>
+                </exclusion>
+            </exclusions>
+		</dependency>
+	</dependencies>
+
+	<!-- Plugins for build process get fetched from parent POM -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.8</version>
+				<configuration>
+					<excludes>
+						<exclude>**/resourcemanagement/**</exclude>
+						<exclude>**/common/**</exclude>
+						<exclude>model/*</exclude>
+						<exclude>assignmentservice/*</exclude>
+						<exclude>capacityservice/*</exclude>
+						<exclude>draft/*</exclude>
+						<!--exclusions in assignment module-->
+						<exclude> **/sap/c4p/rm/assignment/gen/**</exclude>
+						<exclude>**/sap/c4p/rm/assignment/exceptions/HealthCheckException.*</exclude>
+						<exclude>**/sap/c4p/rm/assignment/config/HealthSecurityConfig.*</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<!-- PRECOMPILE PRECOMPILATION CLASSES -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+				    <release>${jdk.version}</release>
+				    <source>${jdk.version}</source>
+				    <target>${jdk.version}</target>
+				</configuration>
+				<executions>
+					<execution>
+						<id>precompile-tools-compile</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<configuration>
+							<includes>
+								<include>com/sap/c4p/rm/assignment/utils/MessageKeyPrecompiler.java</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- PRECOMPILE MESSAGE KEYS -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.6.0</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<configuration>
+							<mainClass>com.sap.c4p.rm.assignment.utils.MessageKeyPrecompiler</mainClass>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Generate POJO interfaces -->
+			<plugin>
+				<groupId>com.sap.cds</groupId>
+				<artifactId>cds-maven-plugin</artifactId>
+				<version>2.1.0</version>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<redirectTestOutputToFile>true</redirectTestOutputToFile>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<profiles>
+		<!-- Verify Java formatting -->
+		<profile>
+			<id>spotless-profile</id>
+			<activation>
+				<property>
+					<name>ghprbPullId</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.diffplug.spotless</groupId>
+						<artifactId>spotless-maven-plugin</artifactId>
+						<version>2.34.0</version>
+						<configuration>
+							<trimTrailingWhitespace />
+							<endWithNewline />
+							<java>
+								<importOrder>
+									<file>${basedir}/eclipse.importorder</file>
+								</importOrder>
+								<removeUnusedImports />
+								<eclipse>
+									<file>${basedir}/eclipse-formatter-profile.xml</file>
+								</eclipse>
+							</java>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>verify</phase>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+<repositories>
+  <repository>
+    <id>artifactory.build.releases</id>
+    <name>Artifactory Build Releases</name>
+    <url>https://common.repositories.cloud.sap/build.releases/</url>
+  </repository>
+  <repository>
+    <id>artifactory.build.snapshots</id>
+    <name>Artifactory Build Snapshots</name>
+    <url>https://common.repositories.cloud.sap:443/artifactory/build.snapshots/</url>
+  </repository>
+ <repository>
+    <id>artifactory.build.milestones</id>
+    <name>Artifactory Build Milestones</name>
+    <url>https://common.repositories.cloud.sap:443/artifactory/build.milestones/</url>
+  </repository>
+</repositories>
+</project>

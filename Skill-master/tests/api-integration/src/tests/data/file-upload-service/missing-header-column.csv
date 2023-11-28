@@ -1,0 +1,4 @@
+conceptType,conceptUri,skillType,UNpreferredLabel,altLabels,description
+KnowledgeSkillCompetence,{uuid()},skill/competence,values,"scruples
+beliefs
+morals","Principles or standards of behaviour, revealing one's judgement of what is important in life."

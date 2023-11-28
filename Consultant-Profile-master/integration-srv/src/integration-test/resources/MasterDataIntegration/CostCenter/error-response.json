@@ -1,0 +1,7 @@
+ {
+ 	"error": {
+ 		"code": "ErrorCodeValue",
+ 		"message": "This is an error message.",
+ 		"details": []
+ 	}
+ }

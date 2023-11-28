@@ -1,0 +1,41 @@
+import { AssignmentBucketsYearMonthAggregate } from "./AssignmentBucketsYearMonthAggregate";
+import {AssignmentBucketsYearWeekAggregate} from "./AssignmentBucketsYearWeekAggregate";
+import { AssignmentBucketsPerDay } from "./AssignmentBucketsPerDay";
+
+export interface AssignmentsDetailsForCapacityGrid {
+    assignment_ID: string,
+    resource_ID: string,
+    resourceRequest_ID: string,
+    assignmentStartDate: string,
+    assignmentEndDate: string,
+    requestStartDate: string,
+    requestEndDate: string,
+    requestName: string,
+    projectName: string | null,
+    assignmentStatusCode: number,
+    assignmentStatusText: string,
+    totalRequestBookedCapacityInHours: number,
+    workItemName?: string | null,
+    assignmentDurationInHours: number,
+    requestedCapacityInHours: number,
+    remainingRequestedCapacityInHours: number,
+    costCenterID: string,
+    customerId?: string | null,
+    customerName?: string | null,
+    projectId?: string | null,
+    projectRoleName?: string | null,
+    referenceObjectId?: string | null,
+    referenceObjectName?: string | null,
+    referenceObjectTypeCode?: string | null,
+    referenceObjectTypeName?: string | null,
+    requestDisplayId?: string | null,
+    isAssignmentEditable: boolean,
+    action?: number,
+    resourceOrgCode?: string | null,
+    referenceAssignment: null,
+    requestStatusCode: number,
+    requestStatusDescription: string,   
+    monthlyAggregatedAssignments?: AssignmentBucketsYearMonthAggregate[],
+    weeklyAggregatedAssignments?: AssignmentBucketsYearWeekAggregate[],
+    dailyAssignments?: AssignmentBucketsPerDay[]
+}

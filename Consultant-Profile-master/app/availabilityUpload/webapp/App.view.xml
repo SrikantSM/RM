@@ -1,0 +1,45 @@
+<mvc:View controllerName="availabilityUpload.App" displayBlock="true"
+          xmlns="sap.m"
+          xmlns:l="sap.ui.layout"
+          xmlns:f="sap.ui.layout.form"
+          xmlns:semantic="sap.f.semantic"
+          xmlns:u="sap.ui.unified"
+          xmlns:core="sap.ui.core"
+          xmlns:mvc="sap.ui.core.mvc">
+    <App>
+        <semantic:SemanticPage busy="{ui>/busy}">
+            <semantic:dependents>
+                <core:CommandExecution command="Upload" enabled="true" execute=".handleUploadPress" />
+            </semantic:dependents>
+            <semantic:titleHeading>
+                <Title text="{i18n>appTitle}" />
+            </semantic:titleHeading>
+            <semantic:content>
+                <l:VerticalLayout width="100%">
+                    <MessageStrip id="uploadMessageStrip" text="{ui>/messageText}" type="{ui>/messageType}" visible="{ui>/messageVisible}" showIcon="true" showCloseButton="false"/>
+                    <f:SimpleForm id="fileuploadform" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+                        <f:content>
+                            <Label text="{i18n>filenameLabel}" labelFor="fileUploader" required="true" />
+                            <u:FileUploader id="fileUploader" name="file" width="100%" uploadUrl="{ui>/serviceUri}" sendXHR="true" fileType="csv" maximumFileSize="{ui>/maxFileUploadSize}" change="handleFileChange" fileSizeExceed="handleFileSizeExceed" uploadComplete="handleUploadComplete">
+								<u:headerParameters>
+									<!--we must use sendXHR to set headers. This drops support for IE9.-->
+                                    <u:FileUploaderParameter name="Accept-Language" value="{ui>/userLocale}" />
+									<u:FileUploaderParameter name="x-csrf-token" value="{ui>/csrfToken}" />
+								</u:headerParameters>
+							</u:FileUploader>
+                            <Label text="{i18n>costCenterLabel}" labelFor="costCenterInput" required="true"/>
+                            <Input id="costCenterInput" showValueHelp="true" required="true" showSuggestion="true" valueHelpRequest="onCostCenterInput" selectedKey="{ui>/selectedCostCenterId}" suggest="onSuggestCostCenter" suggestionItems="{availability>/AvailabilityCostCenter}"
+                                                change = "handleChange">
+                                <suggestionItems>
+                                    <core:ListItem text="{availability>s4CostCenterId}" key="{availability>s4CostCenterId}"/>
+                                </suggestionItems>
+                            </Input>
+                            <Label text="" />
+                            <Button id="uploadButton" text="{i18n>uploadButtonText}" type="Emphasized" press="cmd:Upload" />
+                        </f:content>
+                    </f:SimpleForm>
+                </l:VerticalLayout>
+            </semantic:content>
+        </semantic:SemanticPage>
+    </App>
+</mvc:View>

@@ -1,0 +1,23 @@
+{
+  "overrides": [
+    {
+      "files": [
+        "webapp/**/*.js"
+      ],
+      "rules": {
+        "indent": ["error", 2],
+        "quotes": ["error", "double"],
+        "object-curly-spacing": ["error", "always"],
+        "array-bracket-newline": ["error", { "multiline": true }]
+      }
+    },
+    {
+      "files": [
+        "webapp/test/**/*.js"
+      ],
+      "globals": {
+        "QUnit": true
+      }
+    }
+  ]
+}

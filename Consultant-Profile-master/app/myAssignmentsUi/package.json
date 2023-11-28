@@ -1,0 +1,6 @@
+{
+    "name": "view-assignment-ui",
+    "engines": {
+        "node": "^18.0.0"
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "name": "end-to-end",
+    "private": true,
+    "scripts": {
+        "debug": "node --no-lazy node_modules/@ui5/uiveri5/src/cli.js uiveri5-config.js",
+        "start": "uiveri5 uiveri5-config.js",
+        "test:Assignments": "uiveri5 uiveri5-config.js --params.local \"--suiteFilter=Assignments\"",
+        "test:Utilization": "uiveri5 uiveri5-config.js --params.local \"--suiteFilter=Utilization\""
+    },
+    "dependencies": {
+        "@ui5/uiveri5": "^1.43.1",
+        "test-commons": "git+https://github.tools.sap/Cloud4RM/Test-Commons#1c754918988b87465f4c6ed570ca5bf6510b502f",
+        "uuid": "^8.0.0",
+        "crypto-random-string": "^3.1.0"
+    }
+}

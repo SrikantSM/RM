@@ -1,0 +1,3257 @@
+{
+	"info": {
+		"_postman_id": "2aa6c885-b626-4d03-a3bc-ff3c1abbc987",
+		"name": "Resource Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Get Bearer Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseIsOk = responseCode.code === 200;",
+									"//tests[\"Status code is 200\"] = responseIsOk;",
+									"",
+									"if (responseIsOk) {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    postman.setEnvironmentVariable(\"authHeader\", 'Bearer ' + jsonData.access_token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{xsuaaClientId}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{xsuaaClientSecret}}",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "{{appUser}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{appPassword}}",
+									"type": "text"
+								},
+								{
+									"key": "login_hint",
+									"value": "{\"origin\":\"ldap\"}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{xsuaaUrl}}/oauth/token",
+							"host": [
+								"{{xsuaaUrl}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Setup Basic Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"postman.setEnvironmentVariable(\"authHeader\", 'Basic ' + btoa(\"ConfigurationExpert:pass\"));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "https://www.sap.com/favicon.ico",
+							"protocol": "https",
+							"host": [
+								"www",
+								"sap",
+								"com"
+							],
+							"path": [
+								"favicon.ico"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Skill",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{serviceUrl}}/actuator/health",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"actuator",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get skills",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/Skills?$expand=texts,alternativeLabels,catalogAssociations",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"Skills"
+							],
+							"query": [
+								{
+									"key": "$expand",
+									"value": "texts,alternativeLabels,catalogAssociations"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single draft skill",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/Skills(ID={{skill_ID}},IsActiveEntity=false)?$expand=texts,alternativeLabels,catalogAssociations",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"Skills(ID={{skill_ID}},IsActiveEntity=false)"
+							],
+							"query": [
+								{
+									"key": "$expand",
+									"value": "texts,alternativeLabels,catalogAssociations"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single active skill",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/Skills(ID={{skill_ID}},IsActiveEntity=true)?$expand=texts,alternativeLabels,catalogAssociations",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"Skills(ID={{skill_ID}},IsActiveEntity=true)"
+							],
+							"query": [
+								{
+									"key": "$expand",
+									"value": "texts,alternativeLabels,catalogAssociations"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get skill texts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/Skills_texts",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"Skills_texts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get uploadJob details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							},
+							{
+								"key": "Content-Language",
+								"type": "text",
+								"value": "en"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/SAPDevelop/Resource-Management/Skill/srv/src/test/resources/valid_skills.csv"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/FileUploadService/UploadJob",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"FileUploadService",
+								"UploadJob"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get alternative labels",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/AlternativeLabels?$expand=skill",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"AlternativeLabels"
+							],
+							"query": [
+								{
+									"key": "$expand",
+									"value": "skill"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create skill",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"skill_ID\", pm.response.json().ID);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"texts\": [\n        {\n            \"name\": \"Created skill name\",\n            \"description\": \"Created skill description\",\n            \"locale\": \"en\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/Skills",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"Skills"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create skill with alternative labels",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"skill_ID\", pm.response.json().ID);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"texts\": [\n        {\n            \"name\": \"Created skill name\",\n            \"description\": \"Created skill description\",\n            \"locale\": \"en\"\n        }\n    ],\n    \"alternativeLabels\": [\n        {\n            \"name\": \"first alternative label\",\n            \"language_code\": \"en\"\n        },\n        {\n            \"name\": \"second alternative label\",\n            \"language_code\": \"en\"\n        },\n        {\n            \"name\": \"third alternative label\",\n            \"language_code\": \"en\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/Skills",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"Skills"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create skill with dialog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"skill_ID\", pm.response.json().ID);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"label\": \"Dialog skill name\",\n    \"description\": \"Dialog skill description\",\n    \"locale\": \"en\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/Skills/SkillService.createSkillWithDialog",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"Skills",
+								"SkillService.createSkillWithDialog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload CSV file",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/SAPDevelop/Resource-Management/Skill/srv/src/test/resources/valid_skills.csv"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/api/internal/upload/skills/csv",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"api",
+								"internal",
+								"upload",
+								"skills",
+								"csv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create skill text for a skill",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"text_ID\", pm.response.json().ID_texts);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Created skill text name\",\n    \"description\": \"Created skill text description\",\n    \"locale\": \"de\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/Skills(ID={{skill_ID}},IsActiveEntity=false)/texts",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"Skills(ID={{skill_ID}},IsActiveEntity=false)",
+								"texts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create alternative label for a skill",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"alternativeLabel_ID\", pm.response.json().ID);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Created alternative label\",\n    \"language_code\": \"en\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/Skills(ID={{skill_ID}},IsActiveEntity=false)/alternativeLabels",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"Skills(ID={{skill_ID}},IsActiveEntity=false)",
+								"alternativeLabels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DraftActivate skill",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/Skills(ID={{skill_ID}},IsActiveEntity=false)/SkillService.draftActivate",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"Skills(ID={{skill_ID}},IsActiveEntity=false)",
+								"SkillService.draftActivate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DraftEdit skill",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/Skills(ID={{skill_ID}},IsActiveEntity=true)/SkillService.draftEdit",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"Skills(ID={{skill_ID}},IsActiveEntity=true)",
+								"SkillService.draftEdit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign catalog to skill",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"catalog_IDs\": [\"{{catalog_ID}}\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/Skills(ID={{skill_ID}},IsActiveEntity=true)/SkillService.assignCatalogs",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"Skills(ID={{skill_ID}},IsActiveEntity=true)",
+								"SkillService.assignCatalogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unassign catalog to skill",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"catalog_IDs\": [\"{{catalog_ID}}\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/Skills(ID={{skill_ID}},IsActiveEntity=true)/SkillService.unassignCatalogs",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"Skills(ID={{skill_ID}},IsActiveEntity=true)",
+								"SkillService.unassignCatalogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update skill",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/Skills(ID={{skill_ID}},IsActiveEntity=false)",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"Skills(ID={{skill_ID}},IsActiveEntity=false)"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update skill text",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"locale\": \"de\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/Skills_texts(ID_texts={{text_ID}},IsActiveEntity=false)",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"Skills_texts(ID_texts={{text_ID}},IsActiveEntity=false)"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update alternative label",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"language_code\": \"de\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/SkillService/AlternativeLabels(ID={{alternativeLabel_ID}},IsActiveEntity=false)",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"SkillService",
+								"AlternativeLabels(ID={{alternativeLabel_ID}},IsActiveEntity=false)"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Catalog",
+			"item": [
+				{
+					"name": "Get catalogs",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/CatalogService/Catalogs?$expand=skillAssociations",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"CatalogService",
+								"Catalogs"
+							],
+							"query": [
+								{
+									"key": "$expand",
+									"value": "skillAssociations"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single draft catalog",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/CatalogService/Catalogs(ID={{catalog_ID}},IsActiveEntity=false)?$expand=skillAssociations",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"CatalogService",
+								"Catalogs(ID={{catalog_ID}},IsActiveEntity=false)"
+							],
+							"query": [
+								{
+									"key": "$expand",
+									"value": "skillAssociations"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single active catalog",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/CatalogService/Catalogs(ID={{catalog_ID}},IsActiveEntity=true)?$expand=skillAssociations",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"CatalogService",
+								"Catalogs(ID={{catalog_ID}},IsActiveEntity=true)"
+							],
+							"query": [
+								{
+									"key": "$expand",
+									"value": "skillAssociations"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Catalogs2Skills",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/CatalogService/Catalogs2Skills",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"CatalogService",
+								"Catalogs2Skills"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create catalog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"catalog_ID\", pm.response.json().ID);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\":\"Created catalog5\",\r\n   \"description\":\"Created catalog description\"\r\n}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/CatalogService/Catalogs",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"CatalogService",
+								"Catalogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create catalog with dialog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"catalog_ID\", pm.response.json().ID);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"dialog catalog name\",\r\n    \"description\":\"dialog catalog description\"\r\n}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/CatalogService/Catalogs/CatalogService.createCatalogWithDialog",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"CatalogService",
+								"Catalogs",
+								"CatalogService.createCatalogWithDialog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DraftActivate catalog",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/CatalogService/Catalogs(ID={{catalog_ID}},IsActiveEntity=false)/CatalogService.draftActivate",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"CatalogService",
+								"Catalogs(ID={{catalog_ID}},IsActiveEntity=false)",
+								"CatalogService.draftActivate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DraftEdit catalog",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/CatalogService/Catalogs(ID={{catalog_ID}},IsActiveEntity=true)/CatalogService.draftEdit",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"CatalogService",
+								"Catalogs(ID={{catalog_ID}},IsActiveEntity=true)",
+								"CatalogService.draftEdit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create skill association",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"catalogs2skills_ID\", pm.response.json().ID);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"skill_ID\":\"{{skill_ID}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/CatalogService/Catalogs(ID={{catalog_ID}},IsActiveEntity=false)/skillAssociations",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"CatalogService",
+								"Catalogs(ID={{catalog_ID}},IsActiveEntity=false)",
+								"skillAssociations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update catalog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"catalog_ID\", pm.response.json().ID);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/CatalogService/Catalogs(ID={{catalog_ID}},IsActiveEntity=false)",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"CatalogService",
+								"Catalogs(ID={{catalog_ID}},IsActiveEntity=false)"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update skill association",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"skill_ID\":\"{{skill_ID}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/CatalogService/Catalogs2Skills(ID={{catalogs2skills_ID}},IsActiveEntity=false)",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"CatalogService",
+								"Catalogs2Skills(ID={{catalogs2skills_ID}},IsActiveEntity=false)"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete skill association",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/CatalogService/Catalogs2Skills(ID={{catalogs2skills_ID}},IsActiveEntity=false)",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"CatalogService",
+								"Catalogs2Skills(ID={{catalogs2skills_ID}},IsActiveEntity=false)"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete catalog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authHeader}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/CatalogService/Catalogs(ID={{catalog_ID}},IsActiveEntity=true)",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"CatalogService",
+								"Catalogs(ID={{catalog_ID}},IsActiveEntity=true)"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Proficiency",
+			"item": [
+				{
+					"name": "Get proficiency sets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencySets?$expand=proficiencyLevels,skills",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencySets"
+							],
+							"query": [
+								{
+									"key": "$expand",
+									"value": "proficiencyLevels,skills"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get proficiency levels",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencyLevels?$expand=texts",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencyLevels"
+							],
+							"query": [
+								{
+									"key": "$expand",
+									"value": "texts"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single draft proficiency set",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencySets(ID={{proficiencySet_ID}},IsActiveEntity=false)?$expand=proficiencyLevels,skills",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencySets(ID={{proficiencySet_ID}},IsActiveEntity=false)"
+							],
+							"query": [
+								{
+									"key": "$expand",
+									"value": "proficiencyLevels,skills"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single draft proficiency level",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencyLevels(ID={{proficiencyLevel_ID}},IsActiveEntity=false)?$expand=texts",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencyLevels(ID={{proficiencyLevel_ID}},IsActiveEntity=false)"
+							],
+							"query": [
+								{
+									"key": "$expand",
+									"value": "texts"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single active proficiency set",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencySets(ID={{proficiencySet_ID}},IsActiveEntity=true)?$expand=proficiencyLevels,skills",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencySets(ID={{proficiencySet_ID}},IsActiveEntity=true)"
+							],
+							"query": [
+								{
+									"key": "$expand",
+									"value": "proficiencyLevels,skills"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single active proficiency level",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencyLevels(ID={{proficiencyLevel_ID}},IsActiveEntity=true)?$expand=texts",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencyLevels(ID={{proficiencyLevel_ID}},IsActiveEntity=true)"
+							],
+							"query": [
+								{
+									"key": "$expand",
+									"value": "texts"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get proficiency set level texts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencySets(ID={{proficiencySet_ID}},IsActiveEntity=false)/proficiencyLevels(ID={{proficiencyLevel_ID}},IsActiveEntity=false)/texts",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencySets(ID={{proficiencySet_ID}},IsActiveEntity=false)",
+								"proficiencyLevels(ID={{proficiencyLevel_ID}},IsActiveEntity=false)",
+								"texts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get proficiency level texts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencyLevels_texts",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencyLevels_texts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create proficiency set",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"proficiencySet_ID\", pm.response.json().ID);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Created proficiency set name\",\r\n    \"description\": \"Created proficiency set description\"\r\n}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencySets",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencySets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create proficiency level",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"proficiencyLevel_ID\", pm.response.json().ID);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Created proficiency level name\",\r\n    \"description\": \"Created proficiency level description\",\r\n    \"proficiencySet_ID\": \"{{proficiencySet_ID}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencyLevels",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencyLevels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Draft activate proficiency set",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \r\n}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencySets(ID={{proficiencySet_ID}},IsActiveEntity=false)/ProficiencyService.draftActivate",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencySets(ID={{proficiencySet_ID}},IsActiveEntity=false)",
+								"ProficiencyService.draftActivate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create proficiency set with dialog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"proficiencySet_ID\", pm.response.json().ID);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Proficiency Set name test\",\r\n    \"description\":\"Proficiency Set description test\"\r\n}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencySets/ProficiencyService.createProficiencySetWithDialog",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencySets",
+								"ProficiencyService.createProficiencySetWithDialog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create proficiency set with level",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"proficiencySet_ID\", pm.response.json().ID);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"name\":\"Proficiency Set name test\",\r\n    \"description\":\"Proficiency Set description test\",\r\n    \"proficiencyLevels\": [\r\n        {\r\n           \"rank\" : 1,\r\n           \"texts\": [\r\n        {\r\n            \"name\": \"Level name\",\r\n            \"description\": \"Level description\",\r\n            \"locale\": \"en\"\r\n        }\r\n    ]\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencySets",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencySets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Draft edit proficiency set",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencySets(ID={{proficiencySet_ID}},IsActiveEntity=true)/ProficiencyService.draftEdit",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencySets(ID={{proficiencySet_ID}},IsActiveEntity=true)",
+								"ProficiencyService.draftEdit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create text for proficiency level",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"text_ID\", pm.response.json().ID_texts);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Created proficiency level text name\",\r\n    \"description\": \"Created  proficiency level text description\",\r\n    \"locale\": \"en\"\r\n}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencySets(ID={{proficiencySet_ID}},IsActiveEntity=false)/proficiencyLevels(ID={{proficiencyLevel_ID}},IsActiveEntity=false)/texts",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencySets(ID={{proficiencySet_ID}},IsActiveEntity=false)",
+								"proficiencyLevels(ID={{proficiencyLevel_ID}},IsActiveEntity=false)",
+								"texts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete proficiency level text",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencyLevels_texts(ID_texts={{text_ID}},IsActiveEntity=false)",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencyLevels_texts(ID_texts={{text_ID}},IsActiveEntity=false)"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update proficiency set",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Patch proficiency set name\",\r\n    \"description\": \"Patch proficiency set description\"\r\n}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencySets(ID={{proficiencySet_ID}},IsActiveEntity=false)",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencySets(ID={{proficiencySet_ID}},IsActiveEntity=false)"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update proficiency level text",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authHeader}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Patch proficiency level name\",\r\n    \"description\": \"Patch proficiency level description\",\r\n    \"rank\": 0,\r\n    \"proficiencySet_ID\": \"{{proficiencySet_ID}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{serviceUrl}}/odata/v4/ProficiencyService/ProficiencyLevels(ID={{proficiencyLevel_ID}},IsActiveEntity=false)",
+							"host": [
+								"{{serviceUrl}}"
+							],
+							"path": [
+								"odata",
+								"v4",
+								"ProficiencyService",
+								"ProficiencyLevels(ID={{proficiencyLevel_ID}},IsActiveEntity=false)"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Multitenancy - USE WITH CARE",
+			"item": [
+				{
+					"name": "Local Provisioning Service (LPS)",
+					"item": [
+						{
+							"name": "Get Token (LPS)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var responseIsOk = responseCode.code === 200;",
+											"",
+											"if (responseIsOk) {",
+											"    var jsonData = JSON.parse(responseBody);",
+											"    postman.setEnvironmentVariable(\"LPS-Token\", jsonData.access_token);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "{{saasRegistryClientId}}",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "{{saasRegistryClientSecret}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{xsuaaUrl}}/oauth/token",
+									"host": [
+										"{{xsuaaUrl}}"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Application Registration Details",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{LPS-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{saasRegistryUrl}}/saas-manager/v1/application",
+									"host": [
+										"{{saasRegistryUrl}}"
+									],
+									"path": [
+										"saas-manager",
+										"v1",
+										"application"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all subscriptions",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{LPS-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{saasRegistryUrl}}/saas-manager/v1/application/subscriptions",
+									"host": [
+										"{{saasRegistryUrl}}"
+									],
+									"path": [
+										"saas-manager",
+										"v1",
+										"application",
+										"subscriptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Subscription",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var responseIsOk = responseCode.code === 202;",
+											"",
+											"if (responseIsOk) {",
+											"    var location = postman.getResponseHeader(\"Location\");",
+											"    postman.setEnvironmentVariable(\"SaaS-Registry-Location\", location);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{LPS-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{saasRegistryUrl}}/saas-manager/v1/application/tenants/{{tenantId}}/subscriptions",
+									"host": [
+										"{{saasRegistryUrl}}"
+									],
+									"path": [
+										"saas-manager",
+										"v1",
+										"application",
+										"tenants",
+										"{{tenantId}}",
+										"subscriptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Subscription",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var responseIsOk = responseCode.code === 202;",
+											"",
+											"if (responseIsOk) {",
+											"    var location = postman.getResponseHeader(\"Location\");",
+											"    postman.setEnvironmentVariable(\"SaaS-Registry-Location\", location);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{LPS-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{saasRegistryUrl}}/saas-manager/v1/application/tenants/{{tenantId}}/subscriptions",
+									"host": [
+										"{{saasRegistryUrl}}"
+									],
+									"path": [
+										"saas-manager",
+										"v1",
+										"application",
+										"tenants",
+										"{{tenantId}}",
+										"subscriptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get (un-)subscription Job Information",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{LPS-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{saasRegistryUrl}}{{SaaS-Registry-Location}}",
+									"host": [
+										"{{saasRegistryUrl}}{{SaaS-Registry-Location}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete existing subscription",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var responseIsOk = responseCode.code === 202;",
+											"",
+											"if (responseIsOk) {",
+											"    var location = postman.getResponseHeader(\"Location\");",
+											"    postman.setEnvironmentVariable(\"SaaS-Registry-Location\", location);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{LPS-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{saasRegistryUrl}}/saas-manager/v1/application/tenants/{{tenantId}}/subscriptions",
+									"host": [
+										"{{saasRegistryUrl}}"
+									],
+									"path": [
+										"saas-manager",
+										"v1",
+										"application",
+										"tenants",
+										"{{tenantId}}",
+										"subscriptions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SaaS-Registry unsubscription without application callback!",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var responseIsOk = responseCode.code === 202;",
+											"",
+											"if (responseIsOk) {",
+											"    var location = postman.getResponseHeader(\"Location\");",
+											"    postman.setEnvironmentVariable(\"SaaS-Registry-Location\", location);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{LPS-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{saasRegistryUrl}}/saas-manager/v1/application/tenants/{{tenantId}}/subscriptions?jobUuid={{$guid}}&noCallbacksAppNames=skill-{{spaceName}}\n",
+									"host": [
+										"{{saasRegistryUrl}}"
+									],
+									"path": [
+										"saas-manager",
+										"v1",
+										"application",
+										"tenants",
+										"{{tenantId}}",
+										"subscriptions"
+									],
+									"query": [
+										{
+											"key": "jobUuid",
+											"value": "{{$guid}}"
+										},
+										{
+											"key": "noCallbacksAppNames",
+											"value": "skill-{{spaceName}}\n"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Application specific onboarding",
+					"item": [
+						{
+							"name": "Get Token (InitDb Scope)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var responseIsOk = responseCode.code === 200;",
+											"",
+											"if (responseIsOk) {",
+											"    var jsonData = JSON.parse(responseBody);",
+											"    postman.setEnvironmentVariable(\"InitDb-Token\", jsonData.access_token);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "{{xsuaaClientId}}",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "{{xsuaaClientSecret}}",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "{{appUser}}",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "{{appPassword}}",
+											"type": "text"
+										},
+										{
+											"key": "login_hint",
+											"value": "{\"origin\":\"ldap\"}",
+											"type": "text"
+										},
+										{
+											"key": "scope",
+											"value": "skill-dev-4!b7214.InitDb",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{xsuaaUrl}}/oauth/token",
+									"host": [
+										"{{xsuaaUrl}}"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update all schemas",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{InitDb-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tenants\": [\n        \"all\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{serviceUrl}}/mt/v1.0/subscriptions/deploy",
+									"host": [
+										"{{serviceUrl}}"
+									],
+									"path": [
+										"mt",
+										"v1.0",
+										"subscriptions",
+										"deploy"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Onboard new Tenant",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{InitDb-Token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"subscriptionAppId\": \"skill-dev-1!b7214\",\n    \"subscriptionAppName\": \"skill-dev-1\",\n    \"subscribedTenantId\": \"51c2cff2-7e94-4d4d-8e98-3284727b8493\",\n    \"subscribedSubdomain\": \"rmdev\",\n    \"subscriptionAppPlan\": \"\",\n    \"subscriptionAppAmount\": \"\",\n    \"dependentServiceInstanceAppIds\": [],\n    \"dependantServiceInstanceAppIds\": [],\n    \"eventType\": \"CREATE\",\n    \"globalAccountGUID\": \"\",\n    \"additionalInformation\": {\n        \"clientid\": \"<value>\",\n        \"clientsecret\": \"<value>\",\n        \"tokenurl\": \"<value>\"\n    },\n    \"userId\": \"...\"\n}"
+								},
+								"url": {
+									"raw": "{{serviceUrl}}/mt/v1.0/subscriptions/tenants/51c2cff2-7e94-4d4d-8e98-3284727b8493",
+									"host": [
+										"{{serviceUrl}}"
+									],
+									"path": [
+										"mt",
+										"v1.0",
+										"subscriptions",
+										"tenants",
+										"51c2cff2-7e94-4d4d-8e98-3284727b8493"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Tenant",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{InitDb-Token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{prtcl}}{{host}}/mt/v1.0/subscriptions/tenants/{{tenantId}}",
+									"host": [
+										"{{prtcl}}{{host}}"
+									],
+									"path": [
+										"mt",
+										"v1.0",
+										"subscriptions",
+										"tenants",
+										"{{tenantId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Service Manager",
+					"item": [
+						{
+							"name": "Get Token (SM)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var responseIsOk = responseCode.code === 200;",
+											"",
+											"if (responseIsOk) {",
+											"    var jsonData = JSON.parse(responseBody);",
+											"    postman.setEnvironmentVariable(\"SM-Token\", jsonData.access_token);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "{{serviceManagerClientId}}",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "{{serviceManagerClientSecret}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{xsuaaUrl}}/oauth/token",
+									"host": [
+										"{{xsuaaUrl}}"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all instances",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{SM-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{serviceManagerUrl}}/v1/service_instances",
+									"host": [
+										"{{serviceManagerUrl}}"
+									],
+									"path": [
+										"v1",
+										"service_instances"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all bindings",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{SM-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{serviceManagerUrl}}/v1/service_bindings",
+									"host": [
+										"{{serviceManagerUrl}}"
+									],
+									"path": [
+										"v1",
+										"service_bindings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get instances by tenant",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    postman.setEnvironmentVariable(\"service_instance_id\", jsonData.items[0].id);\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{SM-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{serviceManagerUrl}}/v1/service_instances?labelQuery=tenant_id eq '{{tenantId}}'",
+									"host": [
+										"{{serviceManagerUrl}}"
+									],
+									"path": [
+										"v1",
+										"service_instances"
+									],
+									"query": [
+										{
+											"key": "labelQuery",
+											"value": "tenant_id eq '{{tenantId}}'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get bindings by tenant",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    postman.setEnvironmentVariable(\"service_binding_id\", jsonData.items[0].id);\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{SM-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{serviceManagerUrl}}/v1/service_bindings?labelQuery=tenant_id eq '{{tenantId}}'",
+									"host": [
+										"{{serviceManagerUrl}}"
+									],
+									"path": [
+										"v1",
+										"service_bindings"
+									],
+									"query": [
+										{
+											"key": "labelQuery",
+											"value": "tenant_id eq '{{tenantId}}'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get service offering hana",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    postman.setEnvironmentVariable(\"service_offering_id\", jsonData.items[0].id);\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{SM-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{serviceManagerUrl}}/v1/service_offerings?fieldQuery=name eq 'hana'",
+									"host": [
+										"{{serviceManagerUrl}}"
+									],
+									"path": [
+										"v1",
+										"service_offerings"
+									],
+									"query": [
+										{
+											"key": "fieldQuery",
+											"value": "name eq 'hana'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get service plan id hdi-shared",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    postman.setEnvironmentVariable(\"service_plan_id\", jsonData.items[0].id);\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{SM-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{serviceManagerUrl}}/v1/service_plans?fieldQuery=service_offering_id eq '{{service_offering_id}}' and name eq 'hdi-shared'",
+									"host": [
+										"{{serviceManagerUrl}}"
+									],
+									"path": [
+										"v1",
+										"service_plans"
+									],
+									"query": [
+										{
+											"key": "fieldQuery",
+											"value": "service_offering_id eq '{{service_offering_id}}' and name eq 'hdi-shared'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create instance for tenant",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (responseCode.code === 201) {",
+											"    var jsonData = JSON.parse(responseBody);",
+											"    postman.setEnvironmentVariable(\"service_instance_id\", jsonData.id);",
+											"}",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{SM-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"{{$randomUUID}}\",\r\n    \"service_plan_id\": \"{{service_plan_id}}\",\r\n    \"labels\": {\r\n        \"tenant_id\": [\r\n            \"{{tenantId}}\"\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{serviceManagerUrl}}/v1/service_instances?async=false",
+									"host": [
+										"{{serviceManagerUrl}}"
+									],
+									"path": [
+										"v1",
+										"service_instances"
+									],
+									"query": [
+										{
+											"key": "async",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete binding",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{SM-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{serviceManagerUrl}}/v1/service_bindings/{{service_binding_id}}?async=false",
+									"host": [
+										"{{serviceManagerUrl}}"
+									],
+									"path": [
+										"v1",
+										"service_bindings",
+										"{{service_binding_id}}"
+									],
+									"query": [
+										{
+											"key": "async",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete instance",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{SM-Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{serviceManagerUrl}}/v1/service_instances/{{service_instance_id}}?async=false",
+									"host": [
+										"{{serviceManagerUrl}}"
+									],
+									"path": [
+										"v1",
+										"service_instances",
+										"{{service_instance_id}}"
+									],
+									"query": [
+										{
+											"key": "async",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "The full API for the service manager can be found under https://api.sap.com/api/APIServiceManagment/resource"
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -1,0 +1,63 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form"
+>
+	<form:SimpleForm
+		id="testForm"
+		editable="true"
+		visible="{app>/DevMode}"
+		layout="ColumnLayout"
+		title="Standard"
+		columnsM="1"
+		columnsL="1"
+		columnsXL="1"
+	>
+		<Label
+			text="Standard"
+			class="sapUiTinyMarginEnd"
+		/>
+		<Button
+			text="Select"
+			class="sapUiTinyMarginEnd"
+			press="testSelectStandard"
+		/>
+		<Button
+			text="Save"
+			class="sapUiTinyMarginEnd"
+			enabled="false"
+		/>
+		<Label
+			text="Variant 1"
+			class="sapUiTinyMarginEnd"
+		/>
+		<Button
+			text="Select"
+			class="sapUiTinyMarginEnd"
+			press="testSelect1"
+			id="select1Button"
+			enabled="false"
+		/>
+		<Button
+			text="Save"
+			class="sapUiTinyMarginEnd"
+			press="testSave1"
+		/>
+		<Label
+			text="Variant 2"
+			class="sapUiTinyMarginEnd"
+		/>
+		<Button
+			text="Select"
+			class="sapUiTinyMarginEnd"
+			press="testSelect2"
+			id="select2Button"
+			enabled="false"
+		/>
+		<Button
+			text="Save"
+			class="sapUiTinyMarginEnd"
+			press="testSave2"
+		/>
+	</form:SimpleForm>
+</core:FragmentDefinition>

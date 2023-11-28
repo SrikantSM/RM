@@ -1,0 +1,289 @@
+{
+	"_version": "1.8.0",
+	"sap.app": {
+		"id": "myResourcesUi",
+		"type": "application",
+		"title": "{{APP_TITLE}}",
+		"i18n": "i18n/i18n.properties",
+		"ach": "PPM-CLD-RES",
+		"applicationVersion": {
+			"version": "0.0.1"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/odata/v4/MyResourcesService/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		},
+		"sourceTemplate": {
+			"id": "ui5template.basicSAPUI5ApplicationProject",
+			"-id": "ui5template.smartTemplate",
+			"-version": "1.40.12"
+		},
+		"crossNavigation": {
+			"inbounds": {
+				"configApplicationDisplay": {
+					"semanticObject": "myResourcesUi",
+					"action": "Display",
+					"deviceTypes": {
+						"desktop": true,
+						"tablet": true,
+						"phone": true
+					},
+					"icon": "sap-icon://my-view",
+					"size": "1x1",
+					"signature": {
+						"parameters": {},
+						"additionalParameters": "allowed"
+					}
+				}
+			},
+			"outbounds": {
+			}
+		}
+	},
+	"sap.ui5": {
+		"dependencies": {
+			"minUI5Version": "1.72",
+			"libs": {
+				"sap.fe.templates": {}
+			},
+			"components": {}
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true,
+				"settings": {
+					"synchronizationMode": "None",
+					"operationMode": "Server",
+					"autoExpandSelect": true,
+					"earlyRequests": true,
+					"groupProperties": {
+						"default": {
+							"submit": "Auto"
+						},
+						"collection": {
+							"submit": "Auto"
+						}
+					}
+				}
+			}
+		},
+		"routing": {
+			"routes": [
+				{
+					"pattern": ":?query:",
+					"name": "MyResourceList",
+					"target": "MyResourceList"
+				},
+				{
+					"pattern": "ProjectExperienceHeader({key}):?query:",
+					"name": "MyResourceDetails",
+					"target": "MyResourceDetails"
+				},
+				{
+					"pattern": "ProjectExperienceHeader({key1})/externalWorkExperience({key2}):?query:",
+					"name": "ExternalWorkExperienceDetails",
+					"target": "ExternalWorkExperienceDetails"
+				},
+				{
+					"pattern": "ProjectExperienceHeader({key1})/internalWorkExperience({key3}):?query:",
+					"name": "InternalWorkExperienceDetails",
+					"target": "InternalWorkExperienceDetails"
+				}
+			],
+			"targets": {
+				"MyResourceList": {
+					"type": "Component",
+					"id": "MyResourceListReport",
+					"name": "sap.fe.templates.ListReport",
+					"options": {
+						"settings": {
+							"entitySet": "ProjectExperienceHeader",
+							"navigation": {
+								"ProjectExperienceHeader": {
+									"detail": {
+										"route": "MyResourceDetails"
+									}
+								}
+							},
+							"variantManagement": "Page",
+							"initialLoad": true,
+							"controlConfiguration": {
+								"@com.sap.vocabularies.UI.v1.SelectionFields": {
+									"filterFields": {
+										"profile::workerExternalID": {
+											"availability": "Adaptation"
+										}
+									}
+								},
+								"@com.sap.vocabularies.UI.v1.LineItem": {
+									"columns": {
+                                        "CustomColumnName": {
+                                            "header": "{i18n>PD_NAME}",
+                                            "template": "myResourcesUi.fragment.NameColumn",
+                                            "availability": "Default",
+											"properties" : [
+												"profile/name"
+											],
+                                            "position": {
+                                                "placement": "Before",
+                                                "anchor": "DataField::profile::workerType::name"
+											}
+										},
+										"DataField::profile::workerExternalID": {
+											"availability": "Adaptation"
+										}
+                                    },
+									"tableSettings": {
+										"type": "ResponsiveTable",
+										"personalization": {
+											"sort" : true,
+											"filter" : true,
+											"column" : true
+										},
+										"selectionMode": "None"
+									}
+								}
+							}
+						}
+					}
+				},
+				"MyResourceDetails": {
+					"type": "Component",
+					"id": "MyResourceObjectPage",
+					"name": "sap.fe.templates.ObjectPage",
+					"options": {
+						"settings": {
+							"entitySet": "ProjectExperienceHeader",
+							"navigation": {
+								"externalWorkExperience": {
+									"detail": {
+										"route": "ExternalWorkExperienceDetails"
+									}
+								},
+								"internalWorkExperience": {
+									"detail": {
+										"route": "InternalWorkExperienceDetails"
+									}
+								}
+							},
+							"variantManagement": "Control",
+							"showRelatedApps": true,
+							"editableHeaderContent": false,
+							"sectionLayout": "Page",
+							"controlConfiguration": {
+								"skills/@com.sap.vocabularies.UI.v1.LineItem": {
+									"requestGroupId": "Workers",
+									"tableSettings": {
+										"type": "ResponsiveTable",
+										"personalization": false
+									}	
+								},
+								"periodicAvailability/@com.sap.vocabularies.UI.v1.LineItem": {
+									"requestGroupId": "Workers",
+									"tableSettings": {
+										"type": "ResponsiveTable",
+										"personalization": true
+									}
+								},
+								"roles/@com.sap.vocabularies.UI.v1.LineItem": {
+									"requestGroupId": "Workers",
+									"tableSettings": {
+										"type": "ResponsiveTable",
+										"personalization": false
+									}
+								},
+								"internalWorkExperience/@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "ResponsiveTable",
+										"personalization": true
+									},
+									"columns": {
+										"DataField::workItemName": {
+											"availability": "Adaptation"
+										}
+									}
+								},
+								"externalWorkExperience/@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "ResponsiveTable",
+										"personalization": true
+									}
+								}
+							}
+						}
+					}
+				},
+				"ExternalWorkExperienceDetails": {
+					"type": "Component",
+					"id": "ExternalWorkExperienceObjectPage",
+					"name": "sap.fe.templates.ObjectPage",
+					"options": {
+						"settings": {
+							"entitySet": "ExternalWorkExperience",
+							"editableHeaderContent": false,
+							"variantManagement": "None",
+							"controlConfiguration": {
+								"externalWorkExperienceSkills/@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "ResponsiveTable",
+										"personalization": false
+									}
+								}
+							}
+						}
+					}
+				},
+				"InternalWorkExperienceDetails": {
+					"type": "Component",
+					"id": "InternalWorkExperienceObjectPage",
+					"name": "sap.fe.templates.ObjectPage",
+					"options": {
+						"settings": {
+							"entitySet": "InternalWorkExperience",
+							"editableHeaderContent": false,
+							"variantManagement": "None",
+							"controlConfiguration": {
+								"internalWorkExperienceSkills/@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "ResponsiveTable",
+										"personalization": false
+									}
+								}
+							}
+						}
+					}
+				}
+				}
+			},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"fullWidth": true
+	},
+	"sap.fiori": {
+		"registrationIds": [
+			"F6604"
+		],
+		"archeType": "transactional"
+	},
+	"sap.platform.cf": {
+		"oAuthScopes": [
+			"$XSAPPNAME.MyResources.Read"
+		]
+	}
+}

@@ -1,0 +1,231 @@
+PROCEDURE "COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_AVAILABILITY_MATCH" (
+    IN resourceRequests COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_UUID,
+    IN resources COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_RESOURCES,
+    OUT availabilityMatchResult COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_AVAILABILITY_RESULT
+) LANGUAGE SQLSCRIPT SQL SECURITY INVOKER --DEFAULT SCHEMA <default_schema_name>
+READS SQL DATA AS BEGIN
+
+
+-----Fetch Assignments of the corresponding resource request--------------
+/*
+The below query fetches all the assignments of a resource request if any and then its corresponding assignment buckets.
+The result will be empty in cases when there is no assignment for a request.
+*/
+
+resourceRequestAssignments =
+SELECT
+    resourceRequest.ID as resourceRequest_ID,
+	assignments.ID as assignment_ID,
+    assignmentBuckets.ID as assignmentBucket_ID,
+    assignmentBuckets.bookedCapacityInMinutes,
+    assignmentBuckets.startTime
+FROM
+    COM_SAP_RESOURCEMANAGEMENT_ASSIGNMENT_ASSIGNMENTS as assignments
+    INNER JOIN :resourceRequests as resourceRequest on assignments.resourceRequest_ID = resourceRequest.ID
+    INNER JOIN COM_SAP_RESOURCEMANAGEMENT_ASSIGNMENT_ASSIGNMENTBUCKETS as assignmentBuckets ON assignments.ID = assignmentBuckets.assignment_ID;
+
+-----Fetch the filtered Resource Requests and the corresponding details--------------
+/*
+The below logic fetches the required resource requests from the parameter RESOURCEREQUESTS.
+*/
+filteredResourceRequests =
+SELECT
+    capacityRequirement.ID,
+    capacityRequirement.resourceRequest_ID,
+    capacityRequirement.startTime,
+    capacityRequirement.endTime,
+    capacityRequirement.requestedCapacityInMinutes
+FROM
+    COM_SAP_RESOURCEMANAGEMENT_RESOURCEREQUEST_CAPACITYREQUIREMENTS as capacityRequirement
+    INNER JOIN :resourceRequests as resourceRequest on resourceRequest.ID = capacityRequirement.resourceRequest_ID;
+
+-------------Net Requested Effort-----------------------------------------------
+/*
+If any of the Resource Requests are partially assigned, the remaining required Effort
+is calculated from the REQUESTEDQUANTITY of the RESOURCEREQUEST CAPACITY and ASSIGNMENT.
+
+If a resource is already assigned to a resource request and is over staffed then BOOKEDCAPACITYINMINUTES would be greater than
+requestedCapacityInMinutes of the resource Request then the remaining requested minutes should not be negative.
+So GREATEST HANA function is being used which makes it zero if a negative case occurs.
+Refer test case: https://github.tools.sap/Cloud4RM/Resource-Request/blob/master/tests/db-integration/src/tests/matching-engine/availability-match/availability.md#resource-request-is-over-assigned
+
+*/
+resourceRequest =
+SELECT
+	capacityRequirement.ID AS capacityRequirement_ID,
+	capacityRequirement.resourceRequest_ID AS resourceRequest_ID,
+	capacityRequirement.startTime AS startTime,
+	capacityRequirement.endTime AS endTime,
+	GREATEST(
+		( capacityRequirement.requestedCapacityInMinutes - SUM(coalesce( assignmentBuckets.bookedCapacityInMinutes, 0 )) ),
+		0
+	) AS requestedMinutes
+FROM
+	:filteredResourceRequests AS capacityRequirement
+	LEFT OUTER JOIN
+	:resourceRequestAssignments AS assignmentBuckets
+	ON assignmentBuckets.resourceRequest_ID = capacityRequirement.resourceRequest_ID
+		AND assignmentBuckets.startTime BETWEEN capacityRequirement.startTime AND capacityRequirement.endtime
+GROUP BY
+	capacityRequirement.ID,
+	capacityRequirement.resourceRequest_ID,
+	capacityRequirement.startTime,
+	capacityRequirement.endTime,
+	capacityRequirement.requestedCapacityInMinutes;
+
+-----------------Filtered Resource Requests with corresponding Resource IDs----------------------------------------
+/*
+This is needed to get the resource IDs of all resources under authorized cost centers.
+This is needed if there is no availability data maintained against the resources or
+no matched availability corresponding to the resource request.
+*/
+
+resourceRequestWithResources =
+SELECT
+	resourceRequest.resourceRequest_ID,
+	resourceRequest.startTime,
+	resourceRequest.endTime,
+	resourceRequest.requestedMinutes,
+	resources.ID AS resource_ID
+FROM
+	:resourceRequest AS resourceRequest
+	INNER JOIN
+	:resources AS resources
+	ON resources.ID IS NOT NULL;
+
+-------------Availability of the filtered Resources-----------------------------
+/*
+Net capacity of the consultant is fetched from the view COM_SAP_RESOURCEMANAGEMENT_EMPLOYEE_AVAILABILITY_CAPACITYDATAFORAVAILABILITY
+Parameter RESOURCES filters out the necessary resources.
+For a requested month(or week or day), resource is not available or availablity dates are not maintained
+we still need the corresponding records to calculate the availability which is why LEFT OUTER JOIN on the view
+COM_SAP_RESOURCEMANAGEMENT_EMPLOYEE_AVAILABILITY_CAPACITYDATAFORAVAILABILITY is done and the check resources.NETCAPACITYINMINUTES IS NULL
+is done. If the  NETCAPACITYINMINUTES of the resource is negative(if resource is over staffed) or null, we make it zero.
+The above scenario is covered in the test case scenarios 4, 5,6 and 7.
+Refer link: https://github.tools.sap/Cloud4RM/Resource-Request/blob/master/tests/db-integration/src/tests/matching-engine/availability-match/availability.md#resource-has-more-available-minutes-then-requested
+
+Join condition is on the resource ID, start time and end time. All the resources with
+available start and end time between the resource request start and end date should be fetched.
+
+*/
+
+resourceAvailability =
+
+SELECT
+    resourceHeader.ID as resource_ID,
+    resources.startTime,
+    resources.endTime,
+    (
+        CASE
+            WHEN resources.netCapacityInMinutes < 0
+            OR resources.netCapacityInMinutes IS NULL THEN 0
+            ELSE resources.netCapacityInMinutes
+        END
+    ) as availability,
+    resourceHeader.VALIDFROM,
+    resourceHeader.VALIDTO
+FROM
+    :resources as resourceHeader
+    INNER JOIN COM_SAP_RESOURCEMANAGEMENT_EMPLOYEE_AVAILABILITY_CAPACITYDATAFORAVAILABILITY AS resources
+    ON resources.ID = resourceHeader.ID
+    AND resources.startTime >= resourceHeader.VALIDFROM 
+    AND resources.startTime <  resourceHeader.VALIDTO
+    AND resources.endTime  >=  resourceHeader.VALIDFROM 
+    AND resources.endTime   <  resourceHeader.VALIDTO;
+
+-- Map Resource availability to resource request---------------------
+/*
+
+This is just a mapping of filtered resource requests against the filtered resources and their availability
+
+*/
+
+resourceToRequestMap =
+SELECT
+	resourceRequest.resourceRequest_ID,
+	resourceRequest.startTime AS resourceRequestStartTime,
+	resourceRequest.endTime AS resourceRequestEndTime,
+	resourceRequest.requestedMinutes,
+	resourceRequest.resource_ID,
+	resourceAvailability.startTime,
+	resourceAvailability.endTime,
+	IFNULL( resourceAvailability.availability, 0 ) AS availability
+FROM
+	:resourceRequestWithResources AS resourceRequest
+	LEFT OUTER JOIN
+	:resourceAvailability AS resourceAvailability
+	ON resourceRequest.resource_ID = resourceAvailability.resource_ID
+		AND resourceAvailability.startTime BETWEEN resourceRequest.startTime AND resourceRequest.endTime
+		AND resourceAvailability.endTime BETWEEN resourceRequest.startTime AND resourceRequest.endTime;
+
+----------Resource Request and Resources total availability--------------
+/*
+We aggregate the total Availability of each resource against the periodic split of the Resource Request based on the start time and endTime
+of the Resource Request (capacity Requirement)
+*/
+
+resourceTotalAvailabilityToRequestTotalMap =
+
+SELECT
+    resourceRequest_ID,
+    resourceRequestStartTime as startTime,
+    resourceRequestEndTime as endTime,
+    requestedMinutes,
+    resource_ID,
+    SUM(availability) as totalAvailability
+FROM :resourceToRequestMap
+GROUP BY resourceRequest_ID,
+         resourceRequestStartTime,
+         resourceRequestEndTime,
+         requestedMinutes,
+         resource_ID;
+
+
+---------- Matched Effort--------------------------
+/*
+The below logic calculates the matched effort i.e. even if the total availability of the consultant is more
+than the requested effort from the resource request, the matched effort would the requested effort else it would
+be the availablity of the consultant.
+*/
+
+matchedEffort =
+SELECT
+    resourceRequest_ID,
+    startTime,
+    endTime,
+    requestedMinutes,
+    resource_ID,
+    totalAvailability,
+    CASE
+        WHEN requestedMinutes < totalAvailability THEN requestedMinutes
+        ELSE totalAvailability
+    END AS resourceMatchedEfforts
+FROM
+    :resourceTotalAvailabilityToRequestTotalMap;
+
+/*
+If the Requested Minutes of a Resource Request is zero then Availability Match Percentage
+would be 100 as all the resources(zero or more availability) would match.
+Else Availability Percentage is calculated using the formula
+(Total Matched Efforts of the consultant/ Total Requested Minutes )*100
+The percentage would be calculated for upto two decimal values.
+*/
+availabilityMatchResult =
+SELECT
+    resourceRequest_ID,
+    resource_ID,
+    CASE
+        WHEN SUM(requestedMinutes) = 0 THEN 100.00
+        ELSE TO_DECIMAL(
+            SUM(resourceMatchedEfforts) / SUM(requestedMinutes) * 100,
+            6,
+            2
+        )
+    END AS availabilityMatchPercentage
+FROM
+    :matchedEffort
+GROUP BY
+    resourceRequest_ID,
+    resource_ID;
+
+END

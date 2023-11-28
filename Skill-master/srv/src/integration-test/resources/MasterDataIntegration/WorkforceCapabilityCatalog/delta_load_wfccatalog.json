@@ -1,0 +1,59 @@
+{
+  "@odata.context": "$metadata#Logs",
+  "value": [
+    {
+      "instance": {
+        "id": "b1ca4e9d074f40af9f37857878f51cce",
+        "name": [
+          {
+            "lang": "en-US",
+            "content": "Engineering"
+          }
+        ],
+        "description": [
+          {
+            "lang": "en-US",
+            "content": "Technical"
+          }
+        ]
+      },
+      "event": "updated",
+      "versionId": "8b89331f-616a-4111-be7d-97c244517979"
+    },
+    {
+      "instance": {
+        "id": "b1cd4e9d074f40af9f37857878f51cce",
+        "name": [
+          {
+            "lang": "de-US",
+            "content": "Technical-DE"
+          }
+        ],
+        "description": [
+          {
+            "lang": "de-UK",
+            "content": "Technical"
+          }
+        ]
+      },
+      "event": "created",
+      "versionId": "8b89331f-616a-4111-be7d-97c244517979"
+    },
+    {
+      "instance": {
+        "id": "63c66813dfe942b3bbfbaeff77312c97"
+      },
+      "event": "deleted",
+      "versionId": "02bd6964-5e5f-4bec-b5c8-6271625ec8f1"
+    },
+    {
+      "instance": {
+        "id": "7714e3ebb5304af5a9ecfc95f83794e2"
+      },
+      "event": "deleted",
+      "versionId": "29d29686-d733-4c6c-84ab-d7cf3f03fd92"
+    }
+  ],
+
+  "@odata.deltaLink": "/v1/odm/5.0.0/sap.odm.workforce.capability.WorkforceCapabilityCatalog/events?$deltatoken=deltaLoadResponseDeltaToken"
+}

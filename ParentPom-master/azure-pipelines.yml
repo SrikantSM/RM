@@ -1,0 +1,16 @@
+# Using parent pom pipeline on Azure
+
+trigger:
+  - master
+  - hotfix
+  - release
+
+resources:
+  repositories:
+  - repository: RM-Piper-ADO
+    endpoint: github.tools.sap
+    type: githubenterprise
+    name: Cloud4RM/RM-Piper-ADO
+
+extends:
+  template: piper-ado-templates/rm-parent-pom-pipeline.yml@RM-Piper-ADO

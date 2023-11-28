@@ -1,0 +1,261 @@
+# Using RM domain pipeline for Azure
+
+trigger:
+  - release
+  - master
+  - hotfix
+
+parameters:
+  - name: cfApiEndPoint
+    type: string
+    default: 'https://api.cf.sap.hana.ondemand.com'
+  - name: testOrgName
+    type: string
+    default: 'c4p-rm-valiant'
+    
+  - name: testSpaceName
+    type: string
+    default: 'dev-test'
+  - name: appRouterURL
+    type: string
+    default: 'https://rm-valiant-tenant-dev-test-valiant.cfapps.sap.hana.ondemand.com'
+  - name: testSpaceGuid
+    type: string
+    default: '7baa9e2f-ba05-4e25-8878-e2d857f80f76'
+    
+  - name: testSpaceNameRelease
+    type: string
+    default: 'rel-test'
+  - name: testSpaceGuidRelease
+    type: string
+    default: '89854fba-51e5-48aa-b458-d16c96f8bbd6'
+  - name: appRouterURLRelease
+    type: string
+    default: 'https://rm-valiant-tenant-rel-test-valiant.cfapps.sap.hana.ondemand.com'
+    
+  - name: landscape
+    type: string
+    default: sap
+  - name: appName
+    type: string
+    default: 'consultantProfile-srv'
+  - name: secondSrv
+    type: string
+    default: 'consultantProfile-integration-srv'
+
+resources:
+  repositories:
+  - repository: piper-pipeline-azure
+    endpoint: github.tools.sap
+    type: githubenterprise
+    name: Cloud4RM/RM-Piper-ADO
+  - repository: Umbrella
+    endpoint: github.tools.sap
+    type: githubenterprise
+    name: Cloud4RM/Resource-Management
+
+extends:
+  template: piper-ado-templates/rm-domain-pipeline.yml@piper-pipeline-azure
+  parameters:
+    # General Purpose
+    umbrellaClone:
+    - checkout: Umbrella
+      submodules: true
+    domainName: 'Consultant-Profile'
+    
+    # Build
+    buildPostSteps:
+    - publish: 'Consultant-Profile/srv/target'
+      artifact: 'Sonar1Artifact'
+    - publish: 'Consultant-Profile/integration-srv/target'
+      artifact: 'Sonar2Artifact'
+    buildNotifyUsersKey: 'ConsultantProfileDevOps'  
+    
+    # Sonar 1
+    sonar1SrvSonarProjectKey: 'com.sap.c4p.rm:consultantProfile-srv'
+    sonar1SrvSonarProjectBaseDir: 'srv'
+    sonar1AdditionalSonarProperties: 'sonar.coverage.exclusions=src/main/java/com/sap/c4p/rm/consultantprofile/auditlog/LocalAuditLogUtil.java, src/main/java/com/sap/c4p/rm/consultantprofile/config/GeneralConfiguration.java, src/main/java/com/sap/c4p/rm/consultantprofile/config/HealthSecurityConfig.java, src/main/java/com/sap/c4p/rm/consultantprofile/handlers/InitialReadFlag.java, src/main/java/com/sap/c4p/rm/consultantprofile/handlers/SubscriptionHandler.java, src/main/java/com/sap/c4p/rm/consultantprofile/utils/SqlFunctionsDialect.java, src/main/java/com/sap/c4p/rm/consultantprofile/utils/CertificateUtils.java, src/main/java/com/sap/c4p/rm/consultantprofile/Application.java, src/main/java/com/sap/c4p/rm/consultantprofile/DatabaseMigration.java, src/main/java/com/sap/c4p/rm/consultantprofile/exceptions/HealthCheckException.java'
+ 
+    sonar1PreSteps:
+    - download: current
+      artifact: 'Sonar1Artifact'
+    - bash: 'mv ../Sonar1Artifact srv/target'
+    sonar1NotifyUsersKey: 'ConsultantProfileSonar'
+
+    # Sonar 2
+    sonar2SecondModuleSonarProjectKey: 'com.sap.c4p.rm:consultantProfile-integration-srv'
+    sonar2SecondModuleSonarProjectBaseDir: 'integration-srv'
+    sonar2AdditionalSonarProperties: 'sonar.coverage.exclusions= src/main/java/com/sap/c4p/rm/auditlog/LocalAuditLogUtil.java, src/main/java/com/sap/c4p/rm/cloudfoundry/service/jobscheduler/service/JobSchedulerServiceLocalImpl.java, src/main/java/com/sap/c4p/rm/config/CostCenterConverterWebConfig.java, src/main/java/com/sap/c4p/rm/config/GeneralConfiguration.java, src/main/java/com/sap/c4p/rm/config/HealthSecurityConfig.java, src/main/java/com/sap/c4p/rm/config/local/LocalCfEnv.java, src/main/java/com/sap/c4p/rm/config/local/LocalXsuaaUserInfo.java, src/main/java/com/sap/c4p/rm/config/StartupApplicationListener.java, src/main/java/com/sap/c4p/rm/config/WorkforceConverterWebConfig.java, src/main/java/com/sap/c4p/rm/processor/workforce/dto/**/*.java, src/main/java/com/sap/c4p/rm/processor/costcenter/dto/**/*.java, src/main/java/com/sap/c4p/rm/Application.java, src/main/java/com/sap/c4p/rm/exceptions/HealthCheckException.java'
+    sonar2PreSteps:
+    - download: current
+      artifact: 'Sonar2Artifact'
+    - bash: 'mv ../Sonar2Artifact integration-srv/target'
+    sonar2NotifyUsersKey: 'ConsultantProfileSonar'
+
+
+    # Deploy
+    deploycfAPIEndPoint: ${{ parameters.cfApiEndPoint }}
+    deploycfOrg: ${{ parameters.testOrgName }}
+    deploycfSpace: ${{ parameters.testSpaceName }}
+    deploycfSpaceRelease: ${{ parameters.testSpaceNameRelease }}
+    deployMtarFileName: 'consultantProfile.mtar'
+    deployNotifyUsersKey: 'ConsultantProfileDevOps'
+    
+
+    # First OPA
+    uIIntegration1StageName: 'UI Integration Tests - ConfigApps'
+    # Second OPA
+    uIIntegration2StageName: 'UI Integration Tests - MyProjectExperience'
+    uIIntegration2PostSteps:
+      - task: piper@1
+        displayName: UI Integration Tests - MyProjectExperience
+        inputs:
+          stepName: 'shellExecute'
+          dockerImage: 'dockerimageforopa'
+          flags: '--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/runTests2.sh'
+          dockerOptions: '--env DOMAIN="Consultant-Profile"
+                          --env TEST_PATH="tests/ui-integration"'
+      - task: PublishTestResults@2
+        condition: succeededOrFailed()
+        displayName: Publish UI Integration Tests - MyProjectExperience Test Results(XML)
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '**/target/report/*.xml'
+      - task: PublishPipelineArtifact@1
+        condition: failed()
+        inputs:
+          targetPath: 'Consultant-Profile/tests/ui-integration/target/report/'
+          artifact: 'UIIntegration_Tests_MyProjectExperience_Attempt_$(System.JobAttempt)'
+          publishLocation: 'pipeline'    
+    uIIntegrationNotifyUsersKey: 'ConsultantProfileUIIntegrationTest'    
+
+    # API Test
+    acceptance1StageName: 'API Integration Tests'
+    acceptance1PostSteps:
+    - task: piper@1
+      displayName: API Integration Tests 
+      inputs:
+        stepName: 'shellExecute'
+        flags: '--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/runTests.sh'
+        dockerOptions: '--env DOMAIN="."
+                        --env TEST_PATH="tests/api-integration"
+                        --env ENV_LANDSCAPE=${{ parameters.landscape }} 
+                        --env CF_SPACE_GUID_MASTER=${{ parameters.testSpaceGuid }} 
+                        --env CF_SPACE_GUID_RELEASE=${{ parameters.testSpaceGuidRelease }} 
+                        --env ENV_SRV_APP_NAME=${{ parameters.appName }}
+                        --env ENV_INTEGRATION_APP_NAME=${{ parameters.secondSrv }}'
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      displayName: Publish API Integration Tests Results(XML)
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'tests/api-integration/target/report/*.xml'
+    - task: PublishPipelineArtifact@1
+      condition: failed()
+      inputs:
+        targetPath: 'tests/api-integration/target/report/'
+        artifact: 'API_Integration_Tests_Attempt_$(System.JobAttempt)'
+        publishLocation: 'pipeline'
+    acceptance1NotifyUsersKey: 'ConsultantProfileAPIIntegrationTest'    
+
+    # DB Test
+    acceptance2StageName: 'DB/HANA Tests'
+    acceptance2PostSteps:
+    - task: piper@1
+      displayName: DB/HANA Tests
+      inputs:
+        stepName: 'shellExecute'
+        flags: '--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/runTests.sh'
+        dockerOptions: '--env DOMAIN="."
+                        --env TEST_PATH="tests/db-integration"
+                        --env ENV_LANDSCAPE=${{ parameters.landscape }} 
+                        --env CF_SPACE_GUID_MASTER=${{ parameters.testSpaceGuid }} 
+                        --env CF_SPACE_GUID_RELEASE=${{ parameters.testSpaceGuidRelease }} 
+                        --env ENV_SRV_APP_NAME=${{ parameters.appName }}'
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      displayName: Publish DB/HANA Tests Results(XML)
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'tests/db-integration/target/report/*.xml'
+    - task: PublishPipelineArtifact@1
+      condition: failed()
+      inputs:
+        targetPath: 'tests/db-integration/target/report/'
+        artifact: 'DB_HANA_Tests_Attempt_$(System.JobAttempt)'
+        publishLocation: 'pipeline'
+        
+    acceptance2NotifyUsersKey: 'ConsultantProfileDBIntegrationTest'     
+   # UIVeri5 MyProjectExperience & MyAssignments Tests
+    acceptance3StageName: 'E2E Tests - MyProjectExperience & MyAssignments'
+    acceptance3PostSteps:
+    - task: piper@1
+      displayName: Run E2E Tests - MyProjectExperience & MyAssignments
+      inputs:
+        stepName: shellExecute
+        flags: "--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/runTests.sh"
+        dockerImage: ppiper/node-browsers:v25
+        dockerOptions: '--env DOMAIN="." 
+                        --env TEST_PATH="tests/end-to-end"
+                        --env ADDITIONAL_FLAGS_FOR_START_COMMAND="-- --suiteFilter=myAssignments,myProjectExperience --config.connectionConfigs.direct.binaries.chromedriver.version=111.0.5563.19"
+                        --env ENV_LANDSCAPE="sap" 
+                        --env ENV_SRV_APP_NAME="consultantProfile-srv" 
+                        --env CF_SPACE_GUID_MASTER=${{ parameters.testSpaceGuid }} 
+                        --env CF_SPACE_GUID_RELEASE=${{ parameters.testSpaceGuidRelease }} 
+                        --env ENV_APPROUTER_URL_MASTER=${{parameters.appRouterURL}} 
+                        --env ENV_APPROUTER_URL_RELEASE=${{parameters.appRouterURLRelease}} 
+                        --env ENV_IDP_HOST="axtubdeog.accounts400.ondemand.com"
+                        --env ENV_BROWSER_NAME="chrome"
+                        --env ENV_PLATFORM_NAME="linux"'
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      displayName: Publish E2E Tests - MyProjectExperience & MyAssignments Results(XML)
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'tests/end-to-end/target/**/*.xml'
+    - task: PublishPipelineArtifact@1
+      condition: failed()
+      inputs:
+        targetPath: 'tests/end-to-end/target/report/screenshots/'
+        artifact: 'E2E_Tests_MyProjectExperience_MyAssignments_Attempt_$(System.JobAttempt)'
+        publishLocation: 'pipeline'
+    acceptance3NotifyUsersKey: 'ConsultantProfileEndtoEndTest'     
+
+   # UIVeri5 Consultant-Profile-Config-Apps Tests
+    acceptance4StageName: 'E2E Tests - Config-Apps'
+    acceptance4PostSteps:
+    - task: piper@1
+      displayName: Run E2E Tests - Config-Apps
+      inputs:
+        stepName: shellExecute
+        flags: "--sources https://github.tools.sap/api/v3/repos/Cloud4RM/RM-Piper-ADO/contents/pipeline-scripts/domain/runTests.sh"
+        dockerImage: ppiper/node-browsers:v25
+        dockerOptions: '--env DOMAIN="." 
+                        --env TEST_PATH="tests/end-to-end"
+                        --env ADDITIONAL_FLAGS_FOR_START_COMMAND="-- --suiteFilter=manageProjectRoles,maintainServiceOrg,maintainAvailability,myResource --config.connectionConfigs.direct.binaries.chromedriver.version=111.0.5563.19"
+                        --env ENV_LANDSCAPE="sap" 
+                        --env ENV_SRV_APP_NAME="consultantProfile-srv" 
+                        --env CF_SPACE_GUID_MASTER=${{ parameters.testSpaceGuid }} 
+                        --env CF_SPACE_GUID_RELEASE=${{ parameters.testSpaceGuidRelease }} 
+                        --env ENV_APPROUTER_URL_MASTER=${{parameters.appRouterURL}} 
+                        --env ENV_APPROUTER_URL_RELEASE=${{parameters.appRouterURLRelease}} 
+                        --env ENV_IDP_HOST="axtubdeog.accounts400.ondemand.com"
+                        --env ENV_BROWSER_NAME="chrome"
+                        --env ENV_PLATFORM_NAME="linux"'
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      displayName: Publish E2E Tests - Config-Apps Results(XML)
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'tests/end-to-end/target/**/*.xml'
+    - task: PublishPipelineArtifact@1
+      condition: failed()
+      inputs:
+        targetPath: 'tests/end-to-end/target/report/screenshots/'
+        artifact: 'E2E_Config_Tests_Apps_Attempt_$(System.JobAttempt)'
+        publishLocation: 'pipeline'
+    acceptance4NotifyUsersKey: 'ConsultantProfileEndtoEndTest'     
+        
+    updateSaaSApprouterName: 'consultantProfile-approuter'
+    updateSaaSSpaceGuidMaster: ${{ parameters.testSpaceGuid }} 
+    updateSaaSSpaceGuidRelease: ${{ parameters.testSpaceGuidRelease }}

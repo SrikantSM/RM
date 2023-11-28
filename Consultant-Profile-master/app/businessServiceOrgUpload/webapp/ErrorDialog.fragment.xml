@@ -1,0 +1,24 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core" >
+    <Dialog id="errorDialog" title="{i18n>errorDialogTitle}" >
+        <content>
+            <List
+                items="{ui>/errors}">
+                <items>
+                    <ObjectListItem
+                        title="{ui>message}">
+                        <attributes>
+                            <ObjectAttribute text="{ui>failedItem/description}" />
+                        </attributes>
+                    </ObjectListItem>
+                </items>
+            </List>
+        </content>
+        <buttons>
+            <Button id="buttonClose" text="{i18n>errorDialogClose}" press="handleCloseErrorDialog" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

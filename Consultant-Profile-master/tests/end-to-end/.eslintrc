@@ -1,0 +1,36 @@
+{
+    "extends": [
+        "eslint-config-airbnb-base"
+    ],
+    "globals": {
+        "afterAll": true,
+        "beforeAll": true,
+        "browser": true,
+        "by": true,
+        "describe": true,
+        "element": true,
+        "expect": true,
+        "it": true,
+        "jasmine": true,
+        "jQuery": true,
+        "protractor": true,
+        "sap": true,
+        "window": true
+    },
+    "rules": {
+        "indent": ["error", 4],
+        "no-plusplus": [2, {"allowForLoopAfterthoughts": true}],
+        "class-methods-use-this": "off",
+        "func-names": "off",
+        "import/no-dynamic-require": "off",
+        "import/no-extraneous-dependencies": "off",
+        "max-len": "off",
+        "no-await-in-loop": "off",
+        "no-console": "off",
+        "no-param-reassign": "off",
+        "no-restricted-syntax": "off",
+        "no-unused-vars": ["error", {"args": "none"}],
+        "no-use-before-define": "off",
+        "valid-jsdoc": "error"
+    }
+}

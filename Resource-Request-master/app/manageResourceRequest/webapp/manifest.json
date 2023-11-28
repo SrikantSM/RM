@@ -1,0 +1,546 @@
+{
+    "_version": "1.8.0",
+    "sap.app": {
+        "id": "manageResourceRequest",
+        "type": "application",
+        "title": "{{appTitle}}",
+        "description": "",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/odata/v4/ManageResourceRequestService/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "4.0",
+                    "localUri": "localService/metadata.xml"
+        }
+            }
+        },
+        "sourceTemplate": {
+            "id": "html5moduletemplates.smartTemplateModule",
+            "-id": "ui5template.smartTemplate",
+            "-version": "1.40.12"
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "configApplicationDisplay": {
+                    "semanticObject": "ResourceRequest",
+                    "action": "Manage",
+                    "deviceTypes": {
+                        "desktop": true,
+                        "tablet": true,
+                        "phone": true
+                    },
+                    "icon": "sap-icon://account",
+                    "size": "1x1",
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "title": "{{appTitle}}"
+                }
+            },
+            "outbounds": {}
+        }
+    },
+    "sap.ui5": {
+        "dependencies": {
+            "minUI5Version": "1.65",
+            "libs": {
+                "sap.fe.templates": {},
+                "resourceRequestLibrary": {
+                    "minVersion": "1.0.0",
+                    "lazy": true
+                }
+            },
+            "components": {}
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true,
+                    "groupProperties": {
+                        "default": {
+                            "submit": "Auto"
+                        },
+                        "collection": {
+                            "submit": "Auto"
+                        }
+                    }
+                }
+            }
+        },
+        "extends": {
+            "extensions": {
+                "sap.ui.controllerExtensions": {
+                    "sap.fe.templates.ListReport.ListReportController": {
+                        "controllerNames": [
+                            "resourceRequestLibrary.controller.ListReport",
+                            "resourceRequestLibrary.controller.StaffingSummaryStackedBarChart"
+                        ]
+                    },
+                    "sap.fe.templates.ObjectPage.ObjectPageController": {
+                        "controllerNames": [
+                            "resourceRequestLibrary.controller.ObjectPage",
+                            "resourceRequestLibrary.controller.StaffingSummaryStackedBarChart"
+                        ]
+                    }
+                }
+            }
+        },
+        "routing": {
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "ResourceRequestList",
+                    "target": "ResourceRequestList"
+                },
+                {
+                    "pattern": "ResourceRequests({key}):?query:",
+                    "name": "ResourceRequestDetails",
+                    "target": "ResourceRequestDetails"
+                }
+            ],
+            "targets": {
+                "ResourceRequestList": {
+                    "type": "Component",
+                    "id": "ResourceRequestListReport",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "entitySet": "ResourceRequests",
+                            "variantManagement": "Page",
+                            "initialLoad": true,
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "tableSettings": {
+                                        "type": "ResponsiveTable",
+                                        "personalization": true
+                                    },
+                                    "columns": {
+                                        "StaffingStatusColumn": {
+                                            "header": "{i18n>STAFFING_STATUS_LABEL}",
+                                            "width": "15em",
+                                            "importance": "None",
+                                            "horizontalAlign": "Begin",
+                                            "position": {
+                                                "placement": "After",
+                                                "anchor": "DataField::endDate"
+                                            },
+                                            "template": "resourceRequestLibrary.fragment.StaffedVsRequestedBulletChart",
+                                            "availability": "Default",
+                                            "properties":[
+                                                "staffingStatus/description"
+                                            ]
+                                        },
+                                        "AssignmentStatusColumn": {
+                                            "header": "{i18n>ASSIGNMENT_STATUS_LABEL}",
+                                            "width": "15em",
+                                            "importance": "None",
+                                            "horizontalAlign": "Begin",
+                                            "template": "resourceRequestLibrary.fragment.StaffingSummaryStackedBarChart",
+                                            "availability": "Adaptation",
+                                            "properties":[
+                                                "staffingStatus/bookedCapacityHard",
+                                                "staffingStatus/bookedCapacitySoft",
+                                                "staffingStatus/remainingCapacity"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "@com.sap.vocabularies.UI.v1.SelectionFields": {
+                                    "navigationProperties": [
+                                        "staffingDetails/assignmentStatus_code"
+                                    ],
+                                    "filterFields": {
+                                        "startDate": {
+                                            "label": "{i18n>START_TIME}",
+                                            "settings": {
+                                                "operatorConfiguration": [
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "TODAY",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "YESTERDAY",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "TOMORROW",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "TODAYFROMTO",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "LASTWEEKS",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "NEXTWEEKS",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "SPECIFICMONTH",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "NEXTMONTHS",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "LASTMONTHS",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "THISQUARTER",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "LASTQUARTER",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "LASTQUARTERS",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "NEXTQUARTER",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "NEXTQUARTERS",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "QUARTER1",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "QUARTER2",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "QUARTER3",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "QUARTER4",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "THISYEAR",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "LASTYEAR",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "LASTYEARS",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "NEXTYEAR",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "NEXTYEARS",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "YEARTODATE",
+                                                        "exclude": true
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "endDate": {
+                                            "label": "{i18n>END_TIME}",
+                                            "settings": {
+                                                "operatorConfiguration": [
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "TODAY",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "YESTERDAY",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "TOMORROW",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "TODAYFROMTO",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "LASTWEEKS",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "NEXTWEEKS",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "SPECIFICMONTH",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "NEXTMONTHS",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "LASTMONTHS",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "THISQUARTER",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "LASTQUARTER",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "LASTQUARTERS",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "NEXTQUARTER",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "NEXTQUARTERS",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "QUARTER1",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "QUARTER2",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "QUARTER3",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "QUARTER4",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "THISYEAR",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "LASTYEAR",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "LASTYEARS",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "NEXTYEAR",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "NEXTYEARS",
+                                                        "exclude": true
+                                                    },
+                                                    {
+                                                        "path": "key",
+                                                        "equals": "YEARTODATE",
+                                                        "exclude": true
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "navigation": {
+                                "ResourceRequests": {
+                                    "detail": {
+                                        "route": "ResourceRequestDetails"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "ResourceRequestDetails": {
+                    "type": "Component",
+                    "id": "ResourceRequestObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "entitySet": "ResourceRequests",
+                            "variantManagement": "None",
+                            "editableHeaderContent": false,
+                            "enhanceI18n": "i18n/customDetailsPage.properties",
+                            "controlConfiguration": {
+                                "skillRequirements/@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "tableSettings": {
+                                        "type": "ResponsiveTable",
+                                        "personalization": false,
+                                        "enablePaste": false,
+                                        "enableExport": true,
+                                        "creationMode": {
+                                            "name": "Inline",
+                                            "createAtEnd": false
+                                        },
+                                        "selectionMode": "Multi"
+                                    }
+                                },
+                                "staffingDetails/@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "columns": {
+                                        "AssignedResourcesNameColumnManageApp": {
+                                            "header": "{i18n>NAME}",
+                                            "width": "30rem",
+                                            "template": "resourceRequestLibrary.fragment.ResourceNameManage",
+                                            "availability": "Default",
+                                            "position": {
+                                                "placement": "Before",
+                                                "anchor": "DataField::workerTypeName"
+                                            },
+                                            "properties": [
+                                                "resourceName"
+                                            ]
+                                        }
+                                    },
+                                    "tableSettings": {
+                                        "type": "ResponsiveTable",
+                                        "personalization": false
+                                    }
+                                }
+                            },
+                            "content": {
+                                "header": {
+                                    "facets": {
+                                        "AssignmentStatusOverview": {
+                                            "template": "resourceRequestLibrary.fragment.StaffingSummaryStackedBarChart",
+                                            "title": "{i18n>ASSIGNMENT_STATUS_LABEL}",
+                                            "stashed": "false"
+                                        },
+                                        "StaffingStatusChart": {
+                                            "template": "resourceRequestLibrary.fragment.StaffedVsRequestedBulletChart",
+                                            "title": "{i18n>STAFFING_STATUS_LABEL}",
+                                            "position": {
+                                                "placement": "After",
+                                                "anchor": "AssignmentStatusOverview"
+                                            }
+                                        }
+                                    },
+                                    "actions": {
+                                        "MenuActions": {
+                                            "text": "{i18n>OPEN_IN}",
+                                            "menu": [
+                                                "DataFieldForIntentBasedNavigation::ResourceRequest::Display"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "body": {
+                                    "sections": {
+                                        "effortcustomSection": {
+                                            "type": "XMLFragment",
+                                            "name": "manageResourceRequest.ext.view.EffortDistribution",
+                                            "title": "{i18n>effortcustomSectionTitle}",
+                                            "position": {
+                                                "placement": "After",
+                                                "anchor": "ResourceRequestDetails"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "fullWidth": true
+    },
+    "sap.fiori": {
+        "registrationIds": [
+            "F4723"
+        ],
+        "archeType": "transactional"
+    },
+    "sap.platform.cf": {
+        "oAuthScopes": [
+            "$XSAPPNAME.RsceReq.Edit"
+        ]
+    }
+}

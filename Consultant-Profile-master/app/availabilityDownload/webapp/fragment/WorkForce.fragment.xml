@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<SelectDialog
+		title="{i18n>workforceID}"
+		items="{availability>/AvailabilityWorkForcePersonID}"
+		search=".onValueHelpDialogSearch"
+		confirm=".onValueHelpDialogClose($event,'workForce')"
+		cancel=".onValueHelpDialogClose"
+		cd:FilterName="workForcePersonExternalId">
+		<StandardListItem	
+			title="{availability>workForcePersonExternalId}">
+		</StandardListItem>
+	</SelectDialog>
+</core:FragmentDefinition>

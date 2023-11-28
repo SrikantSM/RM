@@ -1,0 +1,27 @@
+
+{
+    "welcomeFile": "/cp.portal",
+    "authenticationMethod": "route",
+    "routes": [
+        {
+            "source": "^(/applications/.*)$",
+            "target": "$1",
+            "service": "html5-apps-repo-rt",
+            "authenticationType": "xsuaa"
+        },
+        {
+            "source": "^/resources/sap/dfa/help/(.*)$",
+            "target": "$1",
+            "destination": "skill-xray",
+            "csrfProtection": false,
+            "authenticationType": "none"
+         },
+         {
+            "source": "^/sap/dfa/help/(.*)$",
+            "target": "$1",
+            "destination": "skill-xray-data",
+            "csrfProtection": false,
+            "authenticationType": "none"
+         }
+    ]
+}

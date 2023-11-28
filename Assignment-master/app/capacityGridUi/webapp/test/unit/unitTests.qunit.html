@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unit tests for Capacity Grid</title>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+    <meta charset="UTF-8">
+
+    <script id="sap-ui-bootstrap"
+            data-sap-ui-async="true"
+            src="https://sapui5.hana.ondemand.com/1.114.1/resources/sap-ui-core.js"
+            data-sap-ui-libs="sap.m, sap.ui.comp, sap.ui.table"
+            data-sap-ui-resourceroots='{
+					"capacityGridUi": "../../",
+					"test.unit": "./"
+				}'>
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="https://openui5.hana.ondemand.com/resources/sap/ui/thirdparty/qunit-2.css">
+
+    <script src="https://openui5.hana.ondemand.com/resources/sap/ui/thirdparty/qunit-2.js"></script>
+    <script src="https://openui5.hana.ondemand.com/resources/sap/ui/qunit/qunit-junit.js"></script>
+    <script src="https://openui5.hana.ondemand.com/resources/sap/ui/qunit/qunit-coverage.js"></script>
+    <script src="https://openui5.hana.ondemand.com/resources/sap/ui/thirdparty/sinon.js"></script>
+    <script src="https://openui5.hana.ondemand.com/resources/sap/ui/thirdparty/sinon-qunit.js"></script>
+
+    <script>
+		QUnit.config.autostart = false;
+
+		sap.ui.require(
+			["capacityGridUi/test/unit/allTests"],
+			function () {
+				QUnit.start();
+			}
+		);
+    </script>
+
+</head>
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+</body>
+</html>

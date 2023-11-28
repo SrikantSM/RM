@@ -1,0 +1,8 @@
+{
+	"name": "smoke-test",
+	"private": true,
+	"dependencies": {
+		"moment": "latest"
+	},
+	"main": "index.js"
+}

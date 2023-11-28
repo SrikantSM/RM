@@ -1,0 +1,62 @@
+<mvc:View
+  controllerName="skill-download.App"
+  displayBlock="true"
+  xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:semantic="sap.f.semantic"
+  xmlns:u="sap.ui.unified"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc">
+  <App>
+    <semantic:SemanticPage busy="{ui>/busy}">
+      <semantic:titleHeading>
+        <Title text="{i18n>appTitle}" />
+      </semantic:titleHeading>
+      <semantic:content>
+        <l:VerticalLayout width="100%">
+          <MessageStrip
+            id="downloadMessageStrip"
+            text="{ui>/messageText}"
+            type="{ui>/messageType}"
+            visible="{ui>/messageVisible}"
+            showIcon="true" showCloseButton="false">
+          </MessageStrip>
+          <f:SimpleForm
+            id="filedownloadform"
+            editable="true"
+            layout="ResponsiveGridLayout"
+            labelSpanXL="3"
+            labelSpanL="3"
+            labelSpanM="3"
+            labelSpanS="12"
+            adjustLabelSpan="false"
+            emptySpanXL="4"
+            emptySpanL="4"
+            emptySpanM="4"
+            emptySpanS="0"
+            columnsXL="1"
+            columnsL="1"
+            columnsM="1"
+            singleContainerFullSize="false">
+            <f:content>
+              <Label text="{i18n>languageLabel}" labelFor="languageInput" /> 
+              <Input
+                placeholder="{i18n>instructionForLanguageInput}"
+                required="true"
+                id="languageInput"
+                showSuggestion="true"
+				        suggestionItems="{skill>/Languages}" >
+				        <suggestionItems>
+					        <core:ListItem key="{skill>code}" text="{skill>code}" additionalText="{skill>name}"/>
+				        </suggestionItems>
+              </Input>
+              <Label text="" />
+              <Button id="downloadButton" text="{i18n>downloadButtonText}" type="Emphasized" press="handleDownloadPress" />
+            </f:content>
+          </f:SimpleForm>
+        </l:VerticalLayout>
+      </semantic:content>
+    </semantic:SemanticPage>
+  </App>
+</mvc:View>

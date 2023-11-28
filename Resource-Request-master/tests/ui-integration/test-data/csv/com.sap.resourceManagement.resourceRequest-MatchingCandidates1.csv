@@ -1,0 +1,4 @@
+resourceRequest_ID,resource_ID,resourceRequestStartDate,resourceRequestEndDate,resourceName,remainingCapacity,availabilityMatchPercentage,skillMatchPercentage,utilizationPercentage,totalMatchPercentage
+16b79902-afa0-4bef-9658-98cd8d671212,3f0c80ff-8573-485a-8413-48855551631d,2019-01-01,2019-02-28,Mr. Fantastic,100.00,10.00,50.00,50.00,100.00
+16b79902-afa0-4bef-9658-98cd8d671212,3c51b7c6-dbfb-47ab-ae98-e3e1557d1c5d,2019-01-01,2019-02-28,Charles Xavier,60.00,40.00,20.00,40.00,80.00
+16b79902-afa0-4bef-9658-98cd8d671212,742e3684-3b44-11ea-b77f-2e728ce88125,2019-01-01,2019-02-28,Ironman,80.00,30.00,30.00,10.00,60.00

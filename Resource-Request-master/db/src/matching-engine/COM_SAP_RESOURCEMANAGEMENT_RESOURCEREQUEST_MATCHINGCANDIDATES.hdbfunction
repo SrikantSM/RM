@@ -1,0 +1,166 @@
+FUNCTION "COM_SAP_RESOURCEMANAGEMENT_RESOURCEREQUEST_MATCHINGCANDIDATES"() RETURNS TABLE (
+	resourceRequest_ID NVARCHAR(36),
+    resource_ID NVARCHAR(36),
+    resourceRequestStartDate DATE,
+    resourceRequestEndDate DATE,
+    resourceName NVARCHAR(257),
+    remainingCapacity Decimal(10,2),
+    availabilityMatchPercentage DECIMAL(6,2),
+    skillMatchPercentage DECIMAL(6,2),
+    utilizationPercentage DECIMAL(6,2),
+    totalMatchPercentage DECIMAL(6,2)
+) LANGUAGE SQLSCRIPT SQL SECURITY INVOKER AS BEGIN
+
+DECLARE i INTEGER = 0;
+
+DECLARE hasMore BOOLEAN = TRUE;
+DECLARE batchSize INTEGER;
+DECLARE availabilityMatchResult COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_AVAILABILITY_RESULT;
+DECLARE skillMatchResult COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_SKILL_RESULT;
+DECLARE utilizationResult COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_UTILIZATION_RESULT;
+DECLARE matchingResult COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_RESULT;
+DECLARE roleMatchResult COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_TT_ROLE_RESULT;
+
+/*
+ Calculate Recommendation only for the selected Resource Requests and authorized Resource organization only
+*/
+resourceRequests = SELECT SESSION_CONTEXT('RECOMMENDATION_RESOURCEREQUEST_ID_FILTER') as ID FROM RM_DUMMY;
+authorizedResourceOrganizations = SELECT resourceOrganizations FROM "COM_SAP_RESOURCEMANAGEMENT_GET_AUTHORIZED_RESOURCEORGANIZATIONS"();
+
+/*
+Batching is being done with limit of 100 resoures/resource request at a time are being processed.
+Values 'A', 'F', 'S', 'P', 'U' for status_code represent an active resource so only those resources are picked up.
+*/
+
+batchSize = 100;
+
+WHILE :hasMore = TRUE DO
+
+resourcesWithValidity =
+SELECT
+    jobDetails.parent as ID,
+    jobDetails.validFrom,
+    jobDetails.validTo
+FROM
+    COM_SAP_RESOURCEMANAGEMENT_WORKFORCE_WORKASSIGNMENT_WORKASSIGNMENTFIRSTJOBDETAILS As jobDetails
+INNER JOIN 
+    COM_SAP_RESOURCEMANAGEMENT_CONFIG_RESOURCEORGANIZATIONITEMSVIEW As resOrgItems on jobDetails.COSTCENTEREXTERNALID = resOrgItems.COSTCENTERUUID   
+WHERE
+    jobDetails.jobDetailSequenceNumber = 1 
+    AND resOrgItems.ID IN (SELECT resourceOrganizations FROM :authorizedResourceOrganizations)
+    AND jobDetails.status_code IN ('A', 'F', 'S', 'P', 'U')
+LIMIT
+    :batchSize OFFSET :i;
+
+resources =
+SELECT
+    ID
+FROM
+    :resourcesWithValidity;
+
+i = :i + RECORD_COUNT(:resources);
+
+IF IS_EMPTY(:resources) THEN hasMore = FALSE;
+
+BREAK;
+
+ELSE hasMore = TRUE;
+
+END IF;
+/* Commenting this call for now, once default_role is present we will need this
+CALL COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_ROLE_MATCH(
+    resources          => :resources,
+    projectRole_ID     => SESSION_CONTEXT('RECOMMENDATION_PROJECT_ROLE_ID_FILTER'),
+    roleMatchResult    => roleMatchResult
+);
+*/
+/*
+Further logic is executed only on filtered list of resources
+*/
+
+filteredResources = SELECT DISTINCT ID as ID from :resourcesWithValidity;
+
+CALL COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_AVAILABILITY_MATCH(
+    resourceRequests         => :resourceRequests,
+    resources                => :resourcesWithValidity,
+    availabilityMatchResult  => availabilityMatchResult
+);
+
+CALL COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_SKILL_MATCH(
+    resourceRequests  => :resourceRequests,
+    resources         => :filteredResources,
+    skillMatchResult  => skillMatchResult
+);
+
+CALL COM_SAP_RESOURCEMANAGEMENT_MATCHINGCANDIDATE_UTILIZATION_PERCENTAGE(
+    resources          => :filteredResources,
+    startTime          => CURRENT_TIMESTAMP,
+    endTime            => ADD_DAYS (CURRENT_TIMESTAMP, 90),
+    utilizationResult  => utilizationResult
+);
+
+matchingResult =
+SELECT
+    resourceRequest_ID,
+    resource_ID,
+    availabilityMatchPercentage,
+    skillMatchPercentage,
+    utilizationPercentage,
+    totalMatchPercentage
+FROM
+    :matchingResult
+UNION ALL
+SELECT
+    availabilityMatch.resourceRequest_ID,
+    availabilityMatch.resource_ID,
+    availabilityMatch.availabilityMatchPercentage,
+    skillMatch.skillMatchPercentage,
+    utilization.utilizationPercentage,
+    (availabilityMatch.availabilityMatchPercentage + skillMatch.skillMatchPercentage)/2 as totalMatchPercentage
+FROM
+    :availabilityMatchResult as availabilityMatch
+INNER JOIN
+    :utilizationResult as utilization on utilization.resource_ID = availabilityMatch.resource_ID
+INNER JOIN
+    :skillMatchResult as skillMatch on skillMatch.resource_ID = availabilityMatch.resource_ID
+                                  and  skillMatch.resourceRequest_ID = availabilityMatch.resourceRequest_ID;
+END WHILE;
+
+/*
+    This calculation is done to expose the remainingCapacity from this function itself.
+    Note : This needs to be reverted when the CAP issue for fragmented select gets fixed.
+*/
+
+bookedEfforts = SELECT SUM(BOOKEDCAPACITYINMINUTES) AS BOOKEDCAPACITYINMINUTES, RESOURCEREQUEST_ID FROM COM_SAP_RESOURCEMANAGEMENT_ASSIGNMENT_ASSIGNMENTS
+GROUP BY resourceRequest_ID;
+
+RETURN
+
+/*
+    Note : To avoid fragmented select done by CAP, the followig fields -
+    remainingCapacity,resourceRequestStartDate,resourceRequestEndDate,resourceName,projectRoleName are projected from the function itself.
+    Once the issue is fixed, these fields have to be removed from here and should be directly taken from the entity.
+    CAP Issue : https://github.tools.sap/Cloud4RM/ExternalCollaboration/issues/520
+*/
+
+SELECT
+    matchingResults.resourceRequest_ID as resourceRequest_ID,
+    matchingResults.resource_ID as resource_ID,
+    resourceRequest.startDate as resourceRequestStartDate,
+    resourceRequest.endDate as resourceRequestEndDate,
+    resource.fullName as resourceName,
+    GREATEST(resourceRequest.requestedCapacityInMinutes - bookedEfforts.BOOKEDCAPACITYINMINUTES,0) as remainingCapacity,
+    matchingResults.availabilityMatchPercentage as availabilityMatchPercentage,
+    matchingResults.skillMatchPercentage as skillMatchPercentage,
+    matchingResults.utilizationPercentage as utilizationPercentage,
+    matchingResults.totalMatchPercentage as totalMatchPercentage
+FROM
+    :matchingResult as matchingResults
+LEFT OUTER JOIN
+	COM_SAP_RESOURCEMANAGEMENT_RESOURCEREQUEST_RESOURCEREQUESTS as resourceRequest on resourceRequest.ID = matchingResults.resourceRequest_ID
+LEFT OUTER JOIN
+	COM_SAP_RESOURCEMANAGEMENT_RESOURCE_RESOURCEDETAILS as resource on resource.resource_ID = matchingResults.resource_ID
+LEFT OUTER JOIN
+	:bookedEfforts as bookedEfforts on bookedEfforts.RESOURCEREQUEST_ID = matchingResults.resourceRequest_ID
+ORDER BY totalMatchPercentage DESC;
+END;

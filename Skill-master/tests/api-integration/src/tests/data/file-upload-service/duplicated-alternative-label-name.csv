@@ -1,0 +1,5 @@
+conceptType,conceptUri,skillType,preferredLabel,altLabels,description
+KnowledgeSkillCompetence,{uuid()},skill/competence,values,"DUPLICATEDLABELNAME
+DUPLICATEDLABELNAME","Description1"
+KnowledgeSkillCompetence,{uuid()},skill/competence,values2,"DUPLICATEDLABELNAME
+DUPLICATEDLABELNAME","Description1"

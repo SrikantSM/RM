@@ -1,0 +1,33 @@
+# top-most EditorConfig file
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = off
+charset = utf-8
+
+# Indentation
+[Makefile]
+indent_style = tab
+
+[*.{json,yaml}]
+indent_style = space
+indent_size = 4
+
+[*.java]
+indent_style = space
+indent_size = 4
+
+[*.cds]
+indent_style = space
+indent_size = 2
+
+[*.{xml,xsd}]
+indent_style = space
+indent_size = 2
+
+[*.{js,ts}]
+indent_style = space
+indent_size = 2

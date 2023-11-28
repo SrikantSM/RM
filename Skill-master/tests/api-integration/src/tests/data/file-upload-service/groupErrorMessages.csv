@@ -1,0 +1,34 @@
+conceptType,conceptUri,skillType,preferredLabel,altLabels,description,usage,catalogs
+KnowledgeSkillCompetence,{uuid()},,values,"scruples
+beliefs
+morals","Skill is now active",unrestricted,
+KnowledgeSkillCompetence,{uuid()},,values2,"scruples
+beliefs
+morals","Skill is now active",unrestricted,
+TestSkillCompetence,{uuid()},skill/competence,values,"scruples
+beliefs
+morals","Skill is now active",unrestricted,
+TestSkillCompetence,{uuid()},skill/competence,values2,"scruples
+beliefs
+morals","Skill is now active",unrestricted,
+KnowledgeSkillCompetence,{uuid()},skill/competence,values,"scruples
+beliefs
+morals","Skill is restricted",3,
+KnowledgeSkillCompetence,{uuid()},skill/competence,values,"scruples
+beliefs
+morals",,,,
+KnowledgeSkillCompetence,{uuid()},skill/competence,values2,"scruples
+beliefs
+morals",,,
+KnowledgeSkillCompetence,{uuid()},skill/competence,skillWithCatalogs,"scruples
+beliefs
+morals","VALID DESCRIPTION 1",unrestricted,catalogAPINotExisting {uuid()}
+KnowledgeSkillCompetence,{uuid()},skill/competence,skillWithCatalogs,"scruples
+beliefs
+morals","VALID DESCRIPTION 1",unrestricted,catalogAPINotExisting {uuid()}
+KnowledgeSkillCompetence,{uuid()},skill/competence,values,"scruples
+beliefs
+morals","VALID DESCRIPTION 1",,
+KnowledgeSkillCompetence,{uuid()},skill/competence,values2,"scruples
+beliefs
+morals","VALID DESCRIPTION 2",,

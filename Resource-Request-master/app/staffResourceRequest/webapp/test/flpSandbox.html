@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>staffResourceRequests</title>
+
+    <!-- Bootstrap the unified shell in sandbox mode for standalone usage.
+         The renderer is specified in the global Unified Shell configuration object "sap-ushell-config".
+         The fiori2 renderer will render the shell header allowing, for instance,
+         testing of additional application setting buttons.
+         The navigation target resolution service is configured in a way that the empty URL hash is
+         resolved to our own application.
+         This example uses relative path references for the SAPUI5 resources and test-resources;
+         it might be necessary to adapt them depending on the target runtime platform.
+         The sandbox platform is restricted to development or demo use cases and must NOT be used
+         for productive scenarios.
+    -->
+    <script type="text/javascript">
+      window['sap-ushell-config'] = {
+        defaultRenderer: 'fiori2',
+        renderers: {
+          fiori2: {
+            componentData: {
+              config: {
+                search: 'hidden',
+              },
+            },
+          },
+        },
+        services: {
+          ClientSideTargetResolution: {
+            adapter: {
+              config: {
+                inbounds: {
+                  staffResourceRequest: {
+                    semanticObject: 'ResourceRequest',
+                    action: 'Display',
+                    title: 'Staff Resource Requests',
+                    signature: {
+                      parameters: {},
+                      additionalParameters: 'allowed',
+                    },
+                    resolutionResult: {
+                      applicationType: 'SAPUI5',
+                      additionalInformation:
+                        'SAPUI5.Component=staffResourceRequest',
+                      url: '../',
+                    },
+                  },
+                },
+              },
+            },
+          },
+          NavTargetResolution: {
+            config: {
+              enableClientSideTargetResolution: true,
+            },
+          },
+        },
+        bootstrapPlugins: {
+          RuntimeAuthoringPlugin: {
+            component: 'sap.ushell.plugins.rta',
+            config: {
+              validateAppVersion: false,
+            },
+          },
+          PersonalizePlugin: {
+            component: 'sap.ushell.plugins.rta-personalize',
+            config: {
+              validateAppVersion: false,
+            },
+          },
+        },
+      };
+    </script>
+
+    <script type="text/javascript">
+      var ui5BaseUrl = "https://sapui5.hana.ondemand.com/resources";
+      if (parent && parent.sap) ui5BaseUrl= parent.sap.ui.require.toUrl("");
+      // bootstrap the ushell sandbox
+      var bootstrap = document.createElement('script');
+      bootstrap.setAttribute('src', ui5BaseUrl + '/sap-ui-core.js');
+      bootstrap.setAttribute('id', 'sap-ui-bootstrap');
+      bootstrap.setAttribute('data-sap-ui-theme', 'sap_fiori_3');
+      bootstrap.setAttribute('data-sap-ui-compatVersion', 'edge');
+      bootstrap.setAttribute('data-sap-ui-frameOptions', 'allow'); // NON-SECURE setting for testing environment
+      bootstrap.setAttribute(
+        'data-sap-ui-resourceroots',
+        '{"staffResourceRequest": "../", "resourceRequestLibrary":"ui/resourceRequestLibrary"}'
+      );
+      bootstrap.setAttribute(
+        'data-sap-ui-flexibilityServices',
+        '[{"connector":"LocalStorageConnector"}]'
+      );
+      bootstrap.setAttribute('data-sap-ui-async', 'true');
+      bootstrap.setAttribute('data-sap-ui-oninit', 'startFlp');
+      bootstrap.onload = function () {
+        sap.ui.getCore().attachInit(function () {
+          // to enable debugging of OData calls request/response for OPA
+          (function (global) {
+            var origXHR = global.XMLHttpRequest;
+
+            class InternalXHR extends origXHR {
+              constructor(...arg) {
+                super(...arg);
+              }
+              send(...args) {
+                if (
+                  typeof args[0] === 'string' &&
+                  args[0].includes('--batch_id')
+                ) {
+                  console.log(
+                    'LOG-InternalXHR-send. \nRequest Body:\n' + args[0]
+                  );
+                }
+                return super.send(...args);
+              }
+              open(...args) {
+                if (
+                  typeof args[1] === 'string' &&
+                  args[1].includes('ManageResourceRequestService') &&
+                  !args[1].includes('metadata')
+                ) {
+                  console.log(
+                    'LOG-InternalXHR-open. \nRequest Method:' +
+                      args[0] +
+                      '\nRequest URL:' +
+                      args[1]
+                  );
+                  this.addEventListener('loadend', function (...loadendargs) {
+                    console.log(
+                      'LOG-InternalXHR-loadend. \nResponse:\n' +
+                        loadendargs[0].target.responseText
+                    );
+                  });
+                }
+                return super.open(...args);
+              }
+            }
+
+            window.XMLHttpRequest = InternalXHR;
+          })(window);
+        });
+      };
+      document.head.appendChild(bootstrap);
+
+      // initialize the ushell sandbox component
+      function startFlp() {
+        sap.ui.require(['sap/ushell/services/Container'], function () {
+          sap.ushell.bootstrap('local').then(function () {
+            sap.ushell.Container.createRenderer().placeAt('content');
+          });
+        });
+      }
+    </script>
+  </head>
+
+  <!-- UI Content -->
+
+  <body class="sapUiBody" id="content"></body>
+</html>

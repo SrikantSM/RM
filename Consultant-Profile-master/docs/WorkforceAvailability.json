@@ -1,0 +1,532 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Workforce Availability",
+    "description": "This API enables you to upload information about the availability of your workforce in SAP S/4HANA Cloud for projects, resource management. You can read, create, and update the availability of your workforce. For reasons of data protection and privacy, only batch requests are available.",
+    "version": "1.0"
+  },
+  "x-sap-api-type": "ODATAV4",
+  "x-odata-version": "4.0",
+  "x-sap-shortText": "Upload the availability of your workforce.",
+  "servers": [
+    {
+      "url": "https://sandbox.api.sap.com/C4PRM/WorkforceAvailabilityService/v1/"
+    },
+    {
+      "url": "https://{host}-rm-api.{environment}.{domain}/WorkforceAvailabilityService/v1",
+      "variables": {
+        "host": {
+          "default": "c4p",
+          "description": "Your host where SAP S/4HANA Cloud for projects, resource management is deployed"
+        },
+        "environment": {
+          "default": "cfapps",
+          "description": "Your defined environment for SAP S/4HANA Cloud for projects, resource management account"
+        },
+        "domain": {
+          "default": "eu10.hana.ondemand.com"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Batch request",
+          "content": {
+            "multipart/mixed;boundary=request-separator": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET WorkforceAvailability HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET WorkforceAvailability(workAssignmentID='Jane.Doe',availabilityDate=2017-01-01) HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET WorkforceAvailability?$skip=0&$top=2 HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET WorkforceAvailability?$orderby=workAssignmentID HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET WorkforceAvailability?$filter=workAssignmentID%20eq%20'Jane.Doe' HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET WorkforceAvailability?$filter=availabilityDate%20eq%202017-01-01 HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nGET WorkforceAvailability?$filter=workforcePerson_ID%20eq%200013e59c-e066-329a-58d4-f5493f33c5fa HTTP/1.1\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nPUT WorkforceAvailability(workAssignmentID='Jane.Doe',availabilityDate=2017-01-01) HTTP/1.1\nContent-Type: application/json\n\n{\n\"id\":\"52a10ff3-e310-430d-8d00-07b582828ac7\",\n\"workforcePerson_ID\": \"0013e59c-e066-329a-58d4-f5493f33c5fa\",\n\"normalWorkingTime\": \"08:00\",\n\"availabilitySupplements\": [{\n\"intervalStart\": \"09:00:00\",\n\"intervalEnd\": \"11:00:00\",\n\"contribution\": \"02:00\"\n},\n{\n\"intervalStart\": \"15:00:00\",\n\"intervalEnd\": \"17:00:00\",\n\"contribution\": \"02:00\"\n}],\n\"availabilityIntervals\": [{\n\"intervalStart\": \"11:00:00\",\n\"intervalEnd\": \"15:00:00\",\n\"contribution\": \"04:00\"\n}]\n}\n\n\n--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding:binary\n\nPATCH WorkforceAvailability(workAssignmentID='Jane.Doe',availabilityDate=2017-01-01) HTTP/1.1\nContent-Type: application/json\n\n{\n\"availabilitySupplements\": [{\n\"intervalStart\": \"09:00:00\",\n\"intervalEnd\": \"10:00:00\",\n\"contribution\": \"01:00\"\n},\n{\n\"intervalStart\": \"15:00:00\",\n\"intervalEnd\": \"17:00:00\",\n\"contribution\": \"02:00\"\n}],\n\"availabilityIntervals\": [{\n\"intervalStart\": \"10:00:00\",\n\"intervalEnd\": \"15:00:00\",\n\"contribution\": \"05:00\"\n}]\n}\n\n\n--request-separator--"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Batch response",
+            "content": {
+              "multipart/mixed": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+              }
+            }
+          },
+          "201": {
+            "$ref": "#/components/responses/success_201"
+          },
+          "204": {
+            "$ref": "#/components/responses/success_204"
+          },
+          "400": {
+            "$ref": "#/components/responses/error_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/error_401"
+          },
+          "403": {
+            "$ref": "#/components/responses/error_403"
+          },
+          "404": {
+            "$ref": "#/components/responses/error_404"
+          },
+          "405": {
+            "$ref": "#/components/responses/error_405"
+          },
+          "409": {
+            "$ref": "#/components/responses/error_409"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "multipart/mixed;boundary=request-separator"
+            },
+            "description": "Indicates the media type of the resource."
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "WorkforceAvailabilityService.WorkforceAvailability": {
+        "title": "WorkforceAvailability",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": true,
+            "description": "The identifier of the availability entry."
+          },
+          "workAssignmentID": {
+            "type": "string",
+            "maxLength": 100,
+            "description": "The identifier of the work assignment that the availability record relates to."
+          },
+          "workforcePerson_ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "description": "The ID of the workforce person.",
+            "nullable": false
+          },
+          "availabilityDate": {
+            "type": "string",
+            "format": "date",
+            "example": "1971-01-01",
+            "description": "The date for the availability record."
+          },
+          "normalWorkingTime": {
+            "type": "string",
+            "maxLength": 6,
+            "example": "08:00",
+            "description": "The number of working hours for a date.",
+            "nullable": false
+          },
+          "availabilityIntervals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkforceAvailabilityService.com_sap_resourceManagement_employee_workforceAvailability_WorkforceAvailabilityTimeInterval"
+            },
+            "description": "The list of available time intervals for a date."
+          },
+          "availabilitySupplements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkforceAvailabilityService.com_sap_resourceManagement_employee_workforceAvailability_WorkforceAvailabilitySupplement"
+            },
+            "description": "The list of time periods when a workforce person is not available, for a date."
+          }
+        },
+        "required": [
+          "workAssignmentID",
+          "workforcePerson_ID",
+          "availabilityDate",
+          "normalWorkingTime",
+          "availabilityIntervals",
+          "availabilitySupplements"
+        ],
+        "description": "The availability of a workforce person."
+      },
+      "WorkforceAvailabilityService.WorkforceAvailability-create": {
+        "title": "WorkforceAvailability (for create)",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": true,
+            "description": "The identifier of the availability entry."
+          },
+          "workAssignmentID": {
+            "type": "string",
+            "maxLength": 100,
+            "description": "The identifier of the work assignment that the availability record relates to."
+          },
+          "workforcePerson_ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "description": "The ID of the workforce person.",
+            "nullable": false
+          },
+          "availabilityDate": {
+            "type": "string",
+            "format": "date",
+            "example": "1971-01-01",
+            "description": "The date for the availability record."
+          },
+          "normalWorkingTime": {
+            "type": "string",
+            "maxLength": 6,
+            "example": "08:00",
+            "description": "The number of working hours for a date.",
+            "nullable": false
+          },
+          "availabilityIntervals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkforceAvailabilityService.com_sap_resourceManagement_employee_workforceAvailability_WorkforceAvailabilityTimeInterval"
+            },
+            "description": "The list of available time intervals for a date."
+          },
+          "availabilitySupplements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkforceAvailabilityService.com_sap_resourceManagement_employee_workforceAvailability_WorkforceAvailabilitySupplement"
+            },
+            "description": "The list of time periods when a workforce person is not available, for a date."
+          }
+        },
+        "required": [
+          "workAssignmentID",
+          "availabilityDate",
+          "workforcePerson_ID",
+          "normalWorkingTime",
+          "availabilityIntervals",
+          "availabilitySupplements"
+        ],
+        "description": "Creates an availability record for a single worker."
+      },
+      "WorkforceAvailabilityService.WorkforceAvailability-update": {
+        "title": "WorkforceAvailability (for update)",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": true,
+            "description": "The identifier of the availability entry."
+          },
+          "workforcePerson_ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "description": "The ID of the workforce person."
+          },
+          "normalWorkingTime": {
+            "type": "string",
+            "maxLength": 6,
+            "example": "08:00",
+            "description": "The number of working hours for a date."
+          },
+          "availabilityIntervals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkforceAvailabilityService.com_sap_resourceManagement_employee_workforceAvailability_WorkforceAvailabilityTimeInterval"
+            },
+            "description": "The list of available time intervals for a date."
+          },
+          "availabilitySupplements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkforceAvailabilityService.com_sap_resourceManagement_employee_workforceAvailability_WorkforceAvailabilitySupplement"
+            },
+            "description": "The list of time periods when a workforce person is not available, for a date."
+          }
+        },
+        "description": "Updates the availability record for a single worker."
+      },
+      "WorkforceAvailabilityService.com_sap_resourceManagement_employee_workforceAvailability_WorkforceAvailabilitySupplement": {
+        "title": "WorkforceAvailabilitySupplement",
+        "type": "object",
+        "properties": {
+          "intervalStart": {
+            "type": "string",
+            "format": "time",
+            "example": "09:00:00",
+            "nullable": false,
+            "description": "Start of the time interval; a time of day in format hh:mm:ss without time zone."
+          },
+          "intervalEnd": {
+            "type": "string",
+            "format": "time",
+            "example": "13:00:00",
+            "nullable": false,
+            "description": "End of the time interval; a time of day in format hh:mm:ss without time zone."
+          },
+          "contribution": {
+            "type": "string",
+            "maxLength": 6,
+            "nullable": false,
+            "description": "The number of hours when a workforce person is not available during regular working hours.",
+            "example": "04:00"
+          }
+        },
+        "required": [
+          "intervalStart",
+          "intervalEnd",
+          "contribution"
+        ],
+        "description": "The absence during regular working hours."
+      },
+      "WorkforceAvailabilityService.com_sap_resourceManagement_employee_workforceAvailability_WorkforceAvailabilityTimeInterval": {
+        "title": "WorkforceAvailabilityTimeInterval",
+        "type": "object",
+        "properties": {
+          "intervalStart": {
+            "type": "string",
+            "format": "time",
+            "example": "13:00:00",
+            "nullable": false,
+            "description": "Start of the time interval; a time of day in format hh:mm:ss without time zone."
+          },
+          "intervalEnd": {
+            "type": "string",
+            "format": "time",
+            "example": "17:00:00",
+            "nullable": false,
+            "description": "End of the time interval; a time of day in format hh:mm:ss without time zone."
+          },
+          "contribution": {
+            "type": "string",
+            "maxLength": 6,
+            "nullable": false,
+            "description": "The number of hours when a workforce person is available during regular working hours.",
+            "example": "04:00"
+          }
+        },
+        "required": [
+          "intervalStart",
+          "intervalEnd",
+          "contribution"
+        ],
+        "description": "The availability during regular working hours."
+      },
+      "count": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+      },
+      "error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "target": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "innererror": {
+                "type": "object",
+                "description": "The structure of this object is service-specific"
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "top": {
+        "name": "$top",
+        "in": "query",
+        "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "example": 50
+      },
+      "skip": {
+        "name": "$skip",
+        "in": "query",
+        "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "count": {
+        "name": "$count",
+        "in": "query",
+        "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "search": {
+        "name": "$search",
+        "in": "query",
+        "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "error": {
+        "description": "Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_400": {
+        "description": "Bad Request - You have provided an invalid request parameter or the payload does not match the expected format. See error message for details.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_401": {
+        "description": "Unauthorized - No valid access token (JWT) has been provided or it has expired.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_403": {
+        "description": "Forbidden - You do not have the necessary authorization to perform this action or to access the requested resource.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_404": {
+        "description": "Not found - The requested resource does not exist.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_405": {
+        "description": "Method Not Allowed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "error_409": {
+        "description": "Conflict - Could not create the resource, due to a conflict with an existing one (e.g. a unique value was provided that is already used). See error message for details.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "success_201": {
+        "description": "Created - The request has been fulfilled, resulting in the creation of a new resource.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/WorkforceAvailabilityService.WorkforceAvailability-create"
+            }
+          }
+        }
+      },
+      "success_204": {
+        "description": "No Content - The server successfully processed the request, and is not returning any content."
+      }
+    },
+    "securitySchemes": {
+      "OAuth2": {
+        "description": "OAuth client credentials (client ID and secret) are required.",
+        "flows": {
+          "clientCredentials": {
+            "scopes": {},
+            "tokenUrl": "https://{UserAccountSubdomain}.authentication.{CfRegion}.hana.ondemand.com/oauth/token"
+          }
+        },
+        "type": "oauth2"
+      }
+    }
+  }
+}

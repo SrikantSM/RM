@@ -1,0 +1,40 @@
+{
+    "name": "CP_WC_51c2cff27e944d4d8e983284727b8493",
+    "description": "Job to replicate the workforce capability data from MDI system.",
+    "action": "https://dev-6-skill-srv.internal.cfapps.sap.hana.ondemand.com/replicateWorkforceCapability",
+    "active": true,
+    "httpMethod": "POST",
+    "user": null,
+    "startTime": null,
+    "endTime": null,
+    "signatureVersion": 0,
+    "jobType": "HTTP_ENDPOINT",
+    "tenantId": "51c2cff2-7e94-4d4d-8e98-3284727b8493",
+    "subDomain": "rm-bradbury",
+    "createdAt": "2020-09-30 10:12:32",
+    "_id": 206025,
+    "schedules": [
+        {
+            "scheduleId": "5d4b2749-9736-4255-8b70-2316b35eadc2",
+            "description": "Schedule to trigger the initial workforce capability data replication from MDI System.",
+            "data": null,
+            "type": "one-time",
+            "active": false,
+            "startTime": "2020-09-30 10:12:30",
+            "endTime": null,
+            "time": "now",
+            "nextRunAt": null
+        },
+        {
+            "scheduleId": "9dbd9fcd-989d-45f4-a8ea-174729054255",
+            "description": "Schedule to trigger the periodic workforce capability data replication from MDI System.",
+            "data": null,
+            "type": "recurring",
+            "repeatInterval": "30 minutes",
+            "active": false,
+            "startTime": "2020-09-30 10:12:30",
+            "endTime": null,
+            "nextRunAt": null
+        }
+    ]
+}

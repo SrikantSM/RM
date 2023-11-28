@@ -1,0 +1,18 @@
+{
+    "name": "skill-app",
+    "description": "Common dependencies for Skill UIs",
+    "private": true,
+    "version": "1.0.0",
+    "scripts": {
+        "build-apps": "grunt -b catalog && grunt -b download && grunt -b proficiency && grunt -b skill && grunt -b upload",
+        "html5-push": "cf html5-push -n skill-html5-repo-host catalog/dist download/dist proficiency/dist upload/dist skill/dist"
+    },
+    "dependencies": {
+        "@sap/grunt-sapui5-bestpractice-build": "1.4.13",
+        "grunt": "^1.6.1",
+        "grunt-contrib-compress": "^2.0.0"
+    },
+    "engines": {
+        "node": "^18.0.0"
+    }
+}

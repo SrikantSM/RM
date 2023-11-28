@@ -1,0 +1,29 @@
+{
+    "env": {
+        "node": true,
+        "es6": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 8
+    },
+    "globals": {
+        "sap": true,
+        "window": true
+    },
+    "extends": ["eslint:recommended", "google", "prettier"],
+    "rules": {
+        "default-case": "error",
+        "eqeqeq": ["error", "always"],
+        "guard-for-in": "off",
+        "no-sequences": "error",
+        "prefer-const": "off",
+        "prefer-rest-params": "off",
+        "quotes": [
+            "error",
+            "double",
+            {"allowTemplateLiterals": true}
+        ],
+        "require-jsdoc": "off"
+    },
+    "root": true
+}

@@ -1,0 +1,32 @@
+package com.sap.c4p.rm.consultantprofile.config;
+
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
+
+public enum LoggingMarker {
+    AUDIT_LOGGING,
+    AVAILABILITY_IMPORTER,
+    CP_SUBSCRIPTION_MARKER,
+    EXT_WORK_EXP_MARKER,
+    EXT_WORK_EXP_SKILL_MARKER,
+    FILE_UPLOAD,
+    LOGGING,
+    MY_PROJ_EXP_MARKER,
+    MALWARE_SCANNING_MARKER,
+    PRECOMPILER,
+    ROLE_ASSIGNMENT_MARKER,
+    SERVICEORG_IMPORTER,
+    SKILL_ASSIGNMENT_MARKER,
+    EXTERNAL_WORK_EXPERIENCE_MARKER,
+    EXTERNAL_WORK_EXPERIENCE_SKILL_ASSIGNMENTS_MARKER,
+    DB_MIGRATION_TASK,
+    PROFILE_PHOTO_CREATION_TASK,
+    ASSIGNMENT_SERVICE_URL,
+	  GET_ASSIGNMENT, 
+    UPDATE_ASSIGNMENT,
+    ATTACHMENT_CREATION_TASK;
+
+    public Marker getMarker() {
+        return MarkerFactory.getMarker(this.toString());
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "destinations": [
+      {
+        "forwardAuthToken": false,
+        "name": "resourceRequest-srv-api",
+        "url": "http://localhost:8080"
+      }
+    ]
+  }

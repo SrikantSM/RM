@@ -1,0 +1,4 @@
+resourceId,workForcePersonExternalId,firstName,lastName,s4costCenterId,workAssignmentExternalId,startDate,plannedWorkingHours,nonWorkingHours
+{resourceId},workforcePersonExternalID1,firstName4,lastName4,CCDE0001,workforcePersonExternalID1,2018-03-10,8,0
+{resourceId},workforcePersonExternalID1,firstName4,lastName4,CCDE0001,workforcePersonExternalID1,2018-03-11,8,0
+{resourceId},workforcePersonExternalID1,firstName4,lastName4,CCD2321,workforcePersonExternalID1,2018-03-12,8,0

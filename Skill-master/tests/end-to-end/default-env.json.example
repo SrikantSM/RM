@@ -1,0 +1,17 @@
+{
+    "ENV_LANDSCAPE": "",
+    "ENV_SPACE_GUID": "",
+    "ENV_SRV_APP_NAME": "",
+    "ENV_CF_USER": "",
+    "ENV_CF_PASSWORD": "",
+    "ENV_APPROUTER_URL": "",
+    "ENV_BROWSER_NAME": "",
+    "ENV_PLATFORM_NAME": "",
+    "ENV_SELENIUM_ADDRESS": "",
+    "ENV_SELENIUM_TEST_NAME": "",
+    "ENV_USER_CONFIGURATIONEXPERT": "",
+    "ENV_PASSWORD_CONFIGURATIONEXPERT": "",
+    "ENV_USER_PROJECTMANAGER": "",
+    "ENV_PASSWORD_PROJECTMANAGER": "",
+    "ENV_IDP_HOST": "axtubdeog.accounts400.ondemand.com"
+}

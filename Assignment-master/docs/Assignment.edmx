@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+    <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="Assignment" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="Assignments" EntityType="Assignment.Assignments">
+          <NavigationPropertyBinding Path="_workAssignment" Target="WorkAssignment"/>
+          <NavigationPropertyBinding Path="_dailyAssignmentDistribution" Target="DailyAssignmentDistribution"/>
+          <NavigationPropertyBinding Path="_weeklyAssignmentDistribution" Target="WeeklyAssignmentDistribution"/>
+          <NavigationPropertyBinding Path="_monthlyAssignmentDistribution" Target="MonthlyAssignmentDistribution"/>
+        </EntitySet>
+        <EntitySet Name="DailyAssignmentDistribution" EntityType="Assignment.DailyAssignmentDistribution"/>
+        <EntitySet Name="WeeklyAssignmentDistribution" EntityType="Assignment.WeeklyAssignmentDistribution"/>
+        <EntitySet Name="MonthlyAssignmentDistribution" EntityType="Assignment.MonthlyAssignmentDistribution"/>
+        <EntitySet Name="WorkAssignment" EntityType="Assignment.WorkAssignment"/>
+      </EntityContainer>
+      <EntityType Name="Assignments">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="requestID" Type="Edm.Guid"/>
+        <Property Name="resourceID" Type="Edm.Guid"/>
+        <Property Name="startDate" Type="Edm.Date"/>
+        <Property Name="endDate" Type="Edm.Date"/>
+        <Property Name="bookedCapacity" Type="Edm.Decimal" Scale="2" Precision="10"/>
+        <Property Name="isSoftBooked" Type="Edm.Boolean"/>
+        <NavigationProperty Name="_workAssignment" Type="Assignment.WorkAssignment">
+          <ReferentialConstraint Property="resourceID" ReferencedProperty="resourceID"/>
+        </NavigationProperty>
+        <NavigationProperty Name="_dailyAssignmentDistribution" Type="Collection(Assignment.DailyAssignmentDistribution)"/>
+        <NavigationProperty Name="_weeklyAssignmentDistribution" Type="Collection(Assignment.WeeklyAssignmentDistribution)"/>
+        <NavigationProperty Name="_monthlyAssignmentDistribution" Type="Collection(Assignment.MonthlyAssignmentDistribution)"/>
+      </EntityType>
+      <EntityType Name="DailyAssignmentDistribution">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="assignmentID" Type="Edm.Guid"/>
+        <Property Name="date" Type="Edm.Date"/>
+        <Property Name="calendarWeek" Type="Edm.String" MaxLength="6"/>
+        <Property Name="calendarMonth" Type="Edm.String" MaxLength="6"/>
+        <Property Name="calendarYear" Type="Edm.String" MaxLength="4"/>
+        <Property Name="bookedCapacity" Type="Edm.Decimal" Scale="2" Precision="10"/>
+      </EntityType>
+      <EntityType Name="WeeklyAssignmentDistribution">
+        <Key>
+          <PropertyRef Name="assignmentID"/>
+          <PropertyRef Name="calendarWeek"/>
+        </Key>
+        <Property Name="assignmentID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="calendarWeek" Type="Edm.String" MaxLength="6" Nullable="false"/>
+        <Property Name="bookedCapacity" Type="Edm.Int32"/>
+        <Property Name="weekStartDate" Type="Edm.Date"/>
+        <Property Name="weekEndDate" Type="Edm.Date"/>
+      </EntityType>
+      <EntityType Name="MonthlyAssignmentDistribution">
+        <Key>
+          <PropertyRef Name="assignmentID"/>
+          <PropertyRef Name="calendarMonth"/>
+        </Key>
+        <Property Name="assignmentID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="calendarMonth" Type="Edm.String" MaxLength="6" Nullable="false"/>
+        <Property Name="bookedCapacity" Type="Edm.Int32"/>
+        <Property Name="monthStartDate" Type="Edm.Date"/>
+        <Property Name="monthEndDate" Type="Edm.Date"/>
+      </EntityType>
+      <EntityType Name="WorkAssignment">
+        <Key>
+          <PropertyRef Name="resourceID"/>
+        </Key>
+        <Property Name="resourceID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="workAssignmentID" Type="Edm.String" MaxLength="100" Nullable="false"/>
+      </EntityType>
+      <Annotations Target="Assignment.EntityContainer">
+        <Annotation Term="Core.Description" String="Assignment"/>
+        <Annotation Term="Core.LongDescription" String="This API enables you to manage assignments in SAP S/4HANA Cloud for projects, resource management. You can create new assignments or update and delete existing ones. You can also read assignments, either of resources to monitor their utilization or of resource requests to check the staffing status."/>
+      </Annotations>
+      <Annotations Target="Assignment.Assignments">
+        <Annotation Term="Core.LongDescription" String="Assignments"/>
+        <Annotation Term="Core.Description" String="Assignments"/>
+      </Annotations>
+      <Annotations Target="Assignment.EntityContainer/Assignments">
+        <Annotation Term="Capabilities.ReadRestrictions">
+          <Record Type="Capabilities.ReadRestrictionsType">
+            <PropertyValue Property="Description" String="Read assignments."/>
+            <PropertyValue Property="ReadByKeyRestrictions">
+              <Record Type="Capabilities.ReadByKeyRestrictionsType">
+                <PropertyValue Property="Description" String="Read a single assignment."/>
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Description" String="Update assignments"/>
+            <PropertyValue Property="Updatable" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Description" String="Delete assignments."/>
+            <PropertyValue Property="Deletable" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.Assignments/ID">
+        <Annotation Term="Core.Description" String="The identifier of the assignment."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="01234567-89ab-cdef-0123-456789abc001"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.Assignments/requestID">
+        <Annotation Term="Core.Description" String="The identifier of the resource request."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="51455673-456d-abc1-def1-756789def005"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.Assignments/resourceID">
+        <Annotation Term="Core.Description" String="The identifier of the resource."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="04444567-89ab-cde5-4444-456789ccc333"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.Assignments/startDate">
+        <Annotation Term="Core.Description" String="The start date of the assignment."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="2022-12-25"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.Assignments/endDate">
+        <Annotation Term="Core.Description" String="The end date of the assignment."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="2022-12-30"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.Assignments/bookedCapacity">
+        <Annotation Term="Core.Description" String="The total number of assigned hours."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="250"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="Assignment.Assignments/isSoftBooked">
+        <Annotation Term="Core.Description" String="Indicator for soft-booked assignments."/>
+        <Annotation Term="Core.Computed" Bool="false"/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.Assignments/_workAssignment">
+        <Annotation Term="Core.Description" String="The workAssignment of the resource."/>
+      </Annotations>
+      <Annotations Target="Assignment.Assignments/_dailyAssignmentDistribution">
+        <Annotation Term="Core.Description" String="The daily distribution of the assignment."/>
+      </Annotations>
+      <Annotations Target="Assignment.Assignments/_weeklyAssignmentDistribution">
+        <Annotation Term="Core.Description" String="The weekly distribution of the assignment."/>
+      </Annotations>
+      <Annotations Target="Assignment.Assignments/_monthlyAssignmentDistribution">
+        <Annotation Term="Core.Description" String="The monthly distribution of the assignment."/>
+      </Annotations>
+      <Annotations Target="Assignment.DailyAssignmentDistribution">
+        <Annotation Term="Core.LongDescription" String="DailyAssignmentDistribution"/>
+        <Annotation Term="Core.Description" String="The daily distribution of the assignment."/>
+      </Annotations>
+      <Annotations Target="Assignment.EntityContainer/DailyAssignmentDistribution">
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.DailyAssignmentDistribution/ID">
+        <Annotation Term="Core.Description" String="The identifier of the daily assignment distribution."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="06744567-89ab-cde5-7897-456789ccc333"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.DailyAssignmentDistribution/assignmentID">
+        <Annotation Term="Core.Description" String="The identifier of the assignment."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="01234567-89ab-cdef-0123-456789abc001"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.DailyAssignmentDistribution/date">
+        <Annotation Term="Core.Description" String="The date of the daily assignment distribution."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="2022-03-31"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.DailyAssignmentDistribution/calendarWeek">
+        <Annotation Term="Core.Description" String="The calendar week of the daily assignment distribution according to ISO specification."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="202213"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.DailyAssignmentDistribution/calendarMonth">
+        <Annotation Term="Core.Description" String="The calendar month of the daily assignment distribution."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="202203"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.DailyAssignmentDistribution/calendarYear">
+        <Annotation Term="Core.Description" String="The calendar year of the daily assignment distribution."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="2022"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.DailyAssignmentDistribution/bookedCapacity">
+        <Annotation Term="Core.Description" String="The number of assigned hours on this day."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="8"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Computed" Bool="false"/>
+      </Annotations>
+      <Annotations Target="Assignment.WeeklyAssignmentDistribution">
+        <Annotation Term="Core.LongDescription" String="WeeklyAssignmentDistribution"/>
+        <Annotation Term="Core.Description" String="The weekly distribution of the assignment."/>
+      </Annotations>
+      <Annotations Target="Assignment.EntityContainer/WeeklyAssignmentDistribution">
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.WeeklyAssignmentDistribution/assignmentID">
+        <Annotation Term="Core.Description" String="The identifier of the assignment."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="01234567-89ab-cdef-0123-456789abc001"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.WeeklyAssignmentDistribution/calendarWeek">
+        <Annotation Term="Core.Description" String="The calendar week of the weekly assignment distribution according to ISO specification."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="202213"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.WeeklyAssignmentDistribution/bookedCapacity">
+        <Annotation Term="Core.Description" String="The number of assigned hours on this week."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="8"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Computed" Bool="false"/>
+      </Annotations>
+      <Annotations Target="Assignment.WeeklyAssignmentDistribution/weekStartDate">
+        <Annotation Term="Core.Description" String="The start date of the calendar week."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="2022-03-28"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="Assignment.WeeklyAssignmentDistribution/weekEndDate">
+        <Annotation Term="Core.Description" String="The end date of the calendar week."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="2022-04-03"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="Assignment.MonthlyAssignmentDistribution">
+        <Annotation Term="Core.LongDescription" String="MonthlyAssignmentDistribution"/>
+        <Annotation Term="Core.Description" String="The monthly distribution of the assignment."/>
+      </Annotations>
+      <Annotations Target="Assignment.EntityContainer/MonthlyAssignmentDistribution">
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.MonthlyAssignmentDistribution/assignmentID">
+        <Annotation Term="Core.Description" String="The identifier of the assignment."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="01234567-89ab-cdef-0123-456789abc001"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.MonthlyAssignmentDistribution/calendarMonth">
+        <Annotation Term="Core.Description" String="The calendar month of the monthly assignment distribution."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="202203"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.MonthlyAssignmentDistribution/bookedCapacity">
+        <Annotation Term="Core.Description" String="The number of assigned hours on this month."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="8"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Computed" Bool="false"/>
+      </Annotations>
+      <Annotations Target="Assignment.MonthlyAssignmentDistribution/monthStartDate">
+        <Annotation Term="Core.Description" String="The start date of the calendar month."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="2022-03-01"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="Assignment.MonthlyAssignmentDistribution/monthEndDate">
+        <Annotation Term="Core.Description" String="The end date of the calendar month."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="2022-03-31"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="Assignment.WorkAssignment">
+        <Annotation Term="Core.LongDescription" String="WorkAssignment"/>
+        <Annotation Term="Core.Description" String="The workAssignment of the resource."/>
+      </Annotations>
+      <Annotations Target="Assignment.EntityContainer/WorkAssignment">
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.WorkAssignment/resourceID">
+        <Annotation Term="Core.Description" String="The identifier of the resource."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="04444567-89ab-cde5-4444-456789ccc333"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Assignment.WorkAssignment/workAssignmentID">
+        <Annotation Term="Core.Description" String="The identifier of the work assignment."/>
+        <Annotation Term="Core.Example">
+          <Record Type="Core.PrimitiveExampleValue">
+            <PropertyValue Property="Value" String="RES.001.EXAMPLE"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
